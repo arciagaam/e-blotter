@@ -47,6 +47,22 @@
         @apply outline-none border border-project-gray-default/30 rounded-md py-1 px-2 text-sm transition-all duration-300 ease-in-out font-normal
         focus:border-project-blue-default
     }
+
+    .form-input-required {
+        @apply text-red-500
+    }
+
+    .form-input-optional {
+        @apply text-slate-300
+    }
+
+    .primary-btn {
+        @apply  text-center bg-project-yellow text-white font-bold px-4 py-2 rounded-md hover:bg-[#eba328] active:bg-[#d6972b] transition-all
+    }
+
+    .secondary-btn {
+        @apply bg-project-blue-default text-white px-4 py-2 rounded-md hover:bg-project-blue-dark transition-all
+    }
 }
 
 nav box-icon {

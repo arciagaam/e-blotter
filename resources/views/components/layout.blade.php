@@ -19,7 +19,7 @@
 </head>
 
 <body class="font-inter">
-    <x-admin-navbar />
+    <x-user-navbar />
     {{-- <x-popup_warning /> --}}
     
     <div class="relative ml-16 flex flex-col h-screen overflow-auto py-7 px-10 text-project-blue bg-[#F7F7F7] gap-5 z-0">
