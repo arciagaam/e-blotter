@@ -1,11 +1,29 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    "./resources/**/*.blade.php",
+    "./resources/**/*.js",
+    "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        project: {
+          gray: {
+            default: '#252A2E',
+            light: "#F1F1F6",
+          },
+
+          blue: {
+            default: "#0063A3",
+            dark: "#004F83",
+          },
+
+          yellow: "#FBAD26"
+          
+        }
+      }
+    },
   },
   plugins: [],
 }
