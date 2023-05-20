@@ -5,14 +5,14 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class RecordController extends Controller
+class KpFormController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('pages.admin.records.blotter-records');
+        return view('pages.admin.kp_forms.kp-forms');
     }
 
     /**
@@ -36,7 +36,7 @@ class RecordController extends Controller
      */
     public function show(string $id)
     {
-        return view('pages.admin.records.show');
+        return view('pages.admin.kp_forms.show');
     }
 
     /**

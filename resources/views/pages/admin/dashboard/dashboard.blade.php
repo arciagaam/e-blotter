@@ -7,42 +7,78 @@
             <p id="intervalTime">--</p>
         </div>
 
-        <div class="flex flex-col items-center justify-center rounded-md w-full overflow-hidden">
-            <p class="flex flex-1 text-lg">
-                Total Blotter Cases
-            </p>
-            <p class="flex flex-[2] text-2xl bg-project-gray-light w-full justify-center py-10 px-5">
-                25
-            </p>
+        <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <div class="flex gap-5 items-center self-center">
+                <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark">
+                    <box-icon color="white" name='folder' size="3em"></box-icon>
+                </div>
+
+                <div class="flex flex-col">
+                    <p class="text-lg">Total Blotter Cases</p>
+                </div>
+            </div>
+
+            <hr>
+
+            <p class="self-center text-2xl font-bold">5</p>
+        </div>
+
+        <div class="flex w-full">
+            <p class="text-lg">Blotter Cases per Barangay</p>
         </div>
 
         <div class="grid grid-cols-3 gap-5">
-            <div class="flex flex-col items-center justify-center rounded-md w-full overflow-hidden">
-                <p class="flex flex-1 text-lg">
-                    Total Blotter Cases
-                </p>
-                <p class="flex flex-[2] text-2xl bg-project-gray-light w-full justify-center py-10 px-5">
-                    25
-                </p>
-            </div>
-            
-            <div class="flex flex-col items-center justify-center rounded-md w-full overflow-hidden">
-                <p class="flex flex-1 text-lg">
-                    Total Blotter Cases
-                </p>
-                <p class="flex flex-[2] text-2xl bg-project-gray-light w-full justify-center py-10 px-5">
-                    25
-                </p>
+            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+                <div class="flex gap-5 items-center">
+                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark">
+                        <box-icon color="white" name='building-house' size="3em"></box-icon>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-project-gray-default/60 text-sm">Province</p>
+                        <p class="text-lg">Barangay Bulilan Sur</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p class="self-center text-2xl font-bold">5</p>
             </div>
 
-            <div class="flex flex-col items-center justify-center rounded-md w-full overflow-hidden">
-                <p class="flex flex-1 text-lg">
-                    Total Blotter Cases
-                </p>
-                <p class="flex flex-[2] text-2xl bg-project-gray-light w-full justify-center py-10 px-5">
-                    25
-                </p>
+            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+                <div class="flex gap-5 items-center">
+                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark">
+                        <box-icon color="white" name='building-house' size="3em"></box-icon>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-project-gray-default/60 text-sm">Province</p>
+                        <p class="text-lg">Barangay Labuin</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p class="self-center text-2xl font-bold">5</p>
             </div>
+
+            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+                <div class="flex gap-5 items-center">
+                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark">
+                        <box-icon color="white" name='building-house' size="3em"></box-icon>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-project-gray-default/60 text-sm">Province</p>
+                        <p class="text-lg">Barangay Sta Clara Sur</p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <p class="self-center text-2xl font-bold">5</p>
+            </div>
+            
         </div>
     </div>
 </x-layout>
