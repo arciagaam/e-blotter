@@ -8,7 +8,7 @@
     }
 
     .main-table thead tr {
-        @apply bg-project-blue text-white
+        @apply bg-project-blue-dark text-white
     }
 
     .main-table thead tr th {
@@ -47,4 +47,13 @@
         @apply outline-none border border-project-gray-default/30 rounded-md py-1 px-2 text-sm transition-all duration-300 ease-in-out font-normal
         focus:border-project-blue-default
     }
+}
+
+nav box-icon {
+    fill: white;
+    transition: 200ms all ease-in-out;
+}
+
+nav a:hover box-icon, nav button:hover box-icon {
+    fill: #FBAD26;
 }

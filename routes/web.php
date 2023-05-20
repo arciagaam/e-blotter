@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\RecordController;
+use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,8 +21,34 @@ Route::get('/', function () {
 });
 
 Route::prefix('/admin')->group(function() {
+
     Route::get('/', function () {
+        return redirect('/admin/login');
+    });
+
+    Route::get('/login', function () {
         return view('pages.admin.auth.login');
     });
-    
+
+    Route::prefix('/forgot-password')->group(function(){
+
+        Route::get('/', function () {
+            return redirect('/admin/forgot-password/step-one');
+        });
+
+        Route::get('/step-one', [ForgotPasswordController::class, 'ForgotPasswordController@stepOne']);
+        Route::get('/step-two', [ForgotPasswordController::class, 'ForgotPasswordController@stepTwo']);
+        Route::get('/step-three', [ForgotPasswordController::class, 'ForgotPasswordController@stepThree']);
+        Route::get('/complete', [ForgotPasswordController::class, 'ForgotPasswordController@complete']);
+    }); 
+
+    Route::prefix('/dashboard')->group(function() {
+        Route::get('/', [DashboardController::class, 'index']);
+    });
+
+    Route::prefix('/records')->group(function() {
+        Route::get('/', [RecordController::class, 'index']);
+    });
 });
+
+

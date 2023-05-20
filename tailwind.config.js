@@ -21,6 +21,11 @@ module.exports = {
 
           yellow: "#FBAD26"
           
+        },
+
+        table: {
+          even: '#E1E7ED',
+          odd: '#FFFFFF'
         }
       }
     },
