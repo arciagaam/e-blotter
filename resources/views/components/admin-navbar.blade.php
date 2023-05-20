@@ -12,14 +12,24 @@
             </a> --}}  
 
             <div class="flex flex-col gap-5 h-full">
-                <a href="{{url('/admin/dashboard')}}" class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('dashboard*') ? 'text-project-yellow' : 'hover:text-project-yellow' }}">
-                    <box-icon type="regular" name='home' size="1.5em"></box-icon>
+                <a href="{{url('/admin/dashboard')}}" class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('admin/dashboard*') ? 'text-project-yellow' : 'hover:text-project-yellow' }}">
+                    <box-icon type="{{request()->is('admin/dashboard*') ? 'solid' : 'regular'}}" color="{{request()->is('admin/dashboard*') ? '#FBAD26' : 'white'}}"  name='home' size="1.5em"></box-icon>
                     <p class="text-sm font-normal">Dashboard</p>
                 </a>
 
-                <a href="{{url('/admin/records')}}" class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('dashboard*') ? 'text-project-yellow' : 'hover:text-project-yellow' }}">
-                    <box-icon type="regular" name='file' size="1.5em"></box-icon>
+                <a href="{{url('/admin/records')}}" class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('admin/records*') ? 'text-project-yellow' : 'hover:text-project-yellow' }}">
+                    <box-icon type="{{request()->is('admin/records*') ? 'solid' : 'regular'}}" color="{{request()->is('admin/records*') ? '#FBAD26' : 'white'}}"  name='folder' size="1.5em"></box-icon>
                     <p class="text-sm font-normal">Blotter Records</p>
+                </a>
+
+                <a href="{{url('/admin/kp-forms')}}" class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('admin/kp-forms*') ? 'text-project-yellow' : 'hover:text-project-yellow' }}">
+                    <box-icon type="{{request()->is('admin/kp-forms*') ? 'solid' : 'regular'}}" color="{{request()->is('admin/kp-forms*') ? '#FBAD26' : 'white'}}"  name='file' size="1.5em"></box-icon>
+                    <p class="text-sm font-normal">KP Forms</p>
+                </a>
+
+                <a href="{{url('/admin/accounts')}}" class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('admin/accounts*') ? 'text-project-yellow' : 'hover:text-project-yellow' }}">
+                    <box-icon type="{{request()->is('admin/accounts*') ? 'solid' : 'regular'}}" color="{{request()->is('admin/accounts*') ? '#FBAD26' : 'white'}}"  name='group' size="1.5em"></box-icon>
+                    <p class="text-sm font-normal">Accounts</p>
                 </a>
     
                 <a href="{{url('/logout')}}" class="pl-5 flex items-center gap-5 mt-auto hover:text-red-500 hover:fill-red-500">

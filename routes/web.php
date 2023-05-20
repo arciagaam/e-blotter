@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\admin\AccountContoller;
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\KpFormController;
 use App\Http\Controllers\admin\RecordController;
 use App\Http\Controllers\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
@@ -48,7 +50,21 @@ Route::prefix('/admin')->group(function() {
 
     Route::prefix('/records')->group(function() {
         Route::get('/', [RecordController::class, 'index']);
+        Route::get('/{id}', [RecordController::class, 'show']);
     });
+
+    Route::prefix('/kp-forms')->group(function() {
+        Route::get('/', [KpFormController::class, 'index']);
+        Route::get('/{id}', [KpFormController::class, 'show']);
+    });
+
+    Route::prefix('/accounts')->group(function() {
+        Route::get('/', [AccountContoller::class, 'index']);
+        Route::get('/{id}/edit', [AccountContoller::class, 'edit']);
+    });
+
+    
+    
 });
 
 

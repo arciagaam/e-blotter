@@ -22,7 +22,7 @@
     <x-admin-navbar />
     {{-- <x-popup_warning /> --}}
     
-    <div class="relative ml-16 flex flex-col h-screen overflow-auto py-7 px-10 text-project-blue bg-[#F7F7F7] gap-5 z-0">
+    <div class="relative ml-16 flex flex-col h-screen overflow-auto py-7 px-10 text-project-gray-default bg-project-gray-light gap-5 z-0">
         {{ $slot }}
     </div>
 

@@ -6,15 +6,13 @@
         <div class="flex flex-row w-full justify-between items-center">
             <form class="flex w-full gap-6 items-center">
 
-                <div class="form-input-container flex-row gap-5">
-                    <div class="flex flex-row justify-between items-center">
-                        <label for="barangay_id" class="flex gap-2 items-center">Select Barangay</label>
-                    </div>
-
-                    <select class="form-input" name="barangay_id" id="barangay_id">
+                <div class="flex gap-2 items-center">
+                    <label class="text-sm" for="search">Select Barangay</label>
+                    <select class="form-input" name="search" id="search">
                         <option value="1">Barangay 1</option>
                         <option value="2">Barangay 2</option>
                     </select>
+
                 </div>
 
             </form>
