@@ -9,10 +9,8 @@
 </head>
 <body>
     <div class="flex items-center justify-center min-h-screen">
-        
+        <p class="text-lg font-bold">... Login</p>
         <form method="POST" action="{{url('/authenticate')}}" class="flex flex-col min-w-[30%] gap-5 shadow-md py-10 px-6 rounded-md bg-white">
-            <p class="text-lg font-bold">ABC President Login</p>
-
             @csrf
             <div class="flex flex-col gap-2">
                 <div class="form-input-container">

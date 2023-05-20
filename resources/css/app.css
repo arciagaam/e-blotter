@@ -44,7 +44,7 @@
     }
     
     .form-input {
-        @apply outline-none border border-table-even rounded-md py-1 px-2 text-sm transition-all duration-300 ease-in-out font-normal
-        focus:border-project-blue
+        @apply outline-none border border-project-gray-default/30 rounded-md py-1 px-2 text-sm transition-all duration-300 ease-in-out font-normal
+        focus:border-project-blue-default
     }
 }
