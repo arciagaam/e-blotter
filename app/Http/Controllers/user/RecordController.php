@@ -27,7 +27,7 @@ class RecordController extends Controller
     {
         $civilStatus = new CivilStatus();
         
-        return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus()]);
+        return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus(), 'blotterNumber' => Record::count() + 1]);
     }
 
     /**
@@ -38,7 +38,7 @@ class RecordController extends Controller
         $report = new Record();
 
         $report->fill($request->safe()->except('victim', 'suspect'));
-        $report->barangay_id = 1;
+        $report->barangay_id = auth()->user()->barangays[0]->id;
         $report->save();
 
         $report->victim()->save(new Victim($request->validated('victim')));

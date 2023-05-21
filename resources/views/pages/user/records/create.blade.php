@@ -11,7 +11,7 @@
                         <label for="blotter_number" class="flex gap-2 items-center">Blotter No.:</label>
                     </div>
 
-                    <input class="form-input" type="text" name="blotter_number" id="blotter_number" disabled>
+                    <input class="form-input" type="text" name="blotter_number" id="blotter_number" value="{{ $blotterNumber }}" disabled>
                 </div>
                 <div class="form-input-container flex-row gap-5">
                     <div class="flex flex-row justify-center items-center">

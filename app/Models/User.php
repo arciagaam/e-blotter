@@ -56,7 +56,7 @@ class User extends Authenticatable
 
     public function barangays(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class, 'user_barangays');
+        return $this->belongsToMany(Barangay::class, 'user_barangays');
     }
 
     public function otp(): HasOne
