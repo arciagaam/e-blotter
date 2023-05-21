@@ -85,22 +85,6 @@
                         <p class="text-xs text-red-500 italic">{{ $message }}</p>
                     @enderror
                 </div>
-
-                <div class="form-input-container">
-                    <label for="municipality">City / Municipality <span class="form-input-required">*</span></label>
-                    <input class="form-input" type="text" name="municipality" id="municipality" value="{{old('municipality')}}">
-                    @error('municipality')
-                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                    @enderror
-                </div>
-
-                <div class="form-input-container">
-                    <label for="province">Province <span class="form-input-required">*</span></label>
-                    <input class="form-input" type="text" name="province" id="province" value="{{old('province')}}">
-                    @error('province')
-                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                    @enderror
-                </div>
             </div>
 
             <div class="flex w-full justify-between">

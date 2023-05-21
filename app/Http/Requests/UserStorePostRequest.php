@@ -30,8 +30,6 @@ class UserStorePostRequest extends FormRequest
             'email' => 'required',
             'contact_number' => 'required',
             'name' => 'required',
-            'municipality' => 'required',
-            'province' => 'required',
         ];
     }
 }

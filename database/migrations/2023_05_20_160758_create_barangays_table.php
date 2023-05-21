@@ -14,9 +14,6 @@ return new class extends Migration
         Schema::create('barangays', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('municipality');
-            $table->string('province');
-            $table->string('others')->nullable();
             $table->timestamps();
         });
     }

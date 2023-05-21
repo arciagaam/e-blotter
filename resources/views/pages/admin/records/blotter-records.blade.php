@@ -9,8 +9,8 @@
                 <div class="flex gap-2 items-center">
                     <label class="text-sm" for="search">Select Barangay</label>
                     <select class="form-input" name="search" id="search">
-                        <option value="1">Barangay 1</option>
-                        <option value="2">Barangay 2</option>
+                        <option value="1">Test Barangay 1</option>
+                        <option value="2">Test Barangay 2</option>
                     </select>
 
                 </div>
@@ -30,26 +30,20 @@
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $residents = [
-                        ['number' => '1', 'barangay' => 'bgy', 'accusation' => "accusation 1", 'complainant' => 'yesser', 'date' => 'now', 'status' => 'omsim'],
-                        ['number' => '1', 'barangay' => 'bgy', 'accusation' => "accusation 1", 'complainant' => 'yesser', 'date' => 'now', 'status' => 'omsim'],
-                    ];
-                @endphp
 
-                @empty($residents)
+                @empty($records)
                     <tr>
                         <td colspan="100%" class="text-center">There are no data.</td>
                     </tr>
                 @else
-                    @foreach ($residents as $key => $resident)
+                    @foreach ($records as $record)
                         <tr>
-                            <td>asd{{$key}}</td>
-                            <td>shfdh</td>
-                            <td>kghkhg{{$key}}</td>
-                            <td>vbnvbnbv{{$key}}</td>
-                            <td>sdgsdg{{$key}}</td>
-                            <td>fgjfgj</td>
+                            <td>{{$record->id}}</td>
+                            <td>{{$record->barangay_id}}</td>
+                            <td>{{$record->case}}</td>
+                            <td>\\Complainant Name</td>
+                            <td>{{$record->created_at}}</td>
+                            <td>{{$record->blotter_status_id}}</td>
                         </tr>
                     @endforeach
                 @endempty

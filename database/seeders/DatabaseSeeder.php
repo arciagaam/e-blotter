@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Admin',
             'username' => 'admin',
             'email' => 'admin@example.com',
+            'contact_number' => '09123221234',
         ]);
 
         \App\Models\User::factory()->create([
@@ -35,6 +36,7 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Doe',
             'username' => 'john_d',
             'email' => 'user1@example.com',
+            'contact_number' => '09123221232'
         ]);
 
         \App\Models\User::factory()->create([
@@ -42,20 +44,17 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Doe',
             'username' => 'jane_d',
             'email' => 'user2@example.com',
+            'contact_number' => '09123221235'
         ]);
 
         DB::table('barangays')->insert([
             [
                 'name' => 'Bulilan Sur',
-                'municipality' => 'Laguna',
-                'province' => 'Pila',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'Labuin',
-                'municipality' => 'Laguna',
-                'province' => 'Santa Cruz',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

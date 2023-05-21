@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Record;
 use Illuminate\Http\Request;
 
 class RecordController extends Controller
@@ -12,7 +13,8 @@ class RecordController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.records.blotter-records');
+        $records = Record::all();
+        return view('pages.admin.records.blotter-records', ['records' => $records]);
     }
 
     /**
