@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <button class="">Continue</button>
+            <button class="btn-filled">Continue</button>
 
         </form>  
     </div>

@@ -49,7 +49,7 @@
                             <td>{{$kpform['title']}}</td>
                             <td>
                                 <div class="flex gap-3 justify-center items-center w-full">
-                                    <button class="secondary-btn">View</button>
+                                    <button class="btn-tinted">View</button>
                                 </div>
                             </td>
                         </tr>

@@ -38,11 +38,11 @@
                 @error('invalid')
                     <p class="text-xs text-red-500 italic">{{ $message }}</p>
                 @enderror
-                <a class="underline" href="{{ url('/forgot-password') }}">Forgot Password?</a>
-                <a class="underline" href="{{ url('/register') }}">Register your Barangay</a>
+                <a class="btn-plain" href="{{ url('/forgot-password') }}">Forgot Password?</a>
+                <a class="btn-plain" href="{{ url('/register') }}">Register your Barangay</a>
             </div>
 
-            <button class="primary-btn">Login</button>
+            <button class="btn-filled">Login</button>
 
         </form>
     </div>

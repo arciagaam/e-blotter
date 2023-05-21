@@ -8,7 +8,7 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <div class="flex items-center justify-center min-h-screen">
+    <div class="flex items-center justify-center min-h-screen bg-project-blue-default">
         
         <form method="POST" action="{{url('/authenticate')}}" class="flex flex-col min-w-[30%] gap-5 shadow-md py-10 px-6 rounded-md bg-white">
             <p class="text-lg font-bold">ABC President Login</p>
@@ -36,10 +36,10 @@
                 @error('invalid')
                 <p class="text-xs text-red-500 italic">{{$message}}</p>
                 @enderror
-                <a class="self-end" href="{{url('/forgot-password')}}">Forgot Password?</a>
+                <a class="btn-plain self-end" href="{{url('/forgot-password')}}">Forgot Password?</a>
             </div>
 
-            <button class="">LOG IN</button>
+            <button class="btn-filled">Login</button>
 
         </form>  
     </div>

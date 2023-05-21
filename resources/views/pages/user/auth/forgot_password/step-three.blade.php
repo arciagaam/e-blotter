@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <button class="">Send Verification Code</button>
+            <button class="btn-filled">Send Verification Code</button>
 
         </form>  
     </div>

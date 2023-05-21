@@ -21,7 +21,7 @@
                             </select>
                         </div>
 
-                        <a class="primary-btn" href="{{ route('records.create') }}">New Record</a>
+                        <a class="btn-filled" href="{{ route('records.create') }}">New Record</a>
                     </div>
 
                     <div class="flex flex-row justify-between">
@@ -92,9 +92,9 @@
                                 <td>fgjfgj</td>
                                 <td>
                                     <div class="flex w-full h-full justify-center items-center gap-2">
-                                        <button class="secondary-btn" type="button">Preview</button>
-                                        <button class="secondary-btn" type="button">Edit</button>
-                                        <button class="secondary-btn" type="button">Print</button>
+                                        <button class="btn-tinted" type="button">Preview</button>
+                                        <button class="btn-tinted" type="button">Edit</button>
+                                        <button class="btn-tinted" type="button">Print</button>
                                     </div>
                                 </td>
                             </tr>

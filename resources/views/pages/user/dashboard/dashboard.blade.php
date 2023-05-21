@@ -67,7 +67,7 @@
 
             <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-5 items-center">
-                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-yellow">
+                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-yellow-default">
                         <box-icon color="white" name="folder" size="3em"></box-icon>
                     </div>
 
