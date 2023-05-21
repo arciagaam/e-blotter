@@ -89,7 +89,7 @@
                                 <td><p>{{ ucfirst($record->blotterStatus->name) }}</p></td>
                                 <td>
                                     <div class="flex w-full h-full justify-center items-center gap-2">
-                                        <button class="btn-tinted" type="button">Preview</button>
+                                        <a href="{{ route('records.show', ['record' => $record->id]) }}" class="btn-tinted" >Preview</a>
                                         <button class="btn-tinted" type="button">Edit</button>
                                         <button class="btn-tinted" type="button">Print</button>
                                     </div>

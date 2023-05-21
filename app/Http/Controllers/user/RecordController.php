@@ -55,7 +55,7 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
-        //
+        return view('pages.user.records.show', ['record' => Record::where('id', $record->id)->with('victim', 'suspect', 'blotterStatus')->first()]);
     }
 
     /**
