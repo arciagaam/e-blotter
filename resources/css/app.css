@@ -3,14 +3,6 @@
 @tailwind utilities;
 
 @layer components {
-    .btn-filled {
-        @apply  text-center bg-project-yellow text-white font-bold px-4 py-2 rounded-md hover:bg-[#eba328] active:bg-[#d6972b] transition-all
-    }
-
-    .secondary-btn {
-        @apply bg-project-blue-default text-white px-4 py-2 rounded-md hover:bg-project-blue-dark transition-all
-    }
-
     .main-table {
         @apply drop-shadow-md mb-5
     }
@@ -65,11 +57,19 @@
     }
 
     .btn-filled {
-        @apply  text-center bg-project-yellow text-white font-bold px-4 py-2 rounded-md hover:bg-[#eba328] active:bg-[#d6972b] transition-all
+        @apply text-center bg-project-yellow-default text-white font-bold px-4 py-2 rounded-md hover:bg-project-yellow-dark active:bg-project-yellow-darker transition-all
     }
 
-    .secondary-btn {
-        @apply bg-project-blue-default text-white px-4 py-2 rounded-md hover:bg-project-blue-dark transition-all
+    .btn-tinted {
+        @apply bg-project-blue-default text-white px-4 py-2 rounded-md hover:bg-project-blue-dark active:bg-project-blue-darker transition-all
+    }
+
+    .btn-gray {
+        @apply bg-project-neutral-default text-project-gray-default px-4 py-2 hover:bg-project-neutral-dark active:bg-project-neutral-darker rounded-md transition-all
+    }
+
+    .btn-plain {
+        @apply underline text-project-gray-default
     }
 }
 

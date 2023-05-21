@@ -8,10 +8,11 @@
     @vite('resources/css/app.css')
 </head>
 <body>
-    <div class="flex items-center justify-center min-h-screen text-project-gray-default bg-project-blue-dark">
+    <div class="flex items-center justify-center min-h-screen text-project-gray-default bg-project-blue-default">
         
         <div class="flex flex-col min-w-[30%] gap-5 shadow-md py-10 px-6 rounded-md bg-white">
             <p class="text-lg font-bold">Success!</p>
+            <p>Your password has been resetted successfully.</p>
             <a class="btn-filled" href="{{ url('/') }}">Proceed to Login</a>
         </div>  
     </div>

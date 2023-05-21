@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="flex items-center justify-center min-h-screen">
+    <div class="flex items-center justify-center min-h-screen bg-project-blue-default">
         <form method="POST" action="{{ url('/authenticate') }}"
             class="flex flex-col w-[30%] gap-5 shadow-md py-10 px-6 rounded-md bg-white">
             @csrf
