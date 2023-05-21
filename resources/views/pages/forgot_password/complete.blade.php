@@ -12,7 +12,7 @@
         
         <div class="flex flex-col min-w-[30%] gap-5 shadow-md py-10 px-6 rounded-md bg-white">
             <p class="text-lg font-bold">Success!</p>
-            <a class="primary-btn" href="{{ url('/') }}">Proceed to Login</a>
+            <a class="btn-filled" href="{{ url('/') }}">Proceed to Login</a>
         </div>  
     </div>
 </body>

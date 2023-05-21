@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <button class="primary-btn">Continue</button>
+            <button class="btn-filled">Continue</button>
 
         </form>  
     </div>

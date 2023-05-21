@@ -31,7 +31,7 @@
                 </div>
             </div>
 
-            <button class="primary-btn">Change Password</button>
+            <button class="btn-filled">Change Password</button>
 
         </form>  
     </div>

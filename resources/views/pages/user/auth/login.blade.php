@@ -42,7 +42,7 @@
                 <a class="underline" href="{{ url('/register') }}">Register your Barangay</a>
             </div>
 
-            <button class="primary-btn">Login</button>
+            <button class="btn-filled">Login</button>
 
         </form>
     </div>

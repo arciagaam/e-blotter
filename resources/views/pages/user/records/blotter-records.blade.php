@@ -21,7 +21,7 @@
                             </select>
                         </div>
 
-                        <a class="primary-btn" href="{{ route('records.create') }}">New Record</a>
+                        <a class="btn-filled" href="{{ route('records.create') }}">New Record</a>
                     </div>
 
                     <div class="flex flex-row justify-between">

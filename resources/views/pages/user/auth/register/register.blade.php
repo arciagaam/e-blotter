@@ -110,7 +110,7 @@
                 <a class="self-end underline" href="{{ url('/') }}">Already have a Barangay?</a>
             </div>
 
-            <button class="primary-btn">REGISTER</button>
+            <button class="btn-filled">REGISTER</button>
 
         </form>
     </div>

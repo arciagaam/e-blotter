@@ -17,7 +17,7 @@
             <p class="text-lg font-bold">Barangay Officer Registration</p>
             <p class="">Your account needs to be verified by the ABC President. An email will be sent to you if the account is
                 successfully verified.</p>
-            <a class="primary-btn" href="{{ url('/') }}">I Understand</a>
+            <a class="btn-filled" href="{{ url('/') }}">I Understand</a>
         </form>
     </div>
 </body>

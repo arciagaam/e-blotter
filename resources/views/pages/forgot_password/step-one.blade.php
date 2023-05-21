@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <button class="primary-btn">Send Verification Code</button>
+            <button class="btn-filled">Send Verification Code</button>
 
         </form>  
     </div>
