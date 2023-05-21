@@ -61,7 +61,15 @@
     }
 
     .btn-tinted {
-        @apply bg-project-blue-default text-white px-4 py-2 rounded-md hover:bg-project-blue-dark active:bg-project-blue-darker transition-all
+        @apply bg-project-blue-light text-project-blue-default px-4 py-2 rounded-md hover:bg-project-blue-light2 active:bg-project-blue-light3 transition-all
+    }
+
+    .btn-tinted.danger {
+        @apply bg-project-red-light text-rose-600 hover:bg-project-red-light2 active:bg-project-red-light3 transition-all
+    }
+
+    .btn-tinted.success {
+        @apply bg-project-green-light text-emerald-600 hover:bg-project-green-light2 active:bg-project-green-light3 transition-all
     }
 
     .btn-gray {

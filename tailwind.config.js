@@ -21,6 +21,9 @@ module.exports = {
           },
 
           blue: {
+            light: '#b3d6ed',
+            light2: '#a2cbe5',
+            light3: '#92beda',
             default: "#0063A3",
             dark: "#004F83",
             darker: "#024977",
@@ -31,6 +34,18 @@ module.exports = {
             dark: '#EBA328',
             darker: '#D6972B'
           },
+
+          red: {
+            light: '#fda4af',
+            light2: '#f496a2',
+            light3: '#f08b97'
+          },
+
+          green: {
+            light: '#6ee7b7',
+            light2: '#5fdcaa',
+            light3: '#53d19f',
+          }
           
         },
 

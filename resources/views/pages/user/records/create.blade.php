@@ -159,10 +159,10 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <button class="btn-tinted" type="button">Schedule of Reconciliation</button>
-                    <button class="btn-tinted bg-rose-600" type="button">Clear</button>
-                    <button class="btn-tinted bg-emerald-600" type="button">Save</button>
+                    <button class="btn-filled" type="button">Schedule of Reconciliation</button>
                     <button class="btn-tinted" type="button">Print</button>
+                    <button class="btn-tinted danger" type="button">Clear</button>
+                    <button class="btn-tinted success" type="button">Save</button>
                 </div>
             </div>
 
