@@ -35,10 +35,6 @@ Route::prefix('/admin')->group(function () {
     });
 
     Route::middleware(['admin', 'account_verified'])->group(function () {
-        Route::get('/', function () {
-            return redirect()->route('admin.dashboard');
-        });
-
         Route::prefix('/dashboard')->group(function () {
             Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
         });
