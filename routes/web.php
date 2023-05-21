@@ -58,7 +58,7 @@ Route::prefix('/')->group(function () {
         });
     });
 
-    Route::middleware(['auth', 'user'])->group(function () {
+    Route::middleware(['auth', 'user', 'account_verified'])->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index']);
         // Route::get('/records', [UserRecordController::class, 'index']);
         Route::resource('records', UserRecordController::class)
@@ -78,7 +78,7 @@ Route::prefix('/admin')->group(function () {
 
     });
 
-    Route::middleware(['auth', 'admin'])->group(function() {
+    Route::middleware(['auth', 'admin', 'account_verified'])->group(function() {
         Route::prefix('/dashboard')->group(function () {
             Route::get('/', [DashboardController::class, 'index']);
         });
@@ -96,6 +96,7 @@ Route::prefix('/admin')->group(function () {
         Route::prefix('/accounts')->group(function () {
             Route::get('/', [AccountContoller::class, 'index']);
             Route::get('/{id}/edit', [AccountContoller::class, 'edit']);
+            Route::post('/verify', [AccountContoller::class, 'verify']);
         });
     });
 

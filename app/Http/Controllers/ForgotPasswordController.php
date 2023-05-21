@@ -8,8 +8,6 @@ use App\Http\Requests\ForgotPasswordThree;
 use App\Models\OTP;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
 
 class ForgotPasswordController extends Controller
 {
@@ -56,6 +54,7 @@ class ForgotPasswordController extends Controller
 
     public function stepThree()
     {
+        
         return view('pages.forgot_password.step-three');
     }
 
