@@ -30,6 +30,9 @@
                     <p class="text-xs text-red-500 italic">{{$message}}</p>
                     @enderror
                 </div>
+                @if (session()->has('error'))
+                    <p class="text-xs text-red-500 italic">{{ session()->get('error')}}</p>
+                @endif
             </div>
 
             <div class="flex w-full justify-between">

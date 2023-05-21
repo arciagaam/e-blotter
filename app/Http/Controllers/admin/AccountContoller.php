@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AccountContoller extends Controller
@@ -12,15 +13,16 @@ class AccountContoller extends Controller
      */
     public function index()
     {
-        return view('pages.admin.accounts.accounts');
+        $accounts = User::all();
+        return view('pages.admin.accounts.accounts', ['accounts' => $accounts]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function verify(Request $request)
     {
-        //
+        User::find($request->id)->update(['verified_at' => now()]);
     }
-
+    
 }
