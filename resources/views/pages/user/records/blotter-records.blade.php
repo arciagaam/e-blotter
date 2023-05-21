@@ -72,24 +72,21 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    @php
-                        $residents = [['number' => '1', 'barangay' => 'bgy', 'accusation' => 'accusation 1', 'complainant' => 'yesser', 'date' => 'now', 'status' => 'omsim'], ['number' => '1', 'barangay' => 'bgy', 'accusation' => 'accusation 1', 'complainant' => 'yesser', 'date' => 'now', 'status' => 'omsim']];
-                    @endphp
 
-                    @empty($residents)
+                <tbody>
+                    @empty($records)
                         <tr>
                             <td colspan="100%" class="text-center">There are no data.</td>
                         </tr>
                     @else
-                        @foreach ($residents as $key => $resident)
+                        @foreach ($records as $key => $record)
                             <tr>
-                                <td>asd{{ $key }}</td>
-                                <td>1</td>
-                                <td>kghkhg{{ $key }}</td>
-                                <td>vbnvbnbv{{ $key }}</td>
-                                <td>sdgsdg{{ $key }}</td>
-                                <td>fgjfgj</td>
+                                <td><p>{{ $record->id }}</p></td>
+                                <td><p>{{ $record->id }}</p></td>
+                                <td><p>{{ $record->case }}</p></td>
+                                <td><p>{{ $record->victim->name }}</p></td>
+                                <td><p>{{ date_format($record->created_at, 'F j, Y') }}</p></td>
+                                <td><p>{{ ucfirst($record->blotterStatus->name) }}</p></td>
                                 <td>
                                     <div class="flex w-full h-full justify-center items-center gap-2">
                                         <button class="btn-tinted" type="button">Preview</button>
@@ -104,7 +101,7 @@
             </table>
 
             <div class="w-full flex">
-                {{-- {{$residents->links()}} --}}
+                {{$records->links()}}
             </div>
         </div>
 

@@ -17,7 +17,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        return view('pages.user.records.blotter-records');
+        return view('pages.user.records.blotter-records', ['records' => Record::with('victim', 'suspect', 'blotterStatus')->paginate(10)]);
     }
 
     /**
@@ -26,7 +26,8 @@ class RecordController extends Controller
     public function create()
     {
         $civilStatus = new CivilStatus();
-        
+        // $civilStatus = new CivilStatus();
+
         return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus(), 'blotterNumber' => Record::count() + 1]);
     }
 
@@ -38,11 +39,13 @@ class RecordController extends Controller
         $report = new Record();
 
         $report->fill($request->safe()->except('victim', 'suspect'));
+        $report->blotter_status_id = 1;
         $report->barangay_id = auth()->user()->barangays[0]->id;
         $report->save();
 
         $report->victim()->save(new Victim($request->validated('victim')));
         $report->suspect()->save(new Suspect($request->validated('suspect')));
+
 
         return redirect()->route('records.index');
     }

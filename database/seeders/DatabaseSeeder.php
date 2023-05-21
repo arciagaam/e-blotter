@@ -124,5 +124,28 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now()
             ],
         ]);
+
+        DB::table('blotter_status')->insert([
+            [
+                'name' => 'settled',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'unresolved',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'dismissed',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'in prosecution',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+        ]);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -14,6 +15,7 @@ class Record extends Model
 
     protected $fillable = [
         'barangay_id',
+        'blotter_status_id',
         'victim_id',
         'suspect_id',
         'case',
@@ -30,5 +32,10 @@ class Record extends Model
     public function suspect(): HasOne
     {
         return $this->hasOne(Suspect::class);
+    }
+
+    public function blotterStatus(): BelongsTo
+    {
+        return $this->belongsTo(BlotterStatus::class);
     }
 }

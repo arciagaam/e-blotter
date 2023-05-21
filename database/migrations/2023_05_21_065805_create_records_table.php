@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->id();
             $table->foreignId('barangay_id')->constrained('barangays')->cascadeOnUpdate()->restrictOnDelete();
-            // $table->foreignId('victim_id')->constrained('victims')->cascadeOnUpdate()->restrictOnDelete();
-            // $table->foreignId('suspect_id')->constrained('suspects')->cascadeOnUpdate()->restrictOnDelete();
+            $table->foreignId('blotter_status_id')->constrained('blotter_status')->cascadeOnUpdate()->restrictOnDelete();
             $table->string('case');
             $table->text('narrative');
             $table->string('narrative_file')->nullable();
