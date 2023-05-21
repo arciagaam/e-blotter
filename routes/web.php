@@ -62,7 +62,7 @@ Route::prefix('/')->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index']);
         // Route::get('/records', [UserRecordController::class, 'index']);
         Route::resource('records', UserRecordController::class)
-            ->only(['index', 'create']);
+            ->only(['index', 'create', 'store']);
         Route::get('/kp-forms', [UserKpFormController::class, 'index']);
         Route::get('/accounts', [UserAccountController::class, 'index']);
     });

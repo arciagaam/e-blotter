@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RecordRequest;
+use App\Models\CivilStatus;
 use App\Models\Record;
+use App\Models\Suspect;
+use App\Models\Victim;
 use Illuminate\Http\Request;
 
 class RecordController extends Controller
@@ -21,15 +25,26 @@ class RecordController extends Controller
      */
     public function create()
     {
-        return view('pages.user.records.create');
+        $civilStatus = new CivilStatus();
+        
+        return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus()]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RecordRequest $request)
     {
-        //
+        $report = new Record();
+
+        $report->fill($request->safe()->except('victim', 'suspect'));
+        $report->barangay_id = 1;
+        $report->save();
+
+        $report->victim()->save(new Victim($request->validated('victim')));
+        $report->suspect()->save(new Suspect($request->validated('suspect')));
+
+        return redirect()->route('records.index');
     }
 
     /**
@@ -51,7 +66,7 @@ class RecordController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Record $record)
+    public function update(RecordRequest $request, Record $record)
     {
         //
     }

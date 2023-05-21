@@ -2,7 +2,7 @@
     <x-page-header>New Record</x-page-header>
 
     <div class="flex flex-col gap-3">
-        <form action="{{ url('#') }}" method="POST" class="flex flex-col gap-5">
+        <form action="{{ route('records.store') }}" method="POST" class="flex flex-col gap-5">
             @csrf
 
             <div class="flex flex-row justify-between">
@@ -35,7 +35,11 @@
                             <label for="victim_name" class="flex gap-2 items-center">Complainants Name:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim_name" id="victim_name">
+                        <input class="form-input" type="text" name="victim[name]" id="victim_name"
+                            value="{{ old('victim.name') }}">
+                        @error('victim.name')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="form-input-container">
@@ -43,7 +47,11 @@
                             <label for="victim_age" class="flex gap-2 items-center">Age:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim_age" id="victim_age">
+                        <input class="form-input" type="number" name="victim[age]" id="victim_age"
+                            value="{{ old('victim.age') }}">
+                        @error('victim.age')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="form-input-container">
@@ -51,7 +59,14 @@
                             <label for="victim_sex" class="flex gap-2 items-center">Sex:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim_sex" id="victim_sex">
+                        {{-- <input class="form-input" type="text" name="victim_sex" id="victim_sex"> --}}
+                        <select class="form-input" name="victim[sex]" id="victim_sex">
+                            <option value="1" @selected(old('victim.sex') == 1)>Male</option>
+                            <option value="2" @selected(old('victim.sex') == 2)>Female</option>
+                        </select>
+                        @error('victim.sex')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="form-input-container">
@@ -59,8 +74,11 @@
                             <label for="victim_contact_number" class="flex gap-2 items-center">Contact Number:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim_contact_number"
-                            id="victim_contact_number">
+                        <input class="form-input" type="text" name="victim[contact_number]"
+                            id="victim_contact_number" value="{{ old('victim.contact_number') }}">
+                        @error('victim.contact_number')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="form-input-container">
@@ -68,7 +86,11 @@
                             <label for="victim_address" class="flex gap-2 items-center">Address:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim_address" id="victim_address">
+                        <input class="form-input" type="text" name="victim[address]" id="victim_address"
+                            value="{{ old('victim.address') }}">
+                        @error('victim.address')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="form-input-container">
@@ -76,7 +98,15 @@
                             <label for="victim_civil_status" class="flex gap-2 items-center">Civil Status:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim_civil_status" id="victim_civil_status">
+                        <select class="form-input" name="victim[civil_status_id]" id="victim_civil_status">
+                            @foreach ($civilStatus as $value)
+                                <option value="{{ $value->id }}" @selected(old('victim.civil_status') == $value->id)>{{ ucfirst($value->name) }}</option>
+                            @endforeach
+                        </select>
+
+                        @error('victim.civil_status_id')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
                     </div>
 
                 </div>
@@ -95,15 +125,24 @@
                                 <label for="suspect_name" class="flex gap-2 items-center">Suspect Name:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="suspect_name" id="suspect_name">
+                            <input class="form-input" type="text" name="suspect[name]" id="suspect_name"
+                                value="{{ old('suspect.name') }}">
+                            @error('suspect.name')
+                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
                                 <label for="suspect_sex" class="flex gap-2 items-center">Sex:</label>
                             </div>
-
-                            <input class="form-input" type="text" name="suspect_sex" id="suspect_sex">
+                            <select class="form-input" name="suspect[sex]" id="suspect_sex">
+                                <option value="1" @selected(old('suspect.sex') == 1)>Male</option>
+                                <option value="2" @selected(old('suspect.sex') == 2)>Female</option>
+                            </select>
+                            @error('suspect.sex')
+                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
                         </div>
 
                         <div class="form-input-container flex-1">
@@ -111,7 +150,11 @@
                                 <label for="suspect_address" class="flex gap-2 items-center">Address:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="suspect_address" id="suspect_address">
+                            <input class="form-input" type="text" name="suspect[address]" id="suspect_address"
+                                value="{{ old('suspect.address') }}">
+                            @error('suspect.address')
+                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -120,7 +163,11 @@
                             <label for="case" class="flex gap-2 items-center">Case:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="case" id="case">
+                        <input class="form-input" type="text" name="case" id="case"
+                            value="{{ old('case') }}">
+                        @error('case')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
                     </div>
 
                 </div>
@@ -133,12 +180,16 @@
 
                 <div class="flex flex-col gap-2">
                     <div class="form-input-container">
-                        <textarea class="form-input resize-none" name="narrative" id="narrative" cols="30" rows="5"></textarea>
+                        <textarea class="form-input resize-none" name="narrative" id="narrative" cols="30" rows="5">{{ old('narrative') }}</textarea>
+                        @error('narrative')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 
                 <div class="flex flex-row items-center gap-2">
-                    <button class="flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white">
+                    <button
+                        class="flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white">
                         <box-icon class="" name='microphone'></box-icon>
                     </button>
                     <p>Click on the microphone icon and being speaking.</p>
@@ -152,7 +203,10 @@
 
                 <div class="flex flex-col gap-2">
                     <div class="form-input-container">
-                        <textarea class="form-input resize-none" name="reliefs" id="reliefs" cols="30" rows="5"></textarea>
+                        <textarea class="form-input resize-none" name="reliefs" id="reliefs" cols="30" rows="5">{{ old('reliefs') }}</textarea>
+                        @error('reliefs')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
             </div>
@@ -162,7 +216,7 @@
                     <button class="btn-filled" type="button">Schedule of Reconciliation</button>
                     <button class="btn-tinted" type="button">Print</button>
                     <button class="btn-tinted danger" type="button">Clear</button>
-                    <button class="btn-tinted success" type="button">Save</button>
+                    <button class="btn-tinted success" type="submit">Save</button>
                 </div>
             </div>
 

@@ -96,5 +96,33 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now()
             ],
         ]);
+
+        DB::table('civil_status')->insert([
+            [
+                'name' => 'single',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'married',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'divorced',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'separated',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'widowed',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+        ]);
     }
 }
