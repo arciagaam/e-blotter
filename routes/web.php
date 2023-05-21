@@ -10,7 +10,7 @@ use App\Http\Controllers\user\AccountController as UserAccountController;
 use App\Http\Controllers\user\DashboardController as UserDashboardController;
 use App\Http\Controllers\user\KpFormController as UserKpFormController;
 use App\Http\Controllers\user\RecordController as UserRecordController;
-use App\Http\Controllers\UserForgotPasswordController;
+use App\Http\Controllers\user\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,13 +33,9 @@ Route::prefix('/')->group(function () {
             return view('pages.user.auth.login');
         });
 
-        Route::get('/register', function () {
-            return view('pages.user.auth.register.register');
-        });
-
-        Route::get('/register-confirmation', function () {
-            return view('pages.user.auth.register.register-confirmation');
-        });
+        Route::get('/register', [UserController::class, 'index']);
+        Route::post('/register', [UserController::class, 'store']);
+        Route::get('/registration-success', [UserController::class, 'success']);
 
         Route::post('/authenticate', [Authentication::class, 'authenticate'])->name('guest.authenticate');
 
@@ -48,10 +44,14 @@ Route::prefix('/')->group(function () {
                 return redirect('/forgot-password/step-one');
             });
 
-            Route::get('/step-one', [UserForgotPasswordController::class, 'stepOne']);
-            Route::get('/step-two', [UserForgotPasswordController::class, 'stepTwo']);
-            Route::get('/step-three', [UserForgotPasswordController::class, 'stepThree']);
-            Route::get('/complete', [UserForgotPasswordController::class, 'complete']);
+            Route::get('/step-one', [ForgotPasswordController::class, 'stepOne']);
+            Route::post('/step-one', [ForgotPasswordController::class, 'postStepOne']);
+
+            Route::get('/step-two', [ForgotPasswordController::class, 'stepTwo']);
+            Route::post('/step-two', [ForgotPasswordController::class, 'postStepTwo']);
+            
+            Route::get('/step-three', [ForgotPasswordController::class, 'stepThree']);
+            Route::get('/complete', [ForgotPasswordController::class, 'complete']);
         });
     });
 
@@ -68,42 +68,37 @@ Route::prefix('/')->group(function () {
 
 Route::prefix('/admin')->group(function () {
 
-    Route::get('/', function () {
-        return redirect('/admin/login');
-    });
-
-    Route::get('/login', function () {
-        return view('pages.admin.auth.login');
-    });
-
-    Route::prefix('/forgot-password')->group(function () {
-
+    Route::middleware('guest')->group(function() {
         Route::get('/', function () {
-            return redirect('/admin/forgot-password/step-one');
+            return redirect('/admin/login');
         });
 
-        Route::get('/step-one', [ForgotPasswordController::class, 'ForgotPasswordController@stepOne']);
-        Route::get('/step-two', [ForgotPasswordController::class, 'ForgotPasswordController@stepTwo']);
-        Route::get('/step-three', [ForgotPasswordController::class, 'ForgotPasswordController@stepThree']);
-        Route::get('/complete', [ForgotPasswordController::class, 'ForgotPasswordController@complete']);
+        Route::get('/login', function () {
+            return view('pages.admin.auth.login');
+        });
     });
 
-    Route::prefix('/dashboard')->group(function () {
-        Route::get('/', [DashboardController::class, 'index']);
+    Route::middleware(['auth', 'admin'])->group(function() {
+        Route::prefix('/dashboard')->group(function () {
+            Route::get('/', [DashboardController::class, 'index']);
+        });
+    
+        Route::prefix('/records')->group(function () {
+            Route::get('/', [RecordController::class, 'index']);
+            Route::get('/{id}', [RecordController::class, 'show']);
+        });
+    
+        Route::prefix('/kp-forms')->group(function () {
+            Route::get('/', [KpFormController::class, 'index']);
+            Route::get('/{id}', [KpFormController::class, 'show']);
+        });
+    
+        Route::prefix('/accounts')->group(function () {
+            Route::get('/', [AccountContoller::class, 'index']);
+            Route::get('/{id}/edit', [AccountContoller::class, 'edit']);
+        });
     });
 
-    Route::prefix('/records')->group(function () {
-        Route::get('/', [RecordController::class, 'index']);
-        Route::get('/{id}', [RecordController::class, 'show']);
-    });
 
-    Route::prefix('/kp-forms')->group(function () {
-        Route::get('/', [KpFormController::class, 'index']);
-        Route::get('/{id}', [KpFormController::class, 'show']);
-    });
 
-    Route::prefix('/accounts')->group(function () {
-        Route::get('/', [AccountContoller::class, 'index']);
-        Route::get('/{id}/edit', [AccountContoller::class, 'edit']);
-    });
 });
