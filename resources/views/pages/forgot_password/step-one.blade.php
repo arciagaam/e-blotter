@@ -10,7 +10,7 @@
 <body>
     <div class="flex items-center justify-center min-h-screen text-project-gray-default bg-project-blue-dark">
         
-        <form method="POST" action="{{url('/authenticate')}}" class="flex flex-col min-w-[30%] gap-5 shadow-md py-10 px-6 rounded-md bg-white">
+        <form method="POST" action="{{url('/forgot-password/step-one')}}" class="flex flex-col min-w-[30%] gap-5 shadow-md py-10 px-6 rounded-md bg-white">
             <p class="text-lg font-bold">Forgot Password</p>
             <p class="text-sm">Please enter your email address to receive a new OTP</p>
 

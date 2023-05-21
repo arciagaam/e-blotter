@@ -38,12 +38,12 @@ class Authentication extends Controller
      */
     public function logout(Request $request): RedirectResponse
     {
+        $route = str_contains(url()->previous(), 'admin') ? '/admin' : '/';
+
         Auth::logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect($route);
     }
 }
