@@ -11,7 +11,7 @@
 
 <body>
     <div class="flex items-center justify-center min-h-screen">
-        <form method="POST" action="{{ url('/authenticate') }}"
+        <form method="POST" action="{{ route('guest.authenticate') }}"
             class="flex flex-col min-w-[30%] gap-5 shadow-md py-10 px-6 rounded-md bg-white">
             @csrf
 
@@ -42,7 +42,7 @@
                 <a class="underline" href="{{ url('/register') }}">Register your Barangay</a>
             </div>
 
-            <button class="primary-btn">LOG IN</button>
+            <button class="primary-btn">Login</button>
 
         </form>
     </div>
