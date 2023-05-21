@@ -29,9 +29,10 @@ Route::get('/logout', [Authentication::class, 'logout'])->name('logout');
 Route::prefix('/')->group(function () {
 
     Route::middleware(['guest'])->group(function () {
+
         Route::get('/', function () {
             return view('pages.user.auth.login');
-        });
+        })->name('userRoot');
 
         Route::get('/register', [UserController::class, 'index']);
         Route::post('/register', [UserController::class, 'store']);
@@ -51,18 +52,20 @@ Route::prefix('/')->group(function () {
             Route::post('/step-two', [ForgotPasswordController::class, 'postStepTwo']);
             
             Route::get('/step-three', [ForgotPasswordController::class, 'stepThree']);
+            Route::post('/step-three', [ForgotPasswordController::class, 'postStepThree']);
+
             Route::get('/complete', [ForgotPasswordController::class, 'complete']);
         });
     });
 
-    // Route::middleware(['auth'])->group(function () {
-    // });
-    Route::get('/dashboard', [UserDashboardController::class, 'index']);
-    // Route::get('/records', [UserRecordController::class, 'index']);
-    Route::resource('records', UserRecordController::class)
-        ->only(['index', 'create']);
-    Route::get('/kp-forms', [UserKpFormController::class, 'index']);
-    Route::get('/accounts', [UserAccountController::class, 'index']);
+    Route::middleware(['auth', 'user'])->group(function () {
+        Route::get('/dashboard', [UserDashboardController::class, 'index']);
+        // Route::get('/records', [UserRecordController::class, 'index']);
+        Route::resource('records', UserRecordController::class)
+            ->only(['index', 'create']);
+        Route::get('/kp-forms', [UserKpFormController::class, 'index']);
+        Route::get('/accounts', [UserAccountController::class, 'index']);
+    });
 });
 
 
@@ -70,12 +73,9 @@ Route::prefix('/admin')->group(function () {
 
     Route::middleware('guest')->group(function() {
         Route::get('/', function () {
-            return redirect('/admin/login');
-        });
-
-        Route::get('/login', function () {
             return view('pages.admin.auth.login');
-        });
+        })->name('adminRoot');
+
     });
 
     Route::middleware(['auth', 'admin'])->group(function() {
