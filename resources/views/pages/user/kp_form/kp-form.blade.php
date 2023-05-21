@@ -47,7 +47,7 @@
                     @else
                         @foreach ($kpForms as $key => $value)
                             <tr>
-                                <td><p>KP FORM NO # {{ $key }}</p></td>
+                                <td><p>KP FORM NO # {{ $key + 1 }}</p></td>
                                 <td><p>{{ $value }}</p></td>
                                 <td>
                                     <div class="flex w-full h-full justify-center items-center gap-2">

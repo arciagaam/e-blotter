@@ -15,10 +15,14 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->check() && auth()->user()->roles[0]->id === 1) {
-            return $next($request);
-        } else {
+        if (!auth()->check()) {
+            return redirect('/');
+        }
+
+        if (auth()->user()->roles[0]->id !== 1) {
             return redirect('/dashboard');
         }
+
+        return $next($request);
     }
 }

@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-project-gray-default/60 text-sm">Province</p>
+                        {{-- <p class="text-project-gray-default/60 text-sm">Province</p> --}}
                         <p class="text-lg">Barangay Bulilan Sur</p>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-project-gray-default/60 text-sm">Province</p>
+                        {{-- <p class="text-project-gray-default/60 text-sm">Province</p> --}}
                         <p class="text-lg">Barangay Labuin</p>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-project-gray-default/60 text-sm">Province</p>
+                        {{-- <p class="text-project-gray-default/60 text-sm">Province</p> --}}
                         <p class="text-lg">Barangay Sta Clara Sur</p>
                     </div>
                 </div>

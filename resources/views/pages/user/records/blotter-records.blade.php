@@ -9,8 +9,8 @@
                 <form class="flex flex-col w-full gap-2">
                     @csrf
 
-                    <div class="flex flex-row justify-between">
-                        <div class="form-input-container flex-row gap-5">
+                    <div class="flex flex-row">
+                        {{-- <div class="form-input-container flex-row gap-5">
                             <div class="flex flex-row justify-center items-center">
                                 <label for="purok_id" class="flex gap-2 items-center">Select Purok</label>
                             </div>
@@ -19,9 +19,9 @@
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                             </select>
-                        </div>
+                        </div> --}}
 
-                        <a class="btn-filled" href="{{ route('records.create') }}">New Record</a>
+                        <a class="ml-auto btn-filled" href="{{ route('records.create') }}">New Record</a>
                     </div>
 
                     <div class="flex flex-row justify-between">
@@ -52,9 +52,9 @@
                         <th>
                             <p>Blotter No.</p>
                         </th>
-                        <th>
+                        {{-- <th>
                             <p>Purok</p>
-                        </th>
+                        </th> --}}
                         <th>
                             <p>Accusation</p>
                         </th>
@@ -82,7 +82,7 @@
                         @foreach ($records as $key => $record)
                             <tr>
                                 <td><p>{{ $record->id }}</p></td>
-                                <td><p>{{ $record->id }}</p></td>
+                                {{-- <td><p>{{ $record->id }}</p></td> --}}
                                 <td><p>{{ $record->case }}</p></td>
                                 <td><p>{{ $record->victim->name }}</p></td>
                                 <td><p>{{ date_format($record->created_at, 'F j, Y') }}</p></td>

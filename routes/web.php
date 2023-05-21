@@ -26,6 +26,41 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/logout', [Authentication::class, 'logout'])->name('logout');
 
+Route::prefix('/admin')->group(function () {
+
+    Route::middleware('guest')->group(function () {
+        Route::get('/', function () {
+            return view('pages.admin.auth.login');
+        })->name('adminRoot');
+    });
+
+    Route::middleware(['admin', 'account_verified'])->group(function () {
+        Route::get('/', function () {
+            return redirect()->route('admin.dashboard');
+        });
+
+        Route::prefix('/dashboard')->group(function () {
+            Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+        });
+
+        Route::prefix('/records')->group(function () {
+            Route::get('/', [RecordController::class, 'index']);
+            Route::get('/{id}', [RecordController::class, 'show']);
+        });
+
+        Route::prefix('/kp-forms')->group(function () {
+            Route::get('/', [KpFormController::class, 'index']);
+            Route::get('/{id}', [KpFormController::class, 'show']);
+        });
+
+        Route::prefix('/accounts')->group(function () {
+            Route::get('/', [AccountContoller::class, 'index']);
+            Route::get('/{id}/edit', [AccountContoller::class, 'edit']);
+            Route::post('/verify', [AccountContoller::class, 'verify']);
+        });
+    });
+});
+
 Route::prefix('/')->group(function () {
 
     Route::middleware(['guest'])->group(function () {
@@ -50,7 +85,7 @@ Route::prefix('/')->group(function () {
 
             Route::get('/step-two', [ForgotPasswordController::class, 'stepTwo']);
             Route::post('/step-two', [ForgotPasswordController::class, 'postStepTwo']);
-            
+
             Route::get('/step-three', [ForgotPasswordController::class, 'stepThree']);
             Route::post('/step-three', [ForgotPasswordController::class, 'postStepThree']);
 
@@ -58,7 +93,7 @@ Route::prefix('/')->group(function () {
         });
     });
 
-    Route::middleware(['auth', 'user', 'account_verified'])->group(function () {
+    Route::middleware(['user', 'account_verified'])->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index']);
         // Route::get('/records', [UserRecordController::class, 'index']);
         Route::resource('records', UserRecordController::class)
@@ -66,40 +101,4 @@ Route::prefix('/')->group(function () {
         Route::get('/kp-forms', [UserKpFormController::class, 'index']);
         Route::get('/accounts', [UserAccountController::class, 'index']);
     });
-});
-
-
-Route::prefix('/admin')->group(function () {
-
-    Route::middleware('guest')->group(function() {
-        Route::get('/', function () {
-            return view('pages.admin.auth.login');
-        })->name('adminRoot');
-
-    });
-
-    Route::middleware(['auth', 'admin', 'account_verified'])->group(function() {
-        Route::prefix('/dashboard')->group(function () {
-            Route::get('/', [DashboardController::class, 'index']);
-        });
-    
-        Route::prefix('/records')->group(function () {
-            Route::get('/', [RecordController::class, 'index']);
-            Route::get('/{id}', [RecordController::class, 'show']);
-        });
-    
-        Route::prefix('/kp-forms')->group(function () {
-            Route::get('/', [KpFormController::class, 'index']);
-            Route::get('/{id}', [KpFormController::class, 'show']);
-        });
-    
-        Route::prefix('/accounts')->group(function () {
-            Route::get('/', [AccountContoller::class, 'index']);
-            Route::get('/{id}/edit', [AccountContoller::class, 'edit']);
-            Route::post('/verify', [AccountContoller::class, 'verify']);
-        });
-    });
-
-
-
 });
