@@ -18,8 +18,7 @@ class CheckAdmin
         if(auth()->check() && auth()->user()->roles[0]->id === 1) {
             return $next($request);
         } else {
-            auth()->logout();
-            return redirect('/admin');
+            return redirect('/dashboard');
         }
     }
 }
