@@ -21,7 +21,11 @@ class Authentication extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/');
+            if (auth()->user()->roles[0]->id === 1) {
+                return redirect()->intended('/admin/dashboard');
+            }
+
+            return redirect()->intended('/dashboard');
         }
 
         return back()->withErrors([
