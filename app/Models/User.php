@@ -52,12 +52,12 @@ class User extends Authenticatable
 
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(Role::class, 'user_roles');
+        return $this->belongsToMany(Role::class, 'user_roles')->withTimestamps();
     }
 
     public function barangays(): BelongsToMany
     {
-        return $this->belongsToMany(Barangay::class, 'user_barangays');
+        return $this->belongsToMany(Barangay::class, 'user_barangays')->withTimestamps();
     }
 
     public function otp(): HasOne

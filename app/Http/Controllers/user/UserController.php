@@ -5,6 +5,7 @@ namespace App\Http\Controllers\user;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserStorePostRequest;
 use App\Models\Barangay;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -33,18 +34,14 @@ class UserController extends Controller
      */
     public function store(UserStorePostRequest $request) : RedirectResponse
     {   
-        $barangay = $request->safe()->only(['name']);
         $user = $request->safe()->except(['name']);
-        
-        $barangay = Barangay::firstOrCreate($barangay);
 
         $user['password'] = bcrypt($user['password']);
                 
         $user = User::create($user);
-        
-        //TEMP FIX, FIX LATER
-        DB::table('user_roles')
-        ->insert(['user_id' => $user->id, 'role_id' => 2]);
+        $barangay = Barangay::firstOrCreate($request->safe()->only(['name']));
+        $user->barangays()->save($barangay);
+        $user->roles()->save(Role::find(2));
 
         return redirect('/registration-success');
     }
