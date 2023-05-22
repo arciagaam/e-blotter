@@ -4,6 +4,7 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RecordRequest;
+use App\Models\BlotterStatus;
 use App\Models\CivilStatus;
 use App\Models\Record;
 use App\Models\Suspect;
@@ -17,7 +18,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        return view('pages.user.records.blotter-records', ['records' => Record::with('victim', 'suspect', 'blotterStatus')->paginate(10)]);
+        return view('pages.user.records.blotter-records', ['records' => Record::where('barangay_id', auth()->user()->barangays[0]->id)->with('victim', 'suspect', 'barangays', 'blotterStatus')->paginate(10)]);
     }
 
     /**
@@ -26,7 +27,6 @@ class RecordController extends Controller
     public function create()
     {
         $civilStatus = new CivilStatus();
-        // $civilStatus = new CivilStatus();
 
         return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus(), 'blotterNumber' => Record::count() + 1]);
     }
@@ -39,8 +39,8 @@ class RecordController extends Controller
         $report = new Record();
 
         $report->fill($request->safe()->except('victim', 'suspect'));
-        $report->blotter_status_id = 1;
-        $report->barangay_id = auth()->user()->barangays[0]->id;
+        $report->barangays()->associate(auth()->user()->barangays[0]->id);
+        $report->blotterStatus()->associate(BlotterStatus::find(2));
         $report->save();
 
         $report->victim()->save(new Victim($request->validated('victim')));
@@ -55,7 +55,9 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
-        return view('pages.user.records.show', ['record' => Record::where('id', $record->id)->with('victim', 'suspect', 'blotterStatus')->first()]);
+        $civilStatus = new CivilStatus();
+
+        return view('pages.user.records.show', ['record' => Record::where('id', $record->id)->with('victim', 'suspect', 'blotterStatus')->first(), 'civilStatus' => $civilStatus->getAllCivilStatus()]);
     }
 
     /**
@@ -63,7 +65,10 @@ class RecordController extends Controller
      */
     public function edit(Record $record)
     {
-        //
+        $civilStatus = new CivilStatus();
+        $blotterStatus = new BlotterStatus();
+
+        return view('pages.user.records.edit', ['record' => Record::where('id', $record->id)->with('victim', 'suspect', 'blotterStatus')->first(), 'civilStatus' => $civilStatus->getAllCivilStatus(), 'blotterStatus' => $blotterStatus->getAllBlotterStatus()]);
     }
 
     /**
@@ -71,7 +76,13 @@ class RecordController extends Controller
      */
     public function update(RecordRequest $request, Record $record)
     {
-        //
+        $record = Record::find($record->id);
+        
+        $record->update($request->safe()->except('victim', 'suspect'));
+        $record->victim()->update($request->validated('victim'));
+        $record->suspect()->update($request->validated('suspect'));
+
+        return redirect()->route('records.show', ['record' => $record->id]);
     }
 
     /**

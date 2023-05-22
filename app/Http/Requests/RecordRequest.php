@@ -31,6 +31,8 @@ class RecordRequest extends FormRequest
             "suspect.name" => 'required',
             "suspect.sex" => 'required',
             "suspect.address" => 'required',
+            "blotter_status_id" => 'sometimes|required',
+            "purok" => 'required',
             "case" => 'required',
             "narrative" => 'required',
             "reliefs" => 'required',

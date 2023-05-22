@@ -2,26 +2,47 @@
     <x-page-header>New Record</x-page-header>
 
     <div class="flex flex-col gap-3">
-        <form action="{{ route('records.store') }}" method="POST" class="flex flex-col gap-5">
+        <form action="{{ route('records.update', ['record' => $record->id]) }}" method="POST" class="flex flex-col gap-5">
+            @method('PUT')
             @csrf
 
-            <div class="flex flex-row justify-between">
-                <div class="form-input-container flex-row gap-5">
-                    <div class="flex flex-row justify-center items-center">
-                        <label for="blotter_number" class="flex gap-2 items-center">Blotter No.:</label>
-                    </div>
+            <div class="flex flex-col gap-2">
 
-                    <input class="form-input" type="text" name="blotter_number" id="blotter_number" value="{{ $blotterNumber }}" disabled>
+                <div class="flex flex-row justify-between">
+                    <div class="form-input-container flex-row gap-5">
+                        <div class="flex flex-row justify-center items-center">
+                            <label for="blotter_number" class="flex gap-2 items-center">Blotter No.:</label>
+                        </div>
+
+                        <input class="form-input" type="text" name="blotter_number" id="blotter_number"
+                            value="{{ $record->id }}" disabled>
+                    </div>
+                    <div class="form-input-container flex-row gap-5">
+                        <div class="flex flex-row justify-center items-center">
+                            <label for="date" class="flex gap-2 items-center">Date:</label>
+                        </div>
+
+                        <input value="{{ date_format($record->created_at, 'F j, Y') }}" class="form-input"
+                            type="text" name="date" id="date" disabled>
+                    </div>
                 </div>
-                <div class="form-input-container flex-row gap-5">
-                    <div class="flex flex-row justify-center items-center">
-                        <label for="date" class="flex gap-2 items-center">Date:</label>
-                    </div>
 
-                    <input value="{{ date('F j, Y') }}" class="form-input" type="text" name="date" id="date"
-                        disabled>
+                <div class="flex flex-row justify-end">
+                    <div class="form-input-container flex-row gap-5">
+                        <div class="flex flex-row justify-center items-center">
+                            <label for="blotter_status_id" class="flex gap-2 items-center">Status:</label>
+                        </div>
+
+                        <select class="form-input" name="blotter_status_id" id="blotter_status_id">
+                            @foreach ($blotterStatus as $value)
+                                <option value="{{ $value->id }}" @selected($record->blotter_status_id == $value->id)>
+                                    {{ ucfirst($value->name) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
             </div>
+
 
             <div class="flex flex-col gap-2">
                 <div class="border-b-2 border-project-gray-default ">
@@ -36,7 +57,7 @@
                         </div>
 
                         <input class="form-input" type="text" name="victim[name]" id="victim_name"
-                            value="{{ old('victim.name') }}">
+                            value="{{ $record->victim->name }}">
                         @error('victim.name')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
@@ -48,7 +69,7 @@
                         </div>
 
                         <input class="form-input" type="number" name="victim[age]" id="victim_age"
-                            value="{{ old('victim.age') }}">
+                            value="{{ $record->victim->age }}">
                         @error('victim.age')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
@@ -61,8 +82,8 @@
 
                         {{-- <input class="form-input" type="text" name="victim_sex" id="victim_sex"> --}}
                         <select class="form-input" name="victim[sex]" id="victim_sex">
-                            <option value="1" @selected(old('victim.sex') == 1)>Male</option>
-                            <option value="2" @selected(old('victim.sex') == 2)>Female</option>
+                            <option value="1" @selected($record->victim->sex == 1)>Male</option>
+                            <option value="2" @selected($record->victim->sex == 2)>Female</option>
                         </select>
                         @error('victim.sex')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -75,7 +96,7 @@
                         </div>
 
                         <input class="form-input" type="text" name="victim[contact_number]"
-                            id="victim_contact_number" value="{{ old('victim.contact_number') }}">
+                            id="victim_contact_number" value="{{ $record->victim->contact_number }}">
                         @error('victim.contact_number')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
@@ -86,9 +107,9 @@
                             <div class="flex flex-row">
                                 <label for="victim_address" class="flex gap-2 items-center">Address:</label>
                             </div>
-    
+
                             <input class="form-input" type="text" name="victim[address]" id="victim_address"
-                                value="{{ old('victim.address') }}">
+                                value="{{ $record->victim->address }}">
                             @error('victim.address')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
@@ -98,9 +119,9 @@
                             <div class="flex flex-row">
                                 <label for="purok" class="flex gap-2 items-center">Purok:</label>
                             </div>
-    
+
                             <input class="form-input" type="text" name="purok" id="purok"
-                                value="{{ old('purok') }}">
+                                value="{{ $record->purok }}">
                             @error('purok')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
@@ -114,7 +135,8 @@
 
                         <select class="form-input" name="victim[civil_status_id]" id="victim_civil_status">
                             @foreach ($civilStatus as $value)
-                                <option value="{{ $value->id }}" @selected(old('victim.civil_status') == $value->id)>{{ ucfirst($value->name) }}</option>
+                                <option value="{{ $value->id }}" @selected($record->victim->civil_status == $value->id)>
+                                    {{ ucfirst($value->name) }}</option>
                             @endforeach
                         </select>
 
@@ -140,7 +162,7 @@
                             </div>
 
                             <input class="form-input" type="text" name="suspect[name]" id="suspect_name"
-                                value="{{ old('suspect.name') }}">
+                                value="{{ $record->suspect->name }}">
                             @error('suspect.name')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
@@ -151,8 +173,8 @@
                                 <label for="suspect_sex" class="flex gap-2 items-center">Sex:</label>
                             </div>
                             <select class="form-input" name="suspect[sex]" id="suspect_sex">
-                                <option value="1" @selected(old('suspect.sex') == 1)>Male</option>
-                                <option value="2" @selected(old('suspect.sex') == 2)>Female</option>
+                                <option value="1" @selected($record->suspect->sex == 1)>Male</option>
+                                <option value="2" @selected($record->suspect->sex == 2)>Female</option>
                             </select>
                             @error('suspect.sex')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -165,7 +187,7 @@
                             </div>
 
                             <input class="form-input" type="text" name="suspect[address]" id="suspect_address"
-                                value="{{ old('suspect.address') }}">
+                                value="{{ $record->suspect->address }}">
                             @error('suspect.address')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
@@ -178,7 +200,7 @@
                         </div>
 
                         <input class="form-input" type="text" name="case" id="case"
-                            value="{{ old('case') }}">
+                            value="{{ $record->case }}">
                         @error('case')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
@@ -194,7 +216,7 @@
 
                 <div class="flex flex-col gap-2">
                     <div class="form-input-container">
-                        <textarea class="form-input resize-none" name="narrative" id="narrative" cols="30" rows="5">{{ old('narrative') }}</textarea>
+                        <textarea class="form-input resize-none" name="narrative" id="narrative" cols="30" rows="5">{{ $record->narrative }}</textarea>
                         @error('narrative')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
@@ -217,7 +239,7 @@
 
                 <div class="flex flex-col gap-2">
                     <div class="form-input-container">
-                        <textarea class="form-input resize-none" name="reliefs" id="reliefs" cols="30" rows="5">{{ old('reliefs') }}</textarea>
+                        <textarea class="form-input resize-none" name="reliefs" id="reliefs" cols="30" rows="5">{{ $record->reliefs }}</textarea>
                         @error('reliefs')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror

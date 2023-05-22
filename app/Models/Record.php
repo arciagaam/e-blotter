@@ -16,6 +16,7 @@ class Record extends Model
     protected $fillable = [
         'barangay_id',
         'blotter_status_id',
+        'purok',
         'victim_id',
         'suspect_id',
         'case',
@@ -32,6 +33,11 @@ class Record extends Model
     public function suspect(): HasOne
     {
         return $this->hasOne(Suspect::class);
+    }
+
+    public function barangays(): BelongsTo
+    {
+        return $this->belongsTo(Barangay::class, 'barangay_id');
     }
 
     public function blotterStatus(): BelongsTo
