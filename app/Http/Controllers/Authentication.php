@@ -8,6 +8,13 @@ use Illuminate\Support\Facades\Auth;
 
 class Authentication extends Controller
 {
+    protected $authenticationService;
+
+    public function __construct(AuthenticationService $authenticationService)
+    {
+        $this->authenticationService = $authenticationService;
+    }
+
     /**
      * Handle an authentication attempt.
      */
@@ -21,10 +28,20 @@ class Authentication extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             
+            if($this->authenticationService->checkUserRole()) {
+                auth()->logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                $route = str_contains(url()->previous(), 'admin') ? '/admin' : '/';
+                return redirect($route)->with('error', 'Invalid credentials.');
+            }
+            
             if (auth()->user()->roles[0]->id === 1) {
                 return redirect()->intended('/admin/dashboard');
-            }
+            } 
 
+            addToLoginTrail($request->login_role_id);
             return redirect()->intended('/dashboard');
         }
 
@@ -45,5 +62,12 @@ class Authentication extends Controller
         $request->session()->regenerateToken();
 
         return redirect($route);
+    }
+}
+
+class AuthenticationService {
+    public function checkUserRole()
+    {
+        return ((!str_contains(url()->previous(), 'admin') && auth()->user()->roles[0]->id == 1) || (str_contains(url()->previous(), 'admin') && auth()->user()->roles[0]->id != 1));
     }
 }

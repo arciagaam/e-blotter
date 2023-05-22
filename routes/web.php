@@ -11,6 +11,7 @@ use App\Http\Controllers\user\DashboardController as UserDashboardController;
 use App\Http\Controllers\user\KpFormController as UserKpFormController;
 use App\Http\Controllers\user\RecordController as UserRecordController;
 use App\Http\Controllers\user\UserController;
+use App\Models\LoginRole;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -62,7 +63,8 @@ Route::prefix('/')->group(function () {
     Route::middleware(['guest'])->group(function () {
 
         Route::get('/', function () {
-            return view('pages.user.auth.login');
+            $loginRoles = LoginRole::all();
+            return view('pages.user.auth.login', ['loginRoles' => $loginRoles]);
         })->name('userRoot');
 
         Route::get('/register', [UserController::class, 'index']);
