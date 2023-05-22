@@ -10,14 +10,14 @@
                         <label for="blotter_number" class="flex gap-2 items-center">Blotter No.:</label>
                     </div>
 
-                    <input class="form-input" type="text" name="blotter_number" id="blotter_number" value="{{ $record->id }}" disabled>
+                    <input class="form-input bg-white" type="text" name="blotter_number" id="blotter_number" value="{{ $record->id }}" disabled>
                 </div>
                 <div class="form-input-container flex-row gap-5">
                     <div class="flex flex-row justify-center items-center">
                         <label for="date" class="flex gap-2 items-center">Date:</label>
                     </div>
 
-                    <input value="{{ $record->created_at }}" class="form-input" type="text" name="date" id="date"
+                    <input value="{{ $record->created_at }}" class="form-input bg-white" type="text" name="date" id="date"
                         disabled>
                 </div>
             </div>
@@ -34,7 +34,7 @@
                             <label for="victim_name" class="flex gap-2 items-center">Complainants Name:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim[name]" id="victim_name"
+                        <input class="form-input bg-white" type="text" name="victim[name]" id="victim_name"
                             value="{{ $record->victim->name }}" disabled>
                         @error('victim.name')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -46,7 +46,7 @@
                             <label for="victim_age" class="flex gap-2 items-center">Age:</label>
                         </div>
 
-                        <input class="form-input" type="number" name="victim[age]" id="victim_age"
+                        <input class="form-input bg-white" type="number" name="victim[age]" id="victim_age"
                             value="{{ $record->victim->age }}" disabled>
                         @error('victim.age')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -58,7 +58,7 @@
                             <label for="victim_sex" class="flex gap-2 items-center">Sex:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim_sex" id="victim_sex" value="{{ $record->victim->sex }}" disabled>
+                        <input class="form-input bg-white" type="text" name="victim_sex" id="victim_sex" value="{{ $record->victim->sex }}" disabled>
                         @error('victim.sex')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
@@ -69,7 +69,7 @@
                             <label for="victim_contact_number" class="flex gap-2 items-center">Contact Number:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim[contact_number]"
+                        <input class="form-input bg-white" type="text" name="victim[contact_number]"
                             id="victim_contact_number" value="{{ $record->victim->contact_number }}" disabled>
                         @error('victim.contact_number')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -81,7 +81,7 @@
                             <label for="victim_address" class="flex gap-2 items-center">Address:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim[address]" id="victim_address"
+                        <input class="form-input bg-white" type="text" name="victim[address]" id="victim_address"
                             value="{{ $record->victim->address }}" disabled>
                         @error('victim.address')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -93,7 +93,7 @@
                             <label for="victim_civil_status" class="flex gap-2 items-center">Civil Status:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="victim[civil_status_id]" id="victim_civil_status"
+                        <input class="form-input bg-white" type="text" name="victim[civil_status_id]" id="victim_civil_status"
                             value="{{ $record->victim->civil_status_id }}" disabled>
 
                         @error('victim.civil_status_id')
@@ -117,7 +117,7 @@
                                 <label for="suspect_name" class="flex gap-2 items-center">Suspect Name:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="suspect[name]" id="suspect_name"
+                            <input class="form-input bg-white" type="text" name="suspect[name]" id="suspect_name"
                                 value="{{ $record->suspect->name }}" disabled>
                             @error('suspect.name')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -129,7 +129,7 @@
                                 <label for="suspect_sex" class="flex gap-2 items-center">Sex:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="suspect[sex]" id="suspect_sex"
+                            <input class="form-input bg-white" type="text" name="suspect[sex]" id="suspect_sex"
                                 value="{{ $record->suspect->sex }}" disabled>
                             @error('suspect.sex')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -141,7 +141,7 @@
                                 <label for="suspect_address" class="flex gap-2 items-center">Address:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="suspect[address]" id="suspect_address"
+                            <input class="form-input bg-white" type="text" name="suspect[address]" id="suspect_address"
                                 value="{{ $record->suspect->address }}" disabled>
                             @error('suspect.address')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -154,7 +154,7 @@
                             <label for="case" class="flex gap-2 items-center">Case:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="case" id="case"
+                        <input class="form-input bg-white" type="text" name="case" id="case"
                             value="{{ $record->case }}" disabled>
                         @error('case')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -171,7 +171,7 @@
 
                 <div class="flex flex-col gap-2">
                     <div class="form-input-container">
-                        <textarea class="form-input resize-none" name="narrative" id="narrative" cols="30" rows="5" disabled>{{ $record->narrative }}</textarea>
+                        <textarea class="form-input bg-white resize-none" name="narrative" id="narrative" cols="30" rows="5" disabled>{{ $record->narrative }}</textarea>
                         @error('narrative')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
@@ -194,7 +194,7 @@
 
                 <div class="flex flex-col gap-2">
                     <div class="form-input-container">
-                        <textarea class="form-input resize-none" name="reliefs" id="reliefs" cols="30" rows="5" disabled>{{ $record->reliefs }}</textarea>
+                        <textarea class="form-input bg-white resize-none" name="reliefs" id="reliefs" cols="30" rows="5" disabled>{{ $record->reliefs }}</textarea>
                         @error('reliefs')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
