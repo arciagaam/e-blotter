@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\AccountContoller;
+use App\Http\Controllers\admin\AccountController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\KpFormController;
 use App\Http\Controllers\admin\RecordController;
@@ -50,9 +50,9 @@ Route::prefix('/admin')->group(function () {
         });
 
         Route::prefix('/accounts')->group(function () {
-            Route::get('/', [AccountContoller::class, 'index']);
-            Route::get('/{id}/edit', [AccountContoller::class, 'edit']);
-            Route::post('/verify', [AccountContoller::class, 'verify']);
+            Route::get('/', [AccountController::class, 'index']);
+            Route::get('/{id}/edit', [AccountController::class, 'edit']);
+            Route::post('/verify', [AccountController::class, 'verify']);
         });
     });
 });
