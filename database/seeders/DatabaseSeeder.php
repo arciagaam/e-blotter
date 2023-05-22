@@ -146,5 +146,23 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now()
             ],
         ]);
+
+        DB::table('login_roles')->insert([
+            [
+                'name' => 'Secretary',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Barangay Chairman',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'name' => 'Committee in Charge',
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+        ]);
     }
 }

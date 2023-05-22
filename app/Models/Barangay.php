@@ -22,6 +22,12 @@ class Barangay extends Model
         return $this->belongsToMany(User::class, 'user_barangays');
     }
 
+    public function logintrails(): HasMany
+    {
+        return $this->hasMany(LoginTrail::class);
+
+    }
+
     public function records(): HasMany
     {
         return $this->hasMany(Record::class);

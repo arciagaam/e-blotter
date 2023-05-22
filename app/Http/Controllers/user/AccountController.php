@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\LoginTrail;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('pages.user.accounts.accounts');
+        $loginTrails = LoginTrail::where('barangay_id', auth()->user()->barangays[0]->id)->latest()->get();
+        return view('pages.user.accounts.accounts', ['loginTrails' => $loginTrails]);
     }
 
     /**

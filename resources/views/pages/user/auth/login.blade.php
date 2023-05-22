@@ -33,6 +33,18 @@
                     @enderror
                 </div>
 
+                <div class="form-input-container">
+                    <label for="login_role_id">Role</label>
+                    <select class="form-input" name="login_role_id" id="login_role_id">
+                        @foreach ($loginRoles as $loginRole)
+                            <option value="{{$loginRole->id}}">{{ucfirst($loginRole->name)}}</option>
+                        @endforeach
+                    </select>
+                    @error('login_role_id')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 @if (session()->has('error'))
                     <p class="text-xs text-red-500 italic">{{ session()->get('error')}}</p>
                 @endif
