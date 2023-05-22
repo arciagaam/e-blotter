@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('login_trail', function (Blueprint $table) {
             $table->id();
             $table->foreignId('barangay_id')->nullable()->constrained('barangays')->cascadeOnUpdate()->nullOnDelete();
-            $table->foreignId('login_role_id')->nullable()->constrained('barangays')->cascadeOnUpdate()->nullOnDelete();
-            $table->foreignId('user_id')->nullable()->constrained('barangays')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('login_role_id')->nullable()->constrained('login_roles')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->cascadeOnUpdate()->nullOnDelete();
             $table->timestamps();
         });
     }
