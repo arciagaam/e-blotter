@@ -101,7 +101,7 @@
             <p>Are you sure you want to verify this account?</p>
         </div>
 
-        <button id="confirm_verify" class="bg-project-yellow font-bold py-2 px-4 rounded-md">Verify Account</button>
+        <button id="confirm_verify" class="btn-filled">Verify Account</button>
     </div>
 </div>
 
