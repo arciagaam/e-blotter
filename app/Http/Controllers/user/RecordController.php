@@ -27,7 +27,6 @@ class RecordController extends Controller
     public function create()
     {
         $civilStatus = new CivilStatus();
-
         return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus(), 'blotterNumber' => Record::count() + 1]);
     }
 

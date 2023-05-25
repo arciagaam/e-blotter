@@ -54,9 +54,9 @@
                 @else
                     @foreach ($accounts as $account)
                         <tr>
-                            <td>{{$account->first_name}}</td>
+                            <td>{{$account->first_name}} {{$account->last_name}}</td>
                             <td>{{$account->username}}</td>
-                            <td>{{$account->barangay_id}}</td>
+                            <td>{{$account->barangays[0]->name}}</td>
                             <td>{{$account->contact_number}}</td>
                             <td>{{$account->email}}</td>
                             <td>

@@ -36,25 +36,28 @@ Route::prefix('/admin')->group(function () {
     });
 
     Route::middleware(['admin', 'account_verified'])->group(function () {
-        Route::prefix('/dashboard')->group(function () {
-            Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+
+        Route::name('admin.')->group(function() {
+            Route::prefix('/dashboard')->group(function () {
+                Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+            });
+    
+            Route::resource('records', RecordController::class)
+            ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
+    
+            Route::prefix('/kp-forms')->group(function () {
+                Route::get('/', [KpFormController::class, 'index']);
+                Route::get('/{id}', [KpFormController::class, 'show']);
+            });
+    
+            Route::prefix('/accounts')->group(function () {
+                Route::get('/', [AccountController::class, 'index']);
+                Route::get('/{id}/edit', [AccountController::class, 'edit']);
+                Route::post('/verify', [AccountController::class, 'verify']);
+            });
         });
 
-        Route::prefix('/records')->group(function () {
-            Route::get('/', [RecordController::class, 'index']);
-            Route::get('/{id}', [RecordController::class, 'show']);
-        });
 
-        Route::prefix('/kp-forms')->group(function () {
-            Route::get('/', [KpFormController::class, 'index']);
-            Route::get('/{id}', [KpFormController::class, 'show']);
-        });
-
-        Route::prefix('/accounts')->group(function () {
-            Route::get('/', [AccountController::class, 'index']);
-            Route::get('/{id}/edit', [AccountController::class, 'edit']);
-            Route::post('/verify', [AccountController::class, 'verify']);
-        });
     });
 });
 

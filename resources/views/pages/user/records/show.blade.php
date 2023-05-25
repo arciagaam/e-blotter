@@ -1,5 +1,5 @@
 <x-layout>
-    <x-page-header>New Record</x-page-header>
+    <x-page-header>View Record</x-page-header>
 
     <div class="flex flex-col gap-3">
         <div class="flex flex-col gap-5">

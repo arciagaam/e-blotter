@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = User::all();
+        $accounts = User::nonAdmin();
         return view('pages.admin.accounts.accounts', ['accounts' => $accounts]);
     }
 

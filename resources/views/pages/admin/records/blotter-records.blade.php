@@ -21,12 +21,27 @@
         <table id="main-table" class="main-table w-full">
             <thead>
                 <tr>
-                    <th>Blotter No.</th>
-                    <th>Barangay</th>
-                    <th>Accusation</th>
-                    <th>Complainant/s Name</th>
-                    <th>Date of Complaint</th>
-                    <th>Blotter Status</th>
+                    <th class="w-1/12">
+                        <p>Blotter No.</p>
+                    </th>
+                    <th>
+                        <p>Barangay</p>
+                    </th>
+                    <th>
+                        <p>Accusation</p>
+                    </th>
+                    <th>
+                        <p>Complainant/s Name</p>
+                    </th>
+                    <th class="w-2/12">
+                        <p>Date of Complaint</p>
+                    </th>
+                    <th class="w-1/12">
+                        <p class="text-center">Blotter Status</p>
+                    </th>
+                    <th class="w-2/12">
+                        <p class="text-center">Actions</p>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -37,14 +52,25 @@
                     </tr>
                 @else
                     @foreach ($records as $record)
-                        <tr>
-                            <td>{{$record->id}}</td>
-                            <td>{{$record->barangay_id}}</td>
-                            <td>{{$record->case}}</td>
-                            <td>\\Complainant Name</td>
-                            <td>{{$record->created_at}}</td>
-                            <td>{{$record->blotter_status_id}}</td>
-                        </tr>
+                    <tr>
+                        <td><p>{{ $record->id }}</p></td>
+                        <td><p>{{ $record->barangays->name }}</p></td>
+                        <td><p>{{ $record->case }}</p></td>
+                        <td><p>{{ $record->victim->name }}</p></td>
+                        <td><p>{{ date_format($record->created_at, 'F j, Y') }}</p></td>
+                        <td>
+                            <div class="flex justify-center items-center">
+                                <x-blotter-status id="{{ $record->blotterStatus->id }}" text="{{ $record->blotterStatus->name }}" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex w-full h-full justify-center items-center gap-2">
+                                <a href="{{ route('admin.records.show', ['record' => $record->id]) }}" class="btn-tinted" >Preview</a>
+                                <a href="{{ route('admin.records.edit', ['record' => $record->id]) }}" class="btn-tinted" >Edit</a>
+                                <button class="btn-tinted" type="button">Print</button>
+                            </div>
+                        </td>
+                    </tr>
                     @endforeach
                 @endempty
             </tbody>

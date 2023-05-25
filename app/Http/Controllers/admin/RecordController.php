@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CivilStatus;
 use App\Models\Record;
 use Illuminate\Http\Request;
 
@@ -36,9 +37,11 @@ class RecordController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Record $record)
     {
-        return view('pages.admin.records.show');
+        $civilStatus = new CivilStatus();
+        return view('pages.admin.records.show', ['record' => Record::where('id', $record->id)->with('victim', 'suspect', 'blotterStatus')->first(), 'civilStatus' => $civilStatus->getAllCivilStatus()]);
+
     }
 
     /**

@@ -20,7 +20,7 @@
 
             <hr>
 
-            <p class="self-center text-2xl font-bold">5</p>
+            <p class="self-center text-2xl font-bold">{{$totalCases}}</p>
         </div>
 
         <div class="flex w-full">
@@ -28,57 +28,25 @@
         </div>
 
         <div class="grid grid-cols-3 gap-5">
-            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
-                <div class="flex gap-5 items-center">
-                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark">
-                        <box-icon color="white" name='building-house' size="3em"></box-icon>
+
+            @foreach ($barangays as $barangay)  
+                <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+                    <div class="flex gap-5 items-center">
+                        <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark">
+                            <box-icon color="white" name='building-house' size="3em"></box-icon>
+                        </div>
+
+                        <div class="flex flex-col">
+                            {{-- <p class="text-project-gray-default/60 text-sm">Province</p> --}}
+                            <p class="text-lg">Barangay {{$barangay->name}}</p>
+                        </div>
                     </div>
 
-                    <div class="flex flex-col">
-                        {{-- <p class="text-project-gray-default/60 text-sm">Province</p> --}}
-                        <p class="text-lg">Barangay Bulilan Sur</p>
-                    </div>
+                    <hr>
+
+                    <p class="self-center text-2xl font-bold">{{count($barangay->records)}}</p>
                 </div>
-
-                <hr>
-
-                <p class="self-center text-2xl font-bold">5</p>
-            </div>
-
-            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
-                <div class="flex gap-5 items-center">
-                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark">
-                        <box-icon color="white" name='building-house' size="3em"></box-icon>
-                    </div>
-
-                    <div class="flex flex-col">
-                        {{-- <p class="text-project-gray-default/60 text-sm">Province</p> --}}
-                        <p class="text-lg">Barangay Labuin</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <p class="self-center text-2xl font-bold">5</p>
-            </div>
-
-            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
-                <div class="flex gap-5 items-center">
-                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark">
-                        <box-icon color="white" name='building-house' size="3em"></box-icon>
-                    </div>
-
-                    <div class="flex flex-col">
-                        {{-- <p class="text-project-gray-default/60 text-sm">Province</p> --}}
-                        <p class="text-lg">Barangay Sta Clara Sur</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <p class="self-center text-2xl font-bold">5</p>
-            </div>
-            
+            @endforeach         
         </div>
     </div>
 </x-layout>
