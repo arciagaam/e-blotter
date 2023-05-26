@@ -53,7 +53,7 @@
                             <p>Blotter No.</p>
                         </th>
                         <th>
-                            <p>Barangay</p>
+                            <p>Purok</p>
                         </th>
                         <th>
                             <p>Accusation</p>
@@ -82,7 +82,7 @@
                         @foreach ($records as $key => $record)
                             <tr>
                                 <td><p>{{ $record->id }}</p></td>
-                                <td><p>{{ $record->barangays->name }}</p></td>
+                                <td><p>{{ $record->purok }}</p></td>
                                 <td><p>{{ $record->case }}</p></td>
                                 <td><p>{{ $record->victim->name }}</p></td>
                                 <td><p>{{ date_format($record->created_at, 'F j, Y') }}</p></td>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlotterStatus;
+use App\Models\Record;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,7 +14,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.user.dashboard.dashboard');
+        $records = Record::where('barangay_id', auth()->user()->barangays[0]->id)->get();
+        $blotterStatusCount = [
+            'settled' => count(BlotterStatus::find(1)->records),
+            'unresolved' => count(BlotterStatus::find(2)->records),
+            'dismissed' => count(BlotterStatus::find(3)->records),
+            'inProsecution' => count(BlotterStatus::find(4)->records),
+        ];
+
+        return view('pages.user.dashboard.dashboard', ['records' => count($records), 'blotterStatusCount' => $blotterStatusCount]);
     }
 
     /**
