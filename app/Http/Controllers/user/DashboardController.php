@@ -16,10 +16,10 @@ class DashboardController extends Controller
     {
         $records = Record::where('barangay_id', auth()->user()->barangays[0]->id)->count();
         $blotterStatusCount = [
-            'settled' => count(Record::ofStatus(auth()->user()->barangays[0]->id, 1)),
-            'unresolved' => count(Record::ofStatus(auth()->user()->barangays[0]->id, 2)),
-            'dismissed' => count(Record::ofStatus(auth()->user()->barangays[0]->id, 3)),
-            'inProsecution' => count(Record::ofStatus(auth()->user()->barangays[0]->id, 4)),
+            'settled' => count(Record::ofStatus(1)),
+            'unresolved' => count(Record::ofStatus(2)),
+            'dismissed' => count(Record::ofStatus(3)),
+            'inProsecution' => count(Record::ofStatus(4)),
         ];
 
         return view('pages.user.dashboard.dashboard', ['records' => $records, 'blotterStatusCount' => $blotterStatusCount]);

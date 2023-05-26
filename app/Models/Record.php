@@ -46,8 +46,8 @@ class Record extends Model
         return $this->belongsTo(BlotterStatus::class);
     }
 
-    public function scopeOfStatus(Builder $query, int $barangay_id, int $blotter_status_id)
+    public function scopeOfStatus(Builder $query, int $blotter_status_id)
     {
-        return $query->where('barangay_id', $barangay_id)->where('blotter_status_id', $blotter_status_id)->get();
+        return $query->where('barangay_id', auth()->user()->barangays[0]->id)->where('blotter_status_id', $blotter_status_id)->get();
     }
 }
