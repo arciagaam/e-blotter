@@ -14,15 +14,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $records = Record::where('barangay_id', auth()->user()->barangays[0]->id)->get();
+        $records = Record::where('barangay_id', auth()->user()->barangays[0]->id)->count();
         $blotterStatusCount = [
-            'settled' => count(BlotterStatus::find(1)->records),
-            'unresolved' => count(BlotterStatus::find(2)->records),
-            'dismissed' => count(BlotterStatus::find(3)->records),
-            'inProsecution' => count(BlotterStatus::find(4)->records),
+            'settled' => count(Record::ofStatus(auth()->user()->barangays[0]->id, 1)),
+            'unresolved' => count(Record::ofStatus(auth()->user()->barangays[0]->id, 2)),
+            'dismissed' => count(Record::ofStatus(auth()->user()->barangays[0]->id, 3)),
+            'inProsecution' => count(Record::ofStatus(auth()->user()->barangays[0]->id, 4)),
         ];
 
-        return view('pages.user.dashboard.dashboard', ['records' => count($records), 'blotterStatusCount' => $blotterStatusCount]);
+        return view('pages.user.dashboard.dashboard', ['records' => $records, 'blotterStatusCount' => $blotterStatusCount]);
     }
 
     /**

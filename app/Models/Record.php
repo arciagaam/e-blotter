@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -43,5 +44,10 @@ class Record extends Model
     public function blotterStatus(): BelongsTo
     {
         return $this->belongsTo(BlotterStatus::class);
+    }
+
+    public function scopeOfStatus(Builder $query, int $barangay_id, int $blotter_status_id)
+    {
+        return $query->where('barangay_id', $barangay_id)->where('blotter_status_id', $blotter_status_id)->get();
     }
 }
