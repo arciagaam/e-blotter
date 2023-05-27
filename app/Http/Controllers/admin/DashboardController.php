@@ -14,7 +14,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.dashboard.dashboard', ['barangays' => Barangay::all(), 'totalCases' => Record::count()]);
+        
+        return view('pages.admin.dashboard.dashboard', ['barangays' => Barangay::withCount('records')->get(), 'totalCases' => Record::count()]);
     }
 
     /**

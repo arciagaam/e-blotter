@@ -7,7 +7,7 @@ use App\Models\LoginTrail;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AccountController extends Controller
+class LoginTrailController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class AccountController extends Controller
     public function index()
     {
         $loginTrails = LoginTrail::where('barangay_id', auth()->user()->barangays[0]->id)->latest()->get();
-        return view('pages.user.accounts.accounts', ['loginTrails' => $loginTrails]);
+        return view('pages.user.login_trail.accounts', ['loginTrails' => $loginTrails]);
     }
 
     /**
