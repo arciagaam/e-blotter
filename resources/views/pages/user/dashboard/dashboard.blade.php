@@ -23,15 +23,6 @@
             <p class="self-center textt-2xl font-bold">{{ $records }}</p>
         </div>
 
-        {{-- <div class="flex flex-col items-center justify-center rounded-md w-full overflow-hidden">
-            <p class="flex flex-1 text-lg">
-                Total Blotter Cases
-            </p>
-            <p class="flex flex-[2] text-2xl bg-project-gray-light w-full justify-center py-10 px-5">
-                25
-            </p>
-        </div> --}}
-
         <div class="grid grid-cols-2 gap-5">
             <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-5 items-center">
