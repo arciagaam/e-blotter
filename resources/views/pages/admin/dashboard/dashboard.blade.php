@@ -44,7 +44,7 @@
 
                     <hr>
 
-                    <p class="self-center text-2xl font-bold">{{count($barangay->records)}}</p>
+                    <p class="self-center text-2xl font-bold">{{$barangay->records_count}}</p>
                 </div>
             @endforeach         
         </div>
