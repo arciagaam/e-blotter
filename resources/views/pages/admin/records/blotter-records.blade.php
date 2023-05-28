@@ -66,7 +66,6 @@
                         <td>
                             <div class="flex w-full h-full justify-center items-center gap-2">
                                 <a href="{{ route('admin.records.show', ['record' => $record->id]) }}" class="btn-tinted" >Preview</a>
-                                <a href="{{ route('admin.records.edit', ['record' => $record->id]) }}" class="btn-tinted" >Edit</a>
                                 <button class="btn-tinted" type="button">Print</button>
                             </div>
                         </td>
@@ -77,7 +76,7 @@
         </table>
 
         <div class="w-full flex">
-            {{-- {{$residents->links()}} --}}
+            {{-- {{$records->links()}} --}}
         </div>   
     </div>
 

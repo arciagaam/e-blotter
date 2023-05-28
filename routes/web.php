@@ -39,7 +39,7 @@ Route::prefix('/admin')->group(function () {
 
         Route::name('admin.')->group(function() {
             Route::prefix('/dashboard')->group(function () {
-                Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+                Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
             });
     
             Route::resource('records', RecordController::class)
@@ -49,10 +49,11 @@ Route::prefix('/admin')->group(function () {
                 Route::get('/', [KpFormController::class, 'index']);
                 Route::get('/{id}', [KpFormController::class, 'show']);
             });
+
+            Route::resource('accounts', AccountController::class)
+            ->only(['index', 'edit']);
     
             Route::prefix('/accounts')->group(function () {
-                Route::get('/', [AccountController::class, 'index']);
-                Route::get('/{id}/edit', [AccountController::class, 'edit']);
                 Route::post('/verify', [AccountController::class, 'verify']);
             });
         });
