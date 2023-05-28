@@ -6,9 +6,7 @@
             <h1 class="font-bold text-lg">
                 {{ $heading }}
             </h1>
-            <button class="flex justify-center items-center" type="button">
-                <box-icon name='x-circle'></box-icon>
-            </button>
+            <box-icon class="cursor-pointer" data-modal-action="dismiss" name='x-circle'></box-icon>
         </div>
 
         <div class="h-full py-4 px-8">
@@ -16,9 +14,8 @@
         </div>
 
         <div class="flex flex-row items-center justify-end gap-4 bg-neutral-200 h-16 py-2 px-8">
+            <button data-modal-action="dismiss">Cancel</button>
             {{ $footer }}
         </div>
     </div>
 </div>
-
-@vite('resources/js/modal.js')

@@ -31,6 +31,8 @@
         {{ $slot }}
     </div>
 
+    @vite('resources/js/modal.js')
+
 </body>
 
 </html>

@@ -249,7 +249,6 @@
     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, sequi quod? Dolorem unde ad quibusdam fugiat praesentium? Suscipit repellendus fuga odio praesentium quisquam consectetur pariatur qui quos autem commodi. Ipsam quis laborum harum, est consequatur, aspernatur, eum recusandae vero non neque quisquam rem nisi voluptates doloremque molestiae. Molestiae, alias debitis.</p>
 
     <x-slot:footer>
-        <button>Cancel</button>
         <button class="btn-filled">Save</button>
     </x-slot:footer>
 </x-modal>
@@ -262,7 +261,6 @@
     <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, sequi quod? Dolorem unde ad quibusdam fugiat praesentium? Suscipit repellendus fuga odio praesentium quisquam consectetur pariatur qui quos autem commodi. Ipsam quis laborum harum, est consequatur, aspernatur, eum recusandae vero non neque quisquam rem nisi voluptates doloremque molestiae. Molestiae, alias debitis.</p>
 
     <x-slot:footer>
-        <button>Cancel</button>
         <button class="btn-filled">Save</button>
     </x-slot:footer>
 </x-modal>
