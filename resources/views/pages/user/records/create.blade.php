@@ -11,7 +11,8 @@
                         <label for="blotter_number" class="flex gap-2 items-center">Blotter No.:</label>
                     </div>
 
-                    <input class="form-input" type="text" name="blotter_number" id="blotter_number" value="{{ $blotterNumber }}" disabled>
+                    <input class="form-input" type="text" name="blotter_number" id="blotter_number"
+                        value="{{ $blotterNumber }}" disabled>
                 </div>
                 <div class="form-input-container flex-row gap-5">
                     <div class="flex flex-row justify-center items-center">
@@ -86,7 +87,7 @@
                             <div class="flex flex-row">
                                 <label for="victim_address" class="flex gap-2 items-center">Address:</label>
                             </div>
-    
+
                             <input class="form-input" type="text" name="victim[address]" id="victim_address"
                                 value="{{ old('victim.address') }}">
                             @error('victim.address')
@@ -98,7 +99,7 @@
                             <div class="flex flex-row">
                                 <label for="purok" class="flex gap-2 items-center">Purok:</label>
                             </div>
-    
+
                             <input class="form-input" type="text" name="purok" id="purok"
                                 value="{{ old('purok') }}">
                             @error('purok')
@@ -114,7 +115,8 @@
 
                         <select class="form-input" name="victim[civil_status_id]" id="victim_civil_status">
                             @foreach ($civilStatus as $value)
-                                <option value="{{ $value->id }}" @selected(old('victim.civil_status') == $value->id)>{{ ucfirst($value->name) }}</option>
+                                <option value="{{ $value->id }}" @selected(old('victim.civil_status') == $value->id)>
+                                    {{ ucfirst($value->name) }}</option>
                             @endforeach
                         </select>
 
@@ -227,8 +229,8 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <button class="btn-filled" type="button">Schedule of Reconciliation</button>
-                    <button class="btn-tinted" type="button">Print</button>
+                    <button class="btn-filled" data-target="#schedule" type="button">Schedule of Reconciliation</button>
+                    <button class="btn-tinted" data-target="#print" type="button">Print</button>
                     <button class="btn-tinted danger" type="button">Clear</button>
                     <button class="btn-tinted success" type="submit">Save</button>
                 </div>
@@ -238,5 +240,31 @@
     </div>
 
 </x-layout>
+
+<x-modal id="schedule">
+    <x-slot:heading>
+        Schedule of Reconciliation
+    </x-slot:heading>
+    
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, sequi quod? Dolorem unde ad quibusdam fugiat praesentium? Suscipit repellendus fuga odio praesentium quisquam consectetur pariatur qui quos autem commodi. Ipsam quis laborum harum, est consequatur, aspernatur, eum recusandae vero non neque quisquam rem nisi voluptates doloremque molestiae. Molestiae, alias debitis.</p>
+
+    <x-slot:footer>
+        <button>Cancel</button>
+        <button class="btn-filled">Save</button>
+    </x-slot:footer>
+</x-modal>
+
+<x-modal id="print">
+    <x-slot:heading>
+        Print Record
+    </x-slot:heading>
+    
+    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, sequi quod? Dolorem unde ad quibusdam fugiat praesentium? Suscipit repellendus fuga odio praesentium quisquam consectetur pariatur qui quos autem commodi. Ipsam quis laborum harum, est consequatur, aspernatur, eum recusandae vero non neque quisquam rem nisi voluptates doloremque molestiae. Molestiae, alias debitis.</p>
+
+    <x-slot:footer>
+        <button>Cancel</button>
+        <button class="btn-filled">Save</button>
+    </x-slot:footer>
+</x-modal>
 
 @vite('resources/js/table.js')
