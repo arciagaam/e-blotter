@@ -204,11 +204,13 @@
                 </div>
 
                 <div class="flex flex-row items-center gap-2">
-                    <button
-                        class="flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white">
-                        <box-icon class="" name='microphone'></box-icon>
+                    <button id="record"  type="button" class="flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white">
+                        <box-icon class="bx bx-sm bx-microphone" name='microphone'></box-icon>
                     </button>
                     <p>Click on the microphone icon and being speaking.</p>
+                    <button type="button" id="stop_record">Stop</button>
+
+                    <audio id="recording" src="" controls></audio>
                 </div>
             </div>
 
@@ -268,3 +270,5 @@
 </x-modal>
 
 @vite('resources/js/table.js')
+@vite('resources/js/audio_record.js')
+

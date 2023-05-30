@@ -68,9 +68,9 @@
                             </td>
                             <td>
                                 <div class="flex flex-row gap-3">
-                                    <button data-id="{{$account->id}}" class="verify-btn {{$account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled'}}" {{$account->verified_at ? 'disabled' : ''}}>Verify</button>
-                                    <a href="{{ route('admin.accounts.edit', $account->id) }}" class="btn-tinted" >Edit</a>
-                                    <button class="btn-tinted danger">Delete</button>
+                                    <button data-target="#verify" data-id="{{$account->id}}" class="verify-btn {{$account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled'}}" {{$account->verified_at ? 'disabled' : ''}}>Verify</button>
+                                    <button data-target="#edit" class="btn-tinted" >Edit</button>
+                                    <button data-target="#delete" class="btn-tinted danger">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -87,20 +87,91 @@
 
 </x-layout>
 
-<div id="confirm_modal" class="pl-16 absolute hidden flex inset-0 items-center justify-center min-h-[calc(100%)] min-w-[calc(100%)] flex-col bg-black/20 text-project-blue ">
-    <div class="flex flex-col w-3/4 min-h-10 bg-white rounded-md p-5 gap-7">
+<x-modal id="edit">
+    <x-slot:heading>
+        Edit User
+    </x-slot:heading>
 
-        <div class="flex justify-between">
-            <p class="text-lg font-bold">Confirm Verification</p>
-            <i id="close_modal" class='bx bx-sm bxs-x-circle self-end cursor-pointer'></i>
-        </div>
-
-        <div class="flex gap-5 items-center">
-            <p>Are you sure you want to verify this account?</p>
-        </div>
-
-        <button id="confirm_verify" class="btn-filled">Verify Account</button>
+    <div class="form-input-container">
+        <label for="first_name">First Name</label>
+        <input class="form-input" type="text" name="first_name" id="first_name" value="{{$account->first_name}}">
+        @error('first_name')
+            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+        @enderror
     </div>
-</div>
+
+    <div class="form-input-container">
+        <label for="last_name">Last Name</label>
+        <input class="form-input" type="text" name="last_name" id="last_name" value="{{$account->last_name}}">
+        @error('last_name')
+            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div class="form-input-container">
+        <label for="username">Username</label>
+        <input class="form-input" type="text" name="username" id="username" value="{{$account->username}}">
+        @error('username')
+            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div class="form-input-container">
+        <label for="barangay_id">Barangay</label>
+        <input class="form-input" type="text" name="barangay_id" id="barangay_id" value="{{$account->barangays[0]->name}}">
+        @error('barangay_id')
+            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div class="form-input-container">
+        <label for="contact_number">Contact Number</label>
+        <input class="form-input" type="text" name="contact_number" id="contact_number" value="{{$account->contact_number}}">
+        @error('contact_number')
+            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <div class="form-input-container">
+        <label for="email">Email</label>
+        <input class="form-input" type="text" name="email" id="email" value="{{$account->email}}">
+        @error('email')
+            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+        @enderror
+    </div>
+
+    <x-slot:footer>
+        <button>Cancel</button>
+        <button>Submit</button>
+    </x-slot:footer>
+</x-modal>
+
+<x-modal id="verify">
+
+    <x-slot:heading>
+        Confirm Verification
+    </x-slot:heading>
+
+    <p>Are you sure you want to verify this account?</p>
+
+    <x-slot:footer>
+        <button>Cancel</button>
+        <button id="confirm_verify" class="btn-filled">Verify</button>
+    </x-slot:footer>
+</x-modal>
+
+<x-modal id="delete">
+    <x-slot:heading>
+        Delete Account
+    </x-slot:heading>
+
+    <p>Are you sure you want to delete this account?</p>
+
+    <x-slot:footer>
+        <button>Cancel</button>
+        <button id="confirm_verify" class="btn-filled">Verify</button>
+    </x-slot:footer>
+</x-modal>
+
 
 @vite('resources/js/accounts.js')
