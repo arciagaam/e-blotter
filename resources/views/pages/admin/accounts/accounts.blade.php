@@ -10,8 +10,10 @@
                     <label class="text-sm" for="search">Search</label>
                     <div
                         class="flex items-center border border-table-even focus-within:border-project-blue rounded-md overflow-hidden gap-2 px-1 bg-white transition-all duration-300 ease-in-out">
-                        <input class="w-full outline-none px-1 text-sm py-1" type="text" name="search" id="search" value="{{ request()->query()['search'] ?? null }}">
-                        <button class="w-fit h-fit aspect-square flex items-center justify-center"><i class='bx bx-search'></i></button>
+                        <input class="w-full outline-none px-1 text-sm py-1" type="text" name="search" id="search"
+                            value="{{ request()->query()['search'] ?? null }}">
+                        <button class="w-fit h-fit aspect-square flex items-center justify-center"><i
+                                class='bx bx-search'></i></button>
                     </div>
                 </div>
 
@@ -52,15 +54,16 @@
                 @else
                     @foreach ($accounts as $account)
                         <tr>
-                            <td>{{$account->first_name}} {{$account->last_name}}</td>
-                            <td>{{$account->username}}</td>
-                            <td>{{$account->barangays[0]->name}}</td>
-                            <td>{{$account->contact_number}}</td>
-                            <td>{{$account->email}}</td>
+                            <td>{{ $account->first_name }} {{ $account->last_name }}</td>
+                            <td>{{ $account->username }}</td>
+                            <td>{{ $account->barangays[0]->name }}</td>
+                            <td>{{ $account->contact_number }}</td>
+                            <td>{{ $account->email }}</td>
                             <td>
                                 <div class="flex justify-center items-center">
                                     @if ($account->verified_at)
-                                        <p class="w-fit bg-emerald-100 text-center rounded-full text-emerald-600 px-4 py-1">Verified</p>
+                                        <p class="w-fit bg-emerald-100 text-center rounded-full text-emerald-600 px-4 py-1">
+                                            Verified</p>
                                     @else
                                         <p class="bg-rose-100 text-center rounded-full text-rose-600 p-1">Unverified</p>
                                     @endif
@@ -68,8 +71,10 @@
                             </td>
                             <td>
                                 <div class="flex flex-row gap-3">
-                                    <button data-target="#verify" data-id="{{$account->id}}" class="verify-btn {{$account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled'}}" {{$account->verified_at ? 'disabled' : ''}}>Verify</button>
-                                    <button data-target="#edit" class="btn-tinted" >Edit</button>
+                                    <button data-target="#verify" data-id="{{ $account->id }}"
+                                        class="verify-btn {{ $account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled' }}"
+                                        {{ $account->verified_at ? 'disabled' : '' }}>Verify</button>
+                                    <button data-target="#edit" data-form-id="{{ $account->id }}" class="btn-tinted">Edit</button>
                                     <button data-target="#delete" class="btn-tinted danger">Delete</button>
                                 </div>
                             </td>
@@ -92,57 +97,63 @@
         Edit User
     </x-slot:heading>
 
-    <div class="form-input-container">
-        <label for="first_name">First Name</label>
-        <input class="form-input" type="text" name="first_name" id="first_name" value="{{$account->first_name}}">
-        @error('first_name')
-            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-        @enderror
-    </div>
+    <form action="#" method="POST" id="edit-user-form" data-action="{{ route('admin.accounts.update', ['account' => ':id', 'name' => ':name']) }}">
+        @method('PUT')
 
-    <div class="form-input-container">
-        <label for="last_name">Last Name</label>
-        <input class="form-input" type="text" name="last_name" id="last_name" value="{{$account->last_name}}">
-        @error('last_name')
-            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-        @enderror
-    </div>
+        <div class="form-input-container">
+            <label for="first_name">First Name</label>
+            <input class="form-input" type="text" name="first_name" id="first_name"
+                value="{{ $account->first_name }}">
+            @error('first_name')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <div class="form-input-container">
-        <label for="username">Username</label>
-        <input class="form-input" type="text" name="username" id="username" value="{{$account->username}}">
-        @error('username')
-            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-        @enderror
-    </div>
+        <div class="form-input-container">
+            <label for="last_name">Last Name</label>
+            <input class="form-input" type="text" name="last_name" id="last_name" value="{{ $account->last_name }}">
+            @error('last_name')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <div class="form-input-container">
-        <label for="barangay_id">Barangay</label>
-        <input class="form-input" type="text" name="barangay_id" id="barangay_id" value="{{$account->barangays[0]->name}}">
-        @error('barangay_id')
-            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-        @enderror
-    </div>
+        <div class="form-input-container">
+            <label for="username">Username</label>
+            <input class="form-input" type="text" name="username" id="username" value="{{ $account->username }}">
+            @error('username')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <div class="form-input-container">
-        <label for="contact_number">Contact Number</label>
-        <input class="form-input" type="text" name="contact_number" id="contact_number" value="{{$account->contact_number}}">
-        @error('contact_number')
-            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-        @enderror
-    </div>
+        <div class="form-input-container">
+            <label for="barangay_id">Barangay</label>
+            <input class="form-input" type="text" name="barangay_id" id="barangay_id"
+                value="{{ $account->barangays[0]->name }}">
+            @error('barangay_id')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <div class="form-input-container">
-        <label for="email">Email</label>
-        <input class="form-input" type="text" name="email" id="email" value="{{$account->email}}">
-        @error('email')
-            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-        @enderror
-    </div>
+        <div class="form-input-container">
+            <label for="contact_number">Contact Number</label>
+            <input class="form-input" type="text" name="contact_number" id="contact_number"
+                value="{{ $account->contact_number }}">
+            @error('contact_number')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div class="form-input-container">
+            <label for="email">Email</label>
+            <input class="form-input" type="text" name="email" id="email" value="{{ $account->email }}">
+            @error('email')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
+        </div>
+    </form>
 
     <x-slot:footer>
-        <button>Cancel</button>
-        <button>Submit</button>
+        <button class="btn-filled" form="edit-user-form">Submit</button>
     </x-slot:footer>
 </x-modal>
 
@@ -155,7 +166,6 @@
     <p>Are you sure you want to verify this account?</p>
 
     <x-slot:footer>
-        <button>Cancel</button>
         <button id="confirm_verify" class="btn-filled">Verify</button>
     </x-slot:footer>
 </x-modal>
@@ -168,7 +178,6 @@
     <p>Are you sure you want to delete this account?</p>
 
     <x-slot:footer>
-        <button>Cancel</button>
         <button id="confirm_verify" class="btn-filled">Verify</button>
     </x-slot:footer>
 </x-modal>
