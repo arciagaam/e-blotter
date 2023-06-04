@@ -16,7 +16,7 @@ document.querySelector("#record").addEventListener('click', () => {
             });
 
             mediaRecorder.addEventListener("stop", async () => {
-                const api_base_url = 'https://api.assemblyai.com/v2'
+                const api_transcription_url = 'https://api.openai.com/v1/audio/transcriptions'
 
                 const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
                 const audioUrl = URL.createObjectURL(audioBlob);
@@ -29,39 +29,14 @@ document.querySelector("#record").addEventListener('click', () => {
                 form.append("model", "whisper-1")
                 form.append("language", "tl")
 
-                const theFile = new File([audioUrl], 'audio.mp3');
-
-                console.log(theFile)
-                console.log(audioBlob)
-
-                const uploadFile = await fetch(`${api_base_url}/upload`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': '60248e6836ab484dbe4bd03c22507148',
-                        "Transfer-Encoding": "chunked"
-                    },
-                    body: {
-                        data: audioBlob 
-                    },
-
-                });
-
-                if (!uploadFile.ok) {
-                    return
+                const headers = {
+                    'Authorization': 'Bearer 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',
                 }
 
-                const response = await uploadFile.json()
-
-                console.log(response)
-
-                const transcript = await fetch(`${api_base_url}/transcript`, {
+                const transcript = await fetch(`${api_transcription_url}`, {
                     method: 'POST',
-                    headers: {
-                        'Authorization': '60248e6836ab484dbe4bd03c22507148',
-                    },
-                    body: JSON.stringify({
-                        audio_url: response.upload_url,
-                    }),
+                    headers : headers,
+                    body: form
                 })
 
                 if (!transcript.ok) {
@@ -70,32 +45,11 @@ document.querySelector("#record").addEventListener('click', () => {
 
                 let transcriptResult = await transcript.json();
 
-                console.log(transcriptResult.id)
+                console.log(transcriptResult)
 
-                while (true) {
-                    const finalTranscript = await fetch(`${api_base_url}/transcript/${transcriptResult.id}`, {
-                        headers: {
-                            'Authorization': '60248e6836ab484dbe4bd03c22507148',
-                        },
-                    });
-                    console.log(finalTranscript)
-
-                    let transcriptionResult = await finalTranscript.json();
-
-
-                    if (transcriptionResult.status === 'completed') {
-                        document.querySelector('#narrative').innerText = transcriptionResult.text;
-                        break
-                    } else if (transcriptionResult.status === 'error') {
-                        throw new Error(`Transcription failed: ${transcriptionResult.error}`)
-                    } else {
-                        await new Promise((resolve) => setTimeout(resolve, 3000))
-                    }
+                if(transcriptResult.text) {
+                    document.querySelector("#narrative").innerText = transcriptResult.text;
                 }
-
-
-
-
             });
 
         });
