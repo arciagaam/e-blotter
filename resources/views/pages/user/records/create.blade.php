@@ -204,11 +204,12 @@
                 </div>
 
                 <div class="flex flex-row items-center gap-2">
-                    <button id="record"  type="button" class="flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white">
-                        <box-icon class="bx bx-sm bx-microphone" name='microphone'></box-icon>
+                    <button id="record" type="button"
+                        class="disabled:bg-slate-400 flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white relative">
+                        <box-icon id="record-state" class="bx bx-sm bx-microphone" name='microphone'></box-icon>
                     </button>
                     <p>Click on the microphone icon and being speaking.</p>
-                    <button type="button" id="stop_record">Stop</button>
+                    {{-- <button type="button" id="stop_record">Stop</button> --}}
 
                     <audio id="recording" src="" controls></audio>
                 </div>
@@ -231,7 +232,8 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <button class="btn-filled" data-target="#schedule" type="button">Schedule of Reconciliation</button>
+                    <button class="btn-filled" data-target="#schedule" type="button">Schedule of
+                        Reconciliation</button>
                     <button class="btn-tinted" data-target="#print" type="button">Print</button>
                     <button class="btn-tinted danger" type="button">Clear</button>
                     <button class="btn-tinted success" type="submit">Save</button>
@@ -243,7 +245,7 @@
 
 </x-layout>
 
-<x-modal id="schedule">
+{{-- <x-modal id="schedule">
     <x-slot:heading>
         Schedule of Reconciliation
     </x-slot:heading>
@@ -265,8 +267,7 @@
     <x-slot:footer>
         <button class="btn-filled">Save</button>
     </x-slot:footer>
-</x-modal>
+</x-modal> --}}
 
 @vite('resources/js/table.js')
 @vite('resources/js/audio_record.js')
-

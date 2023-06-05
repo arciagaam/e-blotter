@@ -190,13 +190,7 @@ function getFormParams(dataset) {
  * @returns {Boolean}
  */
 function hasForm(element) {
-    const form = element.querySelector('form');
-
-    if (form) {
-        return true;
-    }
-
-    return false;
+    return element.querySelector('form') ? true : false;
 }
 
 /**

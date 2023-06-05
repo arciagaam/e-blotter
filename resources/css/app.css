@@ -79,6 +79,10 @@
     .btn-plain {
         @apply underline text-project-gray-default
     }
+
+    .recording {
+        @apply before:absolute before:w-full before:h-full before:z-10 before:bg-transparent before:border-2 before:border-rose-600 before:rounded-full before:animate-ping
+    }
 }
 
 nav box-icon {

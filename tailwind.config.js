@@ -46,12 +46,18 @@ module.exports = {
             light2: '#5fdcaa',
             light3: '#53d19f',
           }
-          
         },
-
         table: {
           even: '#E1E7ED',
           odd: '#FFFFFF'
+        }
+      },
+      keyframes: {
+        ping: {
+          '75%, 100%': {
+            transform: 'scale(1.5)',
+            opacity: 0,
+          }
         }
       }
     },
