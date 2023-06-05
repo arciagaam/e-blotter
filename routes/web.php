@@ -51,7 +51,7 @@ Route::prefix('/admin')->group(function () {
             });
 
             Route::resource('accounts', AccountController::class)
-            ->only(['index', 'edit', 'update']);
+            ->only(['index', 'show', 'edit', 'update']);
     
             Route::prefix('/accounts')->group(function () {
                 Route::post('/verify', [AccountController::class, 'verify']);

@@ -97,58 +97,40 @@
         Edit User
     </x-slot:heading>
 
-    <form action="#" method="POST" id="edit-user-form" data-action="{{ route('admin.accounts.update', ['account' => ':id', 'name' => ':name']) }}">
+    <form action="#" method="POST" id="edit-user-form" data-action="{{ route('admin.accounts.update', ['account' => ':id']) }}">
         @method('PUT')
 
         <div class="form-input-container">
             <label for="first_name">First Name</label>
             <input class="form-input" type="text" name="first_name" id="first_name"
-                value="{{ $account->first_name }}">
-            @error('first_name')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-            @enderror
+                value="">
         </div>
 
         <div class="form-input-container">
             <label for="last_name">Last Name</label>
-            <input class="form-input" type="text" name="last_name" id="last_name" value="{{ $account->last_name }}">
-            @error('last_name')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-            @enderror
+            <input class="form-input" type="text" name="last_name" id="last_name" value="">
         </div>
 
         <div class="form-input-container">
             <label for="username">Username</label>
-            <input class="form-input" type="text" name="username" id="username" value="{{ $account->username }}">
-            @error('username')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-            @enderror
+            <input class="form-input" type="text" name="username" id="username" value="">
         </div>
 
         <div class="form-input-container">
-            <label for="barangay_id">Barangay</label>
-            <input class="form-input" type="text" name="barangay_id" id="barangay_id"
-                value="{{ $account->barangays[0]->name }}">
-            @error('barangay_id')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-            @enderror
+            <label for="barangays">Barangay</label>
+            <input class="form-input" type="text" name="barangays" id="barangays"
+                value="">
         </div>
 
         <div class="form-input-container">
             <label for="contact_number">Contact Number</label>
             <input class="form-input" type="text" name="contact_number" id="contact_number"
-                value="{{ $account->contact_number }}">
-            @error('contact_number')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-            @enderror
+                value="">
         </div>
 
         <div class="form-input-container">
             <label for="email">Email</label>
-            <input class="form-input" type="text" name="email" id="email" value="{{ $account->email }}">
-            @error('email')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-            @enderror
+            <input class="form-input" type="text" name="email" id="email" value="">
         </div>
     </form>
 

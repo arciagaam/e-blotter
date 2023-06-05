@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class AccountController extends Controller
 {
@@ -38,7 +39,8 @@ class AccountController extends Controller
      */
     public function show(string $id)
     {
-        //
+        // return response()->json(User::find($id), 200);
+        return response()->json(User::with('barangays')->find($id), 200);
     }
 
     /**
@@ -54,7 +56,19 @@ class AccountController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // dd($id, $request);
+        $validator = Validator::make($request->all(), [
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'username' => 'required',
+            'barangays' => 'required',
+            'contact_number' => 'required',
+            'email' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
         return response()->json(['message' => 'Success'], 200);
     }
 

@@ -198,9 +198,48 @@ function hasForm(element) {
  * @param {HTMLFormElement} form 
  * @param {Array} params 
  */
-function formActive(form, params) {
+async function formActive(form, params) {
     form.addEventListener('submit', formEventListener);
     form.formParams = params;
+
+    const formParams = form.formParams;
+    const actionUrl = concatFormParams(form.dataset.action, formParams);
+    const inputs = [...form.querySelectorAll('input')].filter((input) => {
+        if (!input.name.startsWith('_')) {
+            return input;
+        }
+    });
+
+    try {
+        const data = await fetch(actionUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            credentials: 'same-origin',
+        });
+
+        if (!data.ok) {
+            const errorOptions = { status: data.status, statusText: data.statusText };
+            throw errorOptions;
+        }
+
+        const res = await data.json();
+        inputs.forEach((input) => {
+            let value = '';
+
+            if (typeof res[input.name] === 'object') {
+                value = res[input.name][0].name;
+            } else {
+                value = res[input.name];
+            }
+
+            input.value = value ?? '';
+        });
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 /**
@@ -208,8 +247,19 @@ function formActive(form, params) {
  * @param {HTMLFormElement} form 
  */
 function formInactive(form) {
+    clearFormErrors(form);
+    
     form.removeEventListener('submit', formEventListener);
     form.formParas = undefined;
+    const inputs = [...form.querySelectorAll('input')].filter((input) => {
+        if (!input.name.startsWith('_')) {
+            return input;
+        }
+    });;
+
+    inputs.forEach((input) => {
+        input.value = '';
+    });
 }
 
 
@@ -220,6 +270,7 @@ function formInactive(form) {
  */
 async function formEventListener(event) {
     event.preventDefault();
+    clearFormErrors(event.currentTarget);
     const formParams = event.target.formParams;
 
     if (formParams === undefined) {
@@ -245,7 +296,7 @@ async function formEventListener(event) {
         });
 
         if (!data.ok) {
-            const errorOptions = { status: data.status, statusText: data.statusText };
+            const errorOptions = { status: data.status, statusText: data.statusText, response: await data.json() };
             throw errorOptions;
         }
 
@@ -253,13 +304,48 @@ async function formEventListener(event) {
         console.log(res);
 
     } catch (error) {
-        console.error(error)
+        if (error.status === 422) {
+            inputs.forEach((input) => {
+                if (error.response[input.name]) {
+                    handleFormErrors(input, error.response[input.name]);
+                }
+            });
+        } else {
+            console.error(error);
+        }
     } finally {
         // location.reload();
     }
 }
 
+/**
+ * Displays error to specific inputs
+ * 
+ * @param {HTMLInputElement} element 
+ * @param {string} name 
+ * @param {string} message 
+ */
+function handleFormErrors(element, message) {
+    const parent = element.parentNode;
+    const errorMessageElement = Object.assign(document.createElement('p'), {
+        className: 'text-xs text-red-500 italic',
+        textContent: message
+    });
 
-function handleFormErrors() {
+    errorMessageElement.dataset.type = 'error-msg';
 
+    parent.append(errorMessageElement);
 }
+
+/**
+ * Removes all form errors
+ * 
+ * @param {HTMLFormElement} form 
+ */
+function clearFormErrors(form) {
+    const errors = [...form.querySelectorAll('[data-type="error-msg"]')];
+
+    errors.forEach((error) => {
+        error.remove();
+    });
+};
