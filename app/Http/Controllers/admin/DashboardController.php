@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barangay;
+use App\Models\User;
 use App\Models\Record;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        
-        return view('pages.admin.dashboard.dashboard', ['barangays' => Barangay::withCount('records')->get(), 'totalCases' => Record::count()]);
+        return view('pages.admin.dashboard.dashboard', ['barangays' => Barangay::withCount('records')->with('users:verified_at')->get(), 'totalCases' => Record::count()]);
     }
 
     /**

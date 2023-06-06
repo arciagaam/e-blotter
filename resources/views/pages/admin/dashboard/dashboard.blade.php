@@ -37,8 +37,10 @@
                         </div>
 
                         <div class="flex flex-col">
-                            {{-- <p class="text-project-gray-default/60 text-sm">Province</p> --}}
                             <p class="text-lg">Barangay {{$barangay->name}}</p>
+                            @empty($barangay->users[0]->verified_at)
+                                <p class="text-project-yellow-dark italic">User for this barangay is not yet verified.</p>
+                            @endempty
                         </div>
                     </div>
 
