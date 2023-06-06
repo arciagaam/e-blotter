@@ -13,8 +13,6 @@ class Barangay extends Model
 
     protected $fillable = [
         'name',
-        'municipality',
-        'province',
     ];
 
     public function users(): BelongsToMany

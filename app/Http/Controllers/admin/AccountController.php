@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barangay;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class AccountController extends Controller
 {
@@ -54,20 +57,32 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $account)
     {
         $validator = Validator::make($request->all(), [
             'first_name' => 'required',
             'last_name' => 'required',
-            'username' => 'required',
-            'barangays' => 'required',
+            'username' => [
+                'required',
+                Rule::unique('users')->ignore($account)
+            ],
+            'barangays' => [
+                'required',
+                Rule::unique('barangays', 'name')->ignore($account->barangays[0]->id)
+            ],
             'contact_number' => 'required',
-            'email' => 'required'
+            'email' => [
+                'required',
+                Rule::unique('users', 'email')->ignore($account)
+            ]
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
+        User::findOrFail($account->id)->update($validator->safe()->except(['barangays']));
+        Barangay::findOrFail($account->barangays[0]->id)->update(['name' => $validator->safe()->only(['barangays'])['barangays']]);
 
         return response()->json(['message' => 'Success'], 200);
     }
@@ -82,6 +97,8 @@ class AccountController extends Controller
 
     public function verify(Request $request)
     {
-        User::find($request->id)->update(['verified_at' => now()]);
+        $user = User::findOrFail($request->id)->update(['verified_at' => now()]);
+
+        return response()->json(['message' => 'Success'], 200);
     }
 }

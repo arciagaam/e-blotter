@@ -146,21 +146,35 @@ function closeModal() {
 function concatFormParams(action, params) {
     let actionUrl = action;
 
-    const converterParams = params.map((param) => {
+    for (const key in params) {
+        const regex = new RegExp(`:${key}`);
+
+        actionUrl = actionUrl.replace(regex, params[key]);
+    }
+
+    return actionUrl;
+}
+
+/**
+ * Convert params by removing the form at the start of the key
+ * 
+ * @param {Array} params 
+ * @returns Array | undefined
+ */
+function convertParams(params) {
+    if (!params) {
+        return undefined;
+    }
+
+    return params.reduce((acc, param) => {
         const regex = /form/;
         const [key, value] = Object.entries(param)[0];
 
-        return { [key.replace(regex, "").toLocaleLowerCase()]: value };
-    });
-
-    converterParams.forEach((param) => {
-        const [key, value] = Object.entries(param)[0];
-        const regex = new RegExp(`:${key}`);
-
-        actionUrl = actionUrl.replace(regex, value);
-    });
-
-    return actionUrl;
+        return {
+            ...acc,
+            [key.replace(regex, "").toLocaleLowerCase()]: value
+        }
+    }, {});
 }
 
 /**
@@ -202,44 +216,59 @@ async function formActive(form, params) {
     form.addEventListener('submit', formEventListener);
     form.formParams = params;
 
-    const formParams = form.formParams;
-    const actionUrl = concatFormParams(form.dataset.action, formParams);
+    const formParams = convertParams(form.formParams);
+    const formMethod = form.querySelector('input[name="_method"]');
     const inputs = [...form.querySelectorAll('input')].filter((input) => {
         if (!input.name.startsWith('_')) {
             return input;
         }
     });
 
-    try {
-        const data = await fetch(actionUrl, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-            },
-            credentials: 'same-origin',
-        });
+    if (formMethod && formMethod.value === 'PUT') {
+        const actionUrl = concatFormParams(form.dataset.action, formParams);
 
-        if (!data.ok) {
-            const errorOptions = { status: data.status, statusText: data.statusText };
-            throw errorOptions;
-        }
+        try {
+            const data = await fetch(actionUrl, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                credentials: 'same-origin',
+            });
 
-        const res = await data.json();
-        inputs.forEach((input) => {
-            let value = '';
-
-            if (typeof res[input.name] === 'object') {
-                value = res[input.name][0].name;
-            } else {
-                value = res[input.name];
+            if (!data.ok) {
+                const errorOptions = { status: data.status, statusText: data.statusText };
+                throw errorOptions;
             }
 
-            input.value = value ?? '';
-        });
-    } catch (error) {
-        console.error(error);
+            const res = await data.json();
+            inputs.forEach((input) => {
+                let value = '';
+
+                if (typeof res[input.name] === 'object') {
+                    value = res[input.name][0].name;
+                } else {
+                    value = res[input.name];
+                }
+
+                input.value = value ?? '';
+            });
+        } catch (error) {
+            console.error(error);
+        }
+
+        return;
     }
+
+    if (formParams) {
+        inputs.forEach((input) => {
+            input.value = formParams[input.name] ?? '';
+        });
+
+        return;
+    }
+
 }
 
 /**
@@ -248,7 +277,7 @@ async function formActive(form, params) {
  */
 function formInactive(form) {
     clearFormErrors(form);
-    
+
     form.removeEventListener('submit', formEventListener);
     form.formParas = undefined;
     const inputs = [...form.querySelectorAll('input')].filter((input) => {
@@ -271,7 +300,7 @@ function formInactive(form) {
 async function formEventListener(event) {
     event.preventDefault();
     clearFormErrors(event.currentTarget);
-    const formParams = event.target.formParams;
+    const formParams = convertParams(event.target.formParams);
 
     if (formParams === undefined) {
         return;
@@ -301,7 +330,7 @@ async function formEventListener(event) {
         }
 
         const res = await data.json();
-        console.log(res);
+        location.reload();
 
     } catch (error) {
         if (error.status === 422) {
@@ -313,8 +342,6 @@ async function formEventListener(event) {
         } else {
             console.error(error);
         }
-    } finally {
-        // location.reload();
     }
 }
 

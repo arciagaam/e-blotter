@@ -24,12 +24,12 @@ class UserStorePostRequest extends FormRequest
         return [
             'first_name' => 'required',
             'last_name' => 'required',
-            'username' => 'required',
+            'username' => 'required|unique:users,username',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
-            'email' => 'required',
+            'email' => 'required|email',
             'contact_number' => 'required',
-            'name' => 'required',
+            'name' => 'required|unique:barangays,name',
         ];
     }
 }

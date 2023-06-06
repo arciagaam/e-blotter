@@ -53,8 +53,8 @@ Route::prefix('/admin')->group(function () {
             Route::resource('accounts', AccountController::class)
             ->only(['index', 'show', 'edit', 'update']);
     
-            Route::prefix('/accounts')->group(function () {
-                Route::post('/verify', [AccountController::class, 'verify']);
+            Route::prefix('/accounts')->name('accounts.')->group(function () {
+                Route::post('/verify', [AccountController::class, 'verify'])->name('verify');
             });
         });
 

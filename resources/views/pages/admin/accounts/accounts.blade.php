@@ -71,7 +71,7 @@
                             </td>
                             <td>
                                 <div class="flex flex-row gap-3">
-                                    <button data-target="#verify" data-id="{{ $account->id }}"
+                                    <button data-target="#verify" data-form-id="{{ $account->id }}"
                                         class="verify-btn {{ $account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled' }}"
                                         {{ $account->verified_at ? 'disabled' : '' }}>Verify</button>
                                     <button data-target="#edit" data-form-id="{{ $account->id }}" class="btn-tinted">Edit</button>
@@ -145,10 +145,13 @@
         Confirm Verification
     </x-slot:heading>
 
-    <p>Are you sure you want to verify this account?</p>
+    <form action="#" method="POST" id="verify-user-form" data-action="{{ route('admin.accounts.verify') }}">
+        <input type="hidden" name="id" value="">
+        <p>Are you sure you want to verify this account?</p>
+    </form>
 
     <x-slot:footer>
-        <button id="confirm_verify" class="btn-filled">Verify</button>
+        <button class="btn-filled" form="verify-user-form">Verify</button>
     </x-slot:footer>
 </x-modal>
 
@@ -157,12 +160,14 @@
         Delete Account
     </x-slot:heading>
 
-    <p>Are you sure you want to delete this account?</p>
+    <form action="#" method="POST" id="delete-user-form" data-action="{{ route('admin.accounts.verify') }}">
+        <p>Are you sure you want to delete this account?</p>
+    </form>
 
     <x-slot:footer>
-        <button id="confirm_verify" class="btn-filled">Verify</button>
+        <button class="btn-filled danger" form="delete-user-form">Delete</button>
     </x-slot:footer>
 </x-modal>
 
 
-@vite('resources/js/accounts.js')
+{{-- @vite('resources/js/accounts.js') --}}
