@@ -50,4 +50,11 @@ class Record extends Model
     {
         return $query->where('barangay_id', auth()->user()->barangays[0]->id)->where('blotter_status_id', $blotter_status_id)->get();
     }
+
+    public function scopeFilter($query, string $search = null)
+    {
+        if (isset($search)) {
+            return $query->where('barangay_id', $search);
+        }
+    }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Barangay;
 use App\Models\CivilStatus;
 use App\Models\Record;
 use Illuminate\Http\Request;
@@ -14,8 +15,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $records = Record::all();
-        return view('pages.admin.records.blotter-records', ['records' => $records]);
+        return view('pages.admin.records.blotter-records', ['records' => Record::latest()->filter(request('search'))->paginate(10), 'barangays' => Barangay::all()]);
     }
 
     /**
