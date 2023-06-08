@@ -96,4 +96,4 @@
 
 </x-layout>
 
-@vite('resources/js/table.js')
+{{-- @vite('resources/js/table.js') --}}

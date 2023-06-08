@@ -68,3 +68,10 @@ class RecordController extends Controller
         //
     }
 }
+
+// USER:
+// 1. sa blotter records po, pachange po nung bgry sa purok. kasi po for specific na brgy na sya, kaya po mas oks kung yung purok nalang
+
+// 2. patanggal po nung divorced, sa civil status
+
+// 3. diba po specific brgy po sila. nag try po ako mag gawa ng new record sa isang brgy. tapos po nag log po ulit ako ng isang brgy, start po yung blotter record sa 1 po ulit dapat. kasi po bukod silang blotter records

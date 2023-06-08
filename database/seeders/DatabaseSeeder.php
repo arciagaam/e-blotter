@@ -108,11 +108,6 @@ class DatabaseSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'name' => 'divorced',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
                 'name' => 'separated',
                 'created_at' => now(),
                 'updated_at' => now()
@@ -122,6 +117,11 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now()
             ],
+            // [
+            //     'name' => 'divorced',
+            //     'created_at' => now(),
+            //     'updated_at' => now()
+            // ],
         ]);
 
         DB::table('blotter_status')->insert([

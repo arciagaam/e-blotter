@@ -57,11 +57,31 @@
         <p class="font-bold">COMPLAINT</p>
         <p>I/WE hereby complain against above named respondent/s for violating my/our
             rights and interests in the following manner:</p>
+        <textarea rows="3" class="w-full leading-8 outline-none resize-none notes"></textarea>
     </div>
 
     <div class="flex flex-col items-center">
         <p>THEREFORE, I/WE pray that the following relief/s be granted to me/us in
             accordance with law and/or equity:</p>
+        <textarea rows="3" class="w-full leading-8 outline-none resize-none notes"></textarea>
+    </div>
+
+    <div>
+        <p>Made this ____ day of _______, 19___.</p>
+    </div>
+
+    <div class="flex flex-col w-1/4">
+        <input class="w-full border-b-2" type="text">
+        <label class="self-start" for="">Complainant/s</label>
+    </div>
+
+    <div>
+        <p>Received and filed this ________ day of __________, 19____.</p>
+    </div>
+
+    <div class="flex flex-col w-max">
+        <input class="w-full border-b-2" type="text">
+        <label class="self-start" for="">Punong Barangay/Lupon Chairman</label>
     </div>
 
 </x-kp-form-layout>
