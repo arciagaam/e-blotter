@@ -31,38 +31,40 @@
     </div>
 
     <div class="flex flex-col items-center">
-        <p class="font-bold tracking-[0.35rem]">COMPLAINT</p>
+        <p class="font-bold tracking-[0.35rem]">AMICABLE SETTLEMENT</p>
     </div>
 
     <div class="flex flex-col items-center">
-        <p class="self-start">I/WE hereby complain against above named respondent/s for violating my/our
-            rights and interests in the following manner:</p>
+        <p class="self-start">We, complainant/s and respondent/s in the above-captioned case, do hereby
+            agree to settle our dispute as follows:</p>
         <textarea class="w-full h-fit outline-none resize-none underline"></textarea>
+        <p class="self-start">and bind ourselves to comply honestly and faithfully with the above terms of
+            settlement.</p>
+        <p class="self-start">Entered into this ______ day of __________, 19_______.</p>
+    </div>
+
+    <div class="flex flex-row gap-24">
+        <div class="flex-1">
+            <p class="self-start col-span-2">Complainant/s</p>
+            <p class="w-full h-6 border-b border-0 border-black"></p>
+        </div>
+        <div class="flex-1">
+            <p class="self-start col-span-2">Respondent/s</p>
+            <p class="w-full h-6 border-b border-0 border-black"></p>
+        </div>
     </div>
 
     <div class="flex flex-col items-center">
-        <p class="self-start">THEREFORE, I/WE pray that the following relief/s be granted to me/us in
-            accordance with law and/or equity:</p>
-        <textarea class="w-full h-fit outline-none resize-none underline"></textarea>
+        <p class="tracking-[0.35rem]">ATTESTATION</p>
     </div>
 
-    <div class="break-inside-avoid flex flex-col gap-4">
-        <div>
-            <p>Made this ____ day of _______, 19___.</p>
-        </div>
-    
-        <div class="flex flex-col w-1/4">
+    <div class="flex flex-col items-center">
+        <p class="self-start">I hereby certify that the foregoing amicable settlement was entered into by the
+            parties freely and voluntarily, after I had explained to them the nature and
+            consequence of such settlement.</p>
+        <div class="flex flex-col w-max self-start">
             <p class="w-full h-4 border-b border-0 border-black"></p>
-            <p class="self-start" for="">Complainant/s</p>
-        </div>
-    
-        <div>
-            <p>Received and filed this ________ day of __________, 19____.</p>
-        </div>
-    
-        <div class="flex flex-col w-max">
-            <p class="w-full h-4 border-b border-0 border-black"></p>
-            <p class="self-start" for="">Punong Barangay/Lupon Chairman</p>
+            <p class="self-start">Punong Barangay/Lupon Chairman</p>
         </div>
     </div>
 
