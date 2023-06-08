@@ -33,17 +33,16 @@
     <div class="flex flex-col items-center">
         <p class="font-bold tracking-[0.35rem]">COMPLAINT</p>
     </div>
-
     <div class="flex flex-col items-center">
         <p class="self-start">I/WE hereby complain against above named respondent/s for violating my/our
             rights and interests in the following manner:</p>
-        <textarea class="w-full h-fit outline-none resize-none underline"></textarea>
+        <textarea class="w-full h-full outline-none resize-none underline indent-4" readonly>{{$tagIds['complain']}}</textarea>
     </div>
 
     <div class="flex flex-col items-center">
         <p class="self-start">THEREFORE, I/WE pray that the following relief/s be granted to me/us in
             accordance with law and/or equity:</p>
-        <textarea class="w-full h-fit outline-none resize-none underline"></textarea>
+        <textarea class="w-full h-full outline-none resize-none underline indent-4" readonly>{{$tagIds['relief']}}</textarea>
     </div>
 
     <div class="break-inside-avoid flex flex-col gap-4">
@@ -68,13 +67,13 @@
 
 </x-kp-form-layout>
 
-<script type="text/javascript">
-    textareas = document.querySelectorAll("textarea").forEach(textarea => {
-        textarea.addEventListener('input', autoResize, false);
+<script type="text/javascript"> 
+    window.addEventListener('load', () => {
+        document.querySelectorAll("textarea").forEach(textarea => {
+            if(textarea.scrollHeight > textarea.clientHeight) {
+                textarea.style.height = textarea.scrollHeight + 'px';
+            }
+        });
     });
 
-    function autoResize() {
-        this.style.height = 'auto';
-        this.style.height = this.scrollHeight + 'px';
-    }
 </script>
