@@ -9,10 +9,8 @@
     @vite('resources/css/app.css')
     <style>
         * {
+            font-family: 'Times New Roman', Times, serif;
             /* border: 1px solid #ff000025; */
-            -webkit-print-color-adjust: exact;   /* Chrome, Safari 6 – 15.3, Edge */
-            color-adjust: exact;                 /* Firefox 48 – 96 */
-            print-color-adjust: exact;           /* Firefox 97+, Safari 15.4+ */
         }
 
         @page {
@@ -22,30 +20,25 @@
 
         html,
         body {
-            height: 842pt;
+            /* height: 842pt; */
             width: 595pt;
-
-        }
-
-        #main {
-            margin: 1cm 1.4cm;
-        }
-
-        /* https://stackoverflow.com/questions/9468153/textarea-with-horizontal-rule */
-        /* .notes {
-            background-image:
-                repeating-linear-gradient(#ffffff, #ffffff 28px, #000000 28px, #ffffff 29px);
-        } */
-        .notes {
-            /* background-attachment: local; */
-            background-image:
-                repeating-linear-gradient(#ffffff, #ffffff 28px, #000000 28px, #ffffff 29px);
         }
     </style>
 </head>
 
 <body>
-    <div id="main" class="flex flex-col gap-4">
+    <div id="main" class="flex flex-col gap-8">
+        <div class="flex flex-col gap-2">
+            <div class="flex flex-col items-center">
+                <p>Republic of The Philippines</p>
+                <p>Province Of __________</p>
+                <p>CITY/MUNICIPALITY OF __________</p>
+                <p>Barangay __________</p>
+            </div>
+
+            <p class="self-center">OFFICE OF THE LUPONG TAGAPAMAYAPA</p>
+        </div>
+
         {{ $slot }}
     </div>
 </body>

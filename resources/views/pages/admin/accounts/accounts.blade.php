@@ -169,5 +169,4 @@
     </x-slot:footer>
 </x-modal>
 
-
 {{-- @vite('resources/js/accounts.js') --}}
