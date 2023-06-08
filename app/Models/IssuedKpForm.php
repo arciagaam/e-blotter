@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class KpForm extends Model
+class IssuedKpForm extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'number',
-        'name',
+        'record_id',
+        'kp_form_id',
     ];
 }

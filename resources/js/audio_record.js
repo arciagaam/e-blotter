@@ -34,7 +34,7 @@ window.addEventListener('load', () => {
                         recordBtn.classList.remove('recording');
                         recordIcon.setAttribute('name', 'microphone');
 
-                        // const api_transcription_url = 'https://api.openai.com/v1/audio/transcriptions'
+                        const api_transcription_url = 'https://api.openai.com/v1/audio/transcriptions'
 
                         const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
                         const audioUrl = URL.createObjectURL(audioBlob);
@@ -42,30 +42,30 @@ window.addEventListener('load', () => {
                         player.src = audioUrl;
                         player.load();
 
-                        // const form = new FormData();
-                        // form.append("file", new File([audioBlob], 'audio.mp3', { type: "audio/mp3" }))
-                        // form.append("model", "whisper-1")
-                        // form.append("language", "tl")
+                        const form = new FormData();
+                        form.append("file", new File([audioBlob], 'audio.mp3', { type: "audio/mp3" }))
+                        form.append("model", "whisper-1")
+                        form.append("language", "tl")
 
-                        // const headers = {
-                        //     'Authorization': 'Bearer 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',
-                        // }
+                        const headers = {
+                            'Authorization': 'Bearer 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',
+                        }
 
-                        // const transcript = await fetch(`${api_transcription_url}`, {
-                        //     method: 'POST',
-                        //     headers: headers,
-                        //     body: form
-                        // })
+                        const transcript = await fetch(`${api_transcription_url}`, {
+                            method: 'POST',
+                            headers: headers,
+                            body: form
+                        })
 
-                        // if (!transcript.ok) {
-                        //     return
-                        // }
+                        if (!transcript.ok) {
+                            return
+                        }
 
-                        // let transcriptResult = await transcript.json();
+                        let transcriptResult = await transcript.json();
 
-                        // if (transcriptResult.text) {
-                        //     document.querySelector("#narrative").innerText = transcriptResult.text;
-                        // }
+                        if (transcriptResult.text) {
+                            document.querySelector("#narrative").innerText = transcriptResult.text;
+                        }
                     });
                 }).catch((err) => {
                     if (err.message === 'Permission denied') {

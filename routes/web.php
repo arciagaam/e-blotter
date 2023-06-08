@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\KpFormController;
 use App\Http\Controllers\admin\RecordController;
 use App\Http\Controllers\Authentication;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\RecordsKpFormController;
 use App\Http\Controllers\user\LoginTrailController;
 use App\Http\Controllers\user\DashboardController as UserDashboardController;
 use App\Http\Controllers\user\KpFormController as UserKpFormController;
@@ -48,6 +49,7 @@ Route::prefix('/admin')->group(function () {
     
             Route::resource('records', RecordController::class)
             ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
+
     
             Route::prefix('/kp-forms')->group(function () {
                 Route::get('/', [KpFormController::class, 'index']);
@@ -104,6 +106,19 @@ Route::prefix('/')->group(function () {
         // Route::get('/records', [UserRecordController::class, 'index']);
         Route::resource('records', UserRecordController::class)
             ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
+
+        Route::prefix('records')->name('records.')->group(function() {
+            Route::prefix('kp-forms')->name('kp-forms.')->group(function() {
+                Route::get('/step-one/{id}', [RecordsKpFormController::class, 'stepOne'])->name('get.step-one');
+                Route::post('/step-one', [RecordsKpFormController::class, 'postStepOne'])->name('post.step-one');
+
+                Route::get('/step-two', [RecordsKpFormController::class, 'stepTwo'])->name('get.step-two');
+                Route::post('/step-two', [RecordsKpFormController::class, 'postStepTwo'])->name('post.step-two');
+
+                Route::get('/step-three', [RecordsKpFormController::class, 'stepThree'])->name('success');
+
+            });
+        });
         Route::get('/kp-forms', [UserKpFormController::class, 'index']);
         Route::get('/accounts', [LoginTrailController::class, 'index']);
     });
