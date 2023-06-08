@@ -7,6 +7,7 @@ use App\Http\Requests\KpStepTwoRequest;
 use App\Models\IssuedKpForm;
 use App\Models\IssuedKpFormField;
 use App\Models\KpForm;
+use App\Models\Record;
 use Illuminate\Http\Request;
 
 class RecordsKpFormController extends Controller
@@ -14,10 +15,9 @@ class RecordsKpFormController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(string $record)
     {
-        session()->forget('issued_kp_form');
-        session()->forget('kp_fields');
+        return view('pages.kp_forms.kp_forms', ['record' => $record]);
     }
 
     /**
@@ -50,8 +50,6 @@ class RecordsKpFormController extends Controller
 
     public function postStepTwo(KpStepTwoRequest $request)
     {
-        
-
         session()->put('kp_fields', $request->validated());
 
         return redirect()->route('records.kp-forms.success');

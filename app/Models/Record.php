@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -44,6 +45,11 @@ class Record extends Model
     public function blotterStatus(): BelongsTo
     {
         return $this->belongsTo(BlotterStatus::class);
+    }
+
+    public function issuedKpForms(): HasMany
+    {
+        return $this->hasMany(IssuedKpForm::class);
     }
 
     public function scopeOfStatus(Builder $query, int $blotter_status_id)

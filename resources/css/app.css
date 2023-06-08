@@ -80,6 +80,10 @@
         @apply bg-project-neutral-default text-project-gray-default px-4 py-2 hover:bg-project-neutral-dark active:bg-project-neutral-darker rounded-md transition-all
     }
 
+    .btn-gray.active {
+        @apply text-center bg-project-yellow-default text-white font-bold px-4 py-2 rounded-md hover:bg-project-yellow-dark active:bg-project-yellow-darker transition-all
+    }
+
     .btn-plain {
         @apply underline text-project-gray-default
     }

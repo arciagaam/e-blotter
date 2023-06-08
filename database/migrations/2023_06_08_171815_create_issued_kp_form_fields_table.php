@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('issued_kp_form_id')->nullable()->constrained('issued_kp_forms')->cascadeOnUpdate();
             $table->string('tag_id');
-            $table->string('value');
+            $table->text('value');
             $table->timestamps();
         });
     }

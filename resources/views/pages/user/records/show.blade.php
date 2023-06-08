@@ -2,6 +2,12 @@
     <x-page-header>View Record</x-page-header>
 
     <div class="flex flex-col gap-3">
+
+        <div class="flex flex-row gap-4">
+            <x-nav-button url="{{ route('records.show', ['record' => $record->id]) }}">Details</x-nav-button>
+            <x-nav-button url="{{ route('records.kp-forms.index', ['record' => $record->id]) }}">Issued Certificate</x-nav-button>
+        </div>
+
         <div class="flex flex-col gap-5">
 
             <div class="flex flex-col gap-2">

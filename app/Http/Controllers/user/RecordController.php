@@ -54,6 +54,9 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
+        session()->forget('issued_kp_form');
+        session()->forget('kp_fields');
+        
         $civilStatus = new CivilStatus();
 
         return view('pages.user.records.show', ['record' => Record::where('id', $record->id)->with('victim', 'suspect', 'blotterStatus')->first(), 'civilStatus' => $civilStatus->getAllCivilStatus()]);

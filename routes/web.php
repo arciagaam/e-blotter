@@ -104,10 +104,11 @@ Route::prefix('/')->group(function () {
     Route::middleware(['user', 'account_verified'])->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index']);
         // Route::get('/records', [UserRecordController::class, 'index']);
-        Route::resource('records', UserRecordController::class)
-            ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
-
+        
         Route::prefix('records')->name('records.')->group(function() {
+            // Route::get('/kp-forms', [RecordsKpFormController::class, 'index']);
+            // Route::resource('kp-forms', RecordsKpFormController::class)
+            //     ->only(['index']);
             Route::prefix('kp-forms')->name('kp-forms.')->group(function() {
                 Route::get('/step-one/{id}', [RecordsKpFormController::class, 'stepOne'])->name('get.step-one');
                 Route::post('/step-one', [RecordsKpFormController::class, 'postStepOne'])->name('post.step-one');
@@ -116,9 +117,13 @@ Route::prefix('/')->group(function () {
                 Route::post('/step-two', [RecordsKpFormController::class, 'postStepTwo'])->name('post.step-two');
 
                 Route::get('/step-three', [RecordsKpFormController::class, 'stepThree'])->name('success');
-
+                
+                Route::get('/{record}', [RecordsKpFormController::class, 'index'])->name('index');
             });
         });
+        Route::resource('records', UserRecordController::class)
+            ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
+
         Route::get('/kp-forms', [UserKpFormController::class, 'index']);
         Route::get('/accounts', [LoginTrailController::class, 'index']);
     });
