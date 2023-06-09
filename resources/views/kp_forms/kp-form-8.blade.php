@@ -3,7 +3,7 @@
     <div class="flex flex-row gap-2">
         <p>TO:</p>
         <div class="flex flex-col w-1/5">
-            <p class="w-full h-6 border-b border-0 border-black"></p>
+            <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name}}</p>
             <p class="w-full h-6 border-b border-0 border-black"></p>
             <p class="self-end">Complainant/s</p>
         </div>
@@ -13,15 +13,14 @@
         <p class="font-bold tracking-[0.35rem]">NOTICE OF HEARING</p>
         <p class="font-bold tracking-[0.35rem]">(MEDIATION PROCEEDINGS)</p>
     </div>
-
     <div class="flex flex-col items-center">
-        <p class="self-start">You are hereby required to appear before me on the ______ day of _______,
-            19___ at ________ o’clock in the morning/afternoon for the hearing of your
+        <p class="self-start">You are hereby required to appear before me on the <span class="underline">{{date('jS', strtotime($tagIds['hearing']))}}</span> day of <span class="underline">{{date('F', strtotime($tagIds['hearing']))}}</span>,
+            <span class="underline">{{date('Y', strtotime($tagIds['hearing']))}}</span> at <span class="underline">{{date('h:i', strtotime($tagIds['hearing']))}}</span> o’clock in the <span @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'am'])>morning</span>/<span  @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'pm'])>afternoon</span> for the hearing of your
             complaint.</p>
     </div>
 
     <div>
-        <p>This ________ day of ____________, 19____.</p>
+        <p>This <span class="underline">{{date('jS', strtotime($relatedForms['7']['created_at']))}}</span> day of <span class="underline">{{date('F', strtotime($relatedForms['7']['created_at']))}}</span>, <span class="underline">{{date('Y', strtotime($relatedForms['7']['created_at']))}}</span>.</p>
     </div>
 
     <div class="flex flex-col w-max">
@@ -30,13 +29,15 @@
     </div>
 
     <div>
-        <p>Notified this ________ day of __________, 19____.</p>
+        <p>Notified this <span class="underline">{{date('jS', strtotime($relatedForms['7']['created_at']))}}</span> day of <span class="underline">{{date('F', strtotime($relatedForms['7']['created_at']))}}</span>, <span class="underline">{{date('Y', strtotime($relatedForms['7']['created_at']))}}</span>.</p>
     </div>
 
     <div class="flex flex-col w-max">
         <p>Complainant/s</p>
-        <p class="w-full h-6 border-b border-0 border-black"></p>
+        <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name}}</p>
         <p class="w-full h-6 border-b border-0 border-black"></p>
     </div>
 
 </x-kp-form-layout>
+
+@vite('/resources/js/print_window.js')

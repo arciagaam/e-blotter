@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Record extends Model
@@ -50,6 +51,11 @@ class Record extends Model
     public function issuedKpForms(): HasMany
     {
         return $this->hasMany(IssuedKpForm::class);
+    }
+
+    public function relatedKpForms(): HasOneOrMany
+    {
+        return $this->HasOneOrMany(IssuedKpForm::class);
     }
 
     public function scopeOfStatus(Builder $query, int $blotter_status_id)
