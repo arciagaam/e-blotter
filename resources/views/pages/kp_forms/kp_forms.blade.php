@@ -5,7 +5,8 @@
 
         <div class="flex flex-row gap-4">
             <x-nav-button url="{{ route('records.show', ['record' => $record]) }}">Details</x-nav-button>
-            <x-nav-button url="{{ route('records.kp-forms.index', ['record' => $record]) }}">Issued Certificate</x-nav-button>
+            <x-nav-button url="{{ route('records.kp-forms.index', ['record' => $record]) }}">Issued Certificate
+            </x-nav-button>
         </div>
         {{-- TABLE ACTIONS --}}
         {{-- <div class="flex flex-row w-full justify-between items-center">
@@ -47,41 +48,39 @@
                     <th>
                         <p>Form Name</p>
                     </th>
-                    <th class="w-2/12">
+                    <th class="w-4/12">
                         <p class="text-center">Actions</p>
                     </th>
                 </tr>
             </thead>
 
-            {{-- <tbody>
-                    @empty($records)
+            <tbody>
+                @empty($issuedKpForms)
+                    <tr>
+                        <td colspan="100%" class="text-center">There are no data.</td>
+                    </tr>
+                @else
+                    @foreach ($issuedKpForms as $key => $form)
                         <tr>
-                            <td colspan="100%" class="text-center">There are no data.</td>
+                            <td>
+                                <p>{{ $form->kpForm->number }}</p>
+                            </td>
+                            <td>
+                                <p>{{ $form->kpForm->name }}</p>
+                            </td>
+                            <td>
+                                <div class="flex w-full h-full justify-center items-center gap-2">
+                                    {{-- <a href="{{ route('records.show', ['record' => $record->id]) }}"
+                                        class="btn-tinted">Preview</a>
+                                    <a href="{{ route('records.edit', ['record' => $record->id]) }}"
+                                        class="btn-tinted">Edit</a> --}}
+                                    <button class="btn-tinted" type="button">Print</button>
+                                </div>
+                            </td>
                         </tr>
-                    @else
-                        @foreach ($records as $key => $record)
-                            <tr>
-                                <td><p>{{ $record->id }}</p></td>
-                                <td><p>{{ $record->purok }}</p></td>
-                                <td><p>{{ $record->case }}</p></td>
-                                <td><p>{{ $record->victim->name }}</p></td>
-                                <td><p>{{ date_format($record->created_at, 'F j, Y') }}</p></td>
-                                <td>
-                                    <div class="flex justify-center items-center">
-                                        <x-blotter-status id="{{ $record->blotterStatus->id }}" text="{{ $record->blotterStatus->name }}" />
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="flex w-full h-full justify-center items-center gap-2">
-                                        <a href="{{ route('records.show', ['record' => $record->id]) }}" class="btn-tinted" >Preview</a>
-                                        <a href="{{ route('records.edit', ['record' => $record->id]) }}" class="btn-tinted" >Edit</a>
-                                        <button class="btn-tinted" type="button">Print</button>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    @endempty
-                </tbody> --}}
+                    @endforeach
+                @endempty
+            </tbody>
         </table>
 
         {{-- <div class="w-full flex">

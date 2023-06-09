@@ -17,7 +17,7 @@ class RecordsKpFormController extends Controller
      */
     public function index(string $record)
     {
-        return view('pages.kp_forms.kp_forms', ['record' => $record]);
+        return view('pages.kp_forms.kp_forms', ['record' => $record, 'issuedKpForms' => IssuedKpForm::with('kpForm')->where('record_id', $record)->get()]);
     }
 
     /**
