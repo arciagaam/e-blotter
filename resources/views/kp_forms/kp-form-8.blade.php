@@ -9,12 +9,14 @@
         </div>
     </div>
 
+    {{-- {{ dd($relatedForms['7']) }} --}}
+
     <div class="flex flex-col items-center">
         <p class="font-bold tracking-[0.35rem]">NOTICE OF HEARING</p>
         <p class="font-bold tracking-[0.35rem]">(MEDIATION PROCEEDINGS)</p>
     </div>
     <div class="flex flex-col items-center">
-        <p class="self-start">You are hereby required to appear before me on the <span class="underline">{{date('jS', strtotime($tagIds['hearing']))}}</span> day of <span class="underline">{{date('F', strtotime($tagIds['hearing']))}}</span>,
+        <p class="self-start text-justify">You are hereby required to appear before me on the <span class="underline">{{date('jS', strtotime($tagIds['hearing']))}}</span> day of <span class="underline">{{date('F', strtotime($tagIds['hearing']))}}</span>,
             <span class="underline">{{date('Y', strtotime($tagIds['hearing']))}}</span> at <span class="underline">{{date('h:i', strtotime($tagIds['hearing']))}}</span> o’clock in the <span @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'am'])>morning</span>/<span  @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'pm'])>afternoon</span> for the hearing of your
             complaint.</p>
     </div>

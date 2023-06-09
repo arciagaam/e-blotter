@@ -1,5 +1,4 @@
 <x-kp-form-layout>
-    {{ dd($issuedForm, $tagIds, $relatedForms) }}
     <div class="flex flex-row justify-between gap-24">
         <div class="flex flex-col gap-6 w-2/5">
             <div class="flex flex-col">
@@ -45,7 +44,7 @@
 
     <div class="flex flex-col gap-4 items-center">
 
-        <p class="self-start">You are hereby summoned to appear before me in person, together with your
+        <p class="self-start text-justify">You are hereby summoned to appear before me in person, together with your
             witnesses, on the <span class="underline">{{ date('jS', strtotime($relatedForms['8']['hearing'])) }}</span>
             day of
             <span class="underline">{{ date('F', strtotime($relatedForms['8']['hearing'])) }}</span>, <span
@@ -61,7 +60,7 @@
             of your dispute with complainant/s.
         </p>
 
-        <p class="self-start">You are hereby warned that if you refuse or willfully fail to appear in obedience to this
+        <p class="self-start text-justify">You are hereby warned that if you refuse or willfully fail to appear in obedience to this
             summons, you may be barred from filing any counterclaim arising from said complaint.</p>
 
         <p class="self-start">FAIL NOT or else face punishment as for contempt of court.</p>
