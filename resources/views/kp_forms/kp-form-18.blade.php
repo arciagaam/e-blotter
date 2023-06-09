@@ -1,4 +1,5 @@
 <x-kp-form-layout>
+
     <div class="flex flex-row justify-between gap-24">
         <div class="flex flex-col gap-6 w-2/5">
             <div class="flex flex-col">
@@ -48,16 +49,16 @@
 
     <p class="self-start text-justify indent-4">
         You are hereby required to appear before me/the Pangkat on the
-        ______ day of _________, 19____, at ________ o’clock in the
-        morning/afternoon to explain why you failed to appear for mediation/
-        conciliation scheduled on _____________, 19____ and why your
+        <span class="underline">{{date('jS', strtotime($tagIds['hearing']))}}</span> day of <span class="underline">{{date('F', strtotime($tagIds['hearing']))}}</span>, <span class="underline">{{date('Y', strtotime($tagIds['hearing']))}}</span>, at <span class="underline">{{date('h:i', strtotime($tagIds['hearing']))}}</span> o’clock in the
+        <span @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'am'])>morning</span>/<span  @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'pm'])>afternoon</span> to explain why you failed to appear for mediation/
+        conciliation scheduled on <span class="underline">{{date('F j, Y', strtotime($relatedForms['8']['hearing']))}}</span> and why your
         complaint should not be dismissed, a certificate to bar the filing of your
         action on court/government office should not be issued, and contempt
         proceedings should not be initiated in court for willful failure or refusal
         to appear before the Punong Barangay/Pangkat ng Tagapagkasundo.
     </p>
 
-    <p class="self-start">This ______ day of __________, 19_______.</p>
+    <p class="self-start">This <span class="underline">{{date('jS', strtotime($issuedForm->created_at))}}</span> day of <span class="underline">{{date('F', strtotime($issuedForm->created_at))}}</span>, <span class="underline">{{date('Y', strtotime($issuedForm->created_at))}}</span>.</p>
 
     <div class="flex flex-col w-max self-start">
         <p class="w-full h-4 border-b border-0 border-black"></p>
@@ -65,7 +66,7 @@
         <p>(Cross out whichever is not applicable.)</p>
     </div>
 
-    <p class="self-start">Notified this ______ day of __________, 19_______.</p>
+    <p class="self-start">Notified this <span class="underline">{{date('jS', strtotime($issuedForm->created_at))}}</span> day of <span class="underline">{{date('F', strtotime($issuedForm->created_at))}}</span>, <span class="underline">{{date('Y', strtotime($issuedForm->created_at))}}</span>.</p>
 
     <div class="flex flex-col gap-6 w-1/4 ml-10">
         <div class="flex flex-col">
@@ -81,3 +82,5 @@
         </div>
     </div>
 </x-kp-form-layout>
+
+@vite('/resources/js/print_window.js')

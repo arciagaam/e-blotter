@@ -28,7 +28,7 @@ class KpStepTwoRequest extends FormRequest
             'complain' => 'sometimes|required',
             'relief' => 'sometimes|required',
 
-            //KP FORM 8
+            //KP FORM 8, 18, 19
             'hearing' => 'sometimes|required',
 
             //KP FORM 9
