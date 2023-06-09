@@ -19,7 +19,7 @@
             <div class="flex flex-col">
                 <div class="flex">
                     <p class="whitespace-nowrap">Barangay Case No.</p>
-                    <p class="w-full border-b border-0 border-black indent-1">{{$issuedForm->id}}</p>
+                    <p class="w-full border-b border-0 border-black indent-1">{{$issuedForm->record->id}}</p>
                 </div>
                 
                 <div class="flex">
