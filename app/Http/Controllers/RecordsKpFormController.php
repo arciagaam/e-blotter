@@ -88,8 +88,11 @@ class RecordsKpFormController extends Controller
     public function show(string $recordId, string $issuedKpFormId)
     {
 
-        $issuedForm = issuedKpForm::with(['issuedKpFormFields'])->where('id', $issuedKpFormId)->where('record_id', $recordId)->first();
-
+        $issuedForm = issuedKpForm::with([
+        'issuedKpFormFields', 
+        'record' => ['victim', 'suspect']
+        ])->where('id', $issuedKpFormId)->where('record_id', $recordId)->first();
+        
         $tagIds = $issuedForm->issuedKpFormFields->mapWithKeys(function ($item, int $key) {
             return [$item['tag_id'] => $item['value']];
         });
