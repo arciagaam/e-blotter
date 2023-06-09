@@ -58,7 +58,7 @@
         {{-- {{dd(date('jS', strtotime($issuedForm->created_at)))}} --}}
     
         <div>
-            <p>Received and filed this <span class="underline">{{date('jS', strtotime($issuedForm->created_at))}}</span> day of <span class="underline">{{date('F', strtotime($issuedForm->created_at))}}</span>, <span class="underline">{{date('Y', strtotime($issuedForm->created_at))}}</span>.</p>
+            <p>Received and filed this <span class="underline">{{date('jS', strtotime($issuedForm->record))}}</span> day of <span class="underline">{{date('F', strtotime($issuedForm->created_at))}}</span>, <span class="underline">{{date('Y', strtotime($issuedForm->created_at))}}</span>.</p>
         </div>
     
         <div class="flex flex-col w-max">
@@ -76,8 +76,7 @@
                 textarea.style.height = textarea.scrollHeight + 'px';
             }
         });
-
-        window.print();
-        setTimeout(window.close, 500); 	
     });
 </script>
+
+@vite('/resources/js/print_window.js')

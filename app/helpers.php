@@ -9,3 +9,13 @@ function addToLoginTrail($login_role_id) {
     $loginTrail->loginroles()->associate($login_role_id);
     $loginTrail->save();
 }
+
+function getKpRelations($kp_form_id)
+{
+    $relations = [
+        '8' => ['7'],
+        '9' => ['7'],
+    ];
+
+    return $relations[$kp_form_id] ?? [];
+}

@@ -31,5 +31,14 @@ class IssuedKpForm extends Model
         return $this->hasMany(IssuedKpFormField::class);
     }
 
+    public function scopeRelatedKpForms($relations)
+    {
+        $relatedFormsDb = IssuedKpForm::query();
+        foreach($relations as $relation) {
+            $relatedFormsDb = $relatedFormsDb->where('kp_form_id', $relation);
+        }
+        
+        return $relatedFormsDb->get();
+    }
 
 }
