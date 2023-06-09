@@ -1,5 +1,5 @@
 <x-kp-form-layout>
-    {{ dd($relatedForms['8']) }}
+    {{ dd($relatedForms) }}
     <div class="flex flex-row justify-between gap-24">
         <div class="flex flex-col gap-6 w-2/5">
             <div class="flex flex-col">

@@ -38,20 +38,10 @@ class IssuedKpForm extends Model
             ->join('issued_kp_form_fields', 'issued_kp_forms.id', '=', 'issued_kp_form_fields.issued_kp_form_id')
             ->select('issued_kp_form_fields.tag_id', 'issued_kp_form_fields.value', 'issued_kp_forms.*')
             ->where('record_id', $recordId)
-            ->where('kp_form_id', $relations[0])
+            ->wherein('kp_form_id', $relations)
             ->get();
 
-        dd($getRelatedFields);
-        
-        // return $query->where('record_id', $recordId);
-        // $relatedFormsDb = $this->query();
-
-
-        // foreach($relations as $relation) {
-        //     $relatedFormsDb = $relatedFormsDb->where('kp_form_id', $relation);
-        // }
-        
-        // return $relatedFormsDb->get();
+        return $getRelatedFields;
     }
 
 }

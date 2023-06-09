@@ -97,9 +97,13 @@ class RecordsKpFormController extends Controller
             return [$item['tag_id'] => $item['value']];
         });
 
-        $relatedForms = IssuedKpForm::relatedKpForms($recordId, getKpRelations($issuedForm->kp_form_id));
+        $relatedForms = IssuedKpForm::relatedKpForms($recordId, getKpRelations($issuedForm->kp_form_id))->mapToGroups(function ($item, int $key) {     
+            return [$item['kp_form_id'] => [$item['tag_id'] => $item['value']]];
+        });
 
-        return view("kp_forms.kp-form-$issuedForm->kp_form_id", ['issuedForm' => $issuedForm, 'tagIds' => collect($tagIds), 'relatedForms' => collect($relatedForms)]);
+
+        dd($relatedForms);
+        return view("kp_forms.kp-form-$issuedForm->kp_form_id", ['issuedForm' => $issuedForm, 'tagIds' => collect($tagIds), 'relatedForms' => $relatedForms]);
     }
 
     /**
