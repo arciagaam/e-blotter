@@ -77,8 +77,7 @@
             }
         });
 
-        // window.print();
-        // setTimeout(window.close, 500); 	
+        window.print();
+        setTimeout(window.close, 500); 	
     });
-
 </script>
