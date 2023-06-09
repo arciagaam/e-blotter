@@ -14,7 +14,7 @@ function getKpRelations($kp_form_id)
 {
     $relations = [
         '8' => ['7'],
-        '9' => ['7'],
+        '9' => ['7', '8'],
     ];
 
     return $relations[$kp_form_id] ?? [];

@@ -29,7 +29,10 @@ class KpStepTwoRequest extends FormRequest
             'relief' => 'sometimes|required',
 
             //KP FORM 8
-            'hearing' => 'sometimes|required'
+            'hearing' => 'sometimes|required',
+
+            //KP FORM 9
+            'officer' => 'sometimes|required',
         ];
     }
 }

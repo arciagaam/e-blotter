@@ -40,7 +40,7 @@
                             </td>
                             <td>
                                 <div class="flex w-full h-full justify-center items-center gap-2">
-                                    <a class="btn-tinted" target="_blank" href="{{ route('records.kp-forms.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
+                                    <a class="btn-outline" target="_blank" href="{{ route('records.kp-forms.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
                                 </div>
                             </td>
                         </tr>

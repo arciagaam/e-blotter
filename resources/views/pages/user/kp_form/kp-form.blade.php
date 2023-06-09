@@ -51,7 +51,7 @@
                                 <td><p>{{ $value }}</p></td>
                                 <td>
                                     <div class="flex w-full h-full justify-center items-center gap-2">
-                                        <button class="btn-tinted" type="button">Preview</button>
+                                        <button class="btn-outline" type="button">Preview</button>
                                     </div>
                                 </td>
                             </tr>

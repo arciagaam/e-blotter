@@ -74,8 +74,8 @@
                                     <button data-target="#verify" data-form-id="{{ $account->id }}"
                                         class="verify-btn {{ $account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled' }}"
                                         {{ $account->verified_at ? 'disabled' : '' }}>Verify</button>
-                                    <button data-target="#edit" data-form-id="{{ $account->id }}" class="btn-tinted">Edit</button>
-                                    <button data-target="#delete" class="btn-tinted danger">Delete</button>
+                                    <button data-target="#edit" data-form-id="{{ $account->id }}" class="btn-outline">Edit</button>
+                                    <button data-target="#delete" class="btn-outline danger">Delete</button>
                                 </div>
                             </td>
                         </tr>

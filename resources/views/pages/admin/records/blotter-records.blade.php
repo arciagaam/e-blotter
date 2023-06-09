@@ -79,8 +79,8 @@
                             <td>
                                 <div class="flex w-full h-full justify-center items-center gap-2">
                                     <a href="{{ route('admin.records.show', ['record' => $record->id]) }}"
-                                        class="btn-tinted">Preview</a>
-                                    <button class="btn-tinted" type="button">Print</button>
+                                        class="btn-outline">Preview</a>
+                                    <button class="btn-outline" type="button">Print</button>
                                 </div>
                             </td>
                         </tr>

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -31,14 +32,26 @@ class IssuedKpForm extends Model
         return $this->hasMany(IssuedKpFormField::class);
     }
 
-    public function scopeRelatedKpForms($relations)
+    public function scopeRelatedKpForms(Builder $query, string $recordId, array $relations)
     {
-        $relatedFormsDb = IssuedKpForm::query();
-        foreach($relations as $relation) {
-            $relatedFormsDb = $relatedFormsDb->where('kp_form_id', $relation);
-        }
+        $getRelatedFields = $query
+            ->join('issued_kp_form_fields', 'issued_kp_forms.id', '=', 'issued_kp_form_fields.issued_kp_form_id')
+            ->select('issued_kp_form_fields.tag_id', 'issued_kp_form_fields.value', 'issued_kp_forms.*')
+            ->where('record_id', $recordId)
+            ->where('kp_form_id', $relations[0])
+            ->get();
+
+        dd($getRelatedFields);
         
-        return $relatedFormsDb->get();
+        // return $query->where('record_id', $recordId);
+        // $relatedFormsDb = $this->query();
+
+
+        // foreach($relations as $relation) {
+        //     $relatedFormsDb = $relatedFormsDb->where('kp_form_id', $relation);
+        // }
+        
+        // return $relatedFormsDb->get();
     }
 
 }
