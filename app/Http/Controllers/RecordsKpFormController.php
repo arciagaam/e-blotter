@@ -9,6 +9,8 @@ use App\Models\IssuedKpForm;
 use App\Models\IssuedKpFormField;
 use App\Models\KpForm;
 use App\Models\Record;
+use App\Models\Summon;
+use App\Services\RecordsKpFormService;
 use Illuminate\Http\Request;
 
 class RecordsKpFormController extends Controller
@@ -16,8 +18,9 @@ class RecordsKpFormController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(string $record)
+    public function index(string $record, RecordsKpFormService $service, RecordKpFormActions $action)
     {
+        $action->getMessage($service->checkLatestKpForm($record), $record);
         return view('pages.kp_forms.kp_forms', ['record' => $record, 'issuedKpForms' => IssuedKpForm::with('kpForm')->where('record_id', $record)->get()]);
     }
 
@@ -52,7 +55,6 @@ class RecordsKpFormController extends Controller
     public function postStepTwo(KpStepTwoRequest $request)
     {
         session()->put('kp_fields', $request->validated());
-
         return redirect()->route('records.kp-forms.success');
     }
 
@@ -65,6 +67,10 @@ class RecordsKpFormController extends Controller
 
         $kpFields = session()->get('kp_fields');
         $kpFieldsArray = array();
+
+        if($issuedForm->kp_form_id == 8 || $issuedForm->kp_form_id == 9) {
+            Summon::updateOrCreate(['record_id' => $issuedForm->record_id, 'kp_form_id' => $issuedForm->kp_form_id])->increment('attempt');
+        }
 
         foreach($kpFields as $tag_id => $value) {
             array_push($kpFieldsArray, ['issued_kp_form_id' => $issuedForm->id, 'tag_id' => $tag_id, 'value' => $value, 'created_at' => $nowTimestamp, 'updated_at' => $nowTimestamp]);
@@ -117,3 +123,4 @@ class RecordsKpFormController extends Controller
         //
     }
 }
+

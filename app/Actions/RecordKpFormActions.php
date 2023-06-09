@@ -3,6 +3,7 @@
 namespace App\Actions;
 
 use App\Models\IssuedKpForm;
+use App\Models\Summon;
 
 class RecordKpFormActions
 {
@@ -35,4 +36,33 @@ class RecordKpFormActions
 
         return [$issuedForm, $tagIds, $forms];
     }
+
+    public function checkAttempts(string $record)
+    {
+        return Summon::where('record_id', $record)
+        ->wherein('kp_form_id', [8, 9])
+        ->where('attempt', '>=', 3)
+        ->get();
+    }
+
+    public function getMessage($latestKpForm, string $record)
+    {
+        if($latestKpForm->kp_form_id == 8 || $latestKpForm->kp_form_id == 9) {
+            $checkAttempt = $this->checkAttempts($record);
+            if(count($checkAttempt)) {
+                $for = '';
+
+                foreach($checkAttempt as $index => $ca) {
+                    $for .= $ca->kp_form_id == 8 ? 'Complainant/s' : 'Respondent/s';
+
+                    if(count($checkAttempt) > 1 && $index != count($checkAttempt)-1) {
+                        $for .= ' and ';
+                    } 
+                }
+
+                dd("Max Attempt Reached for $for");
+            }   
+        }
+    }
+    
 }
