@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\RecordKpFormActions;
 use App\Http\Requests\KpStepOneRequest;
 use App\Http\Requests\KpStepTwoRequest;
 use App\Models\IssuedKpForm;
@@ -85,25 +86,11 @@ class RecordsKpFormController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $recordId, string $issuedKpFormId)
+    public function show(string $recordId, string $issuedKpFormId, RecordKpFormActions $action)
     {
+        [$issuedForm, $tagIds, $forms] = $action->handleShow($recordId, $issuedKpFormId);
 
-        $issuedForm = issuedKpForm::with([
-        'issuedKpFormFields', 
-        'record' => ['victim', 'suspect']
-        ])->where('id', $issuedKpFormId)->where('record_id', $recordId)->first();
-        
-        $tagIds = $issuedForm->issuedKpFormFields->mapWithKeys(function ($item, int $key) {
-            return [$item['tag_id'] => $item['value']];
-        });
-
-        $relatedForms = IssuedKpForm::relatedKpForms($recordId, getKpRelations($issuedForm->kp_form_id))->mapToGroups(function ($item, int $key) {     
-            return [$item['kp_form_id'] => [$item['tag_id'] => $item['value']]];
-        });
-
-
-        dd($relatedForms);
-        return view("kp_forms.kp-form-$issuedForm->kp_form_id", ['issuedForm' => $issuedForm, 'tagIds' => collect($tagIds), 'relatedForms' => $relatedForms]);
+        return view("kp_forms.kp-form-$issuedForm->kp_form_id", ['issuedForm' => $issuedForm, 'tagIds' => collect($tagIds), 'relatedForms' => $forms]);
     }
 
     /**
