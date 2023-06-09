@@ -27,6 +27,10 @@ class RecordKpFormActions
             }
 
             $forms[$item['kp_form_id']][$item['tag_id']] = $item['value'];
+            $forms[$item['kp_form_id']]['id'] = $item['id'];
+            $forms[$item['kp_form_id']]['record_id'] = $item['record_id'];
+            $forms[$item['kp_form_id']]['kp_form_id'] = $item['kp_form_id'];
+            $forms[$item['kp_form_id']]['created_at'] = $item['created_at'];
         }
 
         return [$issuedForm, $tagIds, $forms];
