@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/logout', [Authentication::class, 'logout'])->name('logout');
 
 Route::get('/kpformtest', function() {
-    return view('kp_forms.kp-form-16');
+    return view('kp_forms.kp-form-9');
 });
 
 Route::prefix('/admin')->group(function () {
@@ -104,19 +104,18 @@ Route::prefix('/')->group(function () {
 
     Route::middleware(['user', 'account_verified'])->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index']);
-        // Route::get('/records', [UserRecordController::class, 'index']);
         
         Route::prefix('records')->name('records.')->group(function() {
             Route::prefix('kp-forms')->name('kp-forms.')->group(function() {
                 Route::get('/step-one/{id}', [RecordsKpFormController::class, 'stepOne'])->name('get.step-one');
-                Route::get('/{recordId}/{issuedKpFormId}', [RecordsKpFormController::class, 'show'])->name('show');
                 Route::post('/step-one', [RecordsKpFormController::class, 'postStepOne'])->name('post.step-one');
 
                 Route::get('/step-two', [RecordsKpFormController::class, 'stepTwo'])->name('get.step-two');
                 Route::post('/step-two', [RecordsKpFormController::class, 'postStepTwo'])->name('post.step-two');
 
                 Route::get('/step-three', [RecordsKpFormController::class, 'stepThree'])->name('success');
-                
+
+                Route::get('/{recordId}/{issuedKpFormId}', [RecordsKpFormController::class, 'show'])->name('show');
 
                 Route::get('/{record}', [RecordsKpFormController::class, 'index'])->name('index');
             });

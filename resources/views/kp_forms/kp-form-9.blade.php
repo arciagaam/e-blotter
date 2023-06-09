@@ -64,15 +64,73 @@
         </div>
     </div>
 
+    <div class="break-before-page"></div>
+
+    <div class="flex flex-col items-center">
+        <p class="font-bold tracking-[0.35rem]">OFFICER’S RETURN</p>
+    </div>
+
+    <div class="flex flex-col gap-4 items-center">
+        <p class="self-start">I served this summons upon respondent ____________________________ on
+            the ______ day of ______________, 19____, and upon respondent
+            ___________________________ on the day of ________________, 19____,
+            by:</p>
+        <p class="self-start">(Write name/s of respondent/s before mode by which he/they was/were
+            served.)</p>
+        <div class="grid grid-cols-2 w-full gap-x-12">
+            <p class="col-span-2">Respondent/s</p>
+
+            <div class="flex flex-row w-full">
+                <p class="w-full h-5 border-b border-black"></p>
+                <p class="">1.</p>
+            </div>
+            <p>handing to him/them said summons in person, or</p>
+            
+            <div class="flex flex-row w-full">
+                <p class="w-full h-5 border-b border-black"></p>
+                <p class="">2.</p>
+            </div>
+            <p>handing to him/them said summons and he/they refused to receive it, or</p>
+
+            <div class="flex flex-row w-full">
+                <p class="w-full h-5 border-b border-black"></p>
+                <p class="">3.</p>
+            </div>
+            <p>leaving said summons at his/their dwelling with __________ (name) a person of suitable age and discretion residing therein, or</p>
+
+            <div class="flex flex-row w-full">
+                <p class="w-full h-5 border-b border-black"></p>
+                <p class="">4.</p>
+            </div>
+            <p>leaving said summons at his/their office/place of business with ________, ( name) a competent person in charge thereof.</p>
+
+            <div class="col-span-2 flex-col self-start">
+                <p class="w-1/4 h-4 border-b border-0 border-black"></p>
+                <p class="self-start">Officer</p>
+            </div>
+        </div>
+    </div>
+
+    <p>Received by Respondent/s representative/s:</p>
+
+    <div class="grid grid-cols-2 w-2/4 gap-8 mt-4">
+        <p class="border-t border-black text-center">Signature</p>
+        <p class="border-t border-black text-center">Date</p>
+
+        <p class="border-t border-black text-center">Signature</p>
+        <p class="border-t border-black text-center">Date</p>
+    </div>
+
 </x-kp-form-layout>
 
 <script type="text/javascript">
-    textareas = document.querySelectorAll("textarea").forEach(textarea => {
-        textarea.addEventListener('input', autoResize, false);
+    window.addEventListener('load', () => {
+        document.querySelectorAll("textarea").forEach(textarea => {
+            if (textarea.scrollHeight > textarea.clientHeight) {
+                textarea.style.height = textarea.scrollHeight + 'px';
+            }
+        });
     });
-
-    function autoResize() {
-        this.style.height = 'auto';
-        this.style.height = this.scrollHeight + 'px';
-    }
 </script>
+
+@vite('/resources/js/print_window.js')

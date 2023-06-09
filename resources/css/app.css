@@ -65,7 +65,7 @@
     }
 
     .btn-tinted {
-        @apply bg-project-blue-light text-project-blue-default px-4 py-2 rounded-md hover:bg-project-blue-light2 active:bg-project-blue-light3 transition-all
+        @apply text-center border border-project-blue-default text-project-blue-default px-4 py-2 rounded-md hover:bg-project-blue-light2 active:bg-project-blue-light3 transition-all
     }
 
     .btn-tinted.danger {
@@ -75,6 +75,18 @@
     .btn-tinted.success {
         @apply bg-project-green-light text-emerald-600 hover:bg-project-green-light2 active:bg-project-green-light3 transition-all
     }
+
+    /* .btn-tinted {
+        @apply bg-project-blue-light text-project-blue-default px-4 py-2 rounded-md hover:bg-project-blue-light2 active:bg-project-blue-light3 transition-all
+    }
+
+    .btn-tinted.danger {
+        @apply bg-project-red-light text-rose-600 hover:bg-project-red-light2 active:bg-project-red-light3 transition-all
+    }
+
+    .btn-tinted.success {
+        @apply bg-project-green-light text-emerald-600 hover:bg-project-green-light2 active:bg-project-green-light3 transition-all
+    } */
 
     .btn-gray {
         @apply bg-project-neutral-default text-project-gray-default px-4 py-2 hover:bg-project-neutral-dark active:bg-project-neutral-darker rounded-md transition-all
