@@ -5,7 +5,10 @@ namespace App\Actions;
 use App\Models\IssuedKpForm;
 use App\Models\Summon;
 use App\Actions\Get;
-
+use App\Models\IssuedKpFormField;
+use Illuminate\Database\Eloquent\Builder;
+// use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 
 class RecordKpFormActions
 {
@@ -55,8 +58,36 @@ class RecordKpFormActions
         ->get();
     }
 
+    public function checkHearingDate(string $record, array $kpFormIds)
+    {
+        $latestHearingDates = array();
+
+        $issuedKpForms = IssuedKpForm::where('record_id', $record)
+        ->where('issued_kp_form_fields.tag_id', 'hearing')
+        ->whereIn('kp_form_id', $kpFormIds)
+        ->join('issued_kp_form_fields', 'issued_kp_form_fields.issued_kp_form_id', '=', 'issued_kp_forms.id')
+        ->orderBy('issued_kp_forms.kp_form_id', 'asc')
+        ->latest('issued_kp_forms.created_at')
+        ->select('issued_kp_form_fields.value', 'issued_kp_forms.id', 'issued_kp_forms.kp_form_id', 'issued_kp_forms.created_at')
+        ->get()
+        ->groupBy('kp_form_id');
+
+        if ($issuedKpForms) {
+            foreach($issuedKpForms as $key => $value) {
+                $latestHearingDates[$key] = $value[0];
+                continue;
+            }
+        }
+
+        return $latestHearingDates;
+    }
+
     public function getMessageAndRecommendations($latestKpForm, string $record, GetKpFormMessageActions $action)
     {
+        if (!isset($latestKpForm->kp_form_id)) {
+            return [];
+        }
+
         switch ($latestKpForm->kp_form_id) {
             case 7 : return $action->getKpForm7Message(); break;
             case 8 : 

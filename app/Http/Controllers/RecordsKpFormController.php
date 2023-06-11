@@ -21,9 +21,8 @@ class RecordsKpFormController extends Controller
      */
     public function index(string $record, RecordsKpFormService $service, RecordKpFormActions $kpFormAction, GetKpFormMessageActions $kpFormMessageAction)
     {
-        $kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm($record), $record, $kpFormMessageAction);
-
-        // $action->getMessage();
+        $message = $kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm($record), $record, $kpFormMessageAction);
+        dd($message);
         return view('pages.kp_forms.kp_forms', ['record' => $record, 'issuedKpForms' => IssuedKpForm::with('kpForm')->where('record_id', $record)->get()]);
     }
 
