@@ -36,7 +36,7 @@ class GetKpFormMessageActions
         $now = strtotime(now());
 
         if (count($attempts)) {
-            if ($now > strtotime($hearingDates[8]->value) || $now > strtotime($hearingDates[9]->value)) {
+            if ($hearingDates->hasAny([8, 9]) && ($now > strtotime($hearingDates[8]->value) || $now > strtotime($hearingDates[9]->value))) {
                 if ($attempts->contains('kp_form_id', 8) && !$attempts->contains('kp_form_id', 9)) {
                     return [
                         'message' => 'Maximum attempts reached for Complainant/s',
@@ -57,20 +57,20 @@ class GetKpFormMessageActions
         }
 
         if (count($hearingDates)) {
-            if ($now > strtotime($hearingDates[8]->value) && $now > strtotime($hearingDates[9]->value)) {
+            if ($hearingDates->has([8, 9]) && ($now > strtotime($hearingDates[8]->value) && $now > strtotime($hearingDates[9]->value))) {
                 return [
                     'message' => "Form 8 and 9 are both past the hearing date",
                     'recommendation' => "Issue Form 8 and 9"
                 ];
-            } else if ($now > strtotime($hearingDates[9]->value)) {
-                return [
-                    'message' => "Form 9 is past the hearing date",
-                    'recommendation' => "Issue Form 9"
-                ];
-            } else if ($now > strtotime($hearingDates[8]->value)) {
+            } else if ($hearingDates->has(8) && ($now > strtotime($hearingDates[8]->value))) {
                 return [
                     'message' => "Form 8 is past the hearing date",
                     'recommendation' => "Issue Form 8"
+                ];
+            } else if ($hearingDates->has(9) && ($now > strtotime($hearingDates[9]->value))) {
+                return [
+                    'message' => "Form 9 is past the hearing date",
+                    'recommendation' => "Issue Form 9"
                 ];
             }
         }
@@ -83,7 +83,28 @@ class GetKpFormMessageActions
 
     public function getKpForm18and19Message(string $record_id, RecordKpFormActions $action): array
     {
-        // date based
+        $hearingDates = $action->checkHearingDate($record_id, [18, 19]);
+        $now = strtotime(now());
+
+        if (count($hearingDates)) {
+            if ($hearingDates->has([18, 19]) && ($now > strtotime($hearingDates[18]->value) && $now > strtotime($hearingDates[19]->value))) {
+                return [
+                    'message' => "Form 18 and 19 are both past the hearing date",
+                    'recommendation' => "Close the case."
+                ];
+            } else if ($hearingDates->has(18) && $now > strtotime($hearingDates[18]->value)) {
+                return [
+                    'message' => "Form 18 is past the hearing date",
+                    'recommendation' => "Close the case."
+                ];
+            } else if ($hearingDates->has(19) && $now > strtotime($hearingDates[19]->value)) {
+                return [
+                    'message' => "Form 19 is past the hearing date",
+                    'recommendation' => "Issue Form 20"
+                ];
+            }
+        }
+
         return [
             'message' => 'Wala pang nangyayari',
             'recommendations' => 'Wait ka muna lods'

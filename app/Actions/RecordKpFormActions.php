@@ -79,7 +79,7 @@ class RecordKpFormActions
             }
         }
 
-        return $latestHearingDates;
+        return collect($latestHearingDates);
     }
 
     public function getMessageAndRecommendations($latestKpForm, string $record, GetKpFormMessageActions $action)
