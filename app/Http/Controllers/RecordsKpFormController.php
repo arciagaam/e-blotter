@@ -67,6 +67,10 @@ class RecordsKpFormController extends Controller
         $issuedForm = session()->get('issued_kp_form');
         $issuedForm->save();
 
+        if($issuedForm->kp_form_id == 16) {
+            Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(10)->timestamp)]);
+        }
+
         $kpFields = session()->get('kp_fields');
         $kpFieldsArray = array();
 

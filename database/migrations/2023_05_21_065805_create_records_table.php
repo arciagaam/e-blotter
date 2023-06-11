@@ -20,6 +20,7 @@ return new class extends Migration
             $table->text('narrative');
             $table->string('narrative_file')->nullable();
             $table->text('reliefs');
+            $table->date('kp_deadline')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +16,7 @@ class Record extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    
 
     protected $fillable = [
         'barangay_id',
@@ -26,6 +28,11 @@ class Record extends Model
         'narrative',
         'narrative_file',
         'reliefs',
+        'kp_deadline',
+    ];
+
+    protected $casts = [
+        'kp_deadline' => 'date'
     ];
 
     public function victim(): HasOne

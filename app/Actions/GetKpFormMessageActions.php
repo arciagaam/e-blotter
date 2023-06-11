@@ -2,6 +2,8 @@
 
 namespace App\Actions;
 
+use App\Models\Record;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class GetKpFormMessageActions
@@ -81,11 +83,30 @@ class GetKpFormMessageActions
         ];
     }
 
+    function getKpForm16Message(string $record_id) {
+
+        $record = Record::find($record_id);
+        $now = now()->format('Y-m-d');
+        $difference = Carbon::parse($now)->diffInDays(Carbon::parse($record->kp_deadline->format('Y-m-d')), false);
+
+        if($difference > 0) {
+            return [
+                'message' => 'Form 16 Issued',
+                'recommendations' => "Issue Form 25 after $difference day/s"
+            ];
+        } 
+
+        return [
+            'message' => '10 days has passed',
+            'recommendations' => 'Issue Form 25'
+        ];
+    }
+
     public function getKpForm18and19Message(string $record_id, RecordKpFormActions $action): array
     {
         $hearingDates = $action->checkHearingDate($record_id, [18, 19]);
         $now = strtotime(now());
-
+        
         if (count($hearingDates)) {
             if ($hearingDates->has([18, 19]) && ($now > strtotime($hearingDates[18]->value) && $now > strtotime($hearingDates[19]->value))) {
                 return [
