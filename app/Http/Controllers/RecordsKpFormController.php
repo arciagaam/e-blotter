@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\GetKpFormMessageActions;
 use App\Actions\RecordKpFormActions;
 use App\Http\Requests\KpStepOneRequest;
 use App\Http\Requests\KpStepTwoRequest;
@@ -18,9 +19,11 @@ class RecordsKpFormController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(string $record, RecordsKpFormService $service, RecordKpFormActions $action)
+    public function index(string $record, RecordsKpFormService $service, RecordKpFormActions $kpFormAction, GetKpFormMessageActions $kpFormMessageAction)
     {
-        $action->getMessage($service->checkLatestKpForm($record), $record);
+        $kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm($record), $record, $kpFormMessageAction);
+
+        // $action->getMessage();
         return view('pages.kp_forms.kp_forms', ['record' => $record, 'issuedKpForms' => IssuedKpForm::with('kpForm')->where('record_id', $record)->get()]);
     }
 
