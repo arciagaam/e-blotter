@@ -83,6 +83,27 @@ class GetKpFormMessageActions
         ];
     }
 
+    function getKpForm10Message() {
+        return [
+            'message' => 'Form 10 Issued',
+            'recommendations' => 'Issue Form 11'
+        ];
+    }
+
+    function getKpForm11Message() {
+        return [
+            'message' => 'Form 11 Issued',
+            'recommendations' => 'Issue Form 12'
+        ];
+    }
+
+    function getKpForm12Message() {
+        return [
+            'message' => 'Form 12 Issued',
+            'recommendations' => 'Issue Form 13'
+        ];
+    }
+
     function getKpForm16Message(string $record_id) {
 
         $record = Record::find($record_id);

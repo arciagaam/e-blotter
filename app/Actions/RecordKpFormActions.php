@@ -92,7 +92,7 @@ class RecordKpFormActions
             case 7 : return $action->getKpForm7Message(); break;
             case 8 : 
             case 9 : return $action->getKpForm8and9Message($record, $this); break;
-            case 10 : break;
+            case 10 : return $action->getKpForm10Message(); break;
             case 11 : break;
             case 16 : return $action->getKpForm16Message($record); break;
             case 18 : 

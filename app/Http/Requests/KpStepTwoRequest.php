@@ -34,6 +34,9 @@ class KpStepTwoRequest extends FormRequest
             //KP FORM 9
             'officer' => 'sometimes|required',
 
+            //KP FORM 10
+            'summon' => 'sometimes|required',
+
             //KP FORM 16
             'settlement' => 'sometimes|required',
         ];

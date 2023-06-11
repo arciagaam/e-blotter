@@ -9,8 +9,6 @@
         </div>
     </div>
 
-    {{-- {{ dd($relatedForms['7']) }} --}}
-
     <div class="flex flex-col items-center">
         <p class="font-bold tracking-[0.35rem]">NOTICE OF HEARING</p>
         <p class="font-bold tracking-[0.35rem]">(MEDIATION PROCEEDINGS)</p>

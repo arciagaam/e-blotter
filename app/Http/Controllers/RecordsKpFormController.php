@@ -22,7 +22,7 @@ class RecordsKpFormController extends Controller
     public function index(string $record, RecordsKpFormService $service, RecordKpFormActions $kpFormAction, GetKpFormMessageActions $kpFormMessageAction)
     {
         $message = $kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm($record), $record, $kpFormMessageAction);
-        dd($message);
+        // dd($message);
         return view('pages.kp_forms.kp_forms', ['record' => $record, 'issuedKpForms' => IssuedKpForm::with('kpForm')->where('record_id', $record)->get()]);
     }
 
@@ -67,9 +67,17 @@ class RecordsKpFormController extends Controller
         $issuedForm = session()->get('issued_kp_form');
         $issuedForm->save();
 
+        // may naisip pala ko pano kung 16 na yung inissue, tapos may kupal na nagkamali inissue is kpform 12 baka mag + 10. Dapat ba may checker tayo
+        // na kunware pag ang latest kp form na is > 12 di na siya mag +10 sa days? medyo magulo explain ko bukas ni note ko lang baka kasi malimutan ko.
+
+        if($issuedForm->kp_form_id == 12) {
+            Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(15)->timestamp)]);
+        }
+
         if($issuedForm->kp_form_id == 16) {
             Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(10)->timestamp)]);
         }
+        
 
         $kpFields = session()->get('kp_fields');
         $kpFieldsArray = array();
