@@ -37,6 +37,15 @@ class KpStepTwoRequest extends FormRequest
             //KP FORM 10
             'summon' => 'sometimes|required',
 
+            //KP FORM 13
+            'witness_1' => 'sometimes|required',
+            'witness_2' => 'sometimes|nullable',
+            'witness_3' => 'sometimes|nullable',
+            'witness_4' => 'sometimes|nullable',
+
+            //KP FORM 15
+            'arbitration_award' => 'sometimes|required',
+
             //KP FORM 16
             'settlement' => 'sometimes|required',
         ];

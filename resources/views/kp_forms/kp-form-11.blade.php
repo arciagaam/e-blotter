@@ -32,6 +32,7 @@
     <div class="flex flex-col items-center">
         <p class="font-bold tracking-[0.35rem]">NOTICE FOR CONSTITUTION OF PANGKAT</p>
     </div>
+    
     <p class="self-end">(Date)</p>
     <p>TO:____________</p>
 
@@ -54,3 +55,4 @@
 
 
 </x-kp-form-layout>
+@vite('/resources/js/print_window.js')

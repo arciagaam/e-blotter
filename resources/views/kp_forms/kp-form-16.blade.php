@@ -38,7 +38,7 @@
     <div class="flex flex-col items-center">
         <p class="self-start">We, complainant/s and respondent/s in the above-captioned case, do hereby
             agree to settle our dispute as follows:</p>
-        <textarea class="w-full h-fit outline-none resize-none underline">{{$tagIds['settlement']}}</textarea>
+        <textarea class="w-full h-fit outline-none resize-none underline decoration-0">{{$tagIds['settlement']}}</textarea>
         <p class="self-start">and bind ourselves to comply honestly and faithfully with the above terms of
             settlement.</p>
         <p class="self-start">Entered into this ______ day of __________, 19_______.</p>
@@ -81,5 +81,4 @@
         this.style.height = this.scrollHeight + 'px';
     }
 </script>
-
 @vite('/resources/js/print_window.js')

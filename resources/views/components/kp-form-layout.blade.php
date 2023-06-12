@@ -10,6 +10,7 @@
     <style>
         * {
             font-family: 'Times New Roman', Times, serif;
+            text-decoration-skip-ink: none;
             /* border: 1px solid #ff000025; */
         }
 

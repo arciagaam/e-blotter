@@ -62,3 +62,4 @@
         </div>
     </div>
 </x-kp-form-layout>
+@vite('/resources/js/print_window.js')

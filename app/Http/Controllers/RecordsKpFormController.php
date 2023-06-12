@@ -60,24 +60,26 @@ class RecordsKpFormController extends Controller
         return redirect()->route('records.kp-forms.success');
     }
 
-    public function stepThree()
+    public function stepThree(RecordsKpFormService $service)
     {
         $nowTimestamp = now();
-
         $issuedForm = session()->get('issued_kp_form');
+
+        $latestKpForm = $service->checkLatestKpForm($issuedForm->record_id);
+        $latestKpForm = $latestKpForm ?? 0;
+
         $issuedForm->save();
 
         // may naisip pala ko pano kung 16 na yung inissue, tapos may kupal na nagkamali inissue is kpform 12 baka mag + 10. Dapat ba may checker tayo
         // na kunware pag ang latest kp form na is > 12 di na siya mag +10 sa days? medyo magulo explain ko bukas ni note ko lang baka kasi malimutan ko.
 
-        if($issuedForm->kp_form_id == 12) {
+        if( $issuedForm->kp_form_id == 12 && $latestKpForm->kp_form_id < 12) {
             Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(15)->timestamp)]);
         }
 
-        if($issuedForm->kp_form_id == 16) {
+        if($issuedForm->kp_form_id == 16 && $latestKpForm->kp_form_id < 16) {
             Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(10)->timestamp)]);
         }
-        
 
         $kpFields = session()->get('kp_fields');
         $kpFieldsArray = array();
@@ -87,6 +89,8 @@ class RecordsKpFormController extends Controller
         }
 
         foreach($kpFields as $tag_id => $value) {
+            if(!$value) continue;
+            
             array_push($kpFieldsArray, ['issued_kp_form_id' => $issuedForm->id, 'tag_id' => $tag_id, 'value' => $value, 'created_at' => $nowTimestamp, 'updated_at' => $nowTimestamp]);
         };
 
