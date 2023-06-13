@@ -18,7 +18,7 @@
                         </div>
     
                         <input class="form-input bg-white" type="text" name="blotter_number" id="blotter_number"
-                            value="{{ $record->id }}" disabled>
+                            value="{{ $record->barangay_blotter_number }}" disabled>
                     </div>
                     <div class="form-input-container flex-row gap-5">
                         <div class="flex flex-row justify-center items-center">

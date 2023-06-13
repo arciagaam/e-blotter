@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('barangay_id')->constrained('barangays')->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId('blotter_status_id')->constrained('blotter_status')->cascadeOnUpdate()->restrictOnDelete();
+            $table->integer('barangay_blotter_number')->default(1);
             $table->string('purok');
             $table->string('case');
             $table->text('narrative');

@@ -21,6 +21,7 @@ class Record extends Model
     protected $fillable = [
         'barangay_id',
         'blotter_status_id',
+        'barangay_blotter_number',
         'purok',
         'victim_id',
         'suspect_id',
@@ -65,12 +66,17 @@ class Record extends Model
         return $this->HasOneOrMany(IssuedKpForm::class);
     }
 
+    public function latestRecord(string $barangay_id): Record | null
+    {
+        return $this->orderBy('barangay_blotter_number', 'desc')->where('barangay_id', $barangay_id)->first();
+    }
+
     public function scopeOfStatus(Builder $query, int $blotter_status_id)
     {
         return $query->where('barangay_id', auth()->user()->barangays[0]->id)->where('blotter_status_id', $blotter_status_id)->get();
     }
 
-    public function scopeFilter($query, string $search = null)
+    public function scopeFilter(Builder $query, string $search = null)
     {
         if (isset($search)) {
             return $query->where('barangay_id', $search);

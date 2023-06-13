@@ -81,7 +81,7 @@
                     @else
                         @foreach ($records as $key => $record)
                             <tr>
-                                <td><p>{{ $record->id }}</p></td>
+                                <td><p>{{ $record->barangay_blotter_number }}</p></td>
                                 <td><p>{{ $record->purok }}</p></td>
                                 <td><p>{{ $record->case }}</p></td>
                                 <td><p>{{ $record->victim->name }}</p></td>

@@ -27,7 +27,10 @@ class RecordController extends Controller
     public function create()
     {
         $civilStatus = new CivilStatus();
-        return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus(), 'blotterNumber' => Record::count() + 1]);
+        $record = new Record();
+        
+        $latest = $record->latestRecord(auth()->user()->barangays[0]->id);
+        return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus(), 'blotterNumber' => $latest ? $latest->barangay_blotter_number + 1 : 1]);
     }
 
     /**
@@ -36,10 +39,12 @@ class RecordController extends Controller
     public function store(RecordRequest $request)
     {
         $report = new Record();
+        $latest = $report->latestRecord(auth()->user()->barangays[0]->id);
 
         $report->fill($request->safe()->except('victim', 'suspect'));
         $report->barangays()->associate(auth()->user()->barangays[0]->id);
         $report->blotterStatus()->associate(BlotterStatus::find(2));
+        $report->barangay_blotter_number = $latest ? $latest->barangay_blotter_number + 1 : 1;
         $report->save();
 
         $report->victim()->save(new Victim($request->validated('victim')));
@@ -56,7 +61,7 @@ class RecordController extends Controller
     {
         session()->forget('issued_kp_form');
         session()->forget('kp_fields');
-        
+
         $civilStatus = new CivilStatus();
 
         return view('pages.user.records.show', ['record' => Record::where('id', $record->id)->with('victim', 'suspect', 'blotterStatus')->first(), 'civilStatus' => $civilStatus->getAllCivilStatus()]);
@@ -79,7 +84,7 @@ class RecordController extends Controller
     public function update(RecordRequest $request, Record $record)
     {
         $record = Record::find($record->id);
-        
+
         $record->update($request->safe()->except('victim', 'suspect'));
         $record->victim()->update($request->validated('victim'));
         $record->suspect()->update($request->validated('suspect'));
