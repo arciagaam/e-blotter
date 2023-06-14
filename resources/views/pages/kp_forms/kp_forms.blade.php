@@ -9,6 +9,22 @@
             </x-nav-button>
         </div>
 
+        <div class="flex flex-col h-fit border border-slate-400 bg-white rounded-md">
+
+            <div class="flex flex-col border-b border-slate-400 p-4">
+                <p class="font-bold">Message</p>
+                <div class="flex flex-col">
+                    <p>{{ $message['message'] ?? 'No message at the moment.' }}</p>
+                </div>
+            </div>
+            <div class="flex flex-col p-4">
+                <p class="font-bold">Recommendations</p>
+                <div class="flex flex-col">
+                    <p>{{ $message['recommendations'] ?? 'No recommendations at the moment.' }}</p>
+                </div>
+            </div>
+        </div>
+
         <table id="main-table" class="main-table w-full">
             <thead>
                 <tr>
@@ -40,7 +56,8 @@
                             </td>
                             <td>
                                 <div class="flex w-full h-full justify-center items-center gap-2">
-                                    <a class="btn-outline" target="_blank" href="{{ route('records.kp-forms.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
+                                    <a class="btn-outline" target="_blank"
+                                        href="{{ route('records.kp-forms.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
                                 </div>
                             </td>
                         </tr>

@@ -13,7 +13,8 @@ class GetKpFormMessageActions
     {
         return [
             'message' => 'Form 7 Issued',
-            'recommendations' => 'Issue Form 8 and 9'
+            'recommendations' => 'Issue Form 8 and 9',
+            'form_ids' => [8, 9]
         ];
     }
 
@@ -24,12 +25,14 @@ class GetKpFormMessageActions
         if ($issuedKpForms->contains('kp_form_id', 8) && !$issuedKpForms->contains('kp_form_id', 9)) {
             return [
                 'message' => 'Form 8 Issued',
-                'recommendations' => 'Issue Form 9'
+                'recommendations' => 'Issue Form 9',
+                'form_ids' => [9]
             ];
         } else if (!$issuedKpForms->contains('kp_form_id', 8) && $issuedKpForms->contains('kp_form_id', 9)) {
             return [
                 'message' => 'Form 9 Issued',
-                'recommendations' => 'Issue Form 8'
+                'recommendations' => 'Issue Form 8',
+                'form_ids' => [8]
             ];
         }
 
@@ -42,17 +45,23 @@ class GetKpFormMessageActions
                 if ($attempts->contains('kp_form_id', 8) && !$attempts->contains('kp_form_id', 9)) {
                     return [
                         'message' => 'Maximum attempts reached for Complainant/s',
-                        'recommendations' => 'Issue Form 18'
+                        'recommendations' => 'Issue Form 18',
+                        'form_ids' => [18]
+
                     ];
                 } else if (!$attempts->contains('kp_form_id', 8) && $attempts->contains('kp_form_id', 9)) {
                     return [
                         'message' => 'Maximum attempts reached for Respondent/s',
-                        'recommendations' => 'Issue Form 19'
+                        'recommendations' => 'Issue Form 19',
+                        'form_ids' => [19]
+
                     ];
                 } else if ($attempts->contains('kp_form_id', 8) && $attempts->contains('kp_form_id', 9)) {
                     return [
                         'message' => 'Maximum attempts reached for both Complainant/s and Respondent/s',
-                        'recommendations' => 'Issue Form 18 and 19'
+                        'recommendations' => 'Issue Form 18 and 19',
+                        'form_ids' => [18, 19]
+
                     ];
                 }
             }
@@ -62,17 +71,22 @@ class GetKpFormMessageActions
             if ($hearingDates->has([8, 9]) && ($now > strtotime($hearingDates[8]->value) && $now > strtotime($hearingDates[9]->value))) {
                 return [
                     'message' => "Form 8 and 9 are both past the hearing date",
-                    'recommendation' => "Issue Form 8 and 9"
+                    'recommendations' => "Issue Form 8 and 9",
+                    'form_ids' => [8, 9]
+
                 ];
             } else if ($hearingDates->has(8) && ($now > strtotime($hearingDates[8]->value))) {
                 return [
                     'message' => "Form 8 is past the hearing date",
-                    'recommendation' => "Issue Form 8"
+                    'recommendations' => "Issue Form 8",
+                    'form_ids' => [8]
+
                 ];
             } else if ($hearingDates->has(9) && ($now > strtotime($hearingDates[9]->value))) {
                 return [
                     'message' => "Form 9 is past the hearing date",
-                    'recommendation' => "Issue Form 9"
+                    'recommendations' => "Issue Form 9",
+                    'form_ids' => [9]
                 ];
             }
         }
@@ -83,43 +97,57 @@ class GetKpFormMessageActions
         ];
     }
 
-    function getKpForm10Message() {
+    function getKpForm10Message()
+    {
         return [
             'message' => 'Form 10 Issued',
-            'recommendations' => 'Issue Form 11'
+            'recommendations' => 'Issue Form 11',
+            'form_ids' => [11]
+
         ];
     }
 
-    function getKpForm11Message() {
+    function getKpForm11Message()
+    {
         return [
             'message' => 'Form 11 Issued',
-            'recommendations' => 'Issue Form 12'
+            'recommendations' => 'Issue Form 12',
+            'form_ids' => [12]
+
         ];
     }
 
-    function getKpForm12Message() {
+    function getKpForm12Message()
+    {
         return [
             'message' => 'Form 12 Issued',
-            'recommendations' => 'Issue Form 13'
+            'recommendations' => 'Issue Form 13',
+            'form_ids' => [13]
+
         ];
     }
 
-    function getKpForm16Message(string $record_id) {
+    function getKpForm16Message(string $record_id)
+    {
 
         $record = Record::find($record_id);
         $now = now()->format('Y-m-d');
         $difference = Carbon::parse($now)->diffInDays(Carbon::parse($record->kp_deadline->format('Y-m-d')), false);
 
-        if($difference > 0) {
+        if ($difference > 0) {
             return [
                 'message' => 'Form 16 Issued',
-                'recommendations' => "Issue Form 25 after $difference day/s"
+                'recommendations' => "Issue Form 25 after $difference day/s",
+                'form_ids' => [16]
+
             ];
-        } 
+        }
 
         return [
             'message' => '10 days has passed',
-            'recommendations' => 'Issue Form 25'
+            'recommendations' => 'Issue Form 25',
+            'form_ids' => [25]
+
         ];
     }
 
@@ -127,22 +155,26 @@ class GetKpFormMessageActions
     {
         $hearingDates = $action->checkHearingDate($record_id, [18, 19]);
         $now = strtotime(now());
-        
+
         if (count($hearingDates)) {
             if ($hearingDates->has([18, 19]) && ($now > strtotime($hearingDates[18]->value) && $now > strtotime($hearingDates[19]->value))) {
                 return [
                     'message' => "Form 18 and 19 are both past the hearing date",
-                    'recommendation' => "Close the case."
+                    'recommendation' => "Close the case.",
+                    'form_ids' => []
                 ];
             } else if ($hearingDates->has(18) && $now > strtotime($hearingDates[18]->value)) {
                 return [
                     'message' => "Form 18 is past the hearing date",
-                    'recommendation' => "Close the case."
+                    'recommendation' => "Close the case.",
+                    'form_ids' => []
+
                 ];
             } else if ($hearingDates->has(19) && $now > strtotime($hearingDates[19]->value)) {
                 return [
                     'message' => "Form 19 is past the hearing date",
-                    'recommendation' => "Issue Form 20"
+                    'recommendation' => "Issue Form 20",
+                    'form_ids' => [20]
                 ];
             }
         }

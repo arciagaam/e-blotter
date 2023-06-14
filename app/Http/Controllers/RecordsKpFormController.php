@@ -23,15 +23,21 @@ class RecordsKpFormController extends Controller
     {
         $message = $kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm($record), $record, $kpFormMessageAction);
         // dd($message);
-        return view('pages.kp_forms.kp_forms', ['record' => $record, 'issuedKpForms' => IssuedKpForm::with('kpForm')->where('record_id', $record)->get()]);
+        return view('pages.kp_forms.kp_forms', ['record' => $record, 'issuedKpForms' => IssuedKpForm::with('kpForm')->where('record_id', $record)->get(), 'message' => $message]);
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function stepOne(string $id)
+    public function stepOne(string $id, RecordsKpFormService $service, RecordKpFormActions $kpFormAction, GetKpFormMessageActions $kpFormMessageAction)
     {
-        return view('pages.kp_forms.create.step-one', ['kpForms' => KpForm::all(), 'recordId' => $id]);
+        $message = $kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm($id), $id, $kpFormMessageAction);
+
+        $issuedKpForms = IssuedKpForm::where('record_id', $id)->with('kpForm')->get()->mapWithKeys(function ($item, $key) {
+            return [$key => $item->kpForm->number];
+        });
+
+        return view('pages.kp_forms.create.step-one', ['kpForms' => KpForm::all(), 'recordId' => $id, 'issuedKpForms' => $issuedKpForms, 'message' => $message]);
     }
 
     public function postStepOne(KpStepOneRequest $request)
