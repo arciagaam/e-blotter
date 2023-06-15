@@ -22,6 +22,7 @@ class DashboardController extends Controller
             'inProsecution' => count(Record::ofStatus(4)),
         ];
 
+        session()->flash('alert', ['title' => 'Test Title', 'description' => 'Lorem ipsum dolor sit amet.', 'type' => 'information']);
         return view('pages.user.dashboard.dashboard', ['records' => $records, 'blotterStatusCount' => $blotterStatusCount]);
     }
 

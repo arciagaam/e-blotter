@@ -52,10 +52,30 @@ module.exports = {
           odd: '#FFFFFF'
         }
       },
+      animation: {
+        'fade': 'fade 5s ease-in-out forwards',
+        'fade-out': 'fadeOut 0.5s ease-out forwards'
+      },
       keyframes: {
         ping: {
           '75%, 100%': {
             transform: 'scale(1.5)',
+            opacity: 0,
+          }
+        },
+        fade: {
+          '0%, 100%': {
+            opacity: 0,
+          },
+          '15%, 85%': {
+            opacity: 1,
+          }
+        },
+        fadeOut: {
+          '0%': {
+            opacity: 1,
+          },
+          '100%': {
             opacity: 0,
           }
         }
