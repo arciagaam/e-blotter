@@ -244,10 +244,10 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <button class="btn-filled" data-target="#schedule" type="button">Schedule of Reconciliation</button>
+                    <button class="btn-outline" data-target="#schedule" type="button">Schedule of Reconciliation</button>
                     <a class="btn-outline text-center" href="{{ route('records.edit', ['record' => $record->id]) }}">Edit</a>
                     <button class="btn-outline" data-target="#print" type="button">Print Record</button>
-                    <a href="{{ route('records.kp-forms.get.step-one', ['id' => $record->id]) }}" class="btn-outline" data-target="#print" type="button">Print KP Form</a>
+                    <a href="{{ route('records.kp-forms.get.step-one', ['id' => $record->id]) }}" class="btn-filled" data-target="#print" type="button">Issue KP Form</a>
                 </div>
             </div>
 
