@@ -84,8 +84,9 @@ class RecordKpFormActions
 
     public function getMessageAndRecommendations($latestKpForm, string $record, GetKpFormMessageActions $action)
     {
+        // dd($latestKpForm);
         if (!isset($latestKpForm->kp_form_id)) {
-            return [];
+            return ['message' => 'No KP Forms issued yet', 'recommendations' => 'Issue Form 7', 'form_ids' => []];
         }
 
         switch ($latestKpForm->kp_form_id) {

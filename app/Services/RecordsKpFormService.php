@@ -8,7 +8,7 @@ class RecordsKpFormService {
 
     public function checkLatestKpForm(string $record_id)
     {
-        return IssuedKpForm::getLatest($record_id);
+        return IssuedKpForm::getLatest($record_id)->first();
     }
 
     // Checker kung ano yung latest issued kp form

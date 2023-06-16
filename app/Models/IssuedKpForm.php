@@ -46,7 +46,7 @@ class IssuedKpForm extends Model
 
     public function scopeGetLatest(Builder $query, string $record_id)
     {
-        return $query->orderBy('kp_form_id', 'desc')->where('record_id', $record_id)->first();
+        return $query->orderBy('kp_form_id', 'desc')->where('record_id', $record_id);
     }
 
 }
