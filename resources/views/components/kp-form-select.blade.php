@@ -9,8 +9,10 @@
 
 @props(['label', 'state', 'name', 'value', 'id'])
 
+{{$state}}
 <div aria-selected="false" @class([
-    'group relative flex flex-row w-full min-w-[16rem] border border-slate-400 bg-gray-200 rounded-md transition-all aria-selected:border-project-yellow-default aria-selected:bg-yellow-50 aria-selected:text-project-yellow-default',
+    'group relative flex flex-row w-full min-w-[16rem] border border-slate-400 rounded-md transition-all aria-selected:border-project-yellow-default aria-selected:bg-yellow-50 aria-selected:text-project-yellow-default',
+    'bg-gray-200' => !isset($state),
     'border-emerald-500 bg-emerald-50 text-emerald-500' => isset($state) && $state == 1,
     'border-blue-500 bg-blue-50 text-blue-500' => isset($state) && $state == 2,
 ])>
