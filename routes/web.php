@@ -103,7 +103,12 @@ Route::prefix('/')->group(function () {
     });
 
     Route::middleware(['user', 'account_verified'])->group(function () {
-        Route::get('/dashboard', [UserDashboardController::class, 'index']);
+        // Route::get('/dashboard', [UserDashboardController::class, 'index']);
+
+        Route::resource('dashboard', UserDashboardController::class)
+            ->only(['index']);
+
+        Route::post('/dashboard', [UserDashboardController::class, 'getHearingDates'])->name('dashboard.get-hearing-dates');
         
         Route::prefix('records')->name('records.')->group(function() {
             Route::prefix('kp-forms')->name('kp-forms.')->group(function() {
