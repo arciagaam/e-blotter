@@ -9,7 +9,6 @@
 
 @props(['label', 'state', 'name', 'value', 'id'])
 
-{{$state}}
 <div aria-selected="false" @class([
     'group relative flex flex-row w-full min-w-[16rem] border border-slate-400 rounded-md transition-all aria-selected:border-project-yellow-default aria-selected:bg-yellow-50 aria-selected:text-project-yellow-default',
     'bg-gray-200' => !isset($state),
