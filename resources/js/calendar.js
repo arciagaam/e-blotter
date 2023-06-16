@@ -2,10 +2,31 @@ import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid'
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Date format: yyyy-mm-dd
+    const eventSources = [
+        {
+            id: 'a',
+            title: 'Test A',
+            start: '2023-06-15'
+          },
+          {
+            id: 'b',
+            title: 'Test B',
+            start: '2023-06-15'
+          },
+          {
+            id: 'c',
+            title: 'Test C',
+            description: 'Description',
+            start: '2023-06-16'
+          },
+    ];
+
     const calendarEl = document.querySelector('#calendar');
     const calendar = new Calendar(calendarEl, {
         plugins: [dayGridPlugin],
-        initialView: 'dayGridMonth'
+        initialView: 'dayGridMonth',
+        events: eventSources
     });
 
     calendar.render();
