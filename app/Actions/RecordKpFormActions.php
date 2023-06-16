@@ -94,10 +94,22 @@ class RecordKpFormActions
             case 8 : 
             case 9 : return $action->getKpForm8and9Message($record, $this); break;
             case 10 : return $action->getKpForm10Message(); break;
-            case 11 : break;
+            case 11 : return $action->getKpForm11Message(); break;
+            case 12 : return $action->getKpForm12Message(); break;
+            case 13 : return $action->getKpForm13Message(); break;
+            case 14 : return $action->getKpForm14Message(); break;
+            case 15 : return $action->getKpForm15Message(); break;
             case 16 : return $action->getKpForm16Message($record); break;
+            case 17 : return $action->getKpForm17Message(); break;
             case 18 : 
             case 19 : return $action->getKpForm18and19Message($record, $this); break;
+            case 20 : return $action->getKpForm20Message($record, $this); break;
+            case 21 :
+            case 22 : return $action->getKpForm21and22Message($latestKpForm->kp_form_id, $this); break;
+            case 23 : return $action->getKpForm23Message(); break;
+            case 24 : return $action->getKpForm24Message(); break;
+            case 25 : return $action->getKpForm25Message(); break;
+            case 27 : return $action->getKpForm27Message(); break;
             default : return [];
         }
         
