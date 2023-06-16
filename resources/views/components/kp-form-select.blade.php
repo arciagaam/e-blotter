@@ -20,7 +20,8 @@
     <label class="flex flex-col gap-2 cursor-pointer p-4 w-full" for="{{ $id }}">
         <span class="font-bold flex flex-row justify-between">{{ $label }}
             <span @class([
-                'w-4 h-4 border ring-1 ring-slate-400 rounded-full group-aria-selected:ring-project-yellow-default group-aria-selected:bg-project-yellow-default',
+                'w-4 h-4 border ring-1 rounded-full group-aria-selected:ring-project-yellow-default group-aria-selected:bg-project-yellow-default',
+                'ring-slate-400' => !isset($state),
                 'ring-emerald-500' => isset($state) && $state == 1,
                 'ring-blue-500' => isset($state) && $state == 2,
                 ])>

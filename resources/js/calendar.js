@@ -2,35 +2,60 @@ import { Calendar } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid'
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Date format: yyyy-mm-dd
-    const eventSources = [
-        {
-            id: 'a',
-            title: 'Test A',
-            start: '2023-06-15'
-          },
-          {
-            id: 'b',
-            title: 'Test B',
-            start: '2023-06-15'
-          },
-          {
-            id: 'c',
-            title: 'Test C',
-            description: 'Description',
-            start: '2023-06-16'
-          },
-    ];
-
     const calendarEl = document.querySelector('#calendar');
+    const path = calendarEl.dataset.route;
     const calendar = new Calendar(calendarEl, {
         plugins: [dayGridPlugin],
         initialView: 'dayGridMonth',
-        events: eventSources
+        // eventDidMount: (info) => {
+        //   console.log(info.event.extendedProps.description);
+        // },
+        datesSet: async () => {
+          const currDate = calendar.getDate();
+          
+          const firstDay = new Date(currDate.getFullYear(), currDate.getMonth(), 1);
+          const lastDay = new Date(currDate.getFullYear(), currDate.getMonth() + 1, 0);
+          
+          await fetchHearingDates(firstDay, lastDay, path);
+        }
     });
 
+    // Renders the calendar
     calendar.render();
+
+    async function fetchHearingDates(start, end, path) {
+      try {
+        const data = await fetch(path, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+          },
+          credentials: 'same-origin',
+          body: JSON.stringify({
+            'start': start,
+            'end': end
+          })
+        });
+      
+        if (!data.ok) {
+          const errorOptions = { status: data.status, statusText: data.statusText };
+          throw errorOptions;
+        }
+    
+        const response = await data.json();
+
+        calendar.removeAllEvents();
+        response['message'].forEach((event) => {
+          calendar.addEvent(event);
+        });
+        
+      } catch (error) {
+        console.error(error);
+      }
+    }
 });
+
 
 // import { Calendar } from '@fullcalendar/core';
 // import dayGridPlugin from '@fullcalendar/daygrid';

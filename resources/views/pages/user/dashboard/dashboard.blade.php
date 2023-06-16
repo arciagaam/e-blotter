@@ -91,7 +91,7 @@
 
         <x-page-header>Schedules for Conciliation</x-page-header>
 
-        <div id="calendar"></div>
+        <div id="calendar" data-route="{{ route('dashboard.get-hearing-dates') }}"></div>
     </div>
 </x-layout>
 
