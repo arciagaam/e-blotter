@@ -55,9 +55,26 @@ class RecordsKpFormController extends Controller
         return redirect()->route('records.kp-forms.get.step-two');
     }
 
-    public function stepTwo()
+    public function stepTwo(RecordsKpFormService $service, RecordKpFormActions $kpFormAction, GetKpFormMessageActions $kpFormMessageAction)
     {
-        return view('pages.kp_forms.create.step-two', ['issuedForm' => session()->get('issued_kp_form')]);
+        $recommendedKpForms = collect($kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm(session()->get('issued_kp_form')->record_id), session()->get('issued_kp_form')->record_id, $kpFormMessageAction)['form_ids']);
+        $isIssued = IssuedKpForm::where('record_id', session()->get('issued_kp_form')->record_id)->where('kp_form_id', session()->get('issued_kp_form')->kp_form_id)->get()->count();
+        $message = array();
+
+        if ($recommendedKpForms->doesntContain(session()->get('issued_kp_form')->kp_form_id)) {
+            switch ($isIssued) {
+                case true:
+                    $message['title'] = 'The KP Form you are trying to issue has already been issued.';
+                    $message['description'] = 'If you are certain of your course of action, you can ignore this message.';
+                    break;
+                case false:
+                    $message['title'] = 'The KP Form you are trying to issue is not recommended.';
+                    $message['description'] = 'If you are certain of your course of action, you can ignore this message.';
+                    break;
+            }
+        }
+
+        return view('pages.kp_forms.create.step-two', ['issuedForm' => session()->get('issued_kp_form'), 'message' => $message]);
     }
 
     public function postStepTwo(KpStepTwoRequest $request)

@@ -86,7 +86,7 @@ class RecordKpFormActions
     {
         // dd($latestKpForm);
         if (!isset($latestKpForm->kp_form_id)) {
-            return ['message' => 'No KP Forms issued yet', 'recommendations' => 'Issue Form 7', 'form_ids' => []];
+            return ['message' => 'No KP Forms issued yet', 'recommendations' => 'Issue Form 7', 'form_ids' => [7]];
         }
 
         switch ($latestKpForm->kp_form_id) {

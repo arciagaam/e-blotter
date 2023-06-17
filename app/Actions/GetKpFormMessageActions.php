@@ -93,7 +93,8 @@ class GetKpFormMessageActions
 
         return [
             'message' => 'Wala pang nangyayari',
-            'recommendations' => 'Wait ka muna lods'
+            'recommendations' => 'Wait ka muna lods',
+            'form_ids' => []
         ];
     }
 
@@ -216,7 +217,8 @@ class GetKpFormMessageActions
 
         return [
             'message' => 'Wala pang nangyayari',
-            'recommendations' => 'Wait ka muna lods'
+            'recommendations' => 'Wait ka muna lods',
+            'form_ids' => []
         ];
     }
 
