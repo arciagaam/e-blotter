@@ -217,13 +217,14 @@
                     </div>
                 </div>
 
-                {{-- <div class="flex flex-row items-center gap-2">
-                    <button
+                <div class="flex flex-row items-center gap-2">
+                    {{-- <button
                         class="flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white">
                         <box-icon class="" name='microphone'></box-icon>
                     </button>
-                    <p>Click on the microphone icon and being speaking.</p>
-                </div> --}}
+                    <p>Click on the microphone icon and being speaking.</p> --}}
+                    <audio id="recording" src="{{ url('assets\\' . $record->narrative_file) }}" controls></audio>
+                </div>
             </div>
 
             <div class="flex flex-col gap-2">
@@ -253,5 +254,27 @@
 
         </div>
     </div>
+
+    <x-modal id="schedule">
+        <x-slot:heading>
+            Schedules
+        </x-slot:heading>
+    
+        <ul class="flex flex-col h-96 max-h-96 overflow-auto divide-y">
+            @empty($hearingDates)
+                <p>No hearing dates.</p>
+            @else
+                @foreach ($hearingDates as $key => $date)
+                    <li class="flex flex-col py-4 first:pt-0 last:pb-0">
+                        <span class="font-bold flex flex-row items-center gap-2">
+                            KP FORM #{{ $date->kp_form_id }}
+                            <span class="font-normal text-sm text-gray-400">Issued at {{ date('F j, Y', strtotime($date->created_at)) }}</span>
+                        </span>
+                        <p>{{ date('F j, Y', strtotime($date->value)) }}</p>
+                    </li>
+                @endforeach
+            @endempty
+        </ul>
+    </x-modal>
 
 </x-layout>

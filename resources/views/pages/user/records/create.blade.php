@@ -2,7 +2,7 @@
     <x-page-header>New Record</x-page-header>
 
     <div class="flex flex-col gap-3">
-        <form action="{{ route('records.store') }}" method="POST" class="flex flex-col gap-5">
+        <form action="{{ route('records.store') }}" method="POST" class="flex flex-col gap-5" enctype="multipart/form-data">
             @csrf
 
             <div class="flex flex-row justify-between">
@@ -209,9 +209,12 @@
                         <box-icon id="record-state" class="bx bx-sm bx-microphone" name='microphone'></box-icon>
                     </button>
                     <p>Click on the microphone icon and being speaking.</p>
-                    {{-- <button type="button" id="stop_record">Stop</button> --}}
 
+                    <input type="file" name="narrative_file" id="narrative_file" hidden accept="audio/*">
                     <audio id="recording" src="" controls></audio>
+                    @error('narrative_file')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
 

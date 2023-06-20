@@ -27,9 +27,12 @@ class Record extends Model
         'suspect_id',
         'case',
         'narrative',
-        'narrative_file',
         'reliefs',
         'kp_deadline',
+    ];
+
+    protected $guarded = [
+        'narrative_file',
     ];
 
     protected $casts = [

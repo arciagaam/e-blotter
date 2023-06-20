@@ -4,9 +4,9 @@ window.addEventListener('load', () => {
 
     if (recordBtn && recordIcon) {
         try {
-            navigator.mediaDevices.getUserMedia({ audio: true })
+            navigator.mediaDevices.getUserMedia({ audio: true, video: false })
                 .then((stream) => {
-                    const mediaRecorder = new MediaRecorder(stream);
+                    const mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
                     const audioChunks = [];
 
                     recordBtn.addEventListener('click', () => {
@@ -39,6 +39,14 @@ window.addEventListener('load', () => {
                         const audioBlob = new Blob(audioChunks, { type: 'audio/mp3' });
                         const audioUrl = URL.createObjectURL(audioBlob);
                         const player = document.querySelector("#recording");
+
+                        const fileInput = document.querySelector("#narrative_file");
+                        const file = new File([audioBlob], 'audio.mp3', { type: 'audio/mpeg' });
+                        const container = new DataTransfer();
+                        container.items.add(file);
+
+                        fileInput.files = container.files;
+
                         player.src = audioUrl;
                         player.load();
 
@@ -56,12 +64,13 @@ window.addEventListener('load', () => {
                             headers: headers,
                             body: form
                         })
-
+                        
                         if (!transcript.ok) {
                             return
                         }
 
                         let transcriptResult = await transcript.json();
+                        console.log(transcriptResult, transcriptResult.text);
 
                         if (transcriptResult.text) {
                             document.querySelector("#narrative").innerText = transcriptResult.text;
