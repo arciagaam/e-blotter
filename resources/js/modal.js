@@ -315,7 +315,7 @@ async function formEventListener(event) {
 
     try {
         const data = await fetch(actionUrl, {
-            method: body.__method ?? event.target.method,
+            method: body._method ?? event.target.method,
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content

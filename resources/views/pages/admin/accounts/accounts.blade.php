@@ -75,7 +75,7 @@
                                         class="verify-btn {{ $account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled' }}"
                                         {{ $account->verified_at ? 'disabled' : '' }}>Verify</button>
                                     <button data-target="#edit" data-form-id="{{ $account->id }}" class="btn-outline">Edit</button>
-                                    <button data-target="#delete" class="btn-outline danger">Delete</button>
+                                    <button data-target="#delete" data-form-id="{{ $account->id }}" class="btn-outline danger">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -160,7 +160,8 @@
         Delete Account
     </x-slot:heading>
 
-    <form action="#" method="POST" id="delete-user-form" data-action="{{ route('admin.accounts.verify') }}">
+    <form action="#" method="DELETE" id="delete-user-form" data-action="{{ route('admin.accounts.destroy', ['account' => ':id']) }}">
+        @method("DELETE")
         <p>Are you sure you want to delete this account?</p>
     </form>
 

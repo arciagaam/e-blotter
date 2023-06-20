@@ -92,7 +92,8 @@ class AccountController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        User::find($id)->delete($id);
+        return response()->json(['message' => 'Success'], 200);
     }
 
     public function verify(Request $request)
