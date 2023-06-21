@@ -120,4 +120,12 @@ class RecordController extends Controller
     {
         //
     }
+
+    /**
+     * Print the specified resource
+     */
+    public function print(string $record)
+    {
+        return view('pages.user.records.print', ['record' => Record::where('id', $record)->with('victim', 'suspect')->first()]);
+    }
 }
