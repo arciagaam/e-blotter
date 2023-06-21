@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\IssuedKpForm;
+use App\Models\Record;
+use App\Models\User;
+use App\Observers\IssuedKpFormObserver;
+use App\Observers\RecordObserver;
+use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +24,12 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+    ];
+
+    protected $observers = [
+        User::class => [UserObserver::class],
+        Record::class => [RecordObserver::class],
+        IssuedKpForm::class => [IssuedKpFormObserver::class],
     ];
 
     /**

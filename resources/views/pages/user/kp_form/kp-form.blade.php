@@ -36,22 +36,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @php
-                        $kpForms = ['NOTICE TO CONSTITUTE THE LUPON', 'APPOINTMENT LETTER', 'NOTICE OF APPOINTMENT', 'LIST OF APPOINTED LUPON MEMBERS', 'LUPON MEMBER OATH STATEMENT', 'WITHDRAWAL OF APPOINTMENT', 'COMPLAINANT’S FORM'];
-                    @endphp
-
                     @empty($kpForms)
                         <tr>
                             <td colspan="100%" class="text-center">There are no data.</td>
                         </tr>
                     @else
-                        @foreach ($kpForms as $key => $value)
+                        @foreach ($kpForms as $kpForm)
                             <tr>
-                                <td><p>KP FORM NO # {{ $key + 1 }}</p></td>
-                                <td><p>{{ $value }}</p></td>
+                                <td><p>KP FORM NO # {{$kpForm->number}}</p></td>
+                                <td><p>{{ $kpForm->name }}</p></td>
                                 <td>
                                     <div class="flex w-full h-full justify-center items-center gap-2">
-                                        <button class="btn-outline" type="button">Preview</button>
+                                        <a href="{{route('kp-forms.show', ['id' => $kpForm->id])}}" class="btn-outline" type="button">Preview</a>
                                     </div>
                                 </td>
                             </tr>

@@ -31,9 +31,9 @@
                 <p class="text-sm font-normal">KP Forms</p>
             </a>
 
-            <a href="{{ url('/accounts') }}"
-                class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('accounts*') ? 'text-project-yellow-default' : 'hover:text-project-yellow-default' }}">
-                <box-icon type="{{request()->is('accounts*') ? 'solid' : 'regular'}}" color="{{request()->is('accounts*') ? '#FBAD26' : 'white'}}" name='group' size="1.5em"></box-icon>
+            <a href="{{ url('/audit-trail') }}"
+                class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('audit-trail*') ? 'text-project-yellow-default' : 'hover:text-project-yellow-default' }}">
+                <box-icon type="{{request()->is('audit-trail*') ? 'solid' : 'regular'}}" color="{{request()->is('audit-trail*') ? '#FBAD26' : 'white'}}" name='group' size="1.5em"></box-icon>
                 <p class="text-sm font-normal">Account</p>
             </a>
 

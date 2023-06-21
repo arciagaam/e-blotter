@@ -1,5 +1,5 @@
 <x-layout>
-    <x-page-header>Login Trail</x-page-header>
+    <x-page-header>Audit Trail</x-page-header>
 
 
     <div class="flex flex-col gap-3">
@@ -21,24 +21,22 @@
         <table id="main-table" class="main-table w-full">
             <thead>
                 <tr>
-                    <th>Username</th>
-                    <th>Name</th>
                     <th>Role</th>
-                    <th>Login Time</th>
+                    <th>Action</th>
+                    <th>Time</th>
                 </tr>
             </thead>
             <tbody>
-                @empty($loginTrails)
+                @empty($auditTrails)
                     <tr>
                         <td colspan="100%" class="text-center">There are no data.</td>
                     </tr>
                 @else
-                    @foreach ($loginTrails as $loginTrail)
+                    @foreach ($auditTrails as $auditTrail)
                         <tr>
-                            <td>{{$loginTrail->users->username}}</td>
-                            <td>{{$loginTrail->users->first_name}} {{$loginTrail->users->last_name}}</td>
-                            <td>{{$loginTrail->loginroles->name}}</td>
-                            <td>{{$loginTrail->created_at}}</td>
+                            <td>{{$auditTrail->loginroles->name}}</td>
+                            <td>{{$auditTrail->action}}</td>
+                            <td>{{$auditTrail->created_at}}</td>
                         </tr>
                     @endforeach
                 @endempty

@@ -6,11 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class LoginTrail extends Model
+class AuditTrail extends Model
 {
     use HasFactory;
 
-    protected $table = 'login_trail';
+    protected $table = 'audit_trail';
+
+    protected $fillable = [
+        'barangay_id',
+        'login_role_id',
+        'user_id',
+        'action'
+    ];
 
     public function barangays(): BelongsTo
     {

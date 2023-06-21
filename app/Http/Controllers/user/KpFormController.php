@@ -13,7 +13,8 @@ class KpFormController extends Controller
      */
     public function index()
     {
-        return view('pages.user.kp_form.kp-form');
+
+        return view('pages.user.kp_form.kp-form', ['kpForms' => KpForm::oldest('id')->get()]);
     }
 
     /**
@@ -35,9 +36,9 @@ class KpFormController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(KpForm $kpForm)
+    public function show(string $id)
     {
-        //
+        return view('pages.user.kp_form.kp-form', ['kpForm' => KpForm::find($id)->first()]);
     }
 
     /**

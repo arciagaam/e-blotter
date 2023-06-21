@@ -41,7 +41,8 @@ class Authentication extends Controller
                 return redirect()->intended('/admin/dashboard');
             } 
 
-            addToLoginTrail($request->login_role_id);
+            session()->put('login_role', $request->login_role_id);
+            // addToLoginTrail($request->login_role_id);
             return redirect()->intended('/dashboard');
         }
 

@@ -7,7 +7,7 @@ use App\Http\Controllers\admin\RecordController;
 use App\Http\Controllers\Authentication;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\RecordsKpFormController;
-use App\Http\Controllers\user\LoginTrailController;
+use App\Http\Controllers\user\AuditTrailController;
 use App\Http\Controllers\user\DashboardController as UserDashboardController;
 use App\Http\Controllers\user\KpFormController as UserKpFormController;
 use App\Http\Controllers\user\RecordController as UserRecordController;
@@ -128,7 +128,11 @@ Route::prefix('/')->group(function () {
         Route::resource('records', UserRecordController::class)
             ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
 
-        Route::get('/kp-forms', [UserKpFormController::class, 'index']);
-        Route::get('/accounts', [LoginTrailController::class, 'index']);
+        Route::prefix('kp-forms')->name('kp-forms.')->group(function() {
+            Route::get('/', [UserKpFormController::class, 'index']);
+            Route::get('/{id}', [UserKpFormController::class, 'show'])->name('show');
+        });
+
+        Route::get('/audit-trail', [AuditTrailController::class, 'index']);
     });
 });

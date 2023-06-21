@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
-use App\Models\LoginTrail;
+use App\Models\AuditTrail;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class LoginTrailController extends Controller
+class AuditTrailController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $loginTrails = LoginTrail::where('barangay_id', auth()->user()->barangays[0]->id)->latest()->get();
-        return view('pages.user.login_trail.accounts', ['loginTrails' => $loginTrails]);
+        $auditTrails = AuditTrail::where('barangay_id', auth()->user()->barangays[0]->id)->latest()->get();
+        return view('pages.user.audit_trail.index', ['auditTrails' => $auditTrails]);
     }
 
     /**
