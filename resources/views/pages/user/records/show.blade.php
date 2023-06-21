@@ -223,7 +223,7 @@
                         <box-icon class="" name='microphone'></box-icon>
                     </button>
                     <p>Click on the microphone icon and being speaking.</p> --}}
-                    <audio id="recording" src="{{ url('assets\\' . $record->narrative_file) }}" controls></audio>
+                    <audio id="recording" src="{{ isset($record->narrative_file) ? url('assets\\' . $record->narrative_file) : '' }}" controls></audio>
                 </div>
             </div>
 

@@ -51,7 +51,7 @@ class RecordRequest extends FormRequest
             function (Validator $validator) {
                 $mimeTypes = collect(['audio/mpeg', 'audio/x-wav']);
 
-                if ($mimeTypes->doesntContain($validator->validated('narrative_file')['narrative_file']->getClientMimeType())) {
+                if (isset($validator->validated('narrative_file')['narrative_file']) && $mimeTypes->doesntContain($validator->validated('narrative_file')['narrative_file']->getClientMimeType())) {
                     $validator->errors()->add(
                         'narrative_file',
                         'The narrative file field must be a file of type: audio/mpeg, audio/x-wav'

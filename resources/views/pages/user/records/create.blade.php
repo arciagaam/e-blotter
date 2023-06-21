@@ -235,10 +235,8 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <button class="btn-filled" data-target="#schedule" type="button">Schedule of
-                        Reconciliation</button>
                     <button class="btn-outline danger" type="button">Clear</button>
-                    <button class="btn-outline success" type="submit">Save</button>
+                    <button class="btn-filled" type="submit">Save</button>
                 </div>
             </div>
 
@@ -247,29 +245,4 @@
 
 </x-layout>
 
-{{-- <x-modal id="schedule">
-    <x-slot:heading>
-        Schedule of Reconciliation
-    </x-slot:heading>
-    
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, sequi quod? Dolorem unde ad quibusdam fugiat praesentium? Suscipit repellendus fuga odio praesentium quisquam consectetur pariatur qui quos autem commodi. Ipsam quis laborum harum, est consequatur, aspernatur, eum recusandae vero non neque quisquam rem nisi voluptates doloremque molestiae. Molestiae, alias debitis.</p>
-
-    <x-slot:footer>
-        <button class="btn-filled">Save</button>
-    </x-slot:footer>
-</x-modal>
-
-<x-modal id="print">
-    <x-slot:heading>
-        Print Record
-    </x-slot:heading>
-    
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, sequi quod? Dolorem unde ad quibusdam fugiat praesentium? Suscipit repellendus fuga odio praesentium quisquam consectetur pariatur qui quos autem commodi. Ipsam quis laborum harum, est consequatur, aspernatur, eum recusandae vero non neque quisquam rem nisi voluptates doloremque molestiae. Molestiae, alias debitis.</p>
-
-    <x-slot:footer>
-        <button class="btn-filled">Save</button>
-    </x-slot:footer>
-</x-modal> --}}
-
-@vite('resources/js/table.js')
 @vite('resources/js/audio_record.js')

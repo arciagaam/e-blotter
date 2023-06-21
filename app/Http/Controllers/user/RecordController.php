@@ -31,7 +31,7 @@ class RecordController extends Controller
     {
         $civilStatus = new CivilStatus();
         $record = new Record();
-        
+
         $latest = $record->latestRecord(auth()->user()->barangays[0]->id);
 
         return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus(), 'blotterNumber' => $latest ? $latest->barangay_blotter_number + 1 : 1]);
@@ -96,13 +96,19 @@ class RecordController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(RecordRequest $request, Record $record)
+    public function update(RecordRequest $request, Record $record, RecordsService $service)
     {
         $record = Record::find($record->id);
 
-        $record->update($request->safe()->except('victim', 'suspect'));
+        $record->fill($request->safe()->except('victim', 'suspect'));
         $record->victim()->update($request->validated('victim'));
         $record->suspect()->update($request->validated('suspect'));
+
+        if ($request->validated('narrative_file') !== null) {
+            $record->narrative_file = $service->handleUploadRecording($request->validated('narrative_file'));
+        }
+
+        $record->save();
 
         return redirect()->route('records.show', ['record' => $record->id]);
     }

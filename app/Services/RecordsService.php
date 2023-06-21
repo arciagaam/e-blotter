@@ -10,9 +10,7 @@ class RecordsService {
     public function handleUploadRecording($recording): string | null
     {
         if (isset($recording)) {
-            $file = request()->narrative_file->store('recording', 'public');
-
-            return $file;
+            return request()->narrative_file->store('recording', 'public');
         }
     }
 }
