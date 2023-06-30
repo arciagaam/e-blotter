@@ -12,5 +12,7 @@ class RecordsService {
         if (isset($recording)) {
             return request()->narrative_file->store('recording', 'public');
         }
+
+        return null;
     }
 }
