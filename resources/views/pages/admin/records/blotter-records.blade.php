@@ -56,7 +56,7 @@
                     @foreach ($records as $record)
                         <tr>
                             <td>
-                                <p>{{ $record->id }}</p>
+                                <p>{{ $record->barangay_blotter_number }}</p>
                             </td>
                             <td>
                                 <p>{{ $record->barangays->name }}</p>

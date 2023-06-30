@@ -15,7 +15,7 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.dashboard.dashboard', ['barangays' => Barangay::withCount('records')->with('users:verified_at')->get(), 'totalCases' => Record::count()]);
+        return view('pages.admin.dashboard.dashboard', ['barangays' => Barangay::withCount('records')->with('users:verified_at')->userNotTrashed()->get(), 'totalCases' => Record::count()]);
     }
 
     /**
