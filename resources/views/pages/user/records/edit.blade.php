@@ -261,7 +261,7 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <button class="btn-outline danger" type="button">Clear</button>
+                    <a href="{{ route('records.show', ['record' => $record->id]) }}" class="btn-outline">Cancel</a>
                     <button class="btn-filled" type="submit">Save</button>
                 </div>
             </div>

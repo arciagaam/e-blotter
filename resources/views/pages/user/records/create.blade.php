@@ -235,7 +235,8 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <button class="btn-outline danger" type="button">Clear</button>
+                    <button class="btn-outline danger" type="button" id="clear-input-btn">Clear</button>
+                    <a href="{{ route('records.index') }}" class="btn-outline">Cancel</a>
                     <button class="btn-filled" type="submit">Save</button>
                 </div>
             </div>
@@ -246,3 +247,4 @@
 </x-layout>
 
 @vite('resources/js/audio_record.js')
+@vite('resources/js/clear.js')

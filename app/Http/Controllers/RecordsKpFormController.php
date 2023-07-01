@@ -37,7 +37,7 @@ class RecordsKpFormController extends Controller
             return [$key => $item->kpForm->number];
         });
 
-        return view('pages.kp_forms.create.step-one', ['kpForms' => KpForm::all(), 'recordId' => $id, 'issuedKpForms' => $issuedKpForms, 'message' => $message]);
+        return view('pages.kp_forms.create.step-one', ['kpForms' => KpForm::getSelectable()->get(), 'recordId' => $id, 'issuedKpForms' => $issuedKpForms, 'message' => $message]);
     }
 
     public function postStepOne(KpStepOneRequest $request)
