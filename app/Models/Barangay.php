@@ -22,6 +22,10 @@ class Barangay extends Model
         ->where('users.deleted_at', null);
     }
 
+    public function scopeGetExisting(Builder $query) {
+        $query->with('users');
+    }
+
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'user_barangays');

@@ -39,6 +39,15 @@ class Record extends Model
         'kp_deadline' => 'date'
     ];
 
+    public function scopeGetPurok(Builder $query)
+    {
+        $query->when(request()->search, function($q) {
+            $q->where('purok', request()->search);
+        })
+        ->where('barangay_id', auth()->user()->barangays[0]->id)
+        ->latest();
+    }
+
     public function victim(): HasOne
     {
         return $this->hasOne(Victim::class);

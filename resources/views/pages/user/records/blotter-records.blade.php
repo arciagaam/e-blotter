@@ -7,8 +7,6 @@
             {{-- TABLE ACTIONS --}}
             <div class="flex flex-row w-full justify-between items-center">
                 <form class="flex flex-col w-full gap-2">
-                    @csrf
-
                     <div class="flex flex-row">
                         {{-- <div class="form-input-container flex-row gap-5">
                             <div class="flex flex-row justify-center items-center">
