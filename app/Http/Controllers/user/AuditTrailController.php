@@ -14,7 +14,7 @@ class AuditTrailController extends Controller
      */
     public function index()
     {
-        $auditTrails = AuditTrail::where('barangay_id', auth()->user()->barangays[0]->id)->latest()->get();
+        $auditTrails = AuditTrail::where('barangay_id', auth()->user()->barangays[0]->id)->where('user_id', auth()->user()->id)->latest()->get();
         return view('pages.user.audit_trail.index', ['auditTrails' => $auditTrails]);
     }
 
