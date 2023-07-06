@@ -2,7 +2,7 @@
     <x-page-header>New Record</x-page-header>
 
     <div class="flex flex-col gap-3">
-        <form action="{{ route('records.update', ['record' => $record->id]) }}" method="POST" class="flex flex-col gap-5">
+        <form action="{{ route('records.update', ['record' => $record->id]) }}" method="POST" class="flex flex-col gap-5" enctype="multipart/form-data">
             @method('PUT')
             @csrf
 
@@ -223,12 +223,24 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row items-center gap-2">
-                    <button
-                        class="flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white">
-                        <box-icon class="" name='microphone'></box-icon>
-                    </button>
-                    <p>Click on the microphone icon and being speaking.</p>
+                <div class="flex flex-col gap-2">
+                    <div class="flex flex-row w-full items-center gap-2">
+                        <button id="record" type="button"
+                            class="disabled:bg-slate-400 flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white relative">
+                            <box-icon id="record-state" class="bx bx-sm bx-microphone" name='microphone'></box-icon>
+                        </button>
+                        <p>Click on the microphone icon and being speaking.</p>
+                        <audio id="recording" src="{{ isset($record->narrative_file) ? url('assets\\' . $record->narrative_file) : '' }}" controls></audio>
+                    </div>
+
+                    <div class="flex flex-row gap-2">
+                        <input class="w-fit file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:btn-outline file:cursor-pointer"
+                        type="file" name="narrative_file" id="narrative_file" accept="audio/*">
+                        @error('narrative_file')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <span class="text-red-500 italic">Do not upload anything if you do not want to replace the old file.</span>
                 </div>
             </div>
 
@@ -249,9 +261,8 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <button class="btn-filled" type="button">Schedule of Reconciliation</button>
-                    <button class="btn-outline danger" type="button">Clear</button>
-                    <button class="btn-outline success" type="submit">Save</button>
+                    <a href="{{ route('records.show', ['record' => $record->id]) }}" class="btn-outline">Cancel</a>
+                    <button class="btn-filled" type="submit">Save</button>
                 </div>
             </div>
 
@@ -260,4 +271,4 @@
 
 </x-layout>
 
-@vite('resources/js/table.js')
+@vite('resources/js/audio_record.js')

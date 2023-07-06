@@ -2,7 +2,7 @@
     <x-page-header>New Record</x-page-header>
 
     <div class="flex flex-col gap-3">
-        <form action="{{ route('records.store') }}" method="POST" class="flex flex-col gap-5">
+        <form action="{{ route('records.store') }}" method="POST" class="flex flex-col gap-5" enctype="multipart/form-data">
             @csrf
 
             <div class="flex flex-row justify-between">
@@ -209,9 +209,12 @@
                         <box-icon id="record-state" class="bx bx-sm bx-microphone" name='microphone'></box-icon>
                     </button>
                     <p>Click on the microphone icon and being speaking.</p>
-                    {{-- <button type="button" id="stop_record">Stop</button> --}}
 
+                    <input type="file" name="narrative_file" id="narrative_file" hidden accept="audio/*">
                     <audio id="recording" src="" controls></audio>
+                    @error('narrative_file')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
 
@@ -232,10 +235,9 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <button class="btn-filled" data-target="#schedule" type="button">Schedule of
-                        Reconciliation</button>
-                    <button class="btn-outline danger" type="button">Clear</button>
-                    <button class="btn-outline success" type="submit">Save</button>
+                    <button class="btn-outline danger" type="button" id="clear-input-btn">Clear</button>
+                    <a href="{{ route('records.index') }}" class="btn-outline">Cancel</a>
+                    <button class="btn-filled" type="submit">Save</button>
                 </div>
             </div>
 
@@ -244,29 +246,5 @@
 
 </x-layout>
 
-{{-- <x-modal id="schedule">
-    <x-slot:heading>
-        Schedule of Reconciliation
-    </x-slot:heading>
-    
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, sequi quod? Dolorem unde ad quibusdam fugiat praesentium? Suscipit repellendus fuga odio praesentium quisquam consectetur pariatur qui quos autem commodi. Ipsam quis laborum harum, est consequatur, aspernatur, eum recusandae vero non neque quisquam rem nisi voluptates doloremque molestiae. Molestiae, alias debitis.</p>
-
-    <x-slot:footer>
-        <button class="btn-filled">Save</button>
-    </x-slot:footer>
-</x-modal>
-
-<x-modal id="print">
-    <x-slot:heading>
-        Print Record
-    </x-slot:heading>
-    
-    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Officia, sequi quod? Dolorem unde ad quibusdam fugiat praesentium? Suscipit repellendus fuga odio praesentium quisquam consectetur pariatur qui quos autem commodi. Ipsam quis laborum harum, est consequatur, aspernatur, eum recusandae vero non neque quisquam rem nisi voluptates doloremque molestiae. Molestiae, alias debitis.</p>
-
-    <x-slot:footer>
-        <button class="btn-filled">Save</button>
-    </x-slot:footer>
-</x-modal> --}}
-
-@vite('resources/js/table.js')
 @vite('resources/js/audio_record.js')
+@vite('resources/js/clear.js')

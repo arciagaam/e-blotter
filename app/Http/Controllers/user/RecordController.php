@@ -9,7 +9,10 @@ use App\Models\CivilStatus;
 use App\Models\Record;
 use App\Models\Suspect;
 use App\Models\Victim;
+use App\Services\RecordsService;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
 {
@@ -28,19 +31,21 @@ class RecordController extends Controller
     {
         $civilStatus = new CivilStatus();
         $record = new Record();
-        
+
         $latest = $record->latestRecord(auth()->user()->barangays[0]->id);
+
         return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus(), 'blotterNumber' => $latest ? $latest->barangay_blotter_number + 1 : 1]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(RecordRequest $request)
+    public function store(RecordRequest $request, RecordsService $service)
     {
         $report = new Record();
-        $latest = $report->latestRecord(auth()->user()->barangays[0]->id);
 
+        $latest = $report->latestRecord(auth()->user()->barangays[0]->id);
+        $report->narrative_file = $service->handleUploadRecording($request->validated('narrative_file'));
         $report->fill($request->safe()->except('victim', 'suspect'));
         $report->barangays()->associate(auth()->user()->barangays[0]->id);
         $report->blotterStatus()->associate(BlotterStatus::find(2));
@@ -49,7 +54,6 @@ class RecordController extends Controller
 
         $report->victim()->save(new Victim($request->validated('victim')));
         $report->suspect()->save(new Suspect($request->validated('suspect')));
-
 
         return redirect()->route('records.index');
     }
@@ -64,7 +68,18 @@ class RecordController extends Controller
 
         $civilStatus = new CivilStatus();
 
-        return view('pages.user.records.show', ['record' => Record::where('id', $record->id)->with('victim', 'suspect', 'blotterStatus')->first(), 'civilStatus' => $civilStatus->getAllCivilStatus()]);
+        $hearingDates = Record::where('records.barangay_id', auth()->user()->barangays[0]->id)
+            ->where('records.id', $record->id)
+            ->join('issued_kp_forms', 'records.id', '=', 'issued_kp_forms.record_id')
+            ->join('issued_kp_form_fields', function (JoinClause $join) {
+                $join->on('issued_kp_forms.id', '=', 'issued_kp_form_fields.issued_kp_form_id')
+                    ->where('issued_kp_form_fields.tag_id', 'hearing');
+            })
+            ->select('issued_kp_form_fields.value', 'issued_kp_forms.kp_form_id', 'issued_kp_forms.created_at')
+            ->latest('issued_kp_forms.created_at')
+            ->get();
+
+        return view('pages.user.records.show', ['record' => Record::where('id', $record->id)->with('victim', 'suspect', 'blotterStatus')->first(), 'civilStatus' => $civilStatus->getAllCivilStatus(), 'hearingDates' => $hearingDates]);
     }
 
     /**
@@ -81,13 +96,19 @@ class RecordController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(RecordRequest $request, Record $record)
+    public function update(RecordRequest $request, Record $record, RecordsService $service)
     {
         $record = Record::find($record->id);
 
-        $record->update($request->safe()->except('victim', 'suspect'));
+        $record->fill($request->safe()->except('victim', 'suspect'));
         $record->victim()->update($request->validated('victim'));
         $record->suspect()->update($request->validated('suspect'));
+
+        if ($request->validated('narrative_file') !== null) {
+            $record->narrative_file = $service->handleUploadRecording($request->validated('narrative_file'));
+        }
+
+        $record->save();
 
         return redirect()->route('records.show', ['record' => $record->id]);
     }
@@ -98,5 +119,13 @@ class RecordController extends Controller
     public function destroy(Record $record)
     {
         //
+    }
+
+    /**
+     * Print the specified resource
+     */
+    public function print(string $record)
+    {
+        return view('pages.user.records.print', ['record' => Record::where('id', $record)->with('victim', 'suspect')->first()]);
     }
 }

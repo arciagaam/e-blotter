@@ -92,8 +92,8 @@ class GetKpFormMessageActions
         }
 
         return [
-            'message' => 'Wala pang nangyayari',
-            'recommendations' => 'Wait ka muna lods',
+            'message' => null,
+            'recommendations' => null,
             'form_ids' => []
         ];
     }
@@ -216,8 +216,8 @@ class GetKpFormMessageActions
         }
 
         return [
-            'message' => 'Wala pang nangyayari',
-            'recommendations' => 'Wait ka muna lods',
+            'message' => null,
+            'recommendations' => null,
             'form_ids' => []
         ];
     }

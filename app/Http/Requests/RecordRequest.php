@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
+use Illuminate\Validation\Rules\File;
 
 class RecordRequest extends FormRequest
 {
@@ -35,7 +37,27 @@ class RecordRequest extends FormRequest
             "purok" => 'required',
             "case" => 'required',
             "narrative" => 'required',
+            "narrative_file" => 'nullable',
             "reliefs" => 'required',
+        ];
+    }
+
+    /**
+     * Get the "after" validation callables for the request.
+     */
+    public function after(): array
+    {
+        return [
+            function (Validator $validator) {
+                $mimeTypes = collect(['audio/mpeg', 'audio/x-wav']);
+
+                if (isset($validator->validated('narrative_file')['narrative_file']) && $mimeTypes->doesntContain($validator->validated('narrative_file')['narrative_file']->getClientMimeType())) {
+                    $validator->errors()->add(
+                        'narrative_file',
+                        'The narrative file field must be a file of type: audio/mpeg, audio/x-wav'
+                    );
+                }
+            }
         ];
     }
 }

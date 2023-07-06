@@ -95,7 +95,7 @@
                                     <div class="flex w-full h-full justify-center items-center gap-2">
                                         <a href="{{ route('records.show', ['record' => $record->id]) }}" class="btn-outline" >Preview</a>
                                         <a href="{{ route('records.edit', ['record' => $record->id]) }}" class="btn-outline" >Edit</a>
-                                        <button class="btn-outline" type="button">Print</button>
+                                        <a class="btn-outline" target="_blank" href="{{ route('records.print', ['record' => $record->id]) }}">Print</a>
                                     </div>
                                 </td>
                             </tr>

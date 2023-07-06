@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/logout', [Authentication::class, 'logout'])->name('logout');
 
 Route::get('/kpformtest', function() {
-    return view('kp_forms.kp-form-9');
+    return view('kp_forms.kp-form-27');
 });
 
 Route::prefix('/admin')->group(function () {
@@ -111,6 +111,8 @@ Route::prefix('/')->group(function () {
         Route::post('/dashboard', [UserDashboardController::class, 'getHearingDates'])->name('dashboard.get-hearing-dates');
         
         Route::prefix('records')->name('records.')->group(function() {
+            Route::get('print/{record}', [UserRecordController::class, 'print'])->name('print');
+
             Route::prefix('kp-forms')->name('kp-forms.')->group(function() {
                 Route::get('/step-one/{id}', [RecordsKpFormController::class, 'stepOne'])->name('get.step-one');
                 Route::post('/step-one', [RecordsKpFormController::class, 'postStepOne'])->name('post.step-one');
