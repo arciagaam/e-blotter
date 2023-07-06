@@ -27,7 +27,6 @@ class AuditTrail extends Model
     public function loginroles(): BelongsTo
     {
         return $this->belongsTo(LoginRole::class, 'login_role_id');
-
     }
 
     public function users(): BelongsTo

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AuditTrail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -38,11 +39,19 @@ class Authentication extends Controller
             }
             
             if (auth()->user()->roles[0]->id === 1) {
+                
                 return redirect()->intended('/admin/dashboard');
             } 
 
             session()->put('login_role', $request->login_role_id);
-            // addToLoginTrail($request->login_role_id);
+
+            AuditTrail::create([
+                'barangay_id' => auth()->user()->barangays[0]->id, 
+                'login_role_id' => session()->get('login_role'), 
+                'user_id' => auth()->user()->id,
+                'action' => "Logged in"
+            ]);
+
             return redirect()->intended('/dashboard');
         }
 

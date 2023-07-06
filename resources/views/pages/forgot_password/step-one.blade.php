@@ -20,7 +20,11 @@
                     <label for="email">Email</label>
                     <input class="form-input" type="email" name="email" id="email">
                     @error('email')
-                    <p class="text-xs text-red-500 italic">{{$message}}</p>
+                        <p class="text-xs text-red-500 italic">{{$message}}</p>
+                    @enderror
+
+                    @if(session('error'))
+                        <p class="text-xs text-red-500 italic">{{session('error')}}</p>
                     @enderror
                 </div>
             </div>

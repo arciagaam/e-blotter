@@ -12,8 +12,11 @@ use App\Http\Controllers\user\DashboardController as UserDashboardController;
 use App\Http\Controllers\user\KpFormController as UserKpFormController;
 use App\Http\Controllers\user\RecordController as UserRecordController;
 use App\Http\Controllers\user\UserController;
+use App\Mail\OTP;
+use App\Mail\TestEmail;
 use App\Models\LoginRole;
 use App\Models\Record;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,6 +29,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
 
 Route::get('/logout', [Authentication::class, 'logout'])->name('logout');
 

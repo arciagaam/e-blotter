@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CheckOTPRequest;
 use App\Http\Requests\ForgotPasswordOne;
 use App\Http\Requests\ForgotPasswordThree;
+use App\Mail\OTP as MailOTP;
 use App\Models\OTP;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Mail;
 
 class ForgotPasswordController extends Controller
 {
@@ -23,12 +25,17 @@ class ForgotPasswordController extends Controller
 
     public function postStepOne(ForgotPasswordOne $request) : RedirectResponse
     {   
-        $user = User::where('email', '=', $request['email'])->first();
-        session()->put('user', $user);
-
-        if($user){
-            OTP::updateOrCreate(['user_id' => $user->id], ['user_id' => $user->id, 'token' => '1234', 'expiration' => 3600]);
+        $user = User::where('email', $request->email)->first();
+        
+        if(!$user) {
+            return back()->with('error', 'Email not found');
         }
+        
+        session()->put('user', $user);
+        $otp = rand(100000, 999999);
+
+        OTP::updateOrCreate(['user_id' => $user->id], ['user_id' => $user->id, 'token' => $otp, 'expiration' => 3600]);
+        Mail::to('miguelarciagaa@gmail.com')->send(new MailOTP($otp));
 
         return redirect('/forgot-password/step-two');
     }
