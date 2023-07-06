@@ -21,7 +21,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        return view('pages.user.records.blotter-records', ['records' => Record::where('barangay_id', auth()->user()->barangays[0]->id)->with('victim', 'suspect', 'barangays', 'blotterStatus')->paginate(10)]);
+        return view('pages.user.records.blotter-records', ['records' => Record::getPurok()->with('victim', 'suspect', 'barangays', 'blotterStatus')->paginate(10)]);
     }
 
     /**
