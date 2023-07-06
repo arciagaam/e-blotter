@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Barangay;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Validator;
 
 class UserStorePostRequest extends FormRequest
 {
@@ -29,7 +31,26 @@ class UserStorePostRequest extends FormRequest
             'confirm_password' => 'required|same:password',
             'email' => 'required|email',
             'contact_number' => 'required',
-            'name' => 'required|unique:barangays,name',
+            'name' => 'required',
+        ];
+    }
+
+    /**
+     * Get the "after" validation callables for the request.
+     */
+    public function after(): array
+    {
+        return [
+            function (Validator $validator) {
+                $barangay = Barangay::where('name', $validator->safe()->only(['name']))->getExisting()->first();
+
+                if ($barangay && count($barangay->users)) {
+                    $validator->errors()->add(
+                        'invalid',
+                        'A user already exists for this barangay.'
+                    );
+                }
+            }
         ];
     }
 }
