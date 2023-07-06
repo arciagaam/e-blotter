@@ -52,6 +52,9 @@ Route::prefix('/admin')->group(function () {
                 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
             });
     
+            Route::prefix('records')->name('records.')->group(function() {
+                Route::get('print/{record}', [RecordController::class, 'print'])->name('print');
+            });
             Route::resource('records', RecordController::class)
             ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
 
