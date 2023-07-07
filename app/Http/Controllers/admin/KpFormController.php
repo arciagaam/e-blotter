@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\KpForm;
 use Illuminate\Http\Request;
 
 class KpFormController extends Controller
@@ -12,7 +13,7 @@ class KpFormController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.kp_forms.kp-forms');
+        return view('pages.admin.kp_forms.kp-forms', ['kpForms' => KpForm::getKpForm()->getSelectable()->orderBy('id', 'asc')->get()]);
     }
 
     /**
