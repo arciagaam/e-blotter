@@ -72,13 +72,12 @@
 </x-kp-form-layout>
 
 <script type="text/javascript">
-    textareas = document.querySelectorAll("textarea").forEach(textarea => {
-        textarea.addEventListener('input', autoResize, false);
+    window.addEventListener('load', () => {
+        document.querySelectorAll("textarea").forEach(textarea => {
+            if(textarea.scrollHeight > textarea.clientHeight) {
+                textarea.style.height = textarea.scrollHeight + 'px';
+            }
+        });
     });
-
-    function autoResize() {
-        this.style.height = 'auto';
-        this.style.height = this.scrollHeight + 'px';
-    }
 </script>
 @vite('/resources/js/print_window.js')
