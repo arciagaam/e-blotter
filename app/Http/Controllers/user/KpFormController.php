@@ -14,7 +14,7 @@ class KpFormController extends Controller
     public function index()
     {
 
-        return view('pages.user.kp_form.kp-form', ['kpForms' => KpForm::oldest('id')->get()]);
+        return view('pages.user.kp_form.kp-form', ['kpForms' => KpForm::getKpForm()->getSelectable()->orderBy('id', 'asc')->get()]);
     }
 
     /**
