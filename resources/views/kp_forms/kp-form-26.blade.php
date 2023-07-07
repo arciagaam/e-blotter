@@ -36,8 +36,8 @@
         <p class="font-bold tracking-[0.35rem]">(RE: MOTION FOR EXECUTION)</p>
     </div>
 
-    <div class="flex justify-between w-full gap-16 items-center">
-        <div class="flex flex-row gap-2 w-3/4">
+    <div class="flex w-full items-center">
+        <div class="flex flex-row gap-2 w-2/4">
             <p>TO:</p>
             <div class="flex flex-col w-3/4">
                 <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name ?? ''}}</p>
@@ -46,8 +46,7 @@
             </div>
         </div>
 
-        <div class="flex flex-row justify-end gap-2 w-3/4">
-            <p>TO:</p>
+        <div class="flex flex-row gap-2 w-2/4">
             <div class="flex flex-col w-3/4">
                 <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->suspect->name ?? ''}}</p>
                 <p class="w-full h-6 border-b border-0 border-black"></p>
