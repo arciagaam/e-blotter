@@ -29,17 +29,6 @@
 
 <body>
     <div id="main" class="flex flex-col gap-8">
-        <div class="flex flex-col gap-2">
-            <div class="flex flex-col items-center">
-                <p>Republic of The Philippines</p>
-                <p>Province Of Laguna</p>
-                <p>CITY/MUNICIPALITY OF __________</p>
-                <p>Barangay <span class="underline underline-offset-4">{{ 'Test' }}</span></p>
-            </div>
-
-            <p class="self-center">OFFICE OF THE LUPONG TAGAPAMAYAPA</p>
-        </div>
-
         {{ $slot }}
     </div>
 </body>

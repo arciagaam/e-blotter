@@ -211,13 +211,9 @@
                     </div>
                 </div>
 
-                {{-- <div class="flex flex-row items-center gap-2">
-                    <button
-                        class="flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white">
-                        <box-icon class="" name='microphone'></box-icon>
-                    </button>
-                    <p>Click on the microphone icon and being speaking.</p>
-                </div> --}}
+                <div class="flex flex-row items-center gap-2">
+                    <audio id="recording" src="{{ isset($record->narrative_file) ? url('assets\\' . $record->narrative_file) : '' }}" controls></audio>
+                </div>
             </div>
 
             <div class="flex flex-col gap-2">
@@ -238,7 +234,7 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <button class="btn-outline" data-target="#print" type="button">Print</button>
+                    <a class="btn-outline" target="_blank" href="{{ route('admin.records.print', ['record' => $record->id]) }}">Print</a>
                 </div>
             </div>
 
