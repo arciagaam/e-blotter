@@ -11,12 +11,22 @@
 
 <body>
     <div class="grid grid-cols-1 lg:grid-cols-2 w-screen min-h-screen bg-project-blue-default">
+
+        <div class="hidden lg:flex flex-col gap-4 w-full h-full justify-center items-center p-20">
+            <img src="{{ asset('assets/register_illust.svg') }}" alt="Register illustration">
+            <p class="text-6xl text-white font-black text-center">E-Blotter</p>
+        </div>
+
         <form method="POST" action="{{ url('/register') }}"
             class="flex flex-col justify-center items-center lg:col-start-2 gap-5 py-10 px-6 bg-white">
             @csrf
 
             <div class="flex flex-col gap-4 w-3/4">
-                <p class="text-lg font-bold">Barangay Officer Register</p>
+                <div>
+                    <p class="lg:hidden text-4xl font-bold">E-Blotter</p>
+                    <p class="italic lg:text-2xl lg:font-bold lg:not-italic">Barangay Officer Register</p>
+                </div>
+
                 <div class="flex flex-col gap-2">
                     <div class="flex flex-row gap-2">
                         <div class="form-input-container flex-1">
