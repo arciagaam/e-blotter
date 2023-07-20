@@ -134,8 +134,7 @@ Route::prefix('/')->group(function () {
                 Route::get('/{record}', [RecordsKpFormController::class, 'index'])->name('index');
             });
         });
-        Route::resource('records', UserRecordController::class)
-            ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
+        Route::resource('records', UserRecordController::class);
 
         Route::prefix('kp-forms')->name('kp-forms.')->group(function() {
             Route::get('/', [UserKpFormController::class, 'index']);

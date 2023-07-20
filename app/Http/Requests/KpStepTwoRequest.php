@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\ValidationException;
 
 class KpStepTwoRequest extends FormRequest
 {
@@ -13,6 +15,26 @@ class KpStepTwoRequest extends FormRequest
     {
         return auth()->check();
 
+    }
+
+    /**
+     * @override
+     *
+     * Handle a failed validation attempt.
+     *
+     * @param  \Illuminate\Contracts\Validation\Validator  $validator
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function failedValidation(Validator $validator): void
+    {
+        session()->flash('alert', ['title' => 'Error', 'description' => $validator->errors()->first(array_keys($validator->errors()->messages())[0]) ?? 'Unkown error.', 'type' => 'danger']);
+        // session()->flash('error', $validator->errors()->first(array_keys($validator->errors()->messages())[0]) ?? 'Unkown error.');
+
+        throw (new ValidationException($validator))
+            ->errorBag($this->errorBag)
+            ->redirectTo($this->getRedirectUrl());
     }
 
     /**
@@ -48,6 +70,11 @@ class KpStepTwoRequest extends FormRequest
 
             //KP FORM 16
             'settlement' => 'sometimes|required',
+
+            //KP FORM 17
+            'fraud' => 'sometimes|required_without_all:violence,intimidation',
+            'violence' => 'sometimes|required_without_all:fraud,intimidation',
+            'intimidation' => 'sometimes|required_without_all:fraud,violence',
         ];
     }
 }
