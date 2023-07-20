@@ -14,10 +14,10 @@ function addToLoginTrail($login_role_id)
 function getKpRelations($kp_form_id)
 {
     $relations = [
-        '8' => ['7'],
+        '8' => ['7', '9'],
         '9' => ['7', '8'],
         '18' => ['8'],
-        '19' => ['8'],
+        '19' => ['9'],
         '25' => ['16']
     ];
 
