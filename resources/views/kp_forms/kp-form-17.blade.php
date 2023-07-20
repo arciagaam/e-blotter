@@ -47,9 +47,25 @@
             <div class="grid grid-cols-[3rem_1fr]">
                 <p>[ ]</p>
                 <div class="flex flex-col">
-                    <p>Fraud. (State details)</p>
-                    <textarea class="w-full outline-none underline decoration-0 resize-none">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi quis eos reprehenderit deserunt fuga eveniet quam earum rerum explicabo illo cumque iste, necessitatibus facilis laudantium consequatur maxime enim deleniti. Illum doloremque minus itaque ducimus ipsa cum. Repudiandae ad minima expedita. Qui temporibus possimus explicabo atque nulla tempore rem est. Iste.</textarea>
-                    {{-- <textarea class="w-full h-fit outline-none resize-none underline decoration-0">{{$tagIds['settlement'] ?? ''}}</textarea> --}}
+                    <p>Fraud. (State details)
+                        <span class="underline">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, sit tempora! Itaque, rem. Ab, minima! Blanditiis, sed consectetur similique at, vel ullam ut provident sunt facilis reprehenderit eos accusantium, commodi molestiae ipsum totam veniam delectus tempora voluptate quaerat aut. Cupiditate nihil, sapiente nemo laboriosam corrupti dignissimos porro unde omnis odit?</span>
+                    </p>
+                </div>
+            </div>
+            <div class="grid grid-cols-[3rem_1fr]">
+                <p>[ ]</p>
+                <div class="flex flex-col">
+                    <p>Violence. (State details)
+                        <span class="underline">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, ad itaque officiis, beatae minima similique cupiditate culpa repudiandae magni aut tempore! Architecto dignissimos quos dolore, commodi blanditiis rerum consequuntur optio mollitia non vel aliquam distinctio minus alias doloribus doloremque impedit in eveniet accusantium quam incidunt itaque. Quasi commodi placeat nesciunt!</span>
+                    </p>
+                </div>
+            </div>
+            <div class="grid grid-cols-[3rem_1fr]">
+                <p>[ ]</p>
+                <div class="flex flex-col">
+                    <p>Intimidation. (State details)
+                        <span class="underline">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae mollitia numquam, quo sit accusamus enim eum beatae laboriosam vel est fugiat aliquam dignissimos commodi nihil qui dolor laudantium veniam provident soluta illo, reiciendis tempore. Sit cum, labore eaque incidunt delectus aperiam quasi voluptatum aliquid quis soluta omnis laborum voluptatem ipsum.</span>
+                    </p>
                 </div>
             </div>
         </div>

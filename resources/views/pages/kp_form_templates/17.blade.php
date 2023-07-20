@@ -1,16 +1,16 @@
 <x-kp-form-create>
-    {{-- 
-        Repudations 
-
-        Checkbox for:
-        Fraud
-        Violence
-        Intimidation
-
-        Description for the selected repudation
-    --}}
-    <div class="flex flex-col">
-        {{-- <label for="appear">You are hereby required to appear before me/the Pangkat on the</label>
-        <input type="datetime-local" name="hearing"> --}}
+    <div class="flex flex-col gap-2">
+        <div class="flex flex-col">
+            <label for="fraud">Fraud</label>
+            <textarea class="resize-none" name="fraud" id="fraud" cols="30" rows="5"></textarea>
+        </div>
+        <div class="flex flex-col">
+            <label for="fraud">Violence</label>
+            <textarea class="resize-none" name="violence" id="violence" cols="30" rows="5"></textarea>
+        </div>
+        <div class="flex flex-col">
+            <label for="fraud">Intimidation</label>
+            <textarea class="resize-none" name="intimidation" id="intimidation" cols="30" rows="5"></textarea>
+        </div>
     </div>
 </x-kp-form-create>

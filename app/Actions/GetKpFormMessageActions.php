@@ -196,20 +196,20 @@ class GetKpFormMessageActions
             if ($hearingDates->has([18, 19]) && ($now > strtotime($hearingDates[18]->value) && $now > strtotime($hearingDates[19]->value))) {
                 return [
                     'message' => "Form 18 and 19 are both past the hearing date",
-                    'recommendation' => "Close the case.",
+                    'recommendations' => "Close the case.",
                     'form_ids' => []
                 ];
             } else if ($hearingDates->has(18) && $now > strtotime($hearingDates[18]->value)) {
                 return [
                     'message' => "Form 18 is past the hearing date",
-                    'recommendation' => "Close the case.",
+                    'recommendations' => "Close the case.",
                     'form_ids' => []
 
                 ];
             } else if ($hearingDates->has(19) && $now > strtotime($hearingDates[19]->value)) {
                 return [
                     'message' => "Form 19 is past the hearing date",
-                    'recommendation' => "Issue Form 20",
+                    'recommendations' => "Issue Form 20",
                     'form_ids' => [20]
                 ];
             }
@@ -228,15 +228,15 @@ class GetKpFormMessageActions
 
         if(count($issuedKpForms)) {
             return [
-                'message' => 'Form 20 Issued, awit moments sa 16',
+                'message' => 'Form 20 Issued and agreement from Form 16 was not followed.',
                 'recommendations' => 'Issue Form 21',
                 'form_ids' => [21]
             ];
         } else {
             return [
-                'message' => 'Form 20 Issued, di sumipot sa 18 19',
-                'recommendations' => 'Issue Form 21',
-                'form_ids' => [21]
+                'message' => 'Form 20 Issued and either parties did not attend the hearing.',
+                'recommendations' => 'Issue Form 22',
+                'form_ids' => [22]
             ];
         }
     }
