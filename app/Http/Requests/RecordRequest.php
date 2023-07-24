@@ -24,15 +24,15 @@ class RecordRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "victim.name" => 'required|string',
+            "victim.name" => 'required|string|max:255',
             "victim.age" => 'required|numeric',
             "victim.sex" => 'required|numeric',
             "victim.contact_number" => 'required|numeric',
-            "victim.address" => 'required',
+            "victim.address" => 'required|max:255',
             "victim.civil_status_id" => 'required|numeric',
-            "suspect.name" => 'required',
+            "suspect.name" => 'required|max:255',
             "suspect.sex" => 'required',
-            "suspect.address" => 'required',
+            "suspect.address" => 'required|max:255',
             "blotter_status_id" => 'sometimes|required',
             "purok" => 'required',
             "case" => 'required',
