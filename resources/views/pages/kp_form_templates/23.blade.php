@@ -1,6 +1,3 @@
 <x-kp-form-create>
-    <div class="flex flex-col">
-        <label for="appear">You are hereby required to appear before me/the Pangkat on the</label>
-        <input type="datetime-local" name="hearing">
-    </div>
+    <p>No inputs to be filled in this form. Click the "Submit" button to issue the current form.</p>
 </x-kp-form-create>

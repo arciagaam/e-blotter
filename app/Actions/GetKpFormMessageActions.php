@@ -144,13 +144,13 @@ class GetKpFormMessageActions
         if($latestKpForm == 21) {
             return $this->generateMessage('Form 21 Issued', 'Issue Form 23', [23]);
         } else {
-            return $this->generateMessage('Form 22 Issued', 'Issue Form 23', [23]);
+            return $this->generateMessage('Form 22 Issued', 'Issue Form 23', [24]);
         }
     }
 
     public function getKpForm23Message()
     {
-        return $this->generateMessage('Form 23 Issued', 'Issue Form 24', [24]);
+        return $this->generateMessage('Form 23 Issued', 'Close the case', []);
     }
 
     public function getKpForm24Message()
