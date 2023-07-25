@@ -45,26 +45,26 @@
 
         <div class="flex flex-col ml-4">
             <div class="grid grid-cols-[3rem_1fr]">
-                <p>[ ]</p>
+                <p>[{{ $tagIds->has('fraud') ? '/' : ' ' }}]</p>
                 <div class="flex flex-col">
                     <p>Fraud. (State details)
-                        <span class="underline">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Harum, sit tempora! Itaque, rem. Ab, minima! Blanditiis, sed consectetur similique at, vel ullam ut provident sunt facilis reprehenderit eos accusantium, commodi molestiae ipsum totam veniam delectus tempora voluptate quaerat aut. Cupiditate nihil, sapiente nemo laboriosam corrupti dignissimos porro unde omnis odit?</span>
+                        <span data-type="text" @class(['underline text-justify whitespace-break-spaces', 'break-words' => $tagIds->has('fraud'), 'break-all' => !$tagIds->has('fraud')])>{{ $tagIds->has('fraud') ? $tagIds['fraud'] : ' ' }}</span>
                     </p>
                 </div>
             </div>
             <div class="grid grid-cols-[3rem_1fr]">
-                <p>[ ]</p>
+                <p>[{{ $tagIds->has('violence') ? '/' : ' ' }}]</p>
                 <div class="flex flex-col">
                     <p>Violence. (State details)
-                        <span class="underline">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, ad itaque officiis, beatae minima similique cupiditate culpa repudiandae magni aut tempore! Architecto dignissimos quos dolore, commodi blanditiis rerum consequuntur optio mollitia non vel aliquam distinctio minus alias doloribus doloremque impedit in eveniet accusantium quam incidunt itaque. Quasi commodi placeat nesciunt!</span>
+                        <span data-type="text" @class(['underline text-justify whitespace-break-spaces', 'break-words' => $tagIds->has('violence'), 'break-all' => !$tagIds->has('violence')])>{{ $tagIds->has('violence') ? $tagIds['violence'] : ' ' }}</span>
                     </p>
                 </div>
             </div>
             <div class="grid grid-cols-[3rem_1fr]">
-                <p>[ ]</p>
+                <p>[{{ $tagIds->has('intimidation') ? '/' : ' ' }}]</p>
                 <div class="flex flex-col">
                     <p>Intimidation. (State details)
-                        <span class="underline">Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae mollitia numquam, quo sit accusamus enim eum beatae laboriosam vel est fugiat aliquam dignissimos commodi nihil qui dolor laudantium veniam provident soluta illo, reiciendis tempore. Sit cum, labore eaque incidunt delectus aperiam quasi voluptatum aliquid quis soluta omnis laborum voluptatem ipsum.</span>
+                        <span data-type="text" @class(['underline text-justify whitespace-break-spaces', 'break-words' => $tagIds->has('intimidation'), 'break-all' => !$tagIds->has('intimidation')])class="border-b border-black break-all">{{ $tagIds->has('intimidation') ? $tagIds['intimidation'] : ' ' }}</span>
                     </p>
                 </div>
             </div>
@@ -124,6 +124,20 @@
                 textarea.style.height = textarea.scrollHeight + 'px';
             }
         });
+
+        document.querySelectorAll("span[data-type='text']").forEach((element) => {
+            if (!element.textContent || element.textContent == '') {
+                return;
+            }
+
+            let fill = ' ';
+            const TEXT_CONTENT_LENGTH = element.textContent.length;
+            const MIN_LENGTH = 256;
+
+            if (TEXT_CONTENT_LENGTH < MIN_LENGTH) {
+                element.textContent = element.textContent + fill.repeat(MIN_LENGTH - TEXT_CONTENT_LENGTH);
+            }
+        })
     });
 </script>
 @vite('/resources/js/print_window.js')
