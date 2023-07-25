@@ -27,18 +27,23 @@
     </style>
 </head>
 
+@props(['body' => true])
+
 <body>
     <div id="main" class="flex flex-col gap-8">
-        <div class="flex flex-col gap-2">
-            <div class="flex flex-col items-center">
-                <p>Republic of The Philippines</p>
-                <p>Province Of Laguna</p>
-                <p>CITY/MUNICIPALITY OF __________</p>
-                <p>Barangay <span class="underline underline-offset-4">{{ auth()->user()->barangays[0]->name }}</span></p>
-            </div>
+        @if ($body)
+            <div class="flex flex-col gap-2">
+                <div class="flex flex-col items-center">
+                    <p>Republic of The Philippines</p>
+                    <p>Province Of Laguna</p>
+                    <p>CITY/MUNICIPALITY OF __________</p>
+                    <p>Barangay <span
+                            class="underline underline-offset-4">{{ auth()->user()->barangays[0]->name }}</span></p>
+                </div>
 
-            <p class="self-center">OFFICE OF THE LUPONG TAGAPAMAYAPA</p>
-        </div>
+                <p class="self-center">OFFICE OF THE LUPONG TAGAPAMAYAPA</p>
+            </div>
+        @endif
 
         {{ $slot }}
     </div>
