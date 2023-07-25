@@ -137,6 +137,8 @@ class RecordsKpFormController extends Controller
     {
         [$issuedForm, $tagIds, $forms] = $action->handleShow($recordId, $issuedKpFormId);
 
+        // dd($issuedForm, $tagIds, $forms);
+
         return view("kp_forms.kp-form-$issuedForm->kp_form_id", ['issuedForm' => $issuedForm, 'tagIds' => collect($tagIds), 'relatedForms' => $forms]);
     }
 
