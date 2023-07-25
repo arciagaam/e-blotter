@@ -26,7 +26,7 @@ function getKpRelations($kp_form_id)
         24 => [22], // Respondent
         
         // Forms from 25 to 27 must disable Form 17
-        25 => [15, 16], 
+        25 => [15, 16],
         27 => [15, 16]
     ];
 
