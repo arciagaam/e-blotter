@@ -73,12 +73,19 @@ class GetKpFormMessageActions
 
     public function getKpForm12Message()
     {
-        return $this->generateMessage('Form 12 Issued', 'Issue Form 13', [13]);
+        return $this->generateMessage('Form 12 Issued', 'If case is a MERITORIOUS CASE and witnesses are needed, issue Form 13. If both parties parties wanted an ARBITRATION, issue Form 14. If both parties reached a SETTLEMENT, issue Form 16. If the parties of COMPLAINANT/S did NOT ATTEND, issue Form 18. If the parties of RESPONDENT/S did NOT ATTEND, issue Form 19. If NO SETTLEMENT has been reached, issue Form 21.', [13, 14, 16, 18, 19, 21]);
+
+        // This is an old message.
+        // return $this->generateMessage('Form 12 Issued', 'Issue Form 13', [13]);
     }
 
     public function getKpForm13Message()
     {
-        return $this->generateMessage('Form 13 Issued', 'Issue Form 14 if both parties attended the hearing, hence, issue forms 18 and 19', [14, 18, 19]);
+        return $this->generateMessage('Form 13 Issued', 'If both parties parties wanted an ARBITRATION, issue Form 14. If both parties reached a SETTLEMENT, issue Form 16. If the parties of COMPLAINANT/S did NOT ATTEND, issue Form 18. If the parties of RESPONDENT/S did NOT ATTEND, issue Form 19. If NO SETTLEMENT has been reached, issue Form 21.', [14, 16, 18, 19, 21]);
+
+
+        // This is an old message.
+        // return $this->generateMessage('Form 13 Issued', 'Issue Form 14 if both parties attended the hearing, hence, issue forms 18 and 19', [14, 16, 18, 19]);
     }
 
     public function getKpForm14Message()
@@ -119,8 +126,19 @@ class GetKpFormMessageActions
             if ($hearingDates->has([18, 19]) && ($now > strtotime($hearingDates[18]->value) && $now > strtotime($hearingDates[19]->value))) {
                 return $this->generateMessage('Form 18 and 19 are both past the hearing date', 'Close the case', []);
             } else if ($hearingDates->has(18) && $now > strtotime($hearingDates[18]->value)) {
-                return $this->generateMessage('Form 18 is past the hearing date', 'Close the case', []);
+                return $this->generateMessage('Form 18 is past the hearing date', 'Issue Form 23', [23]);
             } else if ($hearingDates->has(19) && $now > strtotime($hearingDates[19]->value)) {
+                return $this->generateMessage('Form 19 is past the hearing date', 'Issue Form 22', [22]);
+            }
+
+            // What will happen if 18 / 19 is issued but have a justifiable reason?
+            // PARTIES ISSUED WITH 18 / 19 MUST HAVE JUSTIFIABLE REASON
+            // As long as both parties have justifiable reason, issue KP Form 21, else, issue the required Certification to Bar Action/Counterclaim
+            if ($hearingDates->has([18, 19])) {
+                return $this->generateMessage('Form 18 and 19 Issued', 'If both parties have a justifiable cause', []);
+            } else if ($hearingDates->has(18)) {
+                return $this->generateMessage('Form 18 is past the hearing date', 'Issue Form 23', [23]);
+            } else if ($hearingDates->has(19)) {
                 return $this->generateMessage('Form 19 is past the hearing date', 'Issue Form 22', [22]);
             }
         }
@@ -133,16 +151,16 @@ class GetKpFormMessageActions
         $issuedKpForms = $action->checkIssuedKpForms($record, [16]);
 
         if(count($issuedKpForms)) {
-            return $this->generateMessage('Form 20 Issued and agreement from Form 16 was not followed', 'Issue Form 21', [21]);
-        } else {
-            return $this->generateMessage('Form 20 Issued and either parties did not attend the hearing', 'Issue Form 22', [22]);
+            return $this->generateMessage('Form 20 Issued and agreement from Form 16 was not followed', 'Close the case', []);
         }
     }
 
     public function getKpForm21and22Message(string $latestKpForm) : array
     {
+        // $issuedKpForms = $action->checkIssuedKpForms($record, [16]);
+
         if($latestKpForm == 21) {
-            return $this->generateMessage('Form 21 Issued', 'Issue Form 23', [23]);
+            return $this->generateMessage('Form 21 Issued', 'Close the case', []);
         } else {
             return $this->generateMessage('Form 22 Issued', 'Issue Form 23', [24]);
         }
