@@ -2,7 +2,7 @@
     <div class="flex flex-row justify-between gap-24">
         <div class="flex flex-col gap-6 w-2/5">
             <div class="flex flex-col">
-                <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name}}</p>
+                <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name ?? ''}}</p>
                 <p class="w-full h-6 border-b border-0 border-black"></p>
                 <p class="self-end">Complainant/s</p>
             </div>
@@ -10,7 +10,7 @@
             <p class="ml-auto w-fit">--- against ---</p>
 
             <div class="flex flex-col">
-                <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->suspect->name}}</p>
+                <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->suspect->name ?? ''}}</p>
                 <p class="w-full h-4 border-b border-0 border-black"></p>
                 <p class="self-end">Respondent/s</p>
             </div>
@@ -20,12 +20,12 @@
             <div class="flex flex-col">
                 <div class="flex">
                     <p class="whitespace-nowrap">Barangay Case No.</p>
-                    <p class="w-full border-b border-0 border-black indent-1">{{$issuedForm->record->id}}</p>
+                    <p class="w-full border-b border-0 border-black indent-1">{{$issuedForm->record->id ?? ''}}</p>
                 </div>
 
                 <div class="flex">
                     <p>For:</p>
-                    <p class="w-full border-b border-0 border-black indent-1">{{$issuedForm->record->case}}</p>
+                    <p class="w-full border-b border-0 border-black indent-1">{{$issuedForm->record->case ?? ''}}</p>
                 </div>
             </div>
         </div>
@@ -37,7 +37,15 @@
     
     <div class="flex flex-col">
         <ol class="list-decimal list-inside">
-            <li>On <span class="underline">{{$relatedForms[16]['created_at']->format('Y-m-d')}}</span> the parties in this case signed an
+            <li>On 
+                @if (isset($relatedForms[15]))
+                    <span class="underline">{{$relatedForms[15]['created_at']->format('Y-m-d')}}</span>
+                @elseif (isset($relatedForms[16]))
+                    <span class="underline">{{$relatedForms[16]['created_at']->format('Y-m-d')}}</span>
+                @else
+                    {{ str_repeat('_', 12) }}
+                @endif 
+                the parties in this case signed an
                 amicable settlement/received the arbitration award rendered by the
                 Lupon/Chairman/Pangkat ng Tagapagkasundo;
             </li>

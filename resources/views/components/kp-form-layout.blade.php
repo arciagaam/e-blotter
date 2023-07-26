@@ -50,3 +50,5 @@
 </body>
 
 </html>
+
+@vite('/resources/js/print_window.js')

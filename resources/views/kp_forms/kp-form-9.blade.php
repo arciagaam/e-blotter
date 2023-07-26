@@ -142,4 +142,4 @@
     });
 </script>
 
-@vite('/resources/js/print_window.js')
+

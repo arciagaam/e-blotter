@@ -56,10 +56,22 @@
     </div>
 
     <p class="self-start text-justify indent-4">
-        You are hereby required to appear before me on _________ day of
-        _________ 19____ at _________ o’clock in the morning/afternoon/
+        {{-- Hearing date --}}
+        {{-- Missing evening span --}}
+        You are hereby required to appear before me on <span
+        class="underline">{{ date('jS', strtotime($tagIds['hearing'])) }}</span> day of <span
+        class="underline">{{ date('F', strtotime($tagIds['hearing'])) }}</span>, <span
+        class="underline">{{ date('Y', strtotime($tagIds['hearing'])) }}</span>, at <span
+        class="underline">{{ date('h:i', strtotime($tagIds['hearing'])) }}</span> o’clock in the <span
+        @class([
+            'underline' => date('a', strtotime($tagIds['hearing'])) == 'am',
+        ])>morning</span>/<span @class([
+            'underline' => date('a', strtotime($tagIds['hearing'])) == 'pm',
+        ])>afternoon</span>/
         evening for the hearing of the motion for execution, copy of which is
-        attached hereto, filed by ____________ (Name of complainant/s/
+        attached hereto, filed by <span
+        @class(['underline' => isset($issuedForm->record->victim->name)])>{{ $issuedForm->record->victim->name ?? str_repeat('_', 12) }}</span>,
+    <span @class(['underline' => isset($issuedForm->record->suspect->name)])>{{ $issuedForm->record->suspect->name ?? str_repeat('_', 12) }}</span> (Name of complainant/s/
         respondent/s)
     </p>
 
@@ -91,5 +103,3 @@
         </div>
     </div>
 </x-kp-form-layout>
-
-@vite('/resources/js/print_window.js')
