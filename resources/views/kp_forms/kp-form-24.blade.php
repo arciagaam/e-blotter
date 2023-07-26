@@ -37,19 +37,12 @@
 
     <p class="self-start text-justify indent-4">
         This is to certify that after prior notice and hearing, the respondent/s
-        __________________ (name) and _________________ (name) have
+        <span class="underline">{{$issuedForm->record->suspect->name ?? str_repeat('_', 12)}}</span> (name) and _________________ (name) have
         been found to have willfully failed or refused to appear without
         justifiable reason before the Punong Barangay/Pangkat ng
         Tagapagkasundo and therefore respondent/s is/are barred from filing
         his/their counterclaim (if any) arising from the complaint in court/
         government office.
-        {{-- You are hereby required to appear before me/the Pangkat on the <span class="underline">{{date('jS', strtotime($tagIds['hearing']))}}</span> day of <span class="underline">{{date('F', strtotime($tagIds['hearing']))}}</span>, <span class="underline">{{date('Y', strtotime($tagIds['hearing']))}}</span>, at <span class="underline">{{date('h:i', strtotime($tagIds['hearing']))}}</span> o’clock in the
-        <span @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'am'])>morning</span>/<span  @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'pm'])>afternoon</span> to explain why you failed to appear for mediation/
-        conciliation scheduled on <span class="underline">{{date('F j, Y', strtotime($relatedForms['8']['hearing']))}}</span> and why your
-        complaint should not be dismissed, a certificate to bar the filing of your
-        action on court/government office should not be issued, and contempt
-        proceedings should not be initiated in court for willful failure or refusal
-        to appear before the Punong Barangay/Pangkat ng Tagapagkasundo. --}}
     </p>
 
     <p class="self-start">This <span class="underline">{{date('jS', strtotime($issuedForm->created_at ?? now()))}}</span> day of <span class="underline">{{date('F', strtotime($issuedForm->created_at ?? now()))}}</span>, <span class="underline">{{date('Y', strtotime($issuedForm->created_at ?? now()))}}</span>.</p>
@@ -69,4 +62,3 @@
     </div>
 </x-kp-form-layout>
 
-@vite('/resources/js/print_window.js')
