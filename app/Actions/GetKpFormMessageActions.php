@@ -121,7 +121,7 @@ class GetKpFormMessageActions
             } else if ($hearingDates->has(18) && $now > strtotime($hearingDates[18]->value)) {
                 return $this->generateMessage('Form 18 is past the hearing date', 'Close the case', []);
             } else if ($hearingDates->has(19) && $now > strtotime($hearingDates[19]->value)) {
-                return $this->generateMessage('Form 19 is past the hearing date', 'Issue Form 20', [20]);
+                return $this->generateMessage('Form 19 is past the hearing date', 'Issue Form 22', [22]);
             }
         }
 
