@@ -20,10 +20,10 @@ function getKpRelations($kp_form_id)
         18 => [8],
         19 => [9],
         20 => [17],
-        21 => [18], // Complainant
-        22 => [19], // Respondent
-        23 => [21], // Complainant
-        24 => [22], // Respondent
+        // 21 => [18], // Complainant
+        // 22 => [19], // Respondent
+        23 => [7], // Complainant
+        // 24 => [22], // Respondent
         
         // Forms from 25 to 27 must disable Form 17
         25 => [15, 16],

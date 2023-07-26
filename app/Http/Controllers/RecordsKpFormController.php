@@ -83,7 +83,7 @@ class RecordsKpFormController extends Controller
         return redirect()->route('records.kp-forms.success');
     }
 
-    public function stepThree(RecordsKpFormService $service)
+    public function stepThree(RecordsKpFormService $service, RecordKpFormActions $action)
     {
         $nowTimestamp = now();
         $issuedForm = session()->get('issued_kp_form');
@@ -100,8 +100,15 @@ class RecordsKpFormController extends Controller
             Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(15)->timestamp)]);
         }
 
-        if($issuedForm->kp_form_id == 16 && $latestKpForm->kp_form_id < 16) {
-            Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(10)->timestamp)]);
+
+        // 15 and 16 acts the same settlement
+        // 16 is not needed after 15
+        if(($issuedForm->kp_form_id == 15 || $issuedForm->kp_form_id == 16) && $latestKpForm->kp_form_id < 16) {
+            $issuedKpForms = $action->checkIssuedKpForms($issuedForm->record_id, [15]);
+
+            if (!count($issuedKpForms)) {
+                Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(10)->timestamp)]);
+            }
         }
 
         $kpFields = session()->get('kp_fields');

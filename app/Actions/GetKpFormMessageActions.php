@@ -93,14 +93,26 @@ class GetKpFormMessageActions
         return $this->generateMessage('Form 14 Issued', 'Issue Form 15', [15]);
     }
 
-    public function getKpForm15Message()
+    // NOTE
+    // 16 is not needed after 15 as KP Form 15 is legally binding already and that the conflict has been resolved by an arbitrator
+    public function getKpForm15Message(string $record_id)
     {
-        return $this->generateMessage('Form 15 Issued', 'Issue Form 16', [16]);
+        // This is an old message
+        // return $this->generateMessage('Form 15 Issued', 'Issue Form 16', [16]);
+
+        $record = Record::find($record_id);
+        $now = now()->format('Y-m-d');
+        $difference = Carbon::parse($now)->diffInDays(Carbon::parse($record->kp_deadline->format('Y-m-d')), false);
+
+        if ($difference > 0) {
+            return $this->generateMessage('Form 15 Issued', "Issue Form 25 after $difference day/s", []);
+        }
+
+        return $this->generateMessage('10 days has passed since the issuance of Form 15', "Issue Form 25", [25]);
     }
 
     public function getKpForm16Message(string $record_id)
     {
-
         $record = Record::find($record_id);
         $now = now()->format('Y-m-d');
         $difference = Carbon::parse($now)->diffInDays(Carbon::parse($record->kp_deadline->format('Y-m-d')), false);
@@ -135,35 +147,34 @@ class GetKpFormMessageActions
             // PARTIES ISSUED WITH 18 / 19 MUST HAVE JUSTIFIABLE REASON
             // As long as both parties have justifiable reason, issue KP Form 21, else, issue the required Certification to Bar Action/Counterclaim
             if ($hearingDates->has([18, 19])) {
-                return $this->generateMessage('Form 18 and 19 Issued', 'If both parties have a justifiable cause', []);
+                return $this->generateMessage('Form 18 and 19 Issued', 'If both parties have a JUSTIFIABLE cause, issue Form 21. If the COMPLAINANT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 23. If the RESPONDENT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 22.', [21, 22, 23]);
             } else if ($hearingDates->has(18)) {
-                return $this->generateMessage('Form 18 is past the hearing date', 'Issue Form 23', [23]);
+                return $this->generateMessage('Form 18 Issued', 'If the COMPLAINANT/S have a JUSTIFIABLE cause, issue Form 21. If the COMPLAINANT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 23', [21, 23]);
             } else if ($hearingDates->has(19)) {
-                return $this->generateMessage('Form 19 is past the hearing date', 'Issue Form 22', [22]);
+                return $this->generateMessage('Form 19 Issued', 'If the RESPONDENT/S have a JUSTIFIABLE cause, issue Form 21. If the RESPONDENT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 22', [21, 22]);
             }
         }
 
         return $this->generateMessage(null, null, []);
     }
 
-    public function getKpForm20Message(string $record, RecordKpFormActions $action) : array
+    public function getKpForm20Message(string $record_id, RecordKpFormActions $action) : array
     {
-        $issuedKpForms = $action->checkIssuedKpForms($record, [16]);
+        $issuedKpForms = $action->checkIssuedKpForms($record_id, [16]);
 
         if(count($issuedKpForms)) {
             return $this->generateMessage('Form 20 Issued and agreement from Form 16 was not followed', 'Close the case', []);
         }
     }
 
-    public function getKpForm21and22Message(string $latestKpForm) : array
+    public function getKpForm21Message(string $record_id) : array
     {
-        // $issuedKpForms = $action->checkIssuedKpForms($record, [16]);
+        return $this->generateMessage('Form 21 Issued', 'Close the case', []);
+    }
 
-        if($latestKpForm == 21) {
-            return $this->generateMessage('Form 21 Issued', 'Close the case', []);
-        } else {
-            return $this->generateMessage('Form 22 Issued', 'Issue Form 23', [24]);
-        }
+    public function getKpForm22Message(string $record_id)
+    {
+        return $this->generateMessage('Form 22 Issued', 'Issue Form 24', [24]);
     }
 
     public function getKpForm23Message()
