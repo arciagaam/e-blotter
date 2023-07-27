@@ -38,7 +38,7 @@ class KpFormController extends Controller
      */
     public function show(string $id)
     {
-        return view('pages.user.kp_form.kp-form', ['kpForm' => KpForm::find($id)->first()]);
+        return view('pages.user.kp_form.show', ['id' => $id]);
     }
 
     /**
