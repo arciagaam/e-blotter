@@ -1,4 +1,4 @@
-<x-kp-form-create>
+<x-kp-form-submit>
     <div class="form-input-container">
         <div class="flex flex-row">
             <label for="arbitration_award">After hearing the testimonies given and careful examination of the
@@ -10,4 +10,4 @@
             <p class="text-xs text-red-500 italic">{{ $message }}</p>
         @enderror
     </div>
-</x-kp-form-create>
+</x-kp-form-submit>

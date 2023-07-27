@@ -1,4 +1,4 @@
-<x-kp-form-create>
+<x-kp-form-submit>
     <div class="flex flex-col gap-2">
         <div class="form-input-container">
             <div class="flex flex-row">
@@ -33,4 +33,4 @@
             @enderror
         </div>
     </div>
-</x-kp-form-create>
+</x-kp-form-submit>

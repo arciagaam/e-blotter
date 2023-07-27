@@ -28,8 +28,8 @@
                             <div class="flex flex-row gap-2">
                                 <a class="btn-outline success" target="_blank"
                                     href="{{ route('records.kp-forms.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
-                                <a class="btn-outline" href="#">Edit</a>
-                                <form action="#" method="post">
+                                <a class="btn-outline" href="{{ route('records.kp-forms.edit', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Edit</a>
+                                <form action="{{ route('records.kp-forms.destroy', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}" method="post">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn-outline danger" type="submit">Delete</button>
@@ -58,11 +58,6 @@
                 <a href="{{ route('records.kp-forms.get.step-one', ['id' => $record]) }}" class="btn-filled" data-target="#print" type="button">Issue KP Form</a>
             </div>
         </div>
-
-
-        {{-- <div class="w-full flex">
-                {{$records->links()}}
-            </div> --}}
     </div>
 
 </x-layout>

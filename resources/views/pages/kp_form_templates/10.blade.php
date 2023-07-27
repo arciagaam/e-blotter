@@ -1,4 +1,4 @@
-<x-kp-form-create>
+<x-kp-form-submit>
     <div class="form-input-container">
         <label for="summon">You are hereby required to summon before me on</label>
         <input class="form-input" type="datetime-local" name="summon" id="summon">
@@ -8,4 +8,4 @@
             <p class="text-xs text-red-500 italic">{{ $message }}</p>
         @enderror
     </div>
-</x-kp-form-create>
+</x-kp-form-submit>

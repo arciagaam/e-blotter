@@ -1,4 +1,4 @@
-<x-kp-form-create>
+<x-kp-form-submit>
     <div class="form-input-container">
         <label for="hearing">You are hereby required to appear before the Pangkat on</label>
         <input class="form-input" type="datetime-local" name="hearing" id="hearing">
@@ -8,4 +8,4 @@
             <p class="text-xs text-red-500 italic">{{ $message }}</p>
         @enderror
     </div>
-</x-kp-form-create>
+</x-kp-form-submit>

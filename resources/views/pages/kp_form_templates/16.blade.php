@@ -1,4 +1,4 @@
-<x-kp-form-create>
+<x-kp-form-submit>
     <div class="form-input-container">
         <div class="flex flex-row">
             <label for="settlement">We, complainant/s and respondent/s in the above-captioned case, do
@@ -10,4 +10,4 @@
             <p class="text-xs text-red-500 italic">{{ $message }}</p>
         @enderror
     </div>
-</x-kp-form-create>
+</x-kp-form-submit>

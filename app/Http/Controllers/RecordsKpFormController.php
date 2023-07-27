@@ -171,25 +171,29 @@ class RecordsKpFormController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $recordId, string $issuedKpFormId)
     {
-        //
+        session()->flash('editing_kp_form');
+        session()->flash('edit', ['record_id' => $recordId, 'issued_kp_form_id' => $issuedKpFormId]);
+
+        return view('pages.kp_forms.edit', ['issuedKpForm' => IssuedKpForm::where('id', $issuedKpFormId)->with('issuedKpFormFields')->first()]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $recordId, string $issuedKpFormId)
     {
-        //
+        dd($request->all());
+        dd($recordId, $issuedKpFormId);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $recordId, string $issuedKpFormId)
     {
-        //
+        dd($recordId, $issuedKpFormId);
     }
 }
 
