@@ -1,4 +1,4 @@
-<x-kp-form-create>
+<x-kp-form-submit>
     {{-- <div class="flex flex-col">
         <label for="witness_1">Witness 1</label>
         <input type="text" name="witness_1">
@@ -74,4 +74,4 @@
             @enderror
         </div>
     </div>
-</x-kp-form-create>
+</x-kp-form-submit>
