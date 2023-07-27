@@ -31,6 +31,9 @@ class RecordsKpFormController extends Controller
      */
     public function stepOne(string $id, RecordsKpFormService $service, RecordKpFormActions $kpFormAction, GetKpFormMessageActions $kpFormMessageAction)
     {
+        // Sets the record ID for the whole process
+        session(['record_id' => $id]);
+
         $message = $kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm($id), $id, $kpFormMessageAction);
 
         $issuedKpForms = IssuedKpForm::where('record_id', $id)->with('kpForm')->get()->mapWithKeys(function ($item, $key) {
@@ -57,6 +60,14 @@ class RecordsKpFormController extends Controller
 
     public function stepTwo(RecordsKpFormService $service, RecordKpFormActions $kpFormAction, GetKpFormMessageActions $kpFormMessageAction)
     {
+        if (session()->missing('issued_kp_form')) {
+            if (session()->has('record_id')) {
+                return redirect()->route('records.kp-forms.get.step-one', ['id' => session('record_id')]);
+            } else {
+                return redirect()->route('records.index');
+            }
+        }
+
         $recommendedKpForms = collect($kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm(session()->get('issued_kp_form')->record_id), session()->get('issued_kp_form')->record_id, $kpFormMessageAction)['form_ids']);
         $isIssued = IssuedKpForm::where('record_id', session()->get('issued_kp_form')->record_id)->where('kp_form_id', session()->get('issued_kp_form')->kp_form_id)->get()->count();
         $message = array();
@@ -85,8 +96,16 @@ class RecordsKpFormController extends Controller
 
     public function stepThree(RecordsKpFormService $service, RecordKpFormActions $action)
     {
+        if (session()->missing('issued_kp_form')) {
+            if (session()->has('record_id')) {
+                return redirect()->route('records.kp-forms.get.step-one', ['id' => session('record_id')]);
+            } else {
+                return redirect()->route('records.index');
+            }
+        }
+
         $nowTimestamp = now();
-        $issuedForm = session()->get('issued_kp_form');
+        $issuedForm = session()->pull('issued_kp_form');
 
         $latestKpForm = $service->checkLatestKpForm($issuedForm->record_id);
         $latestKpForm = $latestKpForm ?? 0;
@@ -126,7 +145,7 @@ class RecordsKpFormController extends Controller
 
         IssuedKpFormField::insert($kpFieldsArray);
         
-        return view('pages.kp_forms.create.success');
+        return view('pages.kp_forms.create.success', ['record_id' => $issuedForm->record_id]);
     }
 
     /**

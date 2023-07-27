@@ -1,6 +1,10 @@
 <x-kp-form-create>
-    <div class="flex flex-col">
-        <label for="appear">You are hereby required to appear before me on</label>
-        <input type="datetime-local" name="hearing">
+    <div class="form-input-container">
+        <label for="hearing">You are hereby required to appear before me on</label>
+        <input class="form-input" type="datetime-local" name="hearing" id="hearing">
+
+        @error('hearing')
+            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+        @enderror
     </div>
 </x-kp-form-create>

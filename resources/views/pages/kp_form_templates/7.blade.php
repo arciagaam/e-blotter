@@ -1,15 +1,27 @@
 <x-kp-form-create>
-    <div class="flex flex-col">
-        <label for="complain">I/WE hereby complain against above named respondent/s for violating my/our
-            rights and interests in the following manner:
-        </label>
-        <input type="text" name="complain">
-    </div>
+    <div class="flex flex-col gap-2">
+        <div class="form-input-container">
+            <div class="flex flex-row">
+                <label for="complain" class="flex gap-2 items-center">I/WE hereby complain against above named respondent/s for violating my/our
+                    rights and interests in the following manner:</label>
+            </div>
+            <textarea name="complain" id="complain" cols="30" rows="5" class="form-input"></textarea>
+    
+            @error('complain')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <div class="flex flex-col">
-        <label for="relief">THEREFORE, I/WE pray that the following relief/s be granted to me/us in
-            accordance with law and/or equity:
-        </label>
-        <input type="text" name="relief">
+        <div class="form-input-container">
+            <div class="flex flex-row">
+                <label for="relief" class="flex gap-2 items-center">THEREFORE, I/WE pray that the following relief/s be granted to me/us in
+                    accordance with law and/or equity:</label>
+            </div>
+            <textarea name="relief" id="relief" cols="30" rows="5" class="form-input"></textarea>
+    
+            @error('relief')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
+        </div>
     </div>
 </x-kp-form-create>

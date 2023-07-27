@@ -1,16 +1,36 @@
 <x-kp-form-create>
     <div class="flex flex-col gap-2">
-        <div class="flex flex-col">
-            <label for="fraud">Fraud</label>
-            <textarea class="resize-none" name="fraud" id="fraud" cols="30" rows="5"></textarea>
+        <div class="form-input-container">
+            <div class="flex flex-row">
+                <label for="fraud">Fraud</label>
+            </div>
+            <textarea name="fraud" id="fraud" cols="30" rows="5" class="form-input"></textarea>
+    
+            @error('fraud')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
         </div>
-        <div class="flex flex-col">
-            <label for="fraud">Violence</label>
-            <textarea class="resize-none" name="violence" id="violence" cols="30" rows="5"></textarea>
+
+        <div class="form-input-container">
+            <div class="flex flex-row">
+                <label for="violence">Violence</label>
+            </div>
+            <textarea name="violence" id="violence" cols="30" rows="5" class="form-input"></textarea>
+    
+            @error('violence')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
         </div>
-        <div class="flex flex-col">
-            <label for="fraud">Intimidation</label>
-            <textarea class="resize-none" name="intimidation" id="intimidation" cols="30" rows="5"></textarea>
+
+        <div class="form-input-container">
+            <div class="flex flex-row">
+                <label for="intimidation">Intimidation</label>
+            </div>
+            <textarea name="intimidation" id="intimidation" cols="30" rows="5" class="form-input"></textarea>
+    
+            @error('intimidation')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
         </div>
     </div>
 </x-kp-form-create>
