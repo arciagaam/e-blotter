@@ -33,7 +33,7 @@
         <p class="font-bold tracking-[0.35rem]">NOTICE FOR CONSTITUTION OF PANGKAT</p>
     </div>
     
-    <p class="self-end">(Date)</p>
+    <p class="self-end">_________________________</p>
     <p>TO:____________</p>
 
     <div class="flex flex-col items-center">

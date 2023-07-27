@@ -25,8 +25,16 @@
                                 </span>
                                 <span>{{ $form->kpForm->name }}</span>
                             </label>
-                            <a class="btn-outline" target="_blank"
-                                href="{{ route('records.kp-forms.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
+                            <div class="flex flex-row gap-2">
+                                <a class="btn-outline success" target="_blank"
+                                    href="{{ route('records.kp-forms.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
+                                <a class="btn-outline" href="#">Edit</a>
+                                <form action="#" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn-outline danger" type="submit">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     @endforeach
                 @endif
