@@ -160,7 +160,8 @@
         Delete Account
     </x-slot:heading>
 
-    <form action="#" method="DELETE" id="delete-user-form" data-action="{{ route('admin.accounts.destroy', ['account' => ':id']) }}">
+    <form action="#" method="POST" id="delete-user-form" data-action="{{ route('admin.accounts.destroy', ['account' => ':id']) }}">
+        @csrf
         @method("DELETE")
         <p>Are you sure you want to delete this account?</p>
     </form>

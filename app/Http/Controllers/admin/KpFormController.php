@@ -37,7 +37,7 @@ class KpFormController extends Controller
      */
     public function show(string $id)
     {
-        return view('pages.admin.kp_forms.show');
+        return view('pages.admin.kp_forms.show', ['id' => $id]);
     }
 
     /**

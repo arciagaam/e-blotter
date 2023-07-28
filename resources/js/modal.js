@@ -224,42 +224,50 @@ async function formActive(form, params) {
         }
     });
 
-    if (formMethod && formMethod.value === 'PUT') {
+    if (formMethod) {
         const actionUrl = concatFormParams(form.dataset.action, formParams);
 
-        try {
-            const data = await fetch(actionUrl, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                },
-                credentials: 'same-origin',
-            });
-
-            if (!data.ok) {
-                const errorOptions = { status: data.status, statusText: data.statusText };
-                throw errorOptions;
-            }
-
-            const res = await data.json();
-            inputs.forEach((input) => {
-                let value = '';
-
-                if (typeof res[input.name] === 'object') {
-                    value = res[input.name][0].name;
-                } else {
-                    value = res[input.name];
-                }
-
-                input.value = value ?? '';
-            });
-        } catch (error) {
-            console.error(error);
+        if (formMethod.value === 'DELETE') {
+            form.action = actionUrl;
         }
 
-        return;
+        if (formMethod.value === 'PUT') {
+            try {
+                const data = await fetch(actionUrl, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    credentials: 'same-origin',
+                });
+    
+                if (!data.ok) {
+                    const errorOptions = { status: data.status, statusText: data.statusText };
+                    throw errorOptions;
+                }
+    
+                const res = await data.json();
+                inputs.forEach((input) => {
+                    let value = '';
+    
+                    if (typeof res[input.name] === 'object') {
+                        value = res[input.name][0].name;
+                    } else {
+                        value = res[input.name];
+                    }
+    
+                    input.value = value ?? '';
+                });
+            } catch (error) {
+                console.error(error);
+            }
+    
+            return;
+        }
     }
+
+
 
     if (formParams) {
         inputs.forEach((input) => {
@@ -279,6 +287,7 @@ function formInactive(form) {
     clearFormErrors(form);
 
     form.removeEventListener('submit', formEventListener);
+    form.action = '#';
     form.formParas = undefined;
     const inputs = [...form.querySelectorAll('input')].filter((input) => {
         if (!input.name.startsWith('_')) {
@@ -298,7 +307,6 @@ function formInactive(form) {
  * @param {SubmitEvent} event 
  */
 async function formEventListener(event) {
-    event.preventDefault();
     clearFormErrors(event.currentTarget);
     const formParams = convertParams(event.target.formParams);
 
@@ -312,6 +320,12 @@ async function formEventListener(event) {
     const body = inputs.reduce((acc, curr) => {
         return { ...acc, [curr.name]: curr.value }
     }, {});
+
+    if (body._method != undefined && body._method == 'DELETE') {
+        return;
+    }
+
+    event.preventDefault();
 
     try {
         const data = await fetch(actionUrl, {
