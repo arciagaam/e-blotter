@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class GetKpFormMessageActions
 {
-    public function generateMessage(string|null $message, string|null $recommendations, array $formIds): array
+    public function generateMessage(string|null $message, string|array|null $recommendations, array $formIds): array
     {
         return [
             'message' => $message,
@@ -73,7 +73,7 @@ class GetKpFormMessageActions
 
     public function getKpForm12Message()
     {
-        return $this->generateMessage('Form 12 Issued', 'If case is a MERITORIOUS CASE and witnesses are needed, issue Form 13. If both parties parties wanted an ARBITRATION, issue Form 14. If both parties reached a SETTLEMENT, issue Form 16. If the parties of COMPLAINANT/S did NOT ATTEND, issue Form 18. If the parties of RESPONDENT/S did NOT ATTEND, issue Form 19. If NO SETTLEMENT has been reached, issue Form 21.', [13, 14, 16, 18, 19, 21]);
+        return $this->generateMessage('Form 12 Issued', ['If case is a MERITORIOUS CASE and witnesses are needed, issue Form 13.', 'If both parties parties wanted an ARBITRATION, issue Form 14.', 'If both parties reached a SETTLEMENT, issue Form 16.', 'If the parties of COMPLAINANT/S did NOT ATTEND, issue Form 18.', 'If the parties of RESPONDENT/S did NOT ATTEND, issue Form 19.', 'If NO SETTLEMENT has been reached, issue Form 21.'], [13, 14, 16, 18, 19, 21]);
 
         // This is an old message.
         // return $this->generateMessage('Form 12 Issued', 'Issue Form 13', [13]);
@@ -81,7 +81,7 @@ class GetKpFormMessageActions
 
     public function getKpForm13Message()
     {
-        return $this->generateMessage('Form 13 Issued', 'If both parties parties wanted an ARBITRATION, issue Form 14. If both parties reached a SETTLEMENT, issue Form 16. If the parties of COMPLAINANT/S did NOT ATTEND, issue Form 18. If the parties of RESPONDENT/S did NOT ATTEND, issue Form 19. If NO SETTLEMENT has been reached, issue Form 21.', [14, 16, 18, 19, 21]);
+        return $this->generateMessage('Form 13 Issued', ['If both parties parties wanted an ARBITRATION, issue Form 14.', 'If both parties reached a SETTLEMENT, issue Form 16.', 'If the parties of COMPLAINANT/S did NOT ATTEND, issue Form 18.', 'If the parties of RESPONDENT/S did NOT ATTEND, issue Form 19.', 'If NO SETTLEMENT has been reached, issue Form 21.'], [14, 16, 18, 19, 21]);
 
 
         // This is an old message.
@@ -147,11 +147,11 @@ class GetKpFormMessageActions
             // PARTIES ISSUED WITH 18 / 19 MUST HAVE JUSTIFIABLE REASON
             // As long as both parties have justifiable reason, issue KP Form 21, else, issue the required Certification to Bar Action/Counterclaim
             if ($hearingDates->has([18, 19])) {
-                return $this->generateMessage('Form 18 and 19 Issued', 'If both parties have a JUSTIFIABLE cause, issue Form 21. If the COMPLAINANT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 23. If the RESPONDENT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 22.', [21, 22, 23]);
+                return $this->generateMessage('Form 18 and 19 Issued', ['If both parties have a JUSTIFIABLE cause, issue Form 21.', 'If the COMPLAINANT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 23.', 'If the RESPONDENT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 22.'], [21, 22, 23]);
             } else if ($hearingDates->has(18)) {
-                return $this->generateMessage('Form 18 Issued', 'If the COMPLAINANT/S have a JUSTIFIABLE cause, issue Form 21. If the COMPLAINANT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 23', [21, 23]);
+                return $this->generateMessage('Form 18 Issued', ['If the COMPLAINANT/S have a JUSTIFIABLE cause, issue Form 21.', 'If the COMPLAINANT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 23'], [21, 23]);
             } else if ($hearingDates->has(19)) {
-                return $this->generateMessage('Form 19 Issued', 'If the RESPONDENT/S have a JUSTIFIABLE cause, issue Form 21. If the RESPONDENT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 22', [21, 22]);
+                return $this->generateMessage('Form 19 Issued', ['If the RESPONDENT/S have a JUSTIFIABLE cause, issue Form 21.', 'If the RESPONDENT/S DOES NOT HAVE A JUSTIFIABLE cause, issue Form 22'], [21, 22]);
             }
         }
 

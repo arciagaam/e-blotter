@@ -29,10 +29,6 @@
                                 <a class="btn-outline success" target="_blank"
                                     href="{{ route('records.kp-forms.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
                                 <a class="btn-outline" href="{{ route('records.kp-forms.edit', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Edit</a>
-                                {{-- <form action="{{ route('records.kp-forms.destroy', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}" method="post">
-                                    @method('DELETE')
-                                    <button class="btn-outline danger" type="submit">Delete</button>
-                                </form> --}}
                                 <button data-target="#delete" data-form-record-id="{{ $record }}" data-form-issued-kp-form-id="{{ $form->id }}" class="btn-outline danger">Delete</button>
                             </div>
                         </div>
@@ -51,7 +47,15 @@
                     <div class="flex flex-col p-4">
                         <p class="font-bold">Recommendations</p>
                         <div class="flex flex-col">
-                            <p>{{ $message['recommendations'] ?? 'No recommendations at the moment.' }}</p>
+                            @if (array_key_exists('recommendations', $message) && is_array($message['recommendations']))
+                                <ul class="list-disc list-inside">
+                                    @foreach ($message['recommendations'] as $value)
+                                        <li>{{ $value }}</li>
+                                    @endforeach
+                                </ul>
+                            @else
+                                <p>{{ $message['recommendations'] ?? 'No recommendations at the moment.' }}</p>
+                            @endif
                         </div>
                     </div>
                 </div>
