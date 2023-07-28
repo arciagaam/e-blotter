@@ -108,21 +108,21 @@ class RecordsKpFormController extends Controller
         $issuedForm = session()->pull('issued_kp_form');
 
         $latestKpForm = $service->checkLatestKpForm($issuedForm->record_id);
-        $latestKpForm = $latestKpForm ?? 0;
+        $latestKpForm = $latestKpForm->kp_form_id ?? 0;
 
         $issuedForm->save();
 
         // may naisip pala ko pano kung 16 na yung inissue, tapos may kupal na nagkamali inissue is kpform 12 baka mag + 10. Dapat ba may checker tayo
         // na kunware pag ang latest kp form na is > 12 di na siya mag +10 sa days? medyo magulo explain ko bukas ni note ko lang baka kasi malimutan ko.
-
-        if ($issuedForm->kp_form_id == 12 && $latestKpForm->kp_form_id < 12) {
+            
+        if ($issuedForm->kp_form_id == 12 && $latestKpForm < 12) {
             Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(15)->timestamp)]);
         }
 
 
         // 15 and 16 acts the same settlement
         // 16 is not needed after 15
-        if (($issuedForm->kp_form_id == 15 || $issuedForm->kp_form_id == 16) && $latestKpForm->kp_form_id < 16) {
+        if (($issuedForm->kp_form_id == 15 || $issuedForm->kp_form_id == 16) && $latestKpForm < 16) {
             $issuedKpForms = $action->checkIssuedKpForms($issuedForm->record_id, [15]);
 
             if (!count($issuedKpForms)) {

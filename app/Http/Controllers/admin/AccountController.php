@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Verification;
 use App\Models\Barangay;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -101,8 +102,12 @@ class AccountController extends Controller
 
     public function verify(Request $request)
     {
-        User::where('id', $request->id)->update(['verified_at' => now()]);
-        Mail::to('miguelarciagaa@gmail.com')->send(new MailOTP($otp));
+        $user = User::find($request->id);
+
+        $user->fill(['verified_at' => now()]);
+        $user->save();
+
+        Mail::to($user->email)->send(new Verification($user));
 
         return response()->json(['message' => 'Success'], 200);
     }
