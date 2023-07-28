@@ -45,7 +45,7 @@ class RecordsKpFormController extends Controller
 
     public function postStepOne(KpStepOneRequest $request)
     {
-        if(empty(session()->get('issued_kp_form'))){
+        if (empty(session()->get('issued_kp_form'))) {
             $issuedForm = new IssuedKpForm();
             $issuedForm->fill($request->validated());
             session()->put('issued_kp_form', $issuedForm);
@@ -115,14 +115,14 @@ class RecordsKpFormController extends Controller
         // may naisip pala ko pano kung 16 na yung inissue, tapos may kupal na nagkamali inissue is kpform 12 baka mag + 10. Dapat ba may checker tayo
         // na kunware pag ang latest kp form na is > 12 di na siya mag +10 sa days? medyo magulo explain ko bukas ni note ko lang baka kasi malimutan ko.
 
-        if( $issuedForm->kp_form_id == 12 && $latestKpForm->kp_form_id < 12) {
+        if ($issuedForm->kp_form_id == 12 && $latestKpForm->kp_form_id < 12) {
             Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(15)->timestamp)]);
         }
 
 
         // 15 and 16 acts the same settlement
         // 16 is not needed after 15
-        if(($issuedForm->kp_form_id == 15 || $issuedForm->kp_form_id == 16) && $latestKpForm->kp_form_id < 16) {
+        if (($issuedForm->kp_form_id == 15 || $issuedForm->kp_form_id == 16) && $latestKpForm->kp_form_id < 16) {
             $issuedKpForms = $action->checkIssuedKpForms($issuedForm->record_id, [15]);
 
             if (!count($issuedKpForms)) {
@@ -133,18 +133,18 @@ class RecordsKpFormController extends Controller
         $kpFields = session()->get('kp_fields');
         $kpFieldsArray = array();
 
-        if($issuedForm->kp_form_id == 8 || $issuedForm->kp_form_id == 9) {
+        if ($issuedForm->kp_form_id == 8 || $issuedForm->kp_form_id == 9) {
             Summon::updateOrCreate(['record_id' => $issuedForm->record_id, 'kp_form_id' => $issuedForm->kp_form_id])->increment('attempt');
         }
 
-        foreach($kpFields as $tag_id => $value) {
-            if(!$value) continue;
-            
+        foreach ($kpFields as $tag_id => $value) {
+            if (!$value) continue;
+
             array_push($kpFieldsArray, ['issued_kp_form_id' => $issuedForm->id, 'tag_id' => $tag_id, 'value' => $value, 'created_at' => $nowTimestamp, 'updated_at' => $nowTimestamp]);
         };
 
         IssuedKpFormField::insert($kpFieldsArray);
-        
+
         return view('pages.kp_forms.create.success', ['record_id' => $issuedForm->record_id]);
     }
 
@@ -193,7 +193,8 @@ class RecordsKpFormController extends Controller
      */
     public function destroy(string $recordId, string $issuedKpFormId)
     {
-        dd($recordId, $issuedKpFormId);
+        IssuedKpForm::where('id', $issuedKpFormId)->where('record_id', $recordId)->delete();
+
+        return redirect()->route('records.kp-forms.index', ['record' => $recordId]);
     }
 }
-

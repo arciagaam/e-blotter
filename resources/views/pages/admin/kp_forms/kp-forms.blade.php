@@ -49,7 +49,7 @@
                             </td>
                             <td>
                                 <div class="flex w-full h-full justify-center items-center gap-2">
-                                    <a href="{{ route('kp-forms.show', ['id' => $kpForm->id]) }}" class="btn-outline"
+                                    <a href="{{ route('admin.kp-forms.show', ['kp_form' => $kpForm->id]) }}" class="btn-outline"
                                         type="button">Preview</a>
                                 </div>
                             </td>

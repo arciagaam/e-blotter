@@ -7,7 +7,7 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 
-class AccountController extends Controller
+class AccountsController extends Controller
 {
     /**
      * Display a listing of the resource.

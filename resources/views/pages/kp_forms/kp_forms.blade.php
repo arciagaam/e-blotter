@@ -29,11 +29,11 @@
                                 <a class="btn-outline success" target="_blank"
                                     href="{{ route('records.kp-forms.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
                                 <a class="btn-outline" href="{{ route('records.kp-forms.edit', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Edit</a>
-                                <form action="{{ route('records.kp-forms.destroy', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}" method="post">
-                                    @csrf
+                                {{-- <form action="{{ route('records.kp-forms.destroy', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}" method="post">
                                     @method('DELETE')
                                     <button class="btn-outline danger" type="submit">Delete</button>
-                                </form>
+                                </form> --}}
+                                <button data-target="#delete" data-form-record-id="{{ $record }}" data-form-issued-kp-form-id="{{ $form->id }}" class="btn-outline danger">Delete</button>
                             </div>
                         </div>
                     @endforeach
@@ -61,3 +61,19 @@
     </div>
 
 </x-layout>
+
+<x-modal id="delete">
+    <x-slot:heading>
+        Delete Issued KP Form
+    </x-slot:heading>
+
+    <form action="#" method="POST" id="delete-kp-form" data-action="{{ route('records.kp-forms.destroy', ['recordId' => ':recordid', 'issuedKpFormId' => ':issuedkpformid']) }}">
+        @csrf
+        @method("DELETE")
+        <p>Are you sure you want to delete this KP Form?</p>
+    </form>
+
+    <x-slot:footer>
+        <button class="btn-filled danger" form="delete-kp-form">Delete</button>
+    </x-slot:footer>
+</x-modal>

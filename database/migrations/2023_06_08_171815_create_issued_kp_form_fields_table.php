@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('issued_kp_form_fields', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('issued_kp_form_id')->nullable()->constrained('issued_kp_forms')->cascadeOnUpdate();
+            $table->foreignId('issued_kp_form_id')->nullable()->constrained('issued_kp_forms')->cascadeOnUpdate()->cascadeOnDelete();
             $table->string('tag_id');
             $table->text('value');
             $table->timestamps();

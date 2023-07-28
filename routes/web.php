@@ -58,11 +58,7 @@ Route::prefix('/admin')->group(function () {
             Route::resource('records', RecordController::class)
             ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
 
-    
-            Route::prefix('/kp-forms')->group(function () {
-                Route::get('/', [KpFormController::class, 'index']);
-                Route::get('/{id}', [KpFormController::class, 'show']);
-            });
+            Route::resource('kp-forms', KpFormController::class)->only(['index', 'show']);
 
             Route::resource('accounts', AccountController::class)
             ->only(['index', 'show', 'edit', 'update', 'destroy']);
