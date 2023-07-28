@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
-class KpStepTwoRequest extends FormRequest
+class RecordsKpFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -63,7 +63,7 @@ class KpStepTwoRequest extends FormRequest
             'complain' => 'sometimes|required',
             'relief' => 'sometimes|required',
 
-            //KP FORM 8, 9, 12, 18, 19, 26
+            //KP FORM 8, 9, 18, 19, 26
             'hearing' => 'sometimes|required',
 
             //KP FORM 9

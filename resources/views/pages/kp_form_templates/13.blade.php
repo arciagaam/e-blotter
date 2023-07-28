@@ -1,48 +1,46 @@
 <x-kp-form-submit>
     <div class="flex flex-col gap-2">
-        <div class="form-input-container">
-            <div class="flex flex-row">
-                <label for="witness_1" class="flex gap-2 items-center">Witness 1:</label>
-            </div>
-            <input type="text" class="form-input" name="witness_1" id="witness_1" value="{{ session()->has('editing_kp_form') ? $issuedKpForm->issuedKpFormFields->where('tag_id', 'witness_1')->value('value') : '' }}">
+        <div class="flex flex-col gap-2" data-type="input-container">
+            @if (session()->has('editing_kp_form'))
+                @foreach ($issuedKpForm->issuedKpFormFields->where('tag_id', 'witness')->values() as $key => $value)
+                    @if ($key == 0)
+                        <div class="form-input-container w-full">
+                            <div class="flex flex-row">
+                                <label for="witness_{{$key + 1}}" class="flex gap-2 items-center">Witness Name:</label>
+                            </div>
+                            <input type="text" class="form-input" name="witness[]" id="witness_{{$key + 1}}" data-count="{{ $key + 1 }}" value="{{ $value->value }}">
     
-            @error('witness_1')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div class="form-input-container">
-            <div class="flex flex-row">
-                <label for="witness_2" class="flex gap-2 items-center">Witness 2:</label>
-            </div>
-            <input type="text" class="form-input" name="witness_2" id="witness_2" value="{{ session()->has('editing_kp_form') ? $issuedKpForm->issuedKpFormFields->where('tag_id', 'witness_2')->value('value') : '' }}">
+                            @error('witness')
+                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+                    @else
+                        <div class="flex flex-row gap-2 lg:w-2/4">
+                            <div class="form-input-container w-full">
+                                <div class="flex flex-row">
+                                    <label for="witness_{{ $key + 1 }}" class="flex gap-2 items-center">Witness Name:</label>
+                                </div>
+                                <input type="text" class="form-input" name="witness[]" id="witness_{{ $key + 1 }}" data-count="{{ $key + 1 }}" value="{{ $value->value }}">
+                            </div>
+                            <button type="button" class="btn-outline danger h-fit mt-auto" data-type="delete">Delete</button>
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                <div class="form-input-container w-full">
+                    <div class="flex flex-row">
+                        <label for="witness_1" class="flex gap-2 items-center">Witness Name:</label>
+                    </div>
+                    <input type="text" class="form-input" name="witness[]" id="witness_1" data-count="1">
     
-            @error('witness_2')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-            @enderror
+                    @error('witness')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @enderror
+                </div>
+            @endif
         </div>
-
-        <div class="form-input-container">
-            <div class="flex flex-row">
-                <label for="witness_3" class="flex gap-2 items-center">Witness 3:</label>
-            </div>
-            <input type="text" class="form-input" name="witness_3" id="witness_3" value="{{ session()->has('editing_kp_form') ? $issuedKpForm->issuedKpFormFields->where('tag_id', 'witness_3')->value('value') : '' }}">
     
-            @error('witness_3')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div class="form-input-container">
-            <div class="flex flex-row">
-                <label for="witness_4" class="flex gap-2 items-center">Witness 4:</label>
-            </div>
-            <input type="text" class="form-input" name="witness_4" id="witness_4" value="{{ session()->has('editing_kp_form') ? $issuedKpForm->issuedKpFormFields->where('tag_id', 'witness_4')->value('value') : '' }}">
-    
-            @error('witness_4')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-            @enderror
-        </div>
+        <button type="button" class="btn-outline mt-4 w-fit" data-type="add">Add</button>
 
         <div class="form-input-container">
             <label for="hearing">You are hereby commanded to appear before me on</label>
@@ -55,3 +53,5 @@
         </div>
     </div>
 </x-kp-form-submit>
+
+@vite('resources/js/dynamic_input.js')

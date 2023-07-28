@@ -35,18 +35,22 @@
 
     <div class="flex gap-5">
         <p>TO:</p>
-        <div class="grid grid-cols-2 gap-5 w-full">
-            <p class="w-full border-b border-0 border-black">{{$tagIds['witness_1'] ?? ''}}</p>
-            <p class="w-full border-b border-0 border-black">{{$tagIds['witness_2'] ?? ''}}</p>
-            <p class="w-full border-b border-0 border-black">{{$tagIds['witness_3'] ?? ''}}</p>
-            <p class="w-full border-b border-0 border-black">{{$tagIds['witness_4'] ?? ''}}</p>
+        <div class="grid grid-cols-2 gap-x-5 gap-y-2 w-full">
+            @if (isset($tagIds['witness']))
+                @foreach ($tagIds['witness'] as $witness)
+                    <p class="w-full border-b border-0 border-black">{{$witness ?? ''}}</p>
+                @endforeach
+            @else
+                <p class="w-full border-b border-0 border-black"></p>
+                <p class="w-full border-b border-0 border-black"></p>
+            @endif
         </div>
     </div>
 
     <p class="self-center">Witnesses</p>
 
-    <p class="self-start text-justify">You are hereby required to appear before me on the <span class="underline">{{date('jS', strtotime($tagIds['hearing']))}}</span> day of <span class="underline">{{date('F', strtotime($tagIds['hearing']))}}</span>,
-        <span class="underline">{{date('Y', strtotime($tagIds['hearing']))}}</span> at <span class="underline">{{date('h:i', strtotime($tagIds['hearing']))}}</span> o’clock in the <span @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'am'])>morning</span>/<span  @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'pm'])>afternoon</span>, then and there to testify
+    <p class="self-start text-justify">You are hereby required to appear before me on the <span class="underline">{{date('jS', strtotime($tagIds['hearing'][0]))}}</span> day of <span class="underline">{{date('F', strtotime($tagIds['hearing'][0]))}}</span>,
+        <span class="underline">{{date('Y', strtotime($tagIds['hearing'][0]))}}</span> at <span class="underline">{{date('h:i', strtotime($tagIds['hearing'][0]))}}</span> o’clock in the <span @class(['underline' => date('a', strtotime($tagIds['hearing'][0])) == 'am'])>morning</span>/<span  @class(['underline' => date('a', strtotime($tagIds['hearing'][0])) == 'pm'])>afternoon</span>, then and there to testify
         in the hearing of the above-captioned case.</p>
 
     <p class="self-start">This <span class="underline">{{date('jS', strtotime($issuedForm->created_at))}}</span> day of <span class="underline">{{date('F', strtotime($issuedForm->created_at))}}</span>, <span class="underline">{{date('Y', strtotime($issuedForm->created_at))}}</span>.</p>

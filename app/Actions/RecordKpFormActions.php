@@ -6,9 +6,7 @@ use App\Models\IssuedKpForm;
 use App\Models\Summon;
 use App\Actions\Get;
 use App\Models\IssuedKpFormField;
-use Illuminate\Database\Eloquent\Builder;
-// use Illuminate\Database\Query\Builder;
-use Illuminate\Database\Query\JoinClause;
+use Illuminate\Database\Eloquent\Collection;
 
 class RecordKpFormActions
 {
@@ -19,9 +17,17 @@ class RecordKpFormActions
             'record' => ['victim', 'suspect']
         ])->where('id', $issuedKpFormId)->where('record_id', $recordId)->first();
 
-        $tagIds = $issuedForm->issuedKpFormFields->mapWithKeys(function ($item, int $key) {
-            return [$item['tag_id'] => $item['value']];
-        });
+        $tagIds = new Collection();
+
+        if ($this->hasSimilarTags($issuedForm->kp_form_id)) {
+            $tagIds = $issuedForm->issuedKpFormFields->mapToGroups(function ($item, int $key) {
+                return [$item['tag_id'] => $item['value']];
+            });
+        } else {
+            $tagIds = $issuedForm->issuedKpFormFields->mapWithKeys(function ($item, int $key) {
+                return [$item['tag_id'] => $item['value']];
+            });
+        }
 
         $forms = array();
         $relatedForms = IssuedKpForm::relatedKpForms($recordId, getKpRelations($issuedForm->kp_form_id));
@@ -40,6 +46,14 @@ class RecordKpFormActions
         }
 
         return [$issuedForm, $tagIds, $forms];
+    }
+
+    public function hasSimilarTags($id): bool {
+        switch($id) {
+            case 11: return true;
+            case 13: return true;
+            default: return false;
+        }
     }
 
     // SHOW MESSAGE AND RECOMMENDATION LOGIC

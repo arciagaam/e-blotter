@@ -6,6 +6,7 @@ use App\Actions\GetKpFormMessageActions;
 use App\Actions\RecordKpFormActions;
 use App\Http\Requests\KpStepOneRequest;
 use App\Http\Requests\KpStepTwoRequest;
+use App\Http\Requests\RecordsKpFormRequest;
 use App\Models\IssuedKpForm;
 use App\Models\IssuedKpFormField;
 use App\Models\KpForm;
@@ -140,6 +141,14 @@ class RecordsKpFormController extends Controller
         foreach ($kpFields as $tag_id => $value) {
             if (!$value) continue;
 
+            if (is_array($value)) {
+                foreach ($value as $val) {
+                    array_push($kpFieldsArray, ['issued_kp_form_id' => $issuedForm->id, 'tag_id' => $tag_id, 'value' => $val, 'created_at' => $nowTimestamp, 'updated_at' => $nowTimestamp]);
+                }
+
+                continue;
+            }
+
             array_push($kpFieldsArray, ['issued_kp_form_id' => $issuedForm->id, 'tag_id' => $tag_id, 'value' => $value, 'created_at' => $nowTimestamp, 'updated_at' => $nowTimestamp]);
         };
 
@@ -163,8 +172,6 @@ class RecordsKpFormController extends Controller
     {
         [$issuedForm, $tagIds, $forms] = $action->handleShow($recordId, $issuedKpFormId);
 
-        // dd($issuedForm, $tagIds, $forms);
-
         return view("kp_forms.kp-form-$issuedForm->kp_form_id", ['issuedForm' => $issuedForm, 'tagIds' => collect($tagIds), 'relatedForms' => $forms]);
     }
 
@@ -182,10 +189,25 @@ class RecordsKpFormController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $recordId, string $issuedKpFormId)
+    public function update(RecordsKpFormRequest $request, string $recordId, string $issuedKpFormId, RecordsKpFormService $service)
     {
-        dd($request->all());
-        dd($recordId, $issuedKpFormId);
+        $issuedKpForm = IssuedKpForm::where('id', $issuedKpFormId)->where('record_id', $recordId)->first();
+
+        switch ($issuedKpForm->kp_form_id) {
+            case 11: 
+                $service->handleKpFormUpdate($issuedKpForm, $request->validated(), $issuedKpFormId, 'lupon');
+                break;
+            case 13:
+                $service->handleKpFormUpdate($issuedKpForm, $request->validated(), $issuedKpFormId, 'witness');
+                break;
+            default: 
+                foreach ($request->validated() as $key => $value) {
+                    IssuedKpFormField::where('issued_kp_form_id', $issuedKpFormId)->where('tag_id', $key)->update(['value' => $value]);
+                }
+                break;
+        }
+
+        return redirect()->route('records.kp-forms.index', ['record' => $recordId]);        
     }
 
     /**
