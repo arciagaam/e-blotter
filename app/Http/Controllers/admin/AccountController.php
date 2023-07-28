@@ -7,6 +7,7 @@ use App\Models\Barangay;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -100,7 +101,8 @@ class AccountController extends Controller
 
     public function verify(Request $request)
     {
-        $user = User::findOrFail($request->id)->update(['verified_at' => now()]);
+        User::where('id', $request->id)->update(['verified_at' => now()]);
+        Mail::to('miguelarciagaa@gmail.com')->send(new MailOTP($otp));
 
         return response()->json(['message' => 'Success'], 200);
     }
