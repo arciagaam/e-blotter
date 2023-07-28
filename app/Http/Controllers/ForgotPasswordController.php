@@ -35,7 +35,7 @@ class ForgotPasswordController extends Controller
         $otp = rand(100000, 999999);
 
         OTP::updateOrCreate(['user_id' => $user->id], ['user_id' => $user->id, 'token' => $otp, 'expiration' => 3600]);
-        Mail::to('miguelarciagaa@gmail.com')->send(new MailOTP($otp));
+        Mail::to($request->email)->send(new MailOTP($otp));
 
         return redirect('/forgot-password/step-two');
     }

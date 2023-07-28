@@ -10,7 +10,5 @@ class OTPController extends Controller
 {
     public function mail() {
 
-
-
     }
 }
