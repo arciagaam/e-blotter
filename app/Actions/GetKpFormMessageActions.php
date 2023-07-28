@@ -164,6 +164,8 @@ class GetKpFormMessageActions
 
         if(count($issuedKpForms)) {
             return $this->generateMessage('Form 20 Issued and agreement from Form 16 was not followed', 'Close the case', []);
+        } else {
+            return $this->generateMessage('Form 20 Issued', 'Close the case', []);
         }
     }
 
