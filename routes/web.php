@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/logout', [Authentication::class, 'logout'])->name('logout');
 
 Route::get('/kpformtest', function() {
-    return view('kp_forms.kp-form-17');
+    return view('kp_forms.kp-form-6');
 });
 
 Route::prefix('/admin')->group(function () {

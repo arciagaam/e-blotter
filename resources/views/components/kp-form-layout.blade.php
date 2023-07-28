@@ -27,7 +27,7 @@
     </style>
 </head>
 
-@props(['body' => true])
+@props(['body' => true, 'office' => 'OFFICE OF THE LUPONG TAGAPAMAYAPA'])
 
 <body>
     <div id="main" class="flex flex-col gap-8">
@@ -41,7 +41,7 @@
                             class="underline underline-offset-4">{{ auth()->user()->barangays[0]->name }}</span></p>
                 </div>
 
-                <p class="self-center">OFFICE OF THE LUPONG TAGAPAMAYAPA</p>
+                <p class="self-center">{{ strtoupper($office) }}</p>
             </div>
         @endif
 
@@ -51,4 +51,4 @@
 
 </html>
 
-@vite('/resources/js/print_window.js')
+{{-- @vite('/resources/js/print_window.js') --}}
