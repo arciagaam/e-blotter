@@ -42,19 +42,21 @@
         </div>
     </div>
 
+    {{-- {{ dd($tagIds, date('Y', strtotime($tagIds['hearing']))) }} --}}
+
     <div class="flex flex-col gap-4 items-center">
 
         <p class="self-start text-justify">You are hereby summoned to appear before me in person, together with your
-            witnesses, on the <span class="underline">{{ date('jS', strtotime($relatedForms['8']['hearing'])) }}</span>
+            witnesses, on the <span class="underline">{{ date('jS', strtotime($tagIds['hearing'])) }}</span>
             day of
-            <span class="underline">{{ date('F', strtotime($relatedForms['8']['hearing'])) }}</span>, <span
-                class="underline">{{ date('Y', strtotime($relatedForms['8']['hearing'])) }}</span> at <span
-                class="underline">{{ date('h:i', strtotime($relatedForms['8']['hearing'])) }}</span>
+            <span class="underline">{{ date('F', strtotime($tagIds['hearing'])) }}</span>, <span
+                class="underline">{{ date('Y', strtotime($tagIds['hearing'])) }}</span> at <span
+                class="underline">{{ date('h:i', strtotime($tagIds['hearing'])) }}</span>
             o’clock in the <span @class([
-                'underline' => date('a', strtotime($relatedForms['8']['hearing'])) == 'am',
+                'underline' => date('a', strtotime($tagIds['hearing'])) == 'am',
             ])>morning</span>/<span
                 @class([
-                    'underline' => date('a', strtotime($relatedForms['8']['hearing'])) == 'pm',
+                    'underline' => date('a', strtotime($tagIds['hearing'])) == 'pm',
                 ])>afternoon</span>, then and there to answer to a complaint
             made before me, copy of which is attached hereto, for mediation/conciliation
             of your dispute with complainant/s.
@@ -65,7 +67,7 @@
 
         <p class="self-start">FAIL NOT or else face punishment as for contempt of court.</p>
 
-        <p class="self-start">This <span class="underline">{{date('jS', strtotime($relatedForms['7']['created_at']))}}</span> day of <span class="underline">{{date('F', strtotime($relatedForms['7']['created_at']))}}</span>, <span class="underline">{{date('Y', strtotime($relatedForms['7']['created_at']))}}</span>.</p>
+        <p class="self-start">This <span class="underline">{{isset($relatedForms['7']) ? date('jS', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span> day of <span class="underline">{{isset($relatedForms['7']) ? date('F', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span>, <span class="underline">{{isset($relatedForms['7']) ? date('Y', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span>.</p>
 
         <div class="flex flex-col w-max self-start">
             <p class="w-full h-4 border-b border-0 border-black"></p>

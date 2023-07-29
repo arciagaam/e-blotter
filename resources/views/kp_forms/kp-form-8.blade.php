@@ -20,7 +20,7 @@
     </div>
 
     <div>
-        <p>This <span class="underline">{{date('jS', strtotime($relatedForms['7']['created_at']))}}</span> day of <span class="underline">{{date('F', strtotime($relatedForms['7']['created_at']))}}</span>, <span class="underline">{{date('Y', strtotime($relatedForms['7']['created_at']))}}</span>.</p>
+        <p>This <span @class(['underline' => isset($relatedForms['7'])])>{{ isset($relatedForms['7']) ? date('jS', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span> day of <span @class(['underline' => isset($relatedForms['7'])])>{{ isset($relatedForms['7']) ? date('F', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span>, <span @class(['underline' => isset($relatedForms['7'])])>{{ isset($relatedForms['7']) ? date('Y', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span>.</p>
     </div>
 
     <div class="flex flex-col w-max">
@@ -29,7 +29,7 @@
     </div>
 
     <div>
-        <p>Notified this <span class="underline">{{date('jS', strtotime($relatedForms['7']['created_at']))}}</span> day of <span class="underline">{{date('F', strtotime($relatedForms['7']['created_at']))}}</span>, <span class="underline">{{date('Y', strtotime($relatedForms['7']['created_at']))}}</span>.</p>
+        <p>Notified this <span @class(['underline' => isset($relatedForms['7'])])>{{ isset($relatedForms['7']) ? date('jS', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span> day of <span @class(['underline' => isset($relatedForms['7'])])>{{ isset($relatedForms['7']) ? date('F', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span>, <span @class(['underline' => isset($relatedForms['7'])])>{{ isset($relatedForms['7']) ? date('Y', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span>.</p>
     </div>
 
     <div class="flex flex-col w-max">

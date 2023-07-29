@@ -50,7 +50,7 @@
         You are hereby required to appear before me/the Pangkat on the
         <span class="underline">{{date('jS', strtotime($tagIds['hearing']))}}</span> day of <span class="underline">{{date('F', strtotime($tagIds['hearing']))}}</span>, <span class="underline">{{date('Y', strtotime($tagIds['hearing']))}}</span>, at <span class="underline">{{date('h:i', strtotime($tagIds['hearing']))}}</span> o’clock in the
         <span @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'am'])>morning</span>/<span  @class(['underline' => date('a', strtotime($tagIds['hearing'])) == 'pm'])>afternoon</span> to explain why you failed to appear for mediation/
-        conciliation scheduled on <span class="underline">{{date('F j, Y', strtotime($relatedForms['8']['hearing']))}}</span> and why your
+        conciliation scheduled on <span class="underline">{{ isset($relatedForms['9']) ? date('F j, Y', strtotime($relatedForms['9']['hearing'])) : str_repeat('_', 16) }}</span> and why your
         complaint should not be dismissed, a certificate to bar the filing of your
         action on court/government office should not be issued, and contempt
         proceedings should not be initiated in court for willful failure or refusal
