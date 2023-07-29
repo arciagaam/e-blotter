@@ -11,6 +11,7 @@ class IssuedKpFormField extends Model
     use HasFactory;
 
     protected $fillable = [
+        'issued_kp_form_id',
         'tag_id',
         'value',
     ];

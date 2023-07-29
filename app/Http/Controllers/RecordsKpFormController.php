@@ -200,6 +200,9 @@ class RecordsKpFormController extends Controller
             case 13:
                 $service->handleKpFormUpdate($issuedKpForm, $request->validated(), $issuedKpFormId, 'witness');
                 break;
+            case 17:
+                $service->handleKpFormKeysUpdate($issuedKpForm, $request->validated(), $issuedKpFormId, ['fraud', 'violence', 'intimidation']);
+                break;
             default: 
                 foreach ($request->validated() as $key => $value) {
                     IssuedKpFormField::where('issued_kp_form_id', $issuedKpFormId)->where('tag_id', $key)->update(['value' => $value]);
