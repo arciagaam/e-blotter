@@ -1,6 +1,6 @@
 @php $ctr = 1; @endphp
 
-<x-kp-form-layout office="OFFICE OF THE PUNONG BARANGAY">
+<x-kp-form-preview-layout office="OFFICE OF THE PUNONG BARANGAY">
 
     <div class="self-end">
         <p>________________________</p>
@@ -62,4 +62,4 @@
     </div>
 
 
-</x-kp-form-layout>
+</x-kp-form-preview-layout>

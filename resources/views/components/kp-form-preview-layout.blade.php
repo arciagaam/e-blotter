@@ -17,6 +17,8 @@
     }
 </style>
 
+@props(['office' => 'OFFICE OF THE LUPONG TAGAPAMAYAPA'])
+
 <div id="main" class="print-area flex flex-col gap-8 font-serif w-[595pt]">
     <div class="flex flex-col gap-2">
         <div class="flex flex-col items-center">
@@ -26,7 +28,7 @@
             <p>Barangay ___________________</p>
         </div>
 
-        <p class="self-center">OFFICE OF THE LUPONG TAGAPAMAYAPA</p>
+        <p class="self-center">{{ strtoupper($office) }}</p>
     </div>
 
     {{ $slot }}
