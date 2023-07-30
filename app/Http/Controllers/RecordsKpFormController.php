@@ -138,6 +138,10 @@ class RecordsKpFormController extends Controller
             Summon::updateOrCreate(['record_id' => $issuedForm->record_id, 'kp_form_id' => $issuedForm->kp_form_id])->increment('attempt');
         }
 
+        if(array_key_exists('members', $kpFields)) {
+            $kpFields['members'] = array_filter($kpFields['members'], fn($member) => $member!=null);
+        }
+
         foreach ($kpFields as $tag_id => $value) {
             if (!$value) continue;
 
