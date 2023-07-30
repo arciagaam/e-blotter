@@ -50,7 +50,9 @@ class RecordKpFormActions
 
     public function hasSimilarTags($id): bool {
         switch($id) {
-            case 11: return true;
+            case 1:
+            case 4:
+            case 11:
             case 13: return true;
             default: return false;
         }

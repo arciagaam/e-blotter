@@ -1,7 +1,7 @@
 <x-kp-form-layout office="OFFICE OF THE PUNONG BARANGAY">
 
     <div class="self-end">
-        <p>________________________</p>
+        <p class="underline underline-offset-4">{{ date('F j, Y', strtotime($issuedForm->created_at)) }}</p>
     </div>
 
     <div class="flex flex-col items-center">
@@ -11,7 +11,7 @@
     <div class="flex flex-col gap-4">
         <div class="flex flex-row">
             <p>To:
-                <span class="underline">____________</span>
+                <span class="underline">{{ $tagIds['to'] }}</span>
             </p>
         </div>
     

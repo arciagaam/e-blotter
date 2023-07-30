@@ -1,9 +1,15 @@
-@php $ctr = 1; @endphp
+@php 
+    $ctr = 0;
+
+    if ($tagIds['members']) {
+        $members = count($tagIds['members']) ? $tagIds['members'] : [];
+    }
+@endphp
 
 <x-kp-form-layout office="OFFICE OF THE PUNONG BARANGAY">
 
     <div class="self-end">
-        <p>________________________</p>
+        <p class="underline underline-offset-4">{{ date('F j, Y', strtotime($issuedForm->created_at)) }}</p>
     </div>
 
     <div class="flex flex-col items-center">
@@ -17,9 +23,9 @@
             year following their appointment.</p>
 
         <ol class="grid grid-rows-[repeat(10,_minmax(0,_1fr))] grid-flow-col list-decimal list-inside gap-y-2">
-            @while ($ctr <= 20)
+            @while ($ctr < 20)
                 <li>
-                    <p class="inline-block border-b border-black flex-1 w-5/6"></p>
+                    <p class="inline-block border-b border-black flex-1 w-5/6">{{ $members->has($ctr) ? $members[$ctr] : '' }}</p>
                 </li>
                 @php $ctr += 1; @endphp
             @endwhile

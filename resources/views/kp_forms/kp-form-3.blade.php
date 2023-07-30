@@ -1,7 +1,7 @@
 <x-kp-form-layout office="OFFICE OF THE PUNONG BARANGAY">
 
     <div class="self-end">
-        <p>________________________</p>
+        <p class="underline underline-offset-4">{{ date('F j, Y', strtotime($issuedForm->created_at)) }}</p>
     </div>
 
     <div class="flex flex-col items-center">
@@ -21,7 +21,7 @@
             Barangay as a MEMBER OF THE LUPONG TAGAPAMAYAPA,
             effective upon taking your oath of office, and until a new Lupon is
             constituted on the third year following your appointment. You may
-            take your oath of office before the Punong Barangay on ________.</p>
+            take your oath of office before the Punong Barangay on <span class="underline">{{ date('F j, Y', strtotime($tagIds['summon'])) }}</span>.</p>
     
         <div class="flex flex-col gap-4">
             <p>Very truly yours,</p>

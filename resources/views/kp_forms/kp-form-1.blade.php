@@ -1,9 +1,15 @@
-@php $ctr = 1; @endphp
+@php 
+    $ctr = 0;
+
+    if ($tagIds['members']) {
+        $members = count($tagIds['members']) ? $tagIds['members'] : [];
+    }
+@endphp
 
 <x-kp-form-layout office="OFFICE OF THE PUNONG BARANGAY">
 
     <div class="self-end">
-        <p>________________________</p>
+        <p class="underline underline-offset-4">{{ date('F j, Y', strtotime($issuedForm->created_at)) }}</p>
     </div>
 
     <div class="flex flex-col items-center">
@@ -20,9 +26,9 @@
             considering for appointment are the following:</p>
 
         <ol class="grid grid-rows-[repeat(13,_minmax(0,_1fr))] grid-flow-col list-decimal list-inside gap-y-2">
-            @while ($ctr <= 25)
+            @while ($ctr < 25)
                 <li>
-                    <p class="inline-block border-b border-black flex-1 w-5/6"></p>
+                    <p class="inline-block border-b border-black flex-1 w-5/6">{{ $members->has($ctr) ? $members[$ctr] : '' }}</p>
                 </li>
                 @php $ctr += 1; @endphp
             @endwhile
@@ -42,7 +48,7 @@
         <p>
             All persons are hereby enjoined to immediately inform me and of their
             opposition to or endorsement of any or all the proposed members or recommend to me other persons not
-            included in the list but not later than the ________ day of _______, ____ (the last day for posting this
+            included in the list but not later than the <span class="underline">{{date('jS', strtotime($tagIds['hearing'][0]))}}</span> day of <span class="underline">{{date('F', strtotime($tagIds['hearing'][0]))}}</span>, <span class="underline">{{date('Y', strtotime($tagIds['hearing'][0]))}}</span> (the last day for posting this
             notice).
         </p>
     

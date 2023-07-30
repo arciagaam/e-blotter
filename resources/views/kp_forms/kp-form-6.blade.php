@@ -1,9 +1,8 @@
 @php $ctr = 1; @endphp
 
 <x-kp-form-layout>
-
     <div class="self-end">
-        <p>________________________</p>
+        <p class="underline underline-offset-4">{{ date('F j, Y', strtotime($issuedForm->created_at)) }}</p>
     </div>
 
     <div class="flex flex-col items-center">
@@ -13,7 +12,7 @@
     <div class="flex flex-col gap-4">
         <div class="flex flex-row">
             <p>To:
-                <span class="underline">____________</span>
+                <span class="underline">{{ $tagIds['to'] }}</span>
             </p>
         </div>
 
@@ -23,14 +22,13 @@
             on the following ground/s:</p>
 
         <p>
-            [ ]
-            <span class="inline">incapacity to discharge the duties of your office as shown by <span
-                    class="break-all">__________________________________________</span></span>
+            [{{ $tagIds->has('incapacity_to_discharge') ? '/' : '' }}]
+            <span class="inline">incapacity to discharge the duties of your office as shown by <span @class(['underline' => $tagIds->has('incapacity_to_discharge'), 'break-all' => !$tagIds->has('incapacity_to_discharge')]) class="break-all">{{ $tagIds->has('incapacity_to_discharge') ? $tagIds['incapacity_to_discharge'] : str_repeat('_', 32) }}</span></span>
         </p>
 
         <p>
-            [ ]
-            <span class="inline">unsuitability by reason of <span class="break-all">__________________________________________</span>
+            [{{ $tagIds->has('unsuitability') ? '/' : '' }}]
+            <span class="inline">unsuitability by reason of <span @class(['underline' => $tagIds->has('unsuitability'), 'break-all' => !$tagIds->has('unsuitability')]) class="break-all">{{ $tagIds->has('unsuitability') ? $tagIds['unsuitability'] : str_repeat('_', 32) }}</span>
             (Check whichever is applicable and detail or specify the act/s or omission/s constituting the ground/s for withdrawal.)</span>
         </p>
 

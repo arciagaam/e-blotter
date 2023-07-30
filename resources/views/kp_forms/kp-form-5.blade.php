@@ -1,7 +1,6 @@
 <x-kp-form-layout office="OFFICE OF THE PUNONG BARANGAY">
-
     <div class="self-end">
-        <p>________________________</p>
+        <p class="underline underline-offset-4">{{ date('F j, Y', strtotime($issuedForm->created_at)) }}</p>
     </div>
 
     <div class="flex flex-col items-center">
@@ -11,7 +10,7 @@
     <div class="flex flex-col gap-4">
 
         <p>Pursuant to Chapter 7, Title One, Book II, Local Government Code of
-            1991 (Republic Act No. 7160), I _______________, being duly
+            1991 (Republic Act No. 7160), I <span class="underline">{{ $tagIds['name_of_lupon'] }}</span>, being duly
             qualified and having been duly appointed MEMBER of the Lupong
             Tagapamayapa of this Barangay, do hereby solemnly swear (or affirm)
             that I will faithfully and conscientiously discharge to the best of my
@@ -32,7 +31,7 @@
         </div>
 
         <p>SUBSCRIBED AND SWORN to (or AFFIRMED) before me this
-            _____ day of __________, ______.</p>
+            <span class="underline">{{date('jS', strtotime($tagIds['subscribed']))}}</span> day of <span class="underline">{{date('F', strtotime($tagIds['subscribed']))}}</span>, <span class="underline">{{date('Y', strtotime($tagIds['subscribed']))}}</span>.</p>
 
         <div class="flex flex-col w-max self-end mt-4">
             <p class="w-full border-b border-0 border-black"></p>
