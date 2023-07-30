@@ -59,11 +59,24 @@ class RecordsKpFormRequest extends FormRequest
     {
         return [
 
+            //KP FORM 1
+            'members' => 'sometimes|required',
+
+            //KP FORM 2
+            'to' => 'sometimes|required',
+
+            //KP FORM 5
+            'name_of_lupon' => 'sometimes|required',
+            'subscribed' => 'sometimes|required',
+
+            //KP FORM 6
+            'incapacity_to_discharge' => 'sometimes|required',
+
             // KP FORM 7
             'complain' => 'sometimes|required',
             'relief' => 'sometimes|required',
 
-            //KP FORM 8, 9, 18, 19, 26
+            //KP FORM 8, 9, 12, 18, 19, 26
             'hearing' => 'sometimes|required',
 
             //KP FORM 9

@@ -24,10 +24,10 @@ class RecordsKpFormService
         $requestKpFormFields = collect($request[$tagId]);
 
         $updates = array(
-            'remove' => $issuedKpFormFields->diff($requestKpFormFields),
-            'insert' => $requestKpFormFields->diff($issuedKpFormFields)
+            'remove' => $issuedKpFormFields->isNotEmpty() ? $issuedKpFormFields->diff($requestKpFormFields) : [],
+            'insert' => $requestKpFormFields->isNotEmpty() ? $requestKpFormFields->diff($issuedKpFormFields) : []
         );
-
+        
         if (count($updates['remove'])) {
             IssuedKpFormField::where('issued_kp_form_id', $model->id)->where('tag_id', $tagId)->whereIn('value', $updates['remove'])->delete();
         }
@@ -36,11 +36,13 @@ class RecordsKpFormService
             $inserts = array();
 
             foreach ($updates['insert'] as $value) {
-                array_push($inserts, [
-                    'issued_kp_form_id' => $kpFormId,
-                    'tag_id' => $tagId,
-                    'value' => $value
-                ]);
+                if ($value) {
+                    array_push($inserts, [
+                        'issued_kp_form_id' => $kpFormId,
+                        'tag_id' => $tagId,
+                        'value' => $value
+                    ]);
+                }
             }
 
             IssuedKpFormField::insert($inserts);

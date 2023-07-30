@@ -198,6 +198,10 @@ class RecordsKpFormController extends Controller
         $issuedKpForm = IssuedKpForm::where('id', $issuedKpFormId)->where('record_id', $recordId)->first();
 
         switch ($issuedKpForm->kp_form_id) {
+            case 1:
+            case 4: 
+                $service->handleKpFormUpdate($issuedKpForm, $request->validated(), $issuedKpFormId, 'members');
+                break;
             case 11: 
                 $service->handleKpFormUpdate($issuedKpForm, $request->validated(), $issuedKpFormId, 'lupon');
                 break;
