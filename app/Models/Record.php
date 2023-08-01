@@ -80,7 +80,7 @@ class Record extends Model
 
     public function latestRecord(string $barangay_id): Record | null
     {
-        return $this->orderBy('barangay_blotter_number', 'desc')->where('barangay_id', $barangay_id)->first();
+        return $this->orderBy('barangay_blotter_number', 'desc')->where('barangay_id', $barangay_id)->withTrashed()->first();
     }
 
     public function scopeOfStatus(Builder $query, int $blotter_status_id)

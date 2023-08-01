@@ -8,10 +8,6 @@ use App\Models\Record;
 
 class IssuedKpFormObserver
 {
-    /**
-     * Handle the IssuedKpForm "created" event.
-     */
-
     public function getDefaults() {
         return [
             'barangay_id' => auth()->user()->barangays[0]->id, 
@@ -20,6 +16,9 @@ class IssuedKpFormObserver
         ];
     }
 
+    /**
+     * Handle the IssuedKpForm "created" event.
+     */
     public function created(IssuedKpForm $issuedKpForm): void
     {
         $recordNumber = Record::find($issuedKpForm->record_id)->first()->barangay_blotter_number;
@@ -34,15 +33,23 @@ class IssuedKpFormObserver
      */
     public function updated(IssuedKpForm $issuedKpForm): void
     {
-        //
+        $recordNumber = Record::find($issuedKpForm->record_id)->first()->barangay_blotter_number;
+        
+        AuditTrail::create([
+        ...$this->getDefaults(),
+        'action' => "Updated KP Form #$issuedKpForm->kp_form_id on Blotter Record $recordNumber"]);
     }
 
-    /**
+    /**p
      * Handle the IssuedKpForm "deleted" event.
      */
     public function deleted(IssuedKpForm $issuedKpForm): void
     {
-        //
+        $recordNumber = Record::find($issuedKpForm->record_id)->first()->barangay_blotter_number;
+        
+        AuditTrail::create([
+        ...$this->getDefaults(),
+        'action' => "Deleted KP Form #$issuedKpForm->kp_form_id on Blotter Record $recordNumber"]);
     }
 
     /**

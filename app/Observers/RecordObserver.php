@@ -41,7 +41,9 @@ class RecordObserver
      */
     public function deleted(Record $record): void
     {
-        //
+        AuditTrail::create([
+        ...$this->getDefaults(),
+        'action' => "Deleted Blotter Record Number $record->barangay_blotter_number"]);
     }
 
     /**

@@ -7,6 +7,7 @@ use App\Actions\RecordKpFormActions;
 use App\Http\Requests\KpStepOneRequest;
 use App\Http\Requests\KpStepTwoRequest;
 use App\Http\Requests\RecordsKpFormRequest;
+use App\Models\AuditTrail;
 use App\Models\IssuedKpForm;
 use App\Models\IssuedKpFormField;
 use App\Models\KpForm;
@@ -115,7 +116,7 @@ class RecordsKpFormController extends Controller
 
         // may naisip pala ko pano kung 16 na yung inissue, tapos may kupal na nagkamali inissue is kpform 12 baka mag + 10. Dapat ba may checker tayo
         // na kunware pag ang latest kp form na is > 12 di na siya mag +10 sa days? medyo magulo explain ko bukas ni note ko lang baka kasi malimutan ko.
-            
+
         if ($issuedForm->kp_form_id == 12 && $latestKpForm < 12) {
             Record::find($issuedForm->record_id)->update(['kp_deadline' => date('Y-m-d', now()->addDays(15)->timestamp)]);
         }
@@ -138,8 +139,8 @@ class RecordsKpFormController extends Controller
             Summon::updateOrCreate(['record_id' => $issuedForm->record_id, 'kp_form_id' => $issuedForm->kp_form_id])->increment('attempt');
         }
 
-        if(array_key_exists('members', $kpFields)) {
-            $kpFields['members'] = array_filter($kpFields['members'], fn($member) => $member!=null);
+        if (array_key_exists('members', $kpFields)) {
+            $kpFields['members'] = array_filter($kpFields['members'], fn ($member) => $member != null);
         }
 
         foreach ($kpFields as $tag_id => $value) {
@@ -196,13 +197,14 @@ class RecordsKpFormController extends Controller
     public function update(RecordsKpFormRequest $request, string $recordId, string $issuedKpFormId, RecordsKpFormService $service)
     {
         $issuedKpForm = IssuedKpForm::where('id', $issuedKpFormId)->where('record_id', $recordId)->first();
+        $record = Record::find($recordId);
 
         switch ($issuedKpForm->kp_form_id) {
             case 1:
-            case 4: 
+            case 4:
                 $service->handleKpFormUpdate($issuedKpForm, $request->validated(), $issuedKpFormId, 'members');
                 break;
-            case 11: 
+            case 11:
                 $service->handleKpFormUpdate($issuedKpForm, $request->validated(), $issuedKpFormId, 'lupon');
                 break;
             case 13:
@@ -211,14 +213,21 @@ class RecordsKpFormController extends Controller
             case 17:
                 $service->handleKpFormKeysUpdate($issuedKpForm, $request->validated(), $issuedKpFormId, ['fraud', 'violence', 'intimidation']);
                 break;
-            default: 
+            default:
                 foreach ($request->validated() as $key => $value) {
                     IssuedKpFormField::where('issued_kp_form_id', $issuedKpFormId)->where('tag_id', $key)->update(['value' => $value]);
                 }
                 break;
         }
 
-        return redirect()->route('records.kp-forms.index', ['record' => $recordId]);        
+        AuditTrail::create([
+            'barangay_id' => auth()->user()->barangays[0]->id,
+            'login_role_id' => session()->get('login_role'),
+            'user_id' => auth()->user()->id,
+            'action' => "Updated KP Form #$issuedKpForm->kp_form_id on Blotter Record $record->barangay_blotter_number"
+        ]);
+
+        return redirect()->route('records.kp-forms.index', ['record' => $recordId]);
     }
 
     /**

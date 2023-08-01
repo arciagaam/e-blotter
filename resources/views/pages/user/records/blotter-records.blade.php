@@ -8,17 +8,6 @@
             <div class="flex flex-row w-full justify-between items-center">
                 <form class="flex flex-col w-full gap-2">
                     <div class="flex flex-row">
-                        {{-- <div class="form-input-container flex-row gap-5">
-                            <div class="flex flex-row justify-center items-center">
-                                <label for="purok_id" class="flex gap-2 items-center">Select Purok</label>
-                            </div>
-
-                            <select class="form-input" name="purok_id" id="purok_id">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                            </select>
-                        </div> --}}
-
                         <a class="ml-auto btn-filled" href="{{ route('records.create') }}">New Record</a>
                     </div>
 
@@ -91,9 +80,10 @@
                                 </td>
                                 <td>
                                     <div class="flex w-full h-full justify-center items-center gap-2">
+                                        <a class="btn-outline success" target="_blank" href="{{ route('records.print', ['record' => $record->id]) }}">Print</a>
                                         <a href="{{ route('records.show', ['record' => $record->id]) }}" class="btn-outline" >Preview</a>
                                         <a href="{{ route('records.edit', ['record' => $record->id]) }}" class="btn-outline" >Edit</a>
-                                        <a class="btn-outline" target="_blank" href="{{ route('records.print', ['record' => $record->id]) }}">Print</a>
+                                        <button data-target="#delete" data-form-id="{{ $record->id }}" class="btn-outline danger">Delete</button>
                                     </div>
                                 </td>
                             </tr>
@@ -111,3 +101,18 @@
 
 </x-layout>
 
+<x-modal id="delete">
+    <x-slot:heading>
+        Delete Record
+    </x-slot:heading>
+
+    <form action="#" method="POST" id="delete-record-form" data-action="{{ route('records.destroy', ['record' => ':id']) }}">
+        @csrf
+        @method("DELETE")
+        <p>Are you sure you want to delete this record?</p>
+    </form>
+
+    <x-slot:footer>
+        <button class="btn-filled danger" form="delete-record-form">Delete</button>
+    </x-slot:footer>
+</x-modal>

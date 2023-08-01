@@ -245,10 +245,11 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
+                    <a href="{{ route('records.kp-forms.get.step-one', ['id' => $record->id]) }}" class="btn-filled" data-target="#print" type="button">Issue KP Form</a>
                     <button class="btn-outline" data-target="#schedule" type="button">Schedule of Reconciliation</button>
                     <a class="btn-outline text-center" href="{{ route('records.edit', ['record' => $record->id]) }}">Edit</a>
-                    <a class="btn-outline" target="_blank" href="{{ route('records.print', ['record' => $record->id]) }}">Print</a>
-                    <a href="{{ route('records.kp-forms.get.step-one', ['id' => $record->id]) }}" class="btn-filled" data-target="#print" type="button">Issue KP Form</a>
+                    <a class="btn-outline success" target="_blank" href="{{ route('records.print', ['record' => $record->id]) }}">Print</a>
+                    <button data-target="#delete" data-form-id="{{ $record->id }}" class="btn-outline danger">Delete</button>
                 </div>
             </div>
 
@@ -278,3 +279,19 @@
     </x-modal>
 
 </x-layout>
+
+<x-modal id="delete">
+    <x-slot:heading>
+        Delete Record
+    </x-slot:heading>
+
+    <form action="#" method="POST" id="delete-record-form" data-action="{{ route('records.destroy', ['record' => ':id']) }}">
+        @csrf
+        @method("DELETE")
+        <p>Are you sure you want to delete this record?</p>
+    </form>
+
+    <x-slot:footer>
+        <button class="btn-filled danger" form="delete-record-form">Delete</button>
+    </x-slot:footer>
+</x-modal>
