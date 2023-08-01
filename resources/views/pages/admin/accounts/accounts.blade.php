@@ -65,7 +65,7 @@
                                         <p class="w-fit bg-emerald-100 text-center rounded-full text-emerald-600 px-4 py-1">
                                             Verified</p>
                                     @else
-                                        <p class="bg-rose-100 text-center rounded-full text-rose-600 p-1">Unverified</p>
+                                        <p class="bg-rose-100 text-center rounded-full text-rose-600 px-4 py-1">Unverified</p>
                                     @endif
                                 </div>
                             </td>

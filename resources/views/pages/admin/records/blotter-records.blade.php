@@ -23,7 +23,7 @@
         <table id="main-table" class="main-table w-full">
             <thead>
                 <tr>
-                    <th class="cursor-pointer w-1/12">
+                    <th class="cursor-pointer w-[10%]">
                         <p>Blotter No.</p>
                     </th>
                     <th class="cursor-pointer">
@@ -47,7 +47,6 @@
                 </tr>
             </thead>
             <tbody>
-
                 @empty($records)
                     <tr>
                         <td colspan="100%" class="text-center">There are no data.</td>
@@ -56,7 +55,12 @@
                     @foreach ($records as $record)
                         <tr>
                             <td>
-                                <p>{{ $record->barangay_blotter_number }}</p>
+                                <div class="flex flex-row gap-2 items-center">
+                                    <p>{{ $record->barangay_blotter_number }}</p>
+                                    @isset($record->deleted_at)
+                                        <p class="bg-rose-100 text-center rounded-full text-rose-600 px-4 py-1">Deleted</p>
+                                    @endisset
+                                </div>
                             </td>
                             <td>
                                 <p>{{ $record->barangays->name }}</p>

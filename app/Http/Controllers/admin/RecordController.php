@@ -15,7 +15,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.records.blotter-records', ['records' => Record::latest()->filter(request('search'))->paginate(10), 'barangays' => Barangay::all()]);
+        return view('pages.admin.records.blotter-records', ['records' => Record::latest()->withTrashed()->filter(request('search'))->paginate(10), 'barangays' => Barangay::all()]);
     }
 
     /**
@@ -37,10 +37,11 @@ class RecordController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Record $record)
+    public function show(string $record)
     {
+        $record = Record::where('id', $record)->withTrashed()->with('victim', 'suspect', 'blotterStatus')->first();
         $civilStatus = new CivilStatus();
-        return view('pages.admin.records.show', ['record' => Record::where('id', $record->id)->with('victim', 'suspect', 'blotterStatus')->first(), 'civilStatus' => $civilStatus->getAllCivilStatus()]);
+        return view('pages.admin.records.show', ['record' => $record, 'civilStatus' => $civilStatus->getAllCivilStatus()]);
 
     }
 

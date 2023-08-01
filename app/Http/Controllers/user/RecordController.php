@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Record::class, 'record');
+    }
+
     /**
      * Display a listing of the resource.
      */
