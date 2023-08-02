@@ -11,7 +11,6 @@
         * {
             font-family: 'Times New Roman', Times, serif;
             text-decoration-skip-ink: none;
-            /* border: 1px solid #ff000025; */
         }
 
         @page {
@@ -51,4 +50,4 @@
 
 </html>
 
-{{-- @vite('/resources/js/print_window.js') --}}
+@vite('/resources/js/print_window.js')
