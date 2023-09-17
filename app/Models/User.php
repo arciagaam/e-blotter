@@ -56,14 +56,24 @@ class User extends Authenticatable
 
     public function scopeNonAdmin()
     {
-        return User::whereHas('roles', function($query) {
+        return User::whereHas('roles', function ($query) {
             return $query->where('role_id', '!=', 1);
         })->get();
     }
 
-    public function scopeGetBarangays() {
+    public function scopeGetBarangays()
+    {
         return User::join('user_barangays', 'user_barangays.user_id', 'users.id')
-        ->join('barangays', 'barangays.id', 'user_barangays.barangay_id');
+            ->join('barangays', 'barangays.id', 'user_barangays.barangay_id');
+    }
+
+    public function scopeGetNonDeletedUsers(Builder $query)
+    {
+        return $query->whereNull("users.deleted_at")
+            ->whereNot("users.id", 1)
+            ->join('user_barangays', 'user_barangays.user_id', 'users.id')
+            ->join('barangays', 'barangays.id', 'user_barangays.barangay_id')
+            ->select("users.username", "barangays.name as barangay_name");
     }
 
     public function roles(): BelongsToMany
@@ -85,5 +95,4 @@ class User extends Authenticatable
     {
         return $this->HasMany(User::class);
     }
-    
 }

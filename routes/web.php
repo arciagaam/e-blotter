@@ -16,6 +16,7 @@ use App\Mail\OTP;
 use App\Mail\TestEmail;
 use App\Models\LoginRole;
 use App\Models\Record;
+use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
@@ -33,10 +34,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/logout', [Authentication::class, 'logout'])->name('logout');
 
-Route::get('/kpformtest', function() {
-    return view('kp_forms.kp-form-6');
-});
-
 Route::prefix('/admin')->group(function () {
 
     Route::middleware('guest')->group(function () {
@@ -47,28 +44,26 @@ Route::prefix('/admin')->group(function () {
 
     Route::middleware(['admin', 'account_verified'])->group(function () {
 
-        Route::name('admin.')->group(function() {
+        Route::name('admin.')->group(function () {
             Route::prefix('/dashboard')->group(function () {
                 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
             });
-    
-            Route::prefix('records')->name('records.')->group(function() {
+
+            Route::prefix('records')->name('records.')->group(function () {
                 Route::get('print/{record}', [RecordController::class, 'print'])->name('print');
             });
             Route::resource('records', RecordController::class)
-            ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
+                ->only(['index', 'create', 'store', 'show', 'edit', 'update']);
 
             Route::resource('kp-forms', KpFormController::class)->only(['index', 'show']);
 
             Route::resource('accounts', AccountController::class)
-            ->only(['index', 'show', 'edit', 'update', 'destroy']);
-    
+                ->only(['index', 'show', 'edit', 'update', 'destroy']);
+
             Route::prefix('/accounts')->name('accounts.')->group(function () {
                 Route::post('/verify', [AccountController::class, 'verify'])->name('verify');
             });
         });
-
-
     });
 });
 
@@ -78,7 +73,9 @@ Route::prefix('/')->group(function () {
 
         Route::get('/', function () {
             $loginRoles = LoginRole::all();
-            return view('pages.user.auth.login', ['loginRoles' => $loginRoles]);
+            $users = User::getNonDeletedUsers()->get();
+
+            return view('pages.user.auth.login', ['loginRoles' => $loginRoles, "users" => $users]);
         })->name('userRoot');
 
         Route::get('/register', [UserController::class, 'index']);
@@ -112,11 +109,11 @@ Route::prefix('/')->group(function () {
             ->only(['index']);
 
         Route::post('/dashboard', [UserDashboardController::class, 'getHearingDates'])->name('dashboard.get-hearing-dates');
-        
-        Route::prefix('records')->name('records.')->group(function() {
+
+        Route::prefix('records')->name('records.')->group(function () {
             Route::get('print/{record}', [UserRecordController::class, 'print'])->name('print');
 
-            Route::prefix('kp-forms')->name('kp-forms.')->group(function() {
+            Route::prefix('kp-forms')->name('kp-forms.')->group(function () {
                 Route::get('/step-one/{id}', [RecordsKpFormController::class, 'stepOne'])->name('get.step-one');
                 Route::post('/step-one', [RecordsKpFormController::class, 'postStepOne'])->name('post.step-one');
 
@@ -137,7 +134,7 @@ Route::prefix('/')->group(function () {
         });
         Route::resource('records', UserRecordController::class);
 
-        Route::prefix('kp-forms')->name('kp-forms.')->group(function() {
+        Route::prefix('kp-forms')->name('kp-forms.')->group(function () {
             Route::get('/', [UserKpFormController::class, 'index']);
             Route::get('/{id}', [UserKpFormController::class, 'show'])->name('show');
         });

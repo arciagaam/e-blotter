@@ -26,16 +26,17 @@
                     <p class="lg:hidden text-4xl font-bold">E-Blotter</p>
                     <p class="italic lg:text-2xl lg:font-bold lg:not-italic">Barangay Officer Login</p>
                 </div>
-                
                 <div class="flex flex-col gap-2">
                     <div class="form-input-container">
-                        <label for="username">Username</label>
-                        <input class="form-input" type="text" name="username" id="username">
-                        @error('username')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
+                        <label for="username">Barangay</label>
+                        <select class="form-input" name="username" id="username">
+                            <option value="">-- SELECT YOUR BARANGAY --</option>
+                            @foreach ($users as $user)
+                                <option value="{{ $user->username }}">{{ $user->barangay_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
-    
+
                     <div class="form-input-container">
                         <label for="password">Password</label>
                         <input class="form-input" type="password" name="password" id="password">
@@ -43,7 +44,7 @@
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
-    
+
                     <div class="form-input-container">
                         <label for="login_role_id">Role</label>
                         <select class="form-input" name="login_role_id" id="login_role_id">
@@ -55,12 +56,12 @@
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
-    
+
                     @if (session()->has('error'))
                         <p class="text-xs text-red-500 italic">{{ session()->get('error') }}</p>
                     @endif
                 </div>
-    
+
                 <div class="flex flex-col w-full justify-between">
                     @error('invalid')
                         <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -68,7 +69,7 @@
                     <a class="btn-plain" href="{{ url('/forgot-password') }}">Forgot Password?</a>
                     <a class="btn-plain" href="{{ url('/register') }}">Register your Barangay</a>
                 </div>
-    
+
                 <button class="btn-filled">Login</button>
             </div>
 

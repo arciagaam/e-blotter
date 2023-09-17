@@ -30,7 +30,8 @@
                 <div class="flex flex-col gap-2">
                     <div class="flex flex-row gap-2">
                         <div class="form-input-container flex-1">
-                            <label for="first_name">First Name <span class="form-input-required">*</span></label>
+                            <label for="first_name">Barangay Captain First Name <span
+                                    class="form-input-required">*</span></label>
                             <input class="form-input" type="text" name="first_name" id="first_name"
                                 value="{{ old('first_name') }}">
                             @error('first_name')
@@ -39,7 +40,8 @@
                         </div>
 
                         <div class="form-input-container flex-1">
-                            <label for="last_name">Last Name <span class="form-input-required">*</span></label>
+                            <label for="last_name">Barangay Captain Last Name <span
+                                    class="form-input-required">*</span></label>
                             <input class="form-input" type="text" name="last_name" id="last_name"
                                 value="{{ old('last_name') }}">
                             @error('last_name')
@@ -105,13 +107,21 @@
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
+
+                    <div class="form-input-container">
+                        <label for="logo">Logo<span class="form-input-required">*</span></label>
+                        <input type="file" name="logo" id="logo">
+                        @error('logo')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
 
                 <div class="flex w-full justify-between">
                     @error('invalid')
                         <p class="text-xs text-red-500 italic">{{ $message }}</p>
                     @enderror
-                    <a class="self-end underline" href="{{ url('/') }}">Already have a Barangay?</a>
+                    <a class="self-end underline" href="{{ url('/') }}">Already registered your Barangay?</a>
                 </div>
 
                 <button class="btn-filled">REGISTER</button>
