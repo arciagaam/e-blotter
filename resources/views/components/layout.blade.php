@@ -26,6 +26,7 @@
         <x-user-navbar />
     @endif
 
+
     <div class="w-screen h-screen flex fixed top-0 left-0 z-[9999] px-8 py-4 pointer-events-none">
         @if (session('alert'))
             <x-alert
