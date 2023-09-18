@@ -208,7 +208,7 @@
                         class="disabled:bg-slate-400 flex justify-center items-center p-2 rounded-full bg-rose-600 text-white fill-white relative">
                         <box-icon id="record-state" class="bx bx-sm bx-microphone" name='microphone'></box-icon>
                     </button>
-                    <p>Click on the microphone icon and being speaking.</p>
+                    <p>Click on the microphone icon and start speaking.</p>
 
                     <input type="file" name="narrative_file" id="narrative_file" hidden accept="audio/*">
                     <audio id="recording" src="" controls></audio>

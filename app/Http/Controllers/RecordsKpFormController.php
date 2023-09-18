@@ -70,6 +70,9 @@ class RecordsKpFormController extends Controller
             }
         }
 
+        // Gets data from other form which is related to the current form
+        $relatedData = $kpFormAction->getRelatedData(session('issued_kp_form')->record_id, session('issued_kp_form')->kp_form_id);
+
         $recommendedKpForms = collect($kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm(session()->get('issued_kp_form')->record_id), session()->get('issued_kp_form')->record_id, $kpFormMessageAction)['form_ids']);
         $isIssued = IssuedKpForm::where('record_id', session()->get('issued_kp_form')->record_id)->where('kp_form_id', session()->get('issued_kp_form')->kp_form_id)->get()->count();
         $message = array();
@@ -87,7 +90,7 @@ class RecordsKpFormController extends Controller
             }
         }
 
-        return view('pages.kp_forms.create.step-two', ['issuedForm' => session()->get('issued_kp_form'), 'message' => $message]);
+        return view('pages.kp_forms.create.step-two', ['issuedForm' => session()->get('issued_kp_form'), 'message' => $message, 'relatedData' => $relatedData]);
     }
 
     public function postStepTwo(KpStepTwoRequest $request)

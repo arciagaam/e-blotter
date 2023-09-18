@@ -35,9 +35,8 @@
                 <div class="flex flex-col items-center">
                     <p>Republic of The Philippines</p>
                     <p>Province Of Laguna</p>
-                    <p>CITY/MUNICIPALITY OF __________</p>
-                    <p>Barangay <span
-                            class="underline underline-offset-4">{{ auth()->user()->barangays[0]->name }}</span></p>
+                    <p>Municipality Of Pila</p>
+                    <p>Barangay {{ auth()->user()->barangays[0]->name ?? "____________" }}</p>
                 </div>
 
                 <p class="self-center">{{ strtoupper($office) }}</p>
