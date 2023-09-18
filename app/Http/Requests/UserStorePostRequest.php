@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Barangay;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
+use Mockery\Undefined;
 
 class UserStorePostRequest extends FormRequest
 {
@@ -14,6 +15,16 @@ class UserStorePostRequest extends FormRequest
     public function authorize(): bool
     {
         return auth()->check() == false;
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            "username" => str_replace(" ", "_", strtolower($this->name))
+        ]);
     }
 
     /**
@@ -29,9 +40,10 @@ class UserStorePostRequest extends FormRequest
             'username' => 'required|unique:users,username',
             'password' => 'required',
             'confirm_password' => 'required|same:password',
-            'email' => 'required|email',
+            'email' => 'required|email|unique:users,email',
             'contact_number' => 'required',
             'name' => 'required',
+            'logo' => 'required|image|max:3072|mimes:jpg,jpeg,png', // Make this required later
         ];
     }
 
@@ -42,12 +54,19 @@ class UserStorePostRequest extends FormRequest
     {
         return [
             function (Validator $validator) {
+                if ($validator->errors()->messages('username')) {
+                    $validator->errors()->add(
+                        'invalid',
+                        'Barangay already exists.'
+                    );
+                }
+
                 $barangay = Barangay::where('name', $validator->safe()->only(['name']))->getExisting()->first();
 
                 if ($barangay && count($barangay->users)) {
                     $validator->errors()->add(
                         'invalid',
-                        'A user already exists for this barangay.'
+                        'Barangay already exists.'
                     );
                 }
             }

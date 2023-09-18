@@ -18,7 +18,7 @@
         </div>
 
         <form method="POST" action="{{ url('/register') }}"
-            class="flex flex-col justify-center items-center lg:col-start-2 gap-5 py-10 px-6 bg-white">
+            class="flex flex-col justify-center items-center lg:col-start-2 gap-5 py-10 px-6 bg-white" enctype="multipart/form-data">
             @csrf
 
             <div class="flex flex-col gap-4 w-3/4">
@@ -28,36 +28,39 @@
                 </div>
 
                 <div class="flex flex-col gap-2">
-                    <div class="flex flex-row gap-2">
-                        <div class="form-input-container flex-1">
-                            <label for="first_name">Barangay Captain First Name <span
-                                    class="form-input-required">*</span></label>
-                            <input class="form-input" type="text" name="first_name" id="first_name"
-                                value="{{ old('first_name') }}">
-                            @error('first_name')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="form-input-container flex-1">
-                            <label for="last_name">Barangay Captain Last Name <span
-                                    class="form-input-required">*</span></label>
-                            <input class="form-input" type="text" name="last_name" id="last_name"
-                                value="{{ old('last_name') }}">
-                            @error('last_name')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                            @enderror
+                    <div>
+                        <p class="opacity-50 italic">Barangay Captain</p>
+                        <div class="flex flex-row gap-2">
+                            <div class="form-input-container flex-1">
+                                <label for="first_name">First Name <span
+                                        class="form-input-required">*</span></label>
+                                <input class="form-input" type="text" name="first_name" id="first_name"
+                                    value="{{ old('first_name') }}">
+                                @error('first_name')
+                                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                @enderror
+                            </div>
+    
+                            <div class="form-input-container flex-1">
+                                <label for="last_name">Last Name <span
+                                        class="form-input-required">*</span></label>
+                                <input class="form-input" type="text" name="last_name" id="last_name"
+                                    value="{{ old('last_name') }}">
+                                @error('last_name')
+                                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                @enderror
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-input-container">
+                    {{-- <div class="form-input-container">
                         <label for="username">Username <span class="form-input-required">*</span></label>
                         <input class="form-input" type="text" name="username" id="username"
                             value="{{ old('username') }}">
                         @error('username')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="flex flex-row gap-2">
                         <div class="form-input-container flex-1">
@@ -110,18 +113,18 @@
 
                     <div class="form-input-container">
                         <label for="logo">Logo<span class="form-input-required">*</span></label>
-                        <input type="file" name="logo" id="logo">
+                        <input type="file" name="logo" id="logo" class="w-fit file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:btn-outline file:cursor-pointer">
                         @error('logo')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
 
-                <div class="flex w-full justify-between">
+                <div class="flex w-full flex-col gap-2">
                     @error('invalid')
                         <p class="text-xs text-red-500 italic">{{ $message }}</p>
                     @enderror
-                    <a class="self-end underline" href="{{ url('/') }}">Already registered your Barangay?</a>
+                    <a class="underline" href="{{ url('/') }}">Already registered your Barangay?</a>
                 </div>
 
                 <button class="btn-filled">REGISTER</button>

@@ -10,6 +10,7 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -18,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('pages.user.auth.register.register');
+        return view("pages.user.auth.register.register");
     }
 
     /**
@@ -32,24 +33,26 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserStorePostRequest $request) : RedirectResponse
-    {   
-        $user = $request->safe()->except(['name']);
-
-        $user['password'] = bcrypt($user['password']);
-                
+    public function store(UserStorePostRequest $request)
+    {
+        // Users
+        $user = $request->safe()->except(["name", "logo"]);
+        $user["password"] = bcrypt($user["password"]);
         $user = User::create($user);
-        $barangay = Barangay::firstOrCreate($request->safe()->only(['name']));
+
+        // Barangay
+        $barangay = Barangay::firstOrCreate($request->safe()->only(["name"]));
+        $filePath = $request->file("logo")->store("logos", "public");
+        $barangay["logo"] = $filePath;
+
         $user->barangays()->save($barangay);
         $user->roles()->save(Role::find(2));
 
-        return redirect('/registration-success');
+        return redirect("/registration-success");
     }
 
     public function success()
     {
-        return view('pages.user.auth.register.register-confirmation');
+        return view("pages.user.auth.register.register-confirmation");
     }
-
-
 }
