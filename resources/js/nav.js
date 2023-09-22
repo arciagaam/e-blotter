@@ -26,12 +26,26 @@ const toggleElementVisibility = (element, state) => {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
-    burger.addEventListener('click', () => {
+    const toggleNavbar = () => {
         state = !state;
 
         navbar.classList.toggle('!max-w-full');
         navbar.setAttribute("data-open", new String(state));
 
         toggleElementVisibility(label, state);
-    })
+    };
+
+    burger.addEventListener('click', () => {
+        toggleNavbar();
+    });
+
+    document.addEventListener("click", (e) => {
+        if (!state) {
+            return;
+        }
+
+        if (!navbar.contains(e.target)) {
+            toggleNavbar();
+        }
+    });
 });
