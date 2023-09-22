@@ -20,7 +20,7 @@
 
             <hr>
 
-            <p class="self-center text-2xl font-bold">{{$totalCases}}</p>
+            <p class="self-center text-2xl font-bold">{{ $totalCases }}</p>
         </div>
 
         <div class="flex w-full">
@@ -29,15 +29,21 @@
 
         <div class="grid grid-cols-3 gap-5">
 
-            @foreach ($barangays as $barangay)  
+            @foreach ($barangays as $barangay)
                 <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
                     <div class="flex gap-5 items-center">
-                        <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark">
-                            <box-icon color="white" name='building-house' size="3em"></box-icon>
+                        <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark overflow-hidden aspect-square">
+                            @if ($barangay->logo)
+                                <img class="object-fit w-full max-w-[5rem] aspect-square" id="logo"
+                                    src="{{ asset('assets/' . $barangay->logo) ?? asset('assets/no-image.webp') }}"
+                                    alt="">
+                            @else
+                                <box-icon color="white" name='building-house' size="3em"></box-icon>
+                            @endif
                         </div>
 
                         <div class="flex flex-col">
-                            <p class="text-lg">Barangay {{$barangay->name}}</p>
+                            <p class="text-lg">Barangay {{ $barangay->name }}</p>
                             @empty($barangay->users[0]->verified_at)
                                 <p class="text-project-yellow-dark italic">User for this barangay is not yet verified.</p>
                             @endempty
@@ -46,9 +52,9 @@
 
                     <hr>
 
-                    <p class="self-center text-2xl font-bold">{{$barangay->records_count}}</p>
+                    <p class="self-center text-2xl font-bold">{{ $barangay->records_count }}</p>
                 </div>
-            @endforeach         
+            @endforeach
         </div>
     </div>
 </x-layout>

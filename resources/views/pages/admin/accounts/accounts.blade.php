@@ -23,16 +23,13 @@
         <table id="main-table" class="display main-table w-full">
             <thead>
                 <tr>
-                    <th class="w-2/12">
-                        <p>Name</p>
-                    </th>
-                    <th class="w-2/12">
-                        <p>Username</p>
+                    <th class="w-3/12">
+                        <p>Barangay Captain</p>
                     </th>
                     <th class="w-3/12">
                         <p>Barangay</p>
                     </th>
-                    <th class="w-1/12">
+                    <th class="w-2/12">
                         <p>Contact Number</p>
                     </th>
                     <th class="w-2/12">
@@ -55,7 +52,6 @@
                     @foreach ($accounts as $account)
                         <tr>
                             <td>{{ $account->first_name }} {{ $account->last_name }}</td>
-                            <td>{{ $account->username }}</td>
                             <td>{{ $account->barangays[0]->name }}</td>
                             <td>{{ $account->contact_number }}</td>
                             <td>{{ $account->email }}</td>
