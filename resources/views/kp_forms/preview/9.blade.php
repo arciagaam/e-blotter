@@ -60,7 +60,7 @@
 
         <div class="flex flex-col w-max self-start">
             <p class="w-full h-4 border-b border-0 border-black"></p>
-            <p class="self-start">Punong Barangay/Lupon Chairman</p>
+            <p class="self-start">Punong Barangay/<span class="line-through">Lupon Chairman</span></p>
         </div>
     </div>
 

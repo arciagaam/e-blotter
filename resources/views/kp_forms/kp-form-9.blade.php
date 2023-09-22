@@ -42,8 +42,6 @@
         </div>
     </div>
 
-    {{-- {{ dd($tagIds, date('Y', strtotime($tagIds['hearing']))) }} --}}
-
     <div class="flex flex-col gap-4 items-center">
 
         <p class="self-start text-justify">You are hereby summoned to appear before me in person, together with your
