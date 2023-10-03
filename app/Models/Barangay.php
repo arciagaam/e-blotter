@@ -14,6 +14,7 @@ class Barangay extends Model
 
     protected $fillable = [
         'name',
+        'logo'
     ];
 
     public function scopeUserNotTrashed(Builder $query) {

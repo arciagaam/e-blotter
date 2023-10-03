@@ -76,15 +76,25 @@ class AccountController extends Controller
             'email' => [
                 'required',
                 Rule::unique('users', 'email')->ignore($account)
-            ]
+            ],
+            'logo' => 'nullable|image|max:3072|mimes:jpg,jpeg,png'
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
+        $barangayUpdates = [
+            'name' => $validator->safe()->only(['barangays'])['barangays'],
+        ];
+
+        if ($validator->safe(['logo'])['logo'] !== null) {
+            $filePath = $request->file("logo")->store("logos", "public");
+            $barangayUpdates['logo'] = $filePath;
+        }
+
         User::findOrFail($account->id)->update($validator->safe()->except(['barangays']));
-        Barangay::findOrFail($account->barangays[0]->id)->update(['name' => $validator->safe()->only(['barangays'])['barangays']]);
+        Barangay::findOrFail($account->barangays[0]->id)->update($barangayUpdates);
 
         return response()->json(['message' => 'Success'], 200);
     }

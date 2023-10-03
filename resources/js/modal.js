@@ -232,6 +232,10 @@ async function formActive(form, params) {
         }
 
         if (formMethod.value === 'PUT') {
+            if (form.dataset.fileUpload) {
+                form.action = actionUrl;
+            }
+
             try {
                 const data = await fetch(actionUrl, {
                     method: 'GET',
@@ -241,28 +245,28 @@ async function formActive(form, params) {
                     },
                     credentials: 'same-origin',
                 });
-    
+
                 if (!data.ok) {
                     const errorOptions = { status: data.status, statusText: data.statusText };
                     throw errorOptions;
                 }
-    
+
                 const res = await data.json();
                 inputs.forEach((input) => {
                     let value = '';
-    
+
                     if (typeof res[input.name] === 'object') {
                         value = res[input.name][0].name;
                     } else {
                         value = res[input.name];
                     }
-    
+
                     input.value = value ?? '';
                 });
             } catch (error) {
                 console.error(error);
             }
-    
+
             return;
         }
     }
@@ -288,7 +292,7 @@ function formInactive(form) {
 
     form.removeEventListener('submit', formEventListener);
     form.action = '#';
-    form.formParas = undefined;
+    form.formParams = undefined;
     const inputs = [...form.querySelectorAll('input')].filter((input) => {
         if (!input.name.startsWith('_')) {
             return input;
@@ -317,25 +321,43 @@ async function formEventListener(event) {
     const actionUrl = concatFormParams(event.target.dataset.action, formParams);
     const inputs = [...event.target.querySelectorAll('input')];
 
-    const body = inputs.reduce((acc, curr) => {
-        return { ...acc, [curr.name]: curr.value }
-    }, {});
+    let body;
+    let method;
 
-    if (body._method != undefined && body._method == 'DELETE') {
+    if (event.currentTarget.dataset.fileUpload) {
+        body = new FormData(event.currentTarget);
+        method = "POST";
+    } else {
+        let temp = inputs.reduce((acc, curr) => {
+            return { ...acc, [curr.name]: curr.value }
+        }, {});
+
+        body = JSON.stringify(temp);
+        method = temp._method;
+    }
+
+    console.log(body);
+
+    if (method != undefined && method == 'DELETE') {
         return;
     }
 
     event.preventDefault();
 
     try {
+        let headers = {
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+        }
+
+        if (!event.currentTarget.dataset.fileUpload) {
+            headers["Content-Type"] = "application/json";
+        }
+
         const data = await fetch(actionUrl, {
-            method: body._method ?? event.target.method,
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-            },
+            method: method ?? event.target.method,
+            headers: headers,
             credentials: 'same-origin',
-            body: JSON.stringify(body),
+            body: body,
         });
 
         if (!data.ok) {

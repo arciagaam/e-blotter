@@ -58,8 +58,8 @@ Route::prefix('/admin')->group(function () {
 
             Route::resource('kp-forms', KpFormController::class)->only(['index', 'show']);
 
-            Route::resource('accounts', AccountController::class)
-                ->only(['index', 'show', 'edit', 'update', 'destroy']);
+            Route::resource('accounts', AccountController::class);
+                // ->only(['index', 'show', 'edit', 'update', 'destroy']);
 
             Route::prefix('/accounts')->name('accounts.')->group(function () {
                 Route::post('/verify', [AccountController::class, 'verify'])->name('verify');

@@ -61,7 +61,8 @@
                                         <p class="w-fit bg-emerald-100 text-center rounded-full text-emerald-600 px-4 py-1">
                                             Verified</p>
                                     @else
-                                        <p class="bg-rose-100 text-center rounded-full text-rose-600 px-4 py-1">Unverified</p>
+                                        <p class="bg-rose-100 text-center rounded-full text-rose-600 px-4 py-1">Unverified
+                                        </p>
                                     @endif
                                 </div>
                             </td>
@@ -70,8 +71,10 @@
                                     <button data-target="#verify" data-form-id="{{ $account->id }}"
                                         class="verify-btn {{ $account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled' }}"
                                         {{ $account->verified_at ? 'disabled' : '' }}>Verify</button>
-                                    <button data-target="#edit" data-form-id="{{ $account->id }}" class="btn-outline">Edit</button>
-                                    <button data-target="#delete" data-form-id="{{ $account->id }}" class="btn-outline danger">Delete</button>
+                                    <button data-target="#edit" data-form-id="{{ $account->id }}"
+                                        class="btn-outline">Edit</button>
+                                    <button data-target="#delete" data-form-id="{{ $account->id }}"
+                                        class="btn-outline danger">Delete</button>
                                 </div>
                             </td>
                         </tr>
@@ -93,13 +96,13 @@
         Edit User
     </x-slot:heading>
 
-    <form action="#" method="POST" id="edit-user-form" data-action="{{ route('admin.accounts.update', ['account' => ':id']) }}">
+    <form action="#" method="POST" id="edit-user-form" class="flex flex-col gap-2"
+        data-action="{{ route('admin.accounts.update', ['account' => ':id']) }}" enctype="multipart/form-data" data-file-upload="true">
         @method('PUT')
 
         <div class="form-input-container">
             <label for="first_name">First Name</label>
-            <input class="form-input" type="text" name="first_name" id="first_name"
-                value="">
+            <input class="form-input" type="text" name="first_name" id="first_name" value="">
         </div>
 
         <div class="form-input-container">
@@ -114,19 +117,27 @@
 
         <div class="form-input-container">
             <label for="barangays">Barangay</label>
-            <input class="form-input" type="text" name="barangays" id="barangays"
-                value="">
+            <input class="form-input" type="text" name="barangays" id="barangays" value="">
         </div>
 
         <div class="form-input-container">
             <label for="contact_number">Contact Number</label>
-            <input class="form-input" type="text" name="contact_number" id="contact_number"
-                value="">
+            <input class="form-input" type="text" name="contact_number" id="contact_number" value="">
         </div>
 
         <div class="form-input-container">
             <label for="email">Email</label>
             <input class="form-input" type="text" name="email" id="email" value="">
+        </div>
+
+        <div class="form-input-container">
+            <label for="logo">Logo</label>
+            <input type="file" name="logo" id="logo"
+                class="w-fit file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:btn-outline file:cursor-pointer">
+            @error('logo')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
+            <span class="text-red-500 italic">Do not upload anything if you do not want to replace the old file.</span>
         </div>
     </form>
 
@@ -156,9 +167,10 @@
         Delete Account
     </x-slot:heading>
 
-    <form action="#" method="POST" id="delete-user-form" data-action="{{ route('admin.accounts.destroy', ['account' => ':id']) }}">
+    <form action="#" method="POST" id="delete-user-form"
+        data-action="{{ route('admin.accounts.destroy', ['account' => ':id']) }}">
         @csrf
-        @method("DELETE")
+        @method('DELETE')
         <p>Are you sure you want to delete this account?</p>
     </form>
 
