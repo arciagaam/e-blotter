@@ -35,6 +35,9 @@
                                 <option value="{{ $user->username }}">{{ $user->barangay_name }}</option>
                             @endforeach
                         </select>
+                        @error('username')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="form-input-container">

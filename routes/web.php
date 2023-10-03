@@ -12,6 +12,7 @@ use App\Http\Controllers\user\DashboardController as UserDashboardController;
 use App\Http\Controllers\user\KpFormController as UserKpFormController;
 use App\Http\Controllers\user\RecordController as UserRecordController;
 use App\Http\Controllers\user\UserController;
+use App\Http\Controllers\user\ReportController as UserReportController;
 use App\Mail\OTP;
 use App\Mail\TestEmail;
 use App\Models\LoginRole;
@@ -103,8 +104,6 @@ Route::prefix('/')->group(function () {
     });
 
     Route::middleware(['user', 'account_verified'])->group(function () {
-        // Route::get('/dashboard', [UserDashboardController::class, 'index']);
-
         Route::resource('dashboard', UserDashboardController::class)
             ->only(['index']);
 
@@ -140,5 +139,8 @@ Route::prefix('/')->group(function () {
         });
 
         Route::get('/audit-trail', [AuditTrailController::class, 'index']);
+
+        Route::resource('reports', UserReportController::class)
+            ->only(['index', 'store']);
     });
 });

@@ -1,7 +1,5 @@
-<nav
-    class="absolute top-0 left-0 max-w-[4rem]  z-50 flex flex-col min-h-screen h-screen bg-project-blue-dark text-white transition-all duration-200 ease-in-out drop-shadow-lg pb-10 pt-5 gap-12 pr-5"
-    data-open="false"
-    >
+<nav class="absolute top-0 left-0 max-w-[4rem]  z-50 flex flex-col min-h-screen h-screen bg-project-blue-dark text-white transition-all duration-200 ease-in-out drop-shadow-lg pb-10 pt-5 gap-12 pr-5"
+    data-open="false">
 
     <button id="burger" class="flex items-center self-end pl-5 w-fit">
         <box-icon type="regular" name='menu' size="sm"></box-icon>
@@ -13,7 +11,9 @@
             <img class="object-fit w-full max-w-[5rem] aspect-square" id="logo"
                 src="{{ $barangayInformation->logo ? asset('assets/' . $barangayInformation->logo) : asset('assets/no-image.webp') }}"
                 alt="">
-            <p id="barangay-label" class="opacity-0 hidden transition-opacity duration-100 max-w-[10rem] break-words whitespace-normal">{{ $barangayInformation->name }}</p>
+            <p id="barangay-label"
+                class="opacity-0 hidden transition-opacity duration-100 max-w-[10rem] break-words whitespace-normal">
+                {{ $barangayInformation->name }}</p>
         </a>
 
         <div class="flex flex-col gap-5 h-full">
@@ -47,6 +47,14 @@
                     color="{{ request()->is('audit-trail*') ? '#FBAD26' : 'white' }}" name='group'
                     size="1.5em"></box-icon>
                 <p class="text-sm font-normal">Account</p>
+            </a>
+
+            <a href="{{ url('/reports') }}"
+                class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('reports*') ? 'text-project-yellow-default' : 'hover:text-project-yellow-default' }}">
+                <box-icon type="{{ request()->is('reports*') ? 'solid' : 'regular' }}"
+                    color="{{ request()->is('reports*') ? '#FBAD26' : 'white' }}" name='detail'
+                    size="1.5em"></box-icon>
+                <p class="text-sm font-normal">Reports</p>
             </a>
 
             <a href="{{ url('/logout') }}"

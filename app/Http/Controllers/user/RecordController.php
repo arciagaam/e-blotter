@@ -11,8 +11,6 @@ use App\Models\Suspect;
 use App\Models\Victim;
 use App\Services\RecordsService;
 use Illuminate\Database\Query\JoinClause;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class RecordController extends Controller
 {
