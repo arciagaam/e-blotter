@@ -88,7 +88,7 @@ class AccountController extends Controller
             'name' => $validator->safe()->only(['barangays'])['barangays'],
         ];
 
-        if ($validator->safe(['logo'])['logo'] !== null) {
+        if (!empty($validator->safe(['logo']))) {
             $filePath = $request->file("logo")->store("logos", "public");
             $barangayUpdates['logo'] = $filePath;
         }

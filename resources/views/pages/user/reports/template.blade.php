@@ -135,4 +135,4 @@
 
 </html>
 
-@vite('/resources/js/print_window.js')
+@vite('resources/js/print_window.js')

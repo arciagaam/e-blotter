@@ -31,9 +31,17 @@
                         <label for="username">Barangay</label>
                         <select class="form-input" name="username" id="username">
                             <option value="">-- SELECT YOUR BARANGAY --</option>
-                            @foreach ($users as $user)
-                                <option value="{{ $user->username }}">{{ $user->barangay_name }}</option>
-                            @endforeach
+                            <optgroup label="Admin">
+
+                                {{-- Fix admin login --}}
+                                <option value="abc-officer">ABC Officer</option>
+                                <option value="abc-secretary">ABC Secretary</option>
+                            </optgroup>
+                            <optgroup label="User">
+                                @foreach ($users as $user)
+                                    <option value="{{ $user->username }}">{{ $user->barangay_name }}</option>
+                                @endforeach
+                            </optgroup>
                         </select>
                         @error('username')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
