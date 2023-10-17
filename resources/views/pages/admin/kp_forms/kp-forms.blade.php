@@ -49,8 +49,10 @@
                             </td>
                             <td>
                                 <div class="flex w-full h-full justify-center items-center gap-2">
-                                    <a href="{{ route('admin.kp-forms.show', ['kp_form' => $kpForm->id]) }}" class="btn-outline"
-                                        type="button">Preview</a>
+                                    <a href="{{ route('admin.kp-forms.show', ['kp_form' => $kpForm->id]) }}" class="btn-outline flex justify-center items-center"
+                                        type="button">
+                                        <box-icon class="text-xs" name='search' ></box-icon>
+                                    </a>
                                 </div>
                             </td>
                         </tr>

@@ -12,7 +12,9 @@ class Victim extends Model
 
     protected $fillable = [
         'record_id',
-        'name',
+        'first_name',
+        'middle_name',
+        'last_name',
         'age',
         'sex',
         'contact_number',

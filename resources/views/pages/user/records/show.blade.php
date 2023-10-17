@@ -5,7 +5,8 @@
 
         <div class="flex flex-row gap-4">
             <x-nav-button url="{{ route('records.show', ['record' => $record->id]) }}">Details</x-nav-button>
-            <x-nav-button url="{{ route('records.kp-forms.index', ['record' => $record->id]) }}">Issued Certificate</x-nav-button>
+            <x-nav-button url="{{ route('records.kp-forms.index', ['record' => $record->id]) }}">Issued
+                Certificate</x-nav-button>
         </div>
 
         <div class="flex flex-col gap-5">
@@ -16,7 +17,7 @@
                         <div class="flex flex-row justify-center items-center">
                             <label for="blotter_number" class="flex gap-2 items-center">Blotter No.:</label>
                         </div>
-    
+
                         <input class="form-input bg-white" type="text" name="blotter_number" id="blotter_number"
                             value="{{ $record->barangay_blotter_number }}" disabled>
                     </div>
@@ -24,9 +25,9 @@
                         <div class="flex flex-row justify-center items-center">
                             <label for="date" class="flex gap-2 items-center">Date:</label>
                         </div>
-    
-                        <input value="{{ $record->created_at }}" class="form-input bg-white" type="text" name="date"
-                            id="date" disabled>
+
+                        <input value="{{ $record->created_at }}" class="form-input bg-white" type="text"
+                            name="date" id="date" disabled>
                     </div>
                 </div>
 
@@ -36,7 +37,8 @@
                             <label for="date" class="flex gap-2 items-center">Status:</label>
                         </div>
 
-                        <x-blotter-status id="{{ $record->blotterStatus->id }}" text="{{ $record->blotterStatus->name }}" />
+                        <x-blotter-status id="{{ $record->blotterStatus->id }}"
+                            text="{{ $record->blotterStatus->name }}" />
                     </div>
                 </div>
             </div>
@@ -54,7 +56,8 @@
                         </div>
 
                         <input class="form-input bg-white" type="text" name="victim[name]" id="victim_name"
-                            value="{{ $record->victim->name }}" disabled>
+                            value="{{ formatName($record->victim->first_name, $record->victim->middle_name, $record->victim->last_name) }}"
+                            disabled>
                         @error('victim.name')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
@@ -148,14 +151,14 @@
 
                 <div class="flex flex-col gap-2">
 
-                    <div class="flex flex-row gap-2">
+                    <div class="flex flex-col xl:flex-row gap-2">
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
                                 <label for="suspect_name" class="flex gap-2 items-center">Suspect Name:</label>
                             </div>
 
                             <input class="form-input bg-white" type="text" name="suspect[name]" id="suspect_name"
-                                value="{{ $record->suspect->name }}" disabled>
+                                value="{{ formatName($record->suspect->first_name, $record->suspect->middle_name, $record->suspect->last_name)}}" disabled>
                             @error('suspect.name')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
@@ -223,7 +226,9 @@
                         <box-icon class="" name='microphone'></box-icon>
                     </button>
                     <p>Click on the microphone icon and being speaking.</p> --}}
-                    <audio id="recording" src="{{ isset($record->narrative_file) ? url('assets\\' . $record->narrative_file) : '' }}" controls></audio>
+                    <audio id="recording"
+                        src="{{ isset($record->narrative_file) ? url('assets\\' . $record->narrative_file) : '' }}"
+                        controls></audio>
                 </div>
             </div>
 
@@ -245,11 +250,16 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <a href="{{ route('records.kp-forms.get.step-one', ['id' => $record->id]) }}" class="btn-filled" data-target="#print" type="button">Issue KP Form</a>
-                    <button class="btn-outline" data-target="#schedule" type="button">Schedule of Reconciliation</button>
-                    <a class="btn-outline text-center" href="{{ route('records.edit', ['record' => $record->id]) }}">Edit</a>
-                    <a class="btn-outline success" target="_blank" href="{{ route('records.print', ['record' => $record->id]) }}">Print</a>
-                    <button data-target="#delete" data-form-id="{{ $record->id }}" class="btn-outline danger">Delete</button>
+                    <a href="{{ route('records.kp-forms.get.step-one', ['id' => $record->id]) }}" class="btn-filled"
+                        data-target="#print" type="button">Issue KP Form</a>
+                    <button class="btn-outline" data-target="#schedule" type="button">Schedule of
+                        Reconciliation</button>
+                    <a class="btn-outline text-center"
+                        href="{{ route('records.edit', ['record' => $record->id]) }}">Edit</a>
+                    <a class="btn-outline success" target="_blank"
+                        href="{{ route('records.print', ['record' => $record->id]) }}">Print</a>
+                    <button data-target="#delete" data-form-id="{{ $record->id }}"
+                        class="btn-outline danger">Delete</button>
                 </div>
             </div>
 
@@ -260,7 +270,7 @@
         <x-slot:heading>
             Schedules
         </x-slot:heading>
-    
+
         <ul class="flex flex-col h-96 max-h-96 overflow-auto divide-y">
             @empty($hearingDates)
                 <p>No hearing dates.</p>
@@ -269,7 +279,8 @@
                     <li class="flex flex-col py-4 first:pt-0 last:pb-0">
                         <span class="font-bold flex flex-row items-center gap-2">
                             KP FORM #{{ $date->kp_form_id }}
-                            <span class="font-normal text-sm text-gray-400">Issued at {{ date('F j, Y', strtotime($date->created_at)) }}</span>
+                            <span class="font-normal text-sm text-gray-400">Issued at
+                                {{ date('F j, Y', strtotime($date->created_at)) }}</span>
                         </span>
                         <p>{{ date('F j, Y', strtotime($date->value)) }}</p>
                     </li>
@@ -285,9 +296,10 @@
         Delete Record
     </x-slot:heading>
 
-    <form action="#" method="POST" id="delete-record-form" data-action="{{ route('records.destroy', ['record' => ':id']) }}">
+    <form action="#" method="POST" id="delete-record-form"
+        data-action="{{ route('records.destroy', ['record' => ':id']) }}">
         @csrf
-        @method("DELETE")
+        @method('DELETE')
         <p>Are you sure you want to delete this record?</p>
     </form>
 

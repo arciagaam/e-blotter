@@ -24,10 +24,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         \App\Models\User::factory()->create([
-            'first_name' => 'Admin',
-            'last_name' => 'Admin',
-            'username' => 'admin',
-            'email' => 'admin@example.com',
+            'first_name' => 'ABC',
+            'last_name' => 'Officer',
+            'username' => 'abc_officer',
+            'email' => 'abc_officer@example.com',
+            'contact_number' => '09123221234',
+        ]);
+
+        \App\Models\User::factory()->create([
+            'first_name' => 'ABC',
+            'last_name' => 'Secretary',
+            'username' => 'abc_secretary',
+            'email' => 'abc_secretary@example.com',
             'contact_number' => '09123221234',
         ]);
 
@@ -69,12 +77,18 @@ class DatabaseSeeder extends Seeder
             ],
             [
                 'user_id' => 2,
-                'role_id' => 2,
+                'role_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'user_id' => 3,
+                'role_id' => 2,
+                'created_at' => now(),
+                'updated_at' => now()
+            ],
+            [
+                'user_id' => 4,
                 'role_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()
@@ -83,13 +97,13 @@ class DatabaseSeeder extends Seeder
 
         DB::table('user_barangays')->insert([
             [
-                'user_id' => 2,
+                'user_id' => 3,
                 'barangay_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
-                'user_id' => 3,
+                'user_id' => 4,
                 'barangay_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now()

@@ -57,23 +57,23 @@
     }
 
     .btn-filled {
-        @apply text-center bg-project-yellow-default text-white font-bold px-4 py-2 rounded-md hover:bg-project-yellow-dark active:bg-project-yellow-darker transition-all
+        @apply text-center fill-white bg-project-yellow-default text-white font-bold px-4 py-2 rounded-md hover:bg-project-yellow-dark active:bg-project-yellow-darker transition-all
     }
 
     .btn-filled.danger {
-        @apply text-center bg-rose-600 text-white font-bold px-4 py-2 rounded-md hover:bg-rose-700 active:bg-rose-800 transition-all
+        @apply text-center bg-rose-600 fill-white text-white font-bold px-4 py-2 rounded-md hover:bg-rose-700 active:bg-rose-800 transition-all
     }
 
     .btn-outline {
-        @apply text-center border border-project-blue-default text-project-blue-default px-4 py-2 rounded-md hover:bg-project-blue-light2 active:bg-project-blue-light3 transition-all
+        @apply text-center border fill-project-blue-default border-project-blue-default text-project-blue-default px-4 py-2 rounded-md hover:bg-project-blue-light2 active:bg-project-blue-light3 transition-all
     }
 
     .btn-outline.danger {
-        @apply border border-rose-600 text-rose-600 hover:bg-project-red-light active:bg-project-red-light2 transition-all
+        @apply border fill-rose-600 border-rose-600 text-rose-600 hover:bg-project-red-light active:bg-project-red-light2 transition-all
     }
 
     .btn-outline.success {
-        @apply border border-emerald-600 text-emerald-600 hover:bg-project-green-light active:bg-project-green-light2 transition-all
+        @apply border fill-emerald-600 border-emerald-600 text-emerald-600 hover:bg-project-green-light active:bg-project-green-light2 transition-all
     }
 
     /* .btn-tinted {

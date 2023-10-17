@@ -68,22 +68,46 @@
                     @else
                         @foreach ($records as $key => $record)
                             <tr>
-                                <td><p>{{ $record->barangay_blotter_number }}</p></td>
-                                <td><p>{{ $record->purok }}</p></td>
-                                <td><p>{{ $record->case }}</p></td>
-                                <td><p>{{ $record->victim->name }}</p></td>
-                                <td><p>{{ date_format($record->created_at, 'F j, Y') }}</p></td>
+                                <td>
+                                    <p>{{ $record->barangay_blotter_number }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ $record->purok }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ $record->case }}</p>
+                                </td>
+                                <td>
+                                    <p>{{ formatName($record->victim->first_name, $record->victim->middle_name, $record->victim->last_name) }}
+                                    </p>
+                                </td>
+                                <td>
+                                    <p>{{ date_format($record->created_at, 'F j, Y') }}</p>
+                                </td>
                                 <td>
                                     <div class="flex justify-center items-center">
-                                        <x-blotter-status id="{{ $record->blotterStatus->id }}" text="{{ $record->blotterStatus->name }}" />
+                                        <x-blotter-status id="{{ $record->blotterStatus->id }}"
+                                            text="{{ $record->blotterStatus->name }}" />
                                     </div>
                                 </td>
                                 <td>
                                     <div class="flex w-full h-full justify-center items-center gap-2">
-                                        <a class="btn-outline success" target="_blank" href="{{ route('records.print', ['record' => $record->id]) }}">Print</a>
-                                        <a href="{{ route('records.show', ['record' => $record->id]) }}" class="btn-outline" >Preview</a>
-                                        <a href="{{ route('records.edit', ['record' => $record->id]) }}" class="btn-outline" >Edit</a>
-                                        <button data-target="#delete" data-form-id="{{ $record->id }}" class="btn-outline danger">Delete</button>
+                                        <a class="btn-outline success flex justify-center items-center" target="_blank"
+                                            href="{{ route('records.print', ['record' => $record->id]) }}">
+                                            <box-icon class="text-xs" name='printer'></box-icon>
+                                        </a>
+                                        <a href="{{ route('records.show', ['record' => $record->id]) }}"
+                                            class="btn-outline flex justify-center items-center">
+                                            <box-icon class="text-xs" name='search' ></box-icon>
+                                        </a>
+                                        <a href="{{ route('records.edit', ['record' => $record->id]) }}"
+                                            class="btn-outline flex justify-center items-center">
+                                            <box-icon class="text-xs" name='edit-alt' ></box-icon>
+                                        </a>
+                                        <button data-target="#delete" data-form-id="{{ $record->id }}"
+                                            class="btn-outline danger flex justify-center items-center">
+                                            <box-icon class="text-xs" name='trash-alt' ></box-icon>
+                                        </button>
                                     </div>
                                 </td>
                             </tr>
@@ -93,7 +117,7 @@
             </table>
 
             <div class="w-full flex">
-                {{$records->links()}}
+                {{ $records->links() }}
             </div>
         </div>
 
@@ -106,9 +130,10 @@
         Delete Record
     </x-slot:heading>
 
-    <form action="#" method="POST" id="delete-record-form" data-action="{{ route('records.destroy', ['record' => ':id']) }}">
+    <form action="#" method="POST" id="delete-record-form"
+        data-action="{{ route('records.destroy', ['record' => ':id']) }}">
         @csrf
-        @method("DELETE")
+        @method('DELETE')
         <p>Are you sure you want to delete this record?</p>
     </form>
 

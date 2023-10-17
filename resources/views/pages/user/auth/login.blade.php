@@ -20,7 +20,6 @@
         <form method="POST" action="{{ route('guest.authenticate') }}"
             class="flex flex-col justify-center items-center lg:col-start-2 gap-5 py-10 px-6 bg-white">
             @csrf
-
             <div class="flex flex-col gap-4 w-3/4">
                 <div>
                     <p class="lg:hidden text-4xl font-bold">E-Blotter</p>
@@ -32,10 +31,12 @@
                         <select class="form-input" name="username" id="username">
                             <option value="">-- SELECT YOUR BARANGAY --</option>
                             <optgroup label="Admin">
-
+                                @foreach ($adminUsers as $adminUser)
+                                    <option value="{{ $adminUser->username }}">{{ formatUsername($adminUser->username) }}</option>
+                                @endforeach
                                 {{-- Fix admin login --}}
-                                <option value="abc-officer">ABC Officer</option>
-                                <option value="abc-secretary">ABC Secretary</option>
+                                {{-- <option value="abc-officer">ABC Officer</option>
+                                <option value="abc-secretary">ABC Secretary</option> --}}
                             </optgroup>
                             <optgroup label="User">
                                 @foreach ($users as $user)

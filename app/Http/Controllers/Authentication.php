@@ -22,42 +22,42 @@ class Authentication extends Controller
     public function authenticate(Request $request): RedirectResponse
     {
         $credentials = $request->validate([
-            'username' => 'required',
-            'password' => 'required',
+            "username" => "required",
+            "password" => "required",
         ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             
-            if($this->authenticationService->checkUserRole()) {
-                auth()->logout();
-                $request->session()->invalidate();
-                $request->session()->regenerateToken();
+            // if($this->authenticationService->checkUserRole()) {
+            //     auth()->logout();
+            //     $request->session()->invalidate();
+            //     $request->session()->regenerateToken();
 
-                $route = str_contains(url()->previous(), 'admin') ? '/admin' : '/';
-                return redirect($route)->with('error', 'Invalid credentials.');
-            }
+            //     $route = str_contains(url()->previous(), "admin") ? "/admin" : "/";
+            //     return redirect($route)->with("error", "Invalid credentials.");
+            // }
             
             if (auth()->user()->roles[0]->id === 1) {
                 
-                return redirect()->intended('/admin/dashboard');
+                return redirect()->intended("/admin/dashboard");
             } 
 
-            session()->put('login_role', $request->login_role_id);
+            session()->put("login_role", $request->login_role_id);
 
             AuditTrail::create([
-                'barangay_id' => auth()->user()->barangays[0]->id, 
-                'login_role_id' => session()->get('login_role'), 
-                'user_id' => auth()->user()->id,
-                'action' => "Logged in"
+                "barangay_id" => auth()->user()->barangays[0]->id, 
+                "login_role_id" => session()->get("login_role"), 
+                "user_id" => auth()->user()->id,
+                "action" => "Logged in"
             ]);
 
-            return redirect()->intended('/dashboard');
+            return redirect()->intended("/dashboard");
         }
 
         return back()->withErrors([
-            'username' => 'Invalid username or password.',
-        ])->onlyInput('username');
+            "username" => "Invalid username or password.",
+        ])->onlyInput("username");
     }
 
     /**
@@ -65,19 +65,19 @@ class Authentication extends Controller
      */
     public function logout(Request $request): RedirectResponse
     {
-        $route = str_contains(url()->previous(), 'admin') ? '/admin' : '/';
+        // $route = str_contains(url()->previous(), "admin") ? "/admin" : "/";
 
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect($route);
+        return redirect("/");
     }
 }
 
 class AuthenticationService {
     public function checkUserRole()
     {
-        return ((!str_contains(url()->previous(), 'admin') && auth()->user()->roles[0]->id == 1) || (str_contains(url()->previous(), 'admin') && auth()->user()->roles[0]->id != 1));
+        return ((!str_contains(url()->previous(), "admin") && auth()->user()->roles[0]->id == 1) || (str_contains(url()->previous(), "admin") && auth()->user()->roles[0]->id != 1));
     }
 }

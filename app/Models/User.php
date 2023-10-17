@@ -70,10 +70,17 @@ class User extends Authenticatable
     public function scopeGetNonDeletedUsers(Builder $query)
     {
         return $query->whereNull("users.deleted_at")
-            ->whereNot("users.id", 1)
+            ->whereNotIn("users.id", [1, 2])
             ->join('user_barangays', 'user_barangays.user_id', 'users.id')
             ->join('barangays', 'barangays.id', 'user_barangays.barangay_id')
             ->select("users.username", "barangays.name as barangay_name");
+    }
+
+    public function scopeGetAdminUsers(Builder $query)
+    {
+        return $query->whereNull("users.deleted_at")
+            ->whereIn("users.id", [1, 2])
+            ->select("users.username");
     }
 
     public function roles(): BelongsToMany

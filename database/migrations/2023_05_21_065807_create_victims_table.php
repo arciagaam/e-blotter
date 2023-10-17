@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('record_id')->constrained('records')->cascadeOnUpdate()->restrictOnDelete();
             $table->foreignId('civil_status_id')->constrained('civil_status')->cascadeOnUpdate()->restrictOnDelete();
-            $table->string('name');
+            $table->string("first_name");
+            $table->string("middle_name")->nullable();
+            $table->string("last_name");
             $table->integer('age');
             $table->tinyInteger('sex');
             $table->string('contact_number');

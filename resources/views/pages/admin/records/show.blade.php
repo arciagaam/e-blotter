@@ -10,7 +10,7 @@
                         <div class="flex flex-row justify-center items-center">
                             <label for="blotter_number" class="flex gap-2 items-center">Blotter No.:</label>
                         </div>
-    
+
                         <input class="form-input bg-white" type="text" name="blotter_number" id="blotter_number"
                             value="{{ $record->id }}" disabled>
                     </div>
@@ -18,9 +18,9 @@
                         <div class="flex flex-row justify-center items-center">
                             <label for="date" class="flex gap-2 items-center">Date:</label>
                         </div>
-    
-                        <input value="{{ $record->created_at }}" class="form-input bg-white" type="text" name="date"
-                            id="date" disabled>
+
+                        <input value="{{ $record->created_at }}" class="form-input bg-white" type="text"
+                            name="date" id="date" disabled>
                     </div>
                 </div>
 
@@ -30,7 +30,8 @@
                             <label for="date" class="flex gap-2 items-center">Status:</label>
                         </div>
 
-                        <x-blotter-status id="{{ $record->blotterStatus->id }}" text="{{ $record->blotterStatus->name }}" />
+                        <x-blotter-status id="{{ $record->blotterStatus->id }}"
+                            text="{{ $record->blotterStatus->name }}" />
                     </div>
                 </div>
             </div>
@@ -48,7 +49,8 @@
                         </div>
 
                         <input class="form-input bg-white" type="text" name="victim[name]" id="victim_name"
-                            value="{{ $record->victim->name }}" disabled>
+                            value="{{ formatName($record->victim->first_name, $record->victim->middle_name, $record->victim->last_name) }}"
+                            disabled>
                         @error('victim.name')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
@@ -148,8 +150,9 @@
                                 <label for="suspect_name" class="flex gap-2 items-center">Suspect Name:</label>
                             </div>
 
-                            <input class="form-input bg-white" type="text" name="suspect[name]" id="suspect_name"
-                                value="{{ $record->suspect->name }}" disabled>
+                            <input class="form-input bg-white" type="text" name="victim[name]" id="victim_name"
+                                value="{{ formatName($record->victim->first_name, $record->victim->middle_name, $record->victim->last_name) }}"
+                                disabled>
                             @error('suspect.name')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
@@ -212,7 +215,9 @@
                 </div>
 
                 <div class="flex flex-row items-center gap-2">
-                    <audio id="recording" src="{{ isset($record->narrative_file) ? url('assets\\' . $record->narrative_file) : '' }}" controls></audio>
+                    <audio id="recording"
+                        src="{{ isset($record->narrative_file) ? url('assets\\' . $record->narrative_file) : '' }}"
+                        controls></audio>
                 </div>
             </div>
 
@@ -234,7 +239,8 @@
 
             <div class="flex self-end">
                 <div class="flex flex-col ml-auto gap-2">
-                    <a class="btn-outline" target="_blank" href="{{ route('admin.records.print', ['record' => $record->id]) }}">Print</a>
+                    <a class="btn-outline" target="_blank"
+                        href="{{ route('admin.records.print', ['record' => $record->id]) }}">Print</a>
                 </div>
             </div>
 

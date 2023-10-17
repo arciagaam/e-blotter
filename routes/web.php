@@ -37,11 +37,11 @@ Route::get('/logout', [Authentication::class, 'logout'])->name('logout');
 
 Route::prefix('/admin')->group(function () {
 
-    Route::middleware('guest')->group(function () {
-        Route::get('/', function () {
-            return view('pages.admin.auth.login');
-        })->name('adminRoot');
-    });
+    // Route::middleware('guest')->group(function () {
+    //     Route::get('/', function () {
+    //         return view('pages.admin.auth.login');
+    //     })->name('adminRoot');
+    // });
 
     Route::middleware(['admin', 'account_verified'])->group(function () {
 
@@ -75,8 +75,9 @@ Route::prefix('/')->group(function () {
         Route::get('/', function () {
             $loginRoles = LoginRole::all();
             $users = User::getNonDeletedUsers()->get();
+            $adminUsers = User::getAdminUsers()->get();
 
-            return view('pages.user.auth.login', ['loginRoles' => $loginRoles, "users" => $users]);
+            return view('pages.user.auth.login', ['loginRoles' => $loginRoles, "users" => $users, "adminUsers" => $adminUsers]);
         })->name('userRoot');
 
         Route::get('/register', [UserController::class, 'index']);

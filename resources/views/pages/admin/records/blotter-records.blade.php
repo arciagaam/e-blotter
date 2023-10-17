@@ -69,7 +69,8 @@
                                 <p>{{ $record->case }}</p>
                             </td>
                             <td>
-                                <p>{{ $record->victim->name }}</p>
+                                <p>{{ formatName($record->victim->first_name, $record->victim->middle_name, $record->victim->last_name) }}
+                                </p>
                             </td>
                             <td>
                                 <p>{{ date_format($record->created_at, 'F j, Y') }}</p>
@@ -83,7 +84,9 @@
                             <td>
                                 <div class="flex w-full h-full justify-center items-center gap-2">
                                     <a href="{{ route('admin.records.show', ['record' => $record->id]) }}"
-                                        class="btn-outline">Preview</a>
+                                        class="btn-outline flex justify-center items-center">
+                                        <box-icon class="text-xs" name='search' ></box-icon>
+                                    </a>
                                     {{-- <a class="btn-outline" target="_blank" href="{{ route('admin.records.print', ['record' => $record->id]) }}">Print</a> --}}
                                 </div>
                             </td>
