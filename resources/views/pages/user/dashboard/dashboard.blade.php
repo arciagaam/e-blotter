@@ -89,6 +89,8 @@
             </div>
         </div>
 
+        <canvas id="graph" data-route="{{ route("dashboard.get-reports") }}"></canvas>
+
         <x-page-header>Schedules for Conciliation</x-page-header>
 
         <div id="calendar" data-route="{{ route('dashboard.get-hearing-dates') }}"></div>
@@ -97,3 +99,4 @@
 
 @vite('resources/js/datetime.js')
 @vite('resources/js/calendar.js')
+@vite('resources/js/user_chart.js')

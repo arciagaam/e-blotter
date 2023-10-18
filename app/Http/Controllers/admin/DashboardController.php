@@ -7,6 +7,7 @@ use App\Models\Barangay;
 use App\Models\User;
 use App\Models\Record;
 use Illuminate\Http\Request;
+use App\Models\BlotterStatus;
 
 class DashboardController extends Controller
 {
@@ -64,5 +65,86 @@ class DashboardController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function getReports()
+    {
+        $now = time();
+        $type = "DAYS";
+
+        $dates = array(
+            "dates" => array(),
+            "dataset" => array()
+        );
+
+        // Structure
+        array(
+            "dates" => array(),
+            "dataset" => [
+                "settled" => [
+                    "barangay-1" => 0,
+                    "barangay-2" => 1
+                ],
+                "unresolved" => [
+                    "barangay-1" => 0,
+                    "barangay-2" => 0
+                ]
+            ],
+            // "dataset" => [
+            //     "barangay-name-here" => [
+            //         "dataset" => [
+            //             "settled" => [],
+            //             "unresolved" => [],
+            //             "dismissed" => [],
+            //             "in prosecution" => []
+            //         ]
+            //     ],
+            //     "barangay-name-here" => [
+            //         "dataset" => [
+            //             "settled" => [],
+            //             "unresolved" => [],
+            //             "dismissed" => [],
+            //             "in prosecution" => []
+            //         ]
+            //     ],
+            // ]
+        );
+
+        switch ($type) {
+            case "DAYS": {
+                    $startDate = date('Y-m-d', strtotime('-6 days', $now));
+                    $endDate = date('Y-m-d');
+
+                    $reports = Record::whereBetween("created_at", [$startDate, $endDate])->with('blotterStatus', 'barangays')->select('id', 'barangay_id', 'blotter_status_id', 'created_at')->orderBy("created_at", "asc")->get();
+                    $blotterStatus = BlotterStatus::all();
+                    $barangays = Barangay::all();
+
+                    for ($i = 0; $i < 7; $i++) {
+                        array_push($dates["dates"], date("Y-m-d", strtotime("+{$i} days", strtotime($startDate))));
+                    }
+
+                    foreach ($blotterStatus as $status) {
+                        $dates["dataset"][$status->name] = array();
+
+                        foreach ($barangays as $barangay) {
+                            $dates["dataset"][$status->name][$barangay->name] = array_fill(0, count($dates["dates"]), 0);
+                        }
+                    }
+
+                    foreach ($reports as $report) {
+                        $day = date("Y-m-d", strtotime($report->created_at));
+                        $statusName = $report->blotterStatus->name;
+                        $barangayName = $report->barangays->name;
+                        $idx = array_search($day, $dates["dates"]);
+                        
+                        $dates["dataset"][$statusName][$barangayName][$idx] += 1;
+                    }
+                }
+                break;
+            default:
+                return;
+        }
+
+        return response()->json(["message" => $dates], 200);
     }
 }

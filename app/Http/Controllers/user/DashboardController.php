@@ -107,4 +107,91 @@ class DashboardController extends Controller
 
         return response()->json(['message' => $hearingDatesFormatted], 200);
     }
+
+    public function getReports()
+    {
+
+        $now = time();
+        $type = "DAYS";
+
+        // key = Date
+        // value = Count of records
+
+        // Dataset structure
+        // {
+        //     label: "Settled",
+        //     data: [14, 23, 40, 4, 12, 23, 22],
+        //     fill: false,
+        //     borderColor: "rgb(5, 150, 105)",
+        //     tension: 0.1
+        // },
+
+        // JSON structure
+        $dates = array(
+            "dates" => array(),
+            "dataset" => array()
+        );
+
+        switch ($type) {
+            case "DAYS": {
+                    $startDate = date('Y-m-d', strtotime('-6 days', $now));
+                    $endDate = date('Y-m-d');
+
+                    $reports = Record::whereBetween("created_at", [$startDate, $endDate])->where('barangay_id', auth()->user()->barangays[0]->id)->with('blotterStatus')->select('id', 'blotter_status_id', 'created_at')->orderBy("created_at", "asc")->get();
+                    $blotterStatus = BlotterStatus::all();
+
+                    for ($i = 0; $i < 7; $i++) {
+                        array_push($dates["dates"], date("Y-m-d", strtotime("+{$i} days", strtotime($startDate))));
+                    }
+
+                    foreach ($blotterStatus as $status) {
+                        $dates["dataset"][$status->name] = array_fill(0, count($dates["dates"]), 0);
+                    }
+
+
+                    foreach ($reports as $report) {
+                        $day = date("Y-m-d", strtotime($report->created_at));
+                        $statusName = $report->blotterStatus->name;
+
+                        $idx = array_search($day, $dates["dates"]);
+                        
+                        $dates["dataset"][$statusName][$idx] = $dates["dataset"][$statusName][$idx] + 1;
+                    }
+                }
+                break;
+            default:
+                return;
+        }
+        // switch ($type) {
+        //     case "DAYS": {
+        //             $startDate = date('Y-m-d', strtotime('-6 days', $now));
+        //             $endDate = date('Y-m-d');
+
+        //             $reports = Record::whereBetween("created_at", [$startDate, $endDate])->where('barangay_id', auth()->user()->barangays[0]->id)->with('blotterStatus')->get();
+
+        //             for ($i = 0; $i < 7; $i++) {
+        //                 $dates[date("Y-m-d", strtotime("+{$i} days", strtotime($startDate)))] = array();
+        //             }
+
+        //             foreach ($reports as $report) {
+        //                 $day = date("Y-m-d", strtotime($report->created_at));
+        //                 $blotterName = $report->blotterStatus->name;
+        //                 if (array_key_exists($day, $dates)) {
+        //                     if (array_key_exists($blotterName, $dates[$day])) {
+        //                         $dates[$day][$blotterName] = $dates[$day][$blotterName] + 1;
+        //                     } else {
+        //                         $dates[$day][$blotterName] = 1;
+        //                     }
+        //                 } else {
+        //                     $dates[$day][$blotterName] = 1;
+        //                 }
+        //             }
+        //         }
+        //         break;
+        //     default:
+        //         return;
+        // }
+
+        return response()->json(["message" => $dates], 200);
+    }
 }

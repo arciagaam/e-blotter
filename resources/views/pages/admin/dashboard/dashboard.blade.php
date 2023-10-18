@@ -32,7 +32,8 @@
             @foreach ($barangays as $barangay)
                 <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
                     <div class="flex gap-5 items-center">
-                        <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark overflow-hidden aspect-square">
+                        <div
+                            class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark overflow-hidden aspect-square">
                             @if ($barangay->logo)
                                 <img class="object-fit w-full max-w-[5rem] aspect-square" id="logo"
                                     src="{{ asset('assets/' . $barangay->logo) ?? asset('assets/no-image.webp') }}"
@@ -56,7 +57,12 @@
                 </div>
             @endforeach
         </div>
+
+        <div class="flex flex-col gap-4" id="graph-container" data-route="{{ route('admin.dashboard.get-reports') }}">
+
+        </div>
     </div>
 </x-layout>
 
 @vite('resources/js/datetime.js')
+@vite('resources/js/admin_chart.js')

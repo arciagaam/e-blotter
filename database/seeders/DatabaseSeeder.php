@@ -350,5 +350,26 @@ class DatabaseSeeder extends Seeder
             ],
 
         ]);
+
+        $now = time();
+        $startDate = date('Y-m-d', strtotime('-24 days', $now));
+
+        for ($i = 0; $i <= 24; $i++) {
+            DB::table("records")->insert([
+                [
+                    'barangay_id' => 1,
+                    'blotter_status_id' => 1,
+                    'barangay_blotter_number' => $i + 1,
+                    'purok' => "1",
+                    'case' => "Theft",
+                    'narrative' => "Nagnakaw",
+                    'reliefs' => "Bayaran ang ninakaw",
+                    'created_at' => $startDate,
+                    'updated_at' => now()
+                ]
+            ]);
+            
+            $startDate = date('Y-m-d', strtotime('+1 day', strtotime($startDate)));
+        }
     }
 }

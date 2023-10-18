@@ -48,6 +48,7 @@ Route::prefix('/admin')->group(function () {
         Route::name('admin.')->group(function () {
             Route::prefix('/dashboard')->group(function () {
                 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+                Route::get('/reports', [DashboardController::class, 'getReports'])->name('dashboard.get-reports');
             });
 
             Route::prefix('records')->name('records.')->group(function () {
@@ -108,6 +109,7 @@ Route::prefix('/')->group(function () {
         Route::resource('dashboard', UserDashboardController::class)
             ->only(['index']);
 
+        Route::get('/dashboard/reports', [UserDashboardController::class, 'getReports'])->name('dashboard.get-reports');
         Route::post('/dashboard', [UserDashboardController::class, 'getHearingDates'])->name('dashboard.get-hearing-dates');
 
         Route::prefix('records')->name('records.')->group(function () {

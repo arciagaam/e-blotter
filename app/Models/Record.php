@@ -23,8 +23,6 @@ class Record extends Model
         'blotter_status_id',
         'barangay_blotter_number',
         'purok',
-        'victim_id',
-        'suspect_id',
         'case',
         'narrative',
         'reliefs',
