@@ -78,7 +78,7 @@
                                     <p>{{ $record->case }}</p>
                                 </td>
                                 <td>
-                                    <p>{{ formatName($record->victim->first_name, $record->victim->middle_name, $record->victim->last_name) }}
+                                    <p>{{ formatName($record->victim->first_name ?? "", $record->victim->middle_name ?? null, $record->victim->last_name ?? "") }}
                                     </p>
                                 </td>
                                 <td>

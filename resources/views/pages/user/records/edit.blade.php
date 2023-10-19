@@ -95,7 +95,7 @@
                         </div>
 
                         <input class="form-input" type="number" name="victim[age]" id="victim_age"
-                            value="{{ $record->victim->age }}">
+                            value="{{ $record->victim->age ?? "" }}">
                         @error('victim.age')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror

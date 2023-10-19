@@ -56,7 +56,7 @@
                         </div>
 
                         <input class="form-input bg-white" type="text" name="victim[name]" id="victim_name"
-                            value="{{ formatName($record->victim->first_name, $record->victim->middle_name, $record->victim->last_name) }}"
+                            value="{{ formatName($record->victim->first_name ?? "", $record->victim->middle_name ?? null, $record->victim->last_name ?? "") }}"
                             disabled>
                         @error('victim.name')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -69,7 +69,7 @@
                         </div>
 
                         <input class="form-input bg-white" type="number" name="victim[age]" id="victim_age"
-                            value="{{ $record->victim->age }}" disabled>
+                            value="{{ $record->victim->age ?? "" }}" disabled>
                         @error('victim.age')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror

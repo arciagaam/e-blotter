@@ -2,6 +2,25 @@ import Chart from "chart.js/auto";
 
 const graph = document.querySelector("#graph");
 
+const colors = {
+    "settled": {
+        class: "text-emerald-600 bg-emerald-200",
+        rgb: "rgb(5, 150, 105)",
+    },
+    "dismissed": {
+        class: "text-rose-600 bg-rose-200",
+        rgb: "rgb(225, 29, 72)"
+    },
+    "in prosecution": {
+        class: "text-project-yellow-default bg-project-yellow-default/25",
+        rgb: "rgb(251, 173, 38)"
+    },
+    "unresolved": {
+        class: "text-neutral-500 bg-neutral-200",
+        rgb: "rgb(115, 115, 115)"
+    },
+};
+
 const MONTHS = [
     "January",
     "February",
@@ -60,7 +79,9 @@ window.addEventListener('load', async () => {
             for (const key in datesArray["dataset"]) {
                 const obj = {
                     label: uppercaseFirstChar(key),
-                    data: datesArray["dataset"][key]
+                    data: datesArray["dataset"][key],
+                    borderColor: colors[key].rgb,
+                    backgroundColor: colors[key].rgb
                 }
 
                 datesDataset.push(obj);
@@ -145,7 +166,7 @@ function convertDateToMonths(array) {
 
 function convertDatesToDays(array) {
     return array.map((data) => {
-        return DAYS[new Date(data).getDay()];
+        return new Date(data).toDateString();
     });
 }
 

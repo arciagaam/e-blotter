@@ -352,21 +352,50 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $now = time();
-        $startDate = date('Y-m-d', strtotime('-24 days', $now));
+        $startDate = date('Y-m-d', strtotime('-7 days', $now));
+        $datesArray = [];
 
-        for ($i = 0; $i <= 24; $i++) {
+        for($i = 0; $i <= 7; $i++) {
+            $startDate = date('Y-m-d', strtotime('+1 days', strtotime($startDate)));
+            array_push($datesArray, $startDate);
+        }
+
+        for ($i = 0; $i <= 100; $i++) {
             DB::table("records")->insert([
                 [
-                    'barangay_id' => 1,
-                    'blotter_status_id' => 1,
+                    'barangay_id' => rand(1, 2),
+                    'blotter_status_id' => rand(1, 4),
                     'barangay_blotter_number' => $i + 1,
-                    'purok' => "1",
+                    'purok' => rand(1, 10) . " Purok",
                     'case' => "Theft",
                     'narrative' => "Nagnakaw",
                     'reliefs' => "Bayaran ang ninakaw",
-                    'created_at' => $startDate,
+                    'created_at' => $datesArray[array_rand($datesArray)],
                     'updated_at' => now()
                 ]
+            ]);
+
+            DB::table('victims')->insert([
+                "record_id" => $i + 1,
+                "civil_status_id" => 1,
+                "first_name" => "John",
+                "last_name" => "Doe",
+                "age" => 21,
+                "sex" => 1,
+                "contact_number" => "0912345678",
+                "address" => "123 Street",
+                "created_at" => now(),
+                "updated_at" => now(),
+            ]);
+
+            DB::table('suspects')->insert([
+                "record_id" => $i + 1,
+                "first_name" => "Jane",
+                "last_name" => "Doe",
+                "sex" => 2,
+                "address" => "234 Street",
+                "created_at" => now(),
+                "updated_at" => now(),
             ]);
             
             $startDate = date('Y-m-d', strtotime('+1 day', strtotime($startDate)));

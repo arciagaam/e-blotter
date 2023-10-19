@@ -30,24 +30,17 @@ const DAYS = [
 
 const COUNT = 7;
 
+// {
+//     "settled" = [
+//         {
+//             "label": "barangay-name-here",
+//             "data": []
+//         }
+//     ]
+// }
 const dates = [];
 const datesDataset = [];
 
-const config = {
-    type: "line",
-    options: {
-        scale: {
-            ticks: {
-                precision: 0
-            }
-        },
-        scales: {
-            y: {
-                beginAtZero: true,
-            }
-        }
-    }
-};
 
 window.addEventListener('load', async () => {
     const PATH = graphsContainer.dataset.route;
@@ -71,55 +64,104 @@ window.addEventListener('load', async () => {
             const response = await data.json();
 
             const datesArray = response['message'];
-            console.log(datesArray);
 
-            // dates.push(...convertDatesToDays(datesArray["dates"]));
+            dates.push(...convertDatesToDays(datesArray["dates"]));
 
-            // for (const key in datesArray["dataset"]) {
-            //     const obj = {
-            //         label: uppercaseFirstChar(key),
-            //         data: datesArray["dataset"][key]
-            //     }
+            for (const key in datesArray["dataset"]) {
+                const obj = {
+                    category: key,
+                    dataset: []
+                }
 
-            //     datesDataset.push(obj);
-            // }
+                for (const barangay in datesArray["dataset"][key]) {
+                    obj.dataset.push({
+                        label: barangay,
+                        data: datesArray["dataset"][key][barangay]
+                    })
+                }
+
+                datesDataset.push(obj);
+            }
 
         } catch (error) {
             console.error(error);
         }
     }
 
+
     await fetchReports();
 
-    ["settled", "dismissed", "in prosecution"].forEach((item) => {
-        createGraph(uppercaseFirstChar(item));
+    datesDataset.forEach((data, index) => {
+        createGraph(data.category, data.dataset, index);
     })
-
-    // const data = {
-    //     labels: dates,
-    //     datasets: datesDataset
-    // };
-
-
-    // new Chart(graph, config)
 });
 
-function createGraph(textLabel) {
+    // 'w-fit text-center rounded-full px-4 p-1',
+    // 'bg-emerald-100 text-emerald-600' => $id == 1,
+    // 'bg-neutral-100 text-neutral-600' => $id == 2,
+    // 'bg-rose-100 text-rose-600' => $id == 3,
+    // 'bg-yellow-100 text-yellow-600' => $id == 4,
+const colors = {
+    "settled": {
+        class: "text-emerald-600 bg-emerald-100",
+        rgb: "rgb(5, 150, 105)",
+    },
+    "dismissed": {
+        class: "text-rose-600 bg-rose-100",
+        rgb: "rgb(225, 29, 72)"
+    },
+    "in prosecution": {
+        class: "text-project-yellow-default bg-yellow-100",
+        rgb: "rgb(251, 173, 38)"
+    },
+    "unresolved": {
+        class: "text-neutral-500 bg-neutral-100",
+        rgb: "rgb(115, 115, 115)"
+    },
+};
+
+function createGraph(textLabel, dataset, idx) {
+    const data = {
+        labels: dates,
+        datasets: dataset,
+    }
+
+    const config = {
+        type: "line",
+        data: data,
+        options: {
+            scale: {
+                ticks: {
+                    precision: 0
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    };
+
     const container = Object.assign(document.createElement("div"), {
         classname: "flex flex-col gap-2"
     });
 
     const label = Object.assign(document.createElement("p"), {
-        textContent: textLabel ?? "",
-        className: "text-lg"
+        textContent: uppercaseFirstChar(textLabel) ?? "",
+        className: `text-lg font-bold flex w-fit justify-content items-center rounded-full px-4 py-1 ${colors[textLabel].class}`
     });
 
-    const canvas = Object.assign(document.createElement("canvas"), {});
-
+    const canvas = Object.assign(document.createElement("canvas"), {
+        id: idx
+    });
+    
     container.appendChild(label);
     container.appendChild(canvas);
 
     graphsContainer.appendChild(container);
+
+    new Chart(canvas, config);
 }
 
 function getMonthsRange(count = COUNT) {
@@ -169,7 +211,7 @@ function convertDateToMonths(array) {
 
 function convertDatesToDays(array) {
     return array.map((data) => {
-        return DAYS[new Date(data).getDay()];
+        return new Date(data).toDateString();
     });
 }
 

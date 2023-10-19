@@ -58,7 +58,7 @@
             @endforeach
         </div>
 
-        <div class="flex flex-col gap-4" id="graph-container" data-route="{{ route('admin.dashboard.get-reports') }}">
+        <div class="flex flex-col gap-8" id="graph-container" data-route="{{ route('admin.dashboard.get-reports') }}">
 
         </div>
     </div>
