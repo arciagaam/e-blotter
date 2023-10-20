@@ -12,24 +12,43 @@
                     </div>
 
                     <div class="flex flex-row justify-between">
-                        <div class="flex gap-2 items-center">
-                            <label class="text-sm" for="search">Search</label>
-                            <div
-                                class="flex items-center border border-table-even focus-within:border-project-blue rounded-md overflow-hidden gap-2 px-1 bg-white transition-all duration-300 ease-in-out">
-                                <input class="w-full outline-none px-1 text-sm py-1" type="text" name="search"
-                                    id="search" value="{{ request()->query()['search'] ?? null }}">
-                                <button class="w-fit h-fit aspect-square flex items-center justify-center"><i
-                                        class='bx bx-search'></i></button>
+                        <div class="flex flex-row gap-4">
+                            {{-- <div class="form-input-container">
+                                <label for="search">Search</label>
+                                <input class="form-input" value="{{ request()->query()['search'] ?? null }}"
+                                    type="text" name="search" id="search">
+                            </div> --}}
+                            <div class="form-input-container">
+                                <label for="search">Search</label>
+                                <select class="form-input" name="search" id="search">
+                                    <option value="">-- SELECT YOUR BARANGAY --</option>
+                                    @foreach ($purokList as $purok)
+                                        <option value="{{ $purok }}" @selected(array_key_exists('search', request()->query()) && $purok == request()->query()['search'])>
+                                            {{ $purok }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+                            <div class="flex flex-row gap-2">
+                                <div class="form-input-container">
+                                    <label for="from">From</label>
+                                    <input class="form-input" value="{{ request()->query()['from'] ?? null }}"
+                                        type="date" name="from" id="from">
+                                </div>
+                                <div class="form-input-container">
+                                    <label for="to">To</label>
+                                    <input class="form-input" value="{{ request()->query()['to'] ?? null }}"
+                                        type="date" name="to" id="to">
+                                </div>
+                            </div>
+                            <button class="btn-filled h-fit flex justify-center self-end">Search</button>
                         </div>
 
-                        <div class="flex gap-2 items-center">
+                        <div class="flex gap-2 items-center self-end">
                             <label class="text-sm" for="rows">Rows per page</label>
                             <input class="form-input w-10" type="text" name="rows" id="rows"
                                 value={{ request()->query()['rows'] ?? 10 }}>
                         </div>
                     </div>
-
                 </form>
             </div>
 
@@ -78,7 +97,7 @@
                                     <p>{{ $record->case }}</p>
                                 </td>
                                 <td>
-                                    <p>{{ formatName($record->victim->first_name ?? "", $record->victim->middle_name ?? null, $record->victim->last_name ?? "") }}
+                                    <p>{{ formatName($record->victim->first_name ?? '', $record->victim->middle_name ?? null, $record->victim->last_name ?? '') }}
                                     </p>
                                 </td>
                                 <td>
@@ -98,15 +117,15 @@
                                         </a>
                                         <a href="{{ route('records.show', ['record' => $record->id]) }}"
                                             class="btn-outline flex justify-center items-center">
-                                            <box-icon class="text-xs" name='search' ></box-icon>
+                                            <box-icon class="text-xs" name='search'></box-icon>
                                         </a>
                                         <a href="{{ route('records.edit', ['record' => $record->id]) }}"
                                             class="btn-outline flex justify-center items-center">
-                                            <box-icon class="text-xs" name='edit-alt' ></box-icon>
+                                            <box-icon class="text-xs" name='edit-alt'></box-icon>
                                         </a>
                                         <button data-target="#delete" data-form-id="{{ $record->id }}"
                                             class="btn-outline danger flex justify-center items-center">
-                                            <box-icon class="text-xs" name='trash-alt' ></box-icon>
+                                            <box-icon class="text-xs" name='trash-alt'></box-icon>
                                         </button>
                                     </div>
                                 </td>

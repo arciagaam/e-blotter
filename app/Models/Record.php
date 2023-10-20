@@ -16,7 +16,6 @@ class Record extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    
 
     protected $fillable = [
         'barangay_id',
@@ -37,13 +36,19 @@ class Record extends Model
         'kp_deadline' => 'date'
     ];
 
-    public function scopeGetPurok(Builder $query)
+    public function scopeGetSearchQuery(Builder $query)
     {
-        $query->when(request()->search, function($q) {
+        $query->when(request()->search, function ($q) {
             $q->where('purok', request()->search);
         })
-        ->where('barangay_id', auth()->user()->barangays[0]->id)
-        ->latest();
+            ->when(request()->from, function ($q) {
+                $q->where('created_at', '>=', date('Y-m-d', strtotime(request()->from)));
+            })
+            ->when(request()->to, function ($q) {
+                $q->where('created_at', '<=', date('Y-m-d', strtotime(request()->to)));
+            })
+            ->where('barangay_id', auth()->user()->barangays[0]->id)
+            ->latest();
     }
 
     public function victim(): HasOne

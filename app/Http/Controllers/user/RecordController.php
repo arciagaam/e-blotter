@@ -24,7 +24,17 @@ class RecordController extends Controller
      */
     public function index()
     {
-        return view('pages.user.records.blotter-records', ['records' => Record::getPurok()->with('victim', 'suspect', 'barangays', 'blotterStatus')->paginate(10)]);
+        $record = Record::select('purok')->orderBy('purok')->get();
+        $purokList = array();
+
+        foreach ($record as $key => $value) {
+            if (!in_array($value->purok, $purokList)) {
+                array_push($purokList, $value->purok);
+            }
+        }
+
+        $result = Record::getSearchQuery()->with('victim', 'suspect', 'barangays', 'blotterStatus')->paginate(10)->withQueryString();
+        return view('pages.user.records.blotter-records', ['records' => $result, 'purokList' => $purokList]);
     }
 
     /**
@@ -122,7 +132,7 @@ class RecordController extends Controller
     public function destroy(Record $record)
     {
         $record->delete();
-        
+
         return redirect()->route('records.index');
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AuditTrail;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,9 +27,9 @@ class Authentication extends Controller
             "password" => "required",
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, true)) {
             $request->session()->regenerate();
-            
+
             // if($this->authenticationService->checkUserRole()) {
             //     auth()->logout();
             //     $request->session()->invalidate();
@@ -37,17 +38,17 @@ class Authentication extends Controller
             //     $route = str_contains(url()->previous(), "admin") ? "/admin" : "/";
             //     return redirect($route)->with("error", "Invalid credentials.");
             // }
-            
+
             if (auth()->user()->roles[0]->id === 1) {
-                
+
                 return redirect()->intended("/admin/dashboard");
-            } 
+            }
 
             session()->put("login_role", $request->login_role_id);
 
             AuditTrail::create([
-                "barangay_id" => auth()->user()->barangays[0]->id, 
-                "login_role_id" => session()->get("login_role"), 
+                "barangay_id" => auth()->user()->barangays[0]->id,
+                "login_role_id" => session()->get("login_role"),
                 "user_id" => auth()->user()->id,
                 "action" => "Logged in"
             ]);
@@ -67,6 +68,17 @@ class Authentication extends Controller
     {
         // $route = str_contains(url()->previous(), "admin") ? "/admin" : "/";
 
+        // $user = User::find(auth()->user()->id);
+        // $user->remember_token = null;
+        // $user->save();
+
+        AuditTrail::create([
+            "barangay_id" => auth()->user()->barangays[0]->id ?? null,
+            "login_role_id" => session()->get("login_role"),
+            "user_id" => auth()->user()->id,
+            "action" => "Logged out"
+        ]);
+
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -75,7 +87,8 @@ class Authentication extends Controller
     }
 }
 
-class AuthenticationService {
+class AuthenticationService
+{
     public function checkUserRole()
     {
         return ((!str_contains(url()->previous(), "admin") && auth()->user()->roles[0]->id == 1) || (str_contains(url()->previous(), "admin") && auth()->user()->roles[0]->id != 1));

@@ -20,6 +20,7 @@ use App\Models\Record;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,7 +61,7 @@ Route::prefix('/admin')->group(function () {
             Route::resource('kp-forms', KpFormController::class)->only(['index', 'show']);
 
             Route::resource('accounts', AccountController::class);
-                // ->only(['index', 'show', 'edit', 'update', 'destroy']);
+            // ->only(['index', 'show', 'edit', 'update', 'destroy']);
 
             Route::prefix('/accounts')->name('accounts.')->group(function () {
                 Route::post('/verify', [AccountController::class, 'verify'])->name('verify');
@@ -74,6 +75,15 @@ Route::prefix('/')->group(function () {
     Route::middleware(['guest'])->group(function () {
 
         Route::get('/', function () {
+
+            if (Auth::viaRemember()) {
+                if (auth()->user()->roles[0]->id === 1) {
+                    return redirect()->intended("/admin/dashboard");
+                } else {
+                    return redirect()->intended("/dashboard");
+                }
+            }
+
             $loginRoles = LoginRole::all();
             $users = User::getNonDeletedUsers()->get();
             $adminUsers = User::getAdminUsers()->get();
