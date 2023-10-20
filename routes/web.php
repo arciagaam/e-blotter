@@ -133,6 +133,9 @@ Route::prefix('/')->group(function () {
 
                 Route::get('/{record}', [RecordsKpFormController::class, 'index'])->name('index');
                 Route::post('/{recordId}', [RecordsKpFormController::class, 'store'])->name('store');
+
+                Route::get('/file/{recordId}/{issuedKpFormId}', [RecordsKpFormController::class, 'streamFile'])->name('file.show');
+                Route::delete('/file/delete/{recordId}/{issuedKpFormId}', [RecordsKpFormController::class, 'deleteFile'])->name('file.destroy');
             });
         });
         Route::resource('records', UserRecordController::class);

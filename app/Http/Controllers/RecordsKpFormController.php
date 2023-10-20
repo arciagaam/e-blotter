@@ -27,8 +27,14 @@ class RecordsKpFormController extends Controller
     public function index(string $record, RecordsKpFormService $service, RecordKpFormActions $kpFormAction, GetKpFormMessageActions $kpFormMessageAction)
     {
         $message = $kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm($record), $record, $kpFormMessageAction);
-        // dd($message);
-        return view('pages.kp_forms.kp_forms', ['record' => $record, 'issuedKpForms' => IssuedKpForm::with('kpForm')->latest()->where('record_id', $record)->get(), 'message' => $message]);
+
+        $issuedKpForms = IssuedKpForm::with('kpForm')->latest()->where('record_id', $record)->get();
+        $uploadedKpForms = IssuedKpFormUpload::where('record_id', $record)->get();
+
+        $combinedKpForms = $issuedKpForms->merge($uploadedKpForms)->sortByDesc('created_at');
+        // dd($combinedKpForms);
+
+        return view('pages.kp_forms.kp_forms', ['record' => $record, 'issuedKpForms' => $combinedKpForms, 'message' => $message]);
     }
 
     /**
@@ -203,7 +209,6 @@ class RecordsKpFormController extends Controller
     public function show(string $recordId, string $issuedKpFormId, RecordKpFormActions $action)
     {
         [$issuedForm, $tagIds, $forms] = $action->handleShow($recordId, $issuedKpFormId);
-
         return view("kp_forms.kp-form-$issuedForm->kp_form_id", ['issuedForm' => $issuedForm, 'tagIds' => collect($tagIds), 'relatedForms' => $forms]);
     }
 
@@ -264,6 +269,31 @@ class RecordsKpFormController extends Controller
     {
         IssuedKpForm::where('id', $issuedKpFormId)->where('record_id', $recordId)->delete();
 
+        return redirect()->route('records.kp-forms.index', ['record' => $recordId]);
+    }
+
+
+    /**
+     * View File
+     */
+    public function streamFile(string $recordId, string $issuedKpFormUploadId)
+    {
+        $file = IssuedKpFormUpload::where('id', $issuedKpFormUploadId)->where('record_id', $recordId)->select('path')->first();
+
+        if ($file !== null) {
+            $path = public_path('assets/' . $file['path']);
+            return response()->file($path);
+        }
+
+        return response()->json(["message" => "Cannot find file."], 404);
+    }
+
+    /**
+     * Delete uploaded file
+     */
+    public function deleteFile(string $recordId, string $issuedKpFormUploadId)
+    {
+        IssuedKpFormUpload::where('id', $issuedKpFormUploadId)->where('record_id', $recordId)->delete();
         return redirect()->route('records.kp-forms.index', ['record' => $recordId]);
     }
 }
