@@ -10,11 +10,14 @@ use App\Http\Requests\RecordsKpFormRequest;
 use App\Models\AuditTrail;
 use App\Models\IssuedKpForm;
 use App\Models\IssuedKpFormField;
+use App\Models\IssuedKpFormUpload;
 use App\Models\KpForm;
 use App\Models\Record;
 use App\Models\Summon;
 use App\Services\RecordsKpFormService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RecordsKpFormController extends Controller
 {
@@ -168,9 +171,30 @@ class RecordsKpFormController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, string $recordId)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'kp-form' => 'required|file|mimes:docx,pdf'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
+
+        $record = Record::find($recordId);
+        $file = $validator->validated()['kp-form'];
+
+        if ($file) {
+            $filePath = $file->store("kp_forms", "public");
+
+            IssuedKpFormUpload::create([
+                'record_id' => $record->id,
+                'name' => $file->getClientOriginalName(),
+                'path' => $filePath
+            ]);
+        }
+
+        return response()->json(['message' => 'Success'], 200);
     }
 
     /**

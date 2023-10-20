@@ -56,7 +56,7 @@
                         </div>
 
                         <input class="form-input bg-white" type="text" name="victim[name]" id="victim_name"
-                            value="{{ formatName($record->victim->first_name ?? "", $record->victim->middle_name ?? null, $record->victim->last_name ?? "") }}"
+                            value="{{ formatName($record->victim->first_name ?? '', $record->victim->middle_name ?? null, $record->victim->last_name ?? '') }}"
                             disabled>
                         @error('victim.name')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -69,7 +69,7 @@
                         </div>
 
                         <input class="form-input bg-white" type="number" name="victim[age]" id="victim_age"
-                            value="{{ $record->victim->age ?? "" }}" disabled>
+                            value="{{ $record->victim->age ?? '' }}" disabled>
                         @error('victim.age')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
@@ -158,7 +158,8 @@
                             </div>
 
                             <input class="form-input bg-white" type="text" name="suspect[name]" id="suspect_name"
-                                value="{{ formatName($record->suspect->first_name, $record->suspect->middle_name, $record->suspect->last_name)}}" disabled>
+                                value="{{ formatName($record->suspect->first_name, $record->suspect->middle_name, $record->suspect->last_name) }}"
+                                disabled>
                             @error('suspect.name')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
@@ -252,6 +253,10 @@
                 <div class="flex flex-col ml-auto gap-2">
                     <a href="{{ route('records.kp-forms.get.step-one', ['id' => $record->id]) }}" class="btn-filled"
                         data-target="#print" type="button">Issue KP Form</a>
+                    <button data-target="#upload-form" data-form-id="{{ $record->id }}"
+                        class="btn-outline flex justify-center items-center">
+                        Upload KP Form
+                    </button>
                     <button class="btn-outline" data-target="#schedule" type="button">Schedule of
                         Reconciliation</button>
                     <a class="btn-outline text-center"
@@ -265,29 +270,6 @@
 
         </div>
     </div>
-
-    <x-modal id="schedule">
-        <x-slot:heading>
-            Schedules
-        </x-slot:heading>
-
-        <ul class="flex flex-col h-96 max-h-96 overflow-auto divide-y">
-            @empty($hearingDates)
-                <p>No hearing dates.</p>
-            @else
-                @foreach ($hearingDates as $key => $date)
-                    <li class="flex flex-col py-4 first:pt-0 last:pb-0">
-                        <span class="font-bold flex flex-row items-center gap-2">
-                            KP FORM #{{ $date->kp_form_id }}
-                            <span class="font-normal text-sm text-gray-400">Issued at
-                                {{ date('F j, Y', strtotime($date->created_at)) }}</span>
-                        </span>
-                        <p>{{ date('F j, Y', strtotime($date->value)) }}</p>
-                    </li>
-                @endforeach
-            @endempty
-        </ul>
-    </x-modal>
 
 </x-layout>
 
@@ -306,4 +288,50 @@
     <x-slot:footer>
         <button class="btn-filled danger" form="delete-record-form">Delete</button>
     </x-slot:footer>
+</x-modal>
+
+<x-modal id="upload-form">
+    <x-slot:heading>
+        Upload KP Form
+    </x-slot:heading>
+
+    <form action="#" method="POST" id="upload-kp-form" class="flex flex-col gap-2"
+        data-action="{{ route('records.kp-forms.store', ['recordId' => ':id']) }}" enctype="multipart/form-data"
+        data-file-upload="true">
+
+        <div class="form-input-container">
+            <input type="file" name="kp-form" id="kp-form"
+                class="w-fit file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:btn-outline file:cursor-pointer">
+            @error('logo')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            @enderror
+        </div>
+    </form>
+
+    <x-slot:footer>
+        <button class="btn-filled" form="upload-kp-form">Upload</button>
+    </x-slot:footer>
+</x-modal>
+
+<x-modal id="schedule">
+    <x-slot:heading>
+        Schedules
+    </x-slot:heading>
+
+    <ul class="flex flex-col h-96 max-h-96 overflow-auto divide-y">
+        @empty($hearingDates)
+            <p>No hearing dates.</p>
+        @else
+            @foreach ($hearingDates as $key => $date)
+                <li class="flex flex-col py-4 first:pt-0 last:pb-0">
+                    <span class="font-bold flex flex-row items-center gap-2">
+                        KP FORM #{{ $date->kp_form_id }}
+                        <span class="font-normal text-sm text-gray-400">Issued at
+                            {{ date('F j, Y', strtotime($date->created_at)) }}</span>
+                    </span>
+                    <p>{{ date('F j, Y', strtotime($date->value)) }}</p>
+                </li>
+            @endforeach
+        @endempty
+    </ul>
 </x-modal>

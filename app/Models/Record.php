@@ -71,6 +71,11 @@ class Record extends Model
         return $this->hasMany(IssuedKpForm::class);
     }
 
+    public function issuedKpFormUploads(): HasMany
+    {
+        return $this->hasMany(IssuedKpFormUploads::class);
+    }
+
     public function relatedKpForms(): HasOneOrMany
     {
         return $this->HasOneOrMany(IssuedKpForm::class);

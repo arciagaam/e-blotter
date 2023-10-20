@@ -132,6 +132,7 @@ Route::prefix('/')->group(function () {
                 Route::get('/{recordId}/{issuedKpFormId}', [RecordsKpFormController::class, 'show'])->name('show');
 
                 Route::get('/{record}', [RecordsKpFormController::class, 'index'])->name('index');
+                Route::post('/{recordId}', [RecordsKpFormController::class, 'store'])->name('store');
             });
         });
         Route::resource('records', UserRecordController::class);
