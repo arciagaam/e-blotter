@@ -51,13 +51,11 @@
                                             <span class="font-normal text-sm text-gray-400">Issued at
                                                 {{ date('F j, Y', strtotime($form->created_at)) }}</span>
                                         </span>
-                                        {{-- <span>{{ $form->kpForm->name }}</span> --}}
+                                        <span>Uploaded document.</span>
                                     </label>
                                     <div class="flex flex-row gap-2">
                                         <a class="btn-outline success" target="_blank"
                                             href="{{ route('records.kp-forms.file.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
-                                        {{-- <a class="btn-outline"
-                                            href="{{ route('records.kp-forms.edit', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Edit</a> --}}
                                         <button data-target="#delete-file" data-form-record-id="{{ $record }}"
                                             data-form-issued-kp-form-id="{{ $form->id }}"
                                             class="btn-outline danger">Delete</button>
