@@ -83,13 +83,17 @@ Route::prefix('/')->group(function () {
                     return redirect()->intended("/dashboard");
                 }
             }
+            
+            return view('pages.landing_page.index');
+        })->name('userRoot');
 
+        Route::get('/login', function() {
             $loginRoles = LoginRole::all();
             $users = User::getNonDeletedUsers()->get();
             $adminUsers = User::getAdminUsers()->get();
 
             return view('pages.user.auth.login', ['loginRoles' => $loginRoles, "users" => $users, "adminUsers" => $adminUsers]);
-        })->name('userRoot');
+        })->name('login');
 
         Route::get('/register', [UserController::class, 'index']);
         Route::post('/register', [UserController::class, 'store']);
