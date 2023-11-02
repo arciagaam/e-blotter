@@ -56,7 +56,7 @@ window.addEventListener('load', () => {
                         form.append("language", "tl")
 
                         const headers = {
-                            'Authorization': 'Bearer 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',
+                            'Authorization': 'Bearer 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',
                         }
 
                         const transcript = await fetch(`${api_transcription_url}`, {
