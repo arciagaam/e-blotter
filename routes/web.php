@@ -83,7 +83,7 @@ Route::prefix('/')->group(function () {
                     return redirect()->intended("/dashboard");
                 }
             }
-            
+
             return view('pages.landing_page.index');
         })->name('userRoot');
 
@@ -123,8 +123,10 @@ Route::prefix('/')->group(function () {
         Route::resource('dashboard', UserDashboardController::class)
             ->only(['index']);
 
-        Route::get('/dashboard/reports', [UserDashboardController::class, 'getReports'])->name('dashboard.get-reports');
         Route::post('/dashboard', [UserDashboardController::class, 'getHearingDates'])->name('dashboard.get-hearing-dates');
+
+        Route::get('/dashboard/reports', [UserDashboardController::class, 'getReports'])->name('dashboard.get-reports');
+        Route::get('/dashboard/reports-purok', [UserDashboardController::class, 'getReportsPerPurok'])->name('dashboard.get-hearing-dates-per-purok');
 
         Route::prefix('records')->name('records.')->group(function () {
             Route::get('print/{record}', [UserRecordController::class, 'print'])->name('print');

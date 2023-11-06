@@ -110,12 +110,12 @@
                             </td>
                             @if (in_array('complainant', $selections['contents']))
                                 <td class="border border-black">
-                                    <p class="text-center">{{ $result->victim->name }}</p>
+                                    <p class="text-center">{{ formatName($result->victim->first_name ?? '', $result->victim->middle_name ?? null, $result->victim->last_name ?? '') }}</p>
                                 </td>
                             @endif
                             @if (in_array('respondent', $selections['contents']))
                                 <td class="border border-black">
-                                    <p class="text-center">{{ $result->suspect->name }}</p>
+                                    <p class="text-center">{{ formatName($result->suspect->first_name ?? '', $result->suspect->middle_name ?? null, $result->suspect->last_name ?? '') }}</p>
                                 </td>
                             @endif
                             <td class="border border-black">

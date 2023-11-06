@@ -21,7 +21,7 @@
                     <p class="whitespace-nowrap">Barangay Case No.</p>
                     <p class="w-full border-b border-0 border-black indent-1">{{$issuedForm->record->id ?? ''}}</p>
                 </div>
-                
+
                 <div class="flex">
                     <p>For:</p>
                     <p class="w-full border-b border-0 border-black indent-1">{{$issuedForm->record->case ?? ''}}</p>
@@ -49,32 +49,30 @@
         <div>
             <p>Made this <span class="underline">{{date('jS', strtotime($issuedForm->created_at))}}</span> day of <span class="underline">{{date('F', strtotime($issuedForm->created_at))}}</span>, <span class="underline">{{date('Y', strtotime($issuedForm->created_at))}}</span></p>
         </div>
-    
+
         <div class="flex flex-col w-1/4">
-            <p class="w-full border-b border-0 border-black">{{$issuedForm->record->victim->name ?? ''}}</p>
+            <p class="w-full border-b border-0 border-black">{{ formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? '') }}</p>
             <p class="self-start" for="">Complainant/s</p>
         </div>
-    
+
         <div>
             <p>Received and filed this <span class="underline">{{date('jS', strtotime($issuedForm->created_at))}}</span> day of <span class="underline">{{date('F', strtotime($issuedForm->created_at))}}</span>, <span class="underline">{{date('Y', strtotime($issuedForm->created_at))}}</span>.</p>
         </div>
-    
+
         <div class="flex flex-col w-max">
-            <p class="w-full h-6 border-b border-0 border-black"></p>
+            <p class="w-full h-6 border-b border-0 border-black">{{ auth()->user()->first_name . " " . auth()->user()->last_name }}</p>
             <p class="self-start" for="">Punong Barangay/Lupon Chairman</p>
         </div>
     </div>
 
 </x-kp-form-layout>
 
-<script type="text/javascript"> 
+<script type="text/javascript">
     window.addEventListener('load', () => {
         document.querySelectorAll("textarea").forEach(textarea => {
-            if(textarea.scrollHeight > textarea.clientHeight) {
+            if (textarea.scrollHeight > textarea.clientHeight) {
                 textarea.style.height = textarea.scrollHeight + 'px';
             }
         });
     });
 </script>
-
-

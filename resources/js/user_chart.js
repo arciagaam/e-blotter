@@ -1,6 +1,14 @@
 import Chart from "chart.js/auto";
 
+const dynamicColors = () => {
+    const r = Math.floor(Math.random() * 255);
+    const g = Math.floor(Math.random() * 255);
+    const b = Math.floor(Math.random() * 255);
+    return "rgb(" + r + "," + g + "," + b + ")";
+};
+
 const graph = document.querySelector("#graph");
+const graphPurok = document.querySelector("#graph-purok");
 
 const colors = {
     "settled": {
@@ -51,12 +59,16 @@ const COUNT = 7;
 const dates = [];
 const datesDataset = [];
 
+const puroks = [];
+const puroksDataset = [];
+
 window.addEventListener('load', async () => {
-    const PATH = graph.dataset.route;
+    const PATH_REPORTS = graph.dataset.route;
+    const PATH_REPORTS_PER_PUROK = graphPurok.dataset.route;
 
     async function fetchReports() {
         try {
-            const data = await fetch(PATH, {
+            const data = await fetch(PATH_REPORTS, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -92,8 +104,58 @@ window.addEventListener('load', async () => {
         }
     }
 
-    await fetchReports();
+    async function fetchReportsPerPurok() {
+        try {
+            const data = await fetch(PATH_REPORTS_PER_PUROK, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                },
+                credentials: 'same-origin',
+            });
 
+            if (!data.ok) {
+                const errorOptions = { status: data.status, statusText: data.statusText };
+                throw errorOptions;
+            }
+
+            const response = await data.json();
+
+            const reportsArray = response['message'];
+            puroks.push(...reportsArray['labels']);
+
+            const temp = [];
+
+            for (const key in reportsArray["datasets"]) {
+                temp.push(reportsArray["datasets"][key]);
+            }
+
+            const obj = {
+                label: "Cases per purok",
+                data: temp,
+                backgroundColor: [
+                    'rgba(255, 99, 132)',
+                    'rgba(255, 159, 64)',
+                    'rgba(255, 205, 86)',
+                    'rgba(75, 192, 192)',
+                    'rgba(54, 162, 235)',
+                    'rgba(153, 102, 255)',
+                    'rgba(201, 203, 207)'
+                ]
+            };
+
+            puroksDataset.push(obj);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    await fetchReports();
+    await fetchReportsPerPurok();
+
+    //  Dates
     const data = {
         labels: dates,
         datasets: datesDataset
@@ -116,7 +178,35 @@ window.addEventListener('load', async () => {
         }
     };
 
-    new Chart(graph, config)
+    // Reports per purok
+    const reportData = {
+        labels: puroks,
+        datasets: puroksDataset
+    };
+
+    const reportConfig = {
+        type: "bar",
+        data: reportData,
+        options: {
+            labels: {
+                display: false,
+            },
+            scale: {
+                ticks: {
+                    precision: 0
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    }
+
+
+    new Chart(graph, config);
+    new Chart(graphPurok, reportConfig);
 });
 
 function getMonthsRange(count = COUNT) {

@@ -85,11 +85,12 @@
 
                 <hr>
 
-                <p class="self-center textt-2xl font-bold">{{ $blotterStatusCount['unresolved'] }}</p>
+                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['unresolved'] }}</p>
             </div>
         </div>
 
         <canvas id="graph" data-route="{{ route("dashboard.get-reports") }}"></canvas>
+        <canvas id="graph-purok" data-route="{{ route("dashboard.get-hearing-dates-per-purok") }}"></canvas>
 
         <x-page-header>Schedules for Conciliation</x-page-header>
 
