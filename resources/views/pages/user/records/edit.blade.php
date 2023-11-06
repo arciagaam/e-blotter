@@ -88,7 +88,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="form-input-container">
                         <div class="flex flex-row">
                             <label for="victim_age" class="flex gap-2 items-center">Age:</label>
@@ -251,7 +251,7 @@
                             <label for="case" class="flex gap-2 items-center">Case:</label>
                         </div>
 
-                        <input class="form-input" type="text" name="case" id="case"
+                        <input class="form-input" type="text" name="case" id="case" list="cases"
                             value="{{ $record->case }}">
                         @error('case')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -322,5 +322,52 @@
     </div>
 
 </x-layout>
+
+<datalist id="cases">
+    <option value="Paglalathala at pamamahayag nang labag sa batas"></option>
+    <option value="Mga pananakot at paninirang-puri"></option>
+    <option value="Paggamit ng huwad na katibayan"></option>
+    <option value="Paggamit ng hindi totoong pangalan at pagtatago ng totoong pangalan"></option>
+    <option value="Paggamit ng mga uniporme at sagisag na labag sa batas"></option>
+    <option value="Pinsala sa katawan dala ng marahas na pag-aaway"></option>
+    <option value="Pagtulong sa naganap na pagpapatiwakal"></option>
+    <option value="Pananagutan ng mga sangkot sa isang labanan kapag nagkaroon lang ng mga pinsala sa katawan o wala mang nangyaring pinsala"></option>
+    <option value="Mga hindi gaanong malalang pinsala sa katawan"></option>
+    <option value="Mga bahagyang pinsala sa katawan at pagmamalupit"></option>
+    <option value="Pagdakip nang labag sa batas"></option>
+    <option value="Paghimok sa isang menor de edad na lumayas sa kanyang tahanan"></option>
+    <option value="Pag-iwan sa isang taong nasa panganib at pag-iwan sa isang naging biktima"></option>
+    <option value="Pagpapabaya sa isang menor de edad (isang bata na mababa ang edad sa pitong (7) taong gulang)"></option>
+    <option value="Pag-iwan ng mga taong pinagkatiwalaang magaalaga sa isang menor de edad; kawalan ng pagmamalasakit ng mga magulang"></option>
+    <option value="Pagpasok sa isang tirahan nang walang pahintulot (hindi gumamit ng dahas at pananakot)"></option>
+    <option value="Mga ibang anyo nang pagpasok na walang pahintulot"></option>
+    <option value="Magaan na mga pagbabanta"></option>
+    <option value="Iba pang magaan na pagbabanta"></option>
+    <option value="Grabeng pamumuwersa"></option>
+    <option value="Hindi grabeng pamumuwersa"></option>
+    <option value="Iba pang katulad na pamumuwersa (sapilitang pagbili ng mga paninda at pagbabayad ng suweldo sa pamamagitan ng pagsingil ng utang na loob)"></option>
+    <option value="Pagbubuo, pananatili at pagbabawal ng pagsasanib ng puhunan at lakas-paggawa sa pamamagitan ng dahas at pananakot"></option>
+    <option value="Pag-alam ng lihim nang sapilitan at sa pamamagitan ng kasunduan"></option>
+    <option value="Pagsisiwalat ng lihim nang mga pang-aabuso ng kapangyarihan"></option>
+    <option value="Pagnanakaw (kung ang halaga ng ninakaw na ariarian ay hindi hihigit sa p50.00)"></option>
+    <option value="Pagnanakaw (kung ang halaga ay hindi hihigit sa p500)"></option>
+    <option value="Pagsakop ng mga tigil na ari-arian o sapilitang pagkuha ng karapatan sa ari-arian"></option>
+    <option value="Paglilipat ng mga hangganan o muhon"></option>
+    <option value="Pandaraya o panggagantso (kung ang halaga ay hindi hihigit sa p200.00)"></option>
+    <option value="Iba pang anyo ng pandaraya"></option>
+    <option value="Pandaraya sa isang menor de edad"></option>
+    <option value="Iba pang panloloko"></option>
+    <option value="Pagtanggal, pagbebenta o pagpeprenda ng nakasanlang pag-aari"></option>
+    <option value="Mga kakaibang kaso ng panlolokong may masamang hangarin (kung ang halaga ng nasirang ari-arian ay hindi hihigit sa p1,000.00)"></option>
+    <option value="Iba pang kalokohan (kung ang halaga ng nasirang ari-arian ay hindi hihigit sa p1,000.00)"></option>
+    <option value="Simpleng panunulsol"></option>
+    <option value="Paggawa ng kahalayan na mayroong pagsang-ayon na naagrabyadong partido"></option>
+    <option value="Pagbanta na isisiwalat at alok na pagpigil sa pagsisiwalat na may kabayaran"></option>
+    <option value="Pagpigil sa paglalathala ng mga gawaing tinutukoy sa panahon ng opisyal na proseso"></option>
+    <option value="Pagdadawit sa mga inosenteng tao"></option>
+    <option value="Mga pakana laban sa dangal"></option>
+    <option value="Paglalabas ng tseke nang walang sapat na pondo"></option>
+    <option value="Pagbili ng nakaw na ari-arian kung ang halaga ng ari-ariang sangkot ay hindi hihigit sa p50.00"></option>
+</datalist>
 
 @vite('resources/js/audio_record.js')

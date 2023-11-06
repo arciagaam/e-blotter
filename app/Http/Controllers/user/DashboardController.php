@@ -154,7 +154,7 @@ class DashboardController extends Controller
                         $statusName = $report->blotterStatus->name;
 
                         $idx = array_search($day, $dates["dates"]);
-                        
+
                         $dates["dataset"][$statusName][$idx] = $dates["dataset"][$statusName][$idx] + 1;
                     }
                 }
@@ -193,5 +193,67 @@ class DashboardController extends Controller
         // }
 
         return response()->json(["message" => $dates], 200);
+    }
+
+    public function getReportsPerPurok()
+    {
+        $now = time();
+
+        // key = Date
+        // value = Count of records
+
+        // Dataset structure
+        //const labels = Utils.months({count: 7});
+        //const data = {
+        //  labels: labels,
+        //  datasets: [{
+        //    label: 'My First Dataset',
+        //    data: [65, 59, 80, 81, 56, 55, 40],
+        //    backgroundColor: [
+        //      'rgba(255, 99, 132, 0.2)',
+        //      'rgba(255, 159, 64, 0.2)',
+        //      'rgba(255, 205, 86, 0.2)',
+        //      'rgba(75, 192, 192, 0.2)',
+        //      'rgba(54, 162, 235, 0.2)',
+        //      'rgba(153, 102, 255, 0.2)',
+        //      'rgba(201, 203, 207, 0.2)'
+        //    ],
+        //    borderColor: [
+        //      'rgb(255, 99, 132)',
+        //      'rgb(255, 159, 64)',
+        //      'rgb(255, 205, 86)',
+        //      'rgb(75, 192, 192)',
+        //      'rgb(54, 162, 235)',
+        //      'rgb(153, 102, 255)',
+        //      'rgb(201, 203, 207)'
+        //    ],
+        //    borderWidth: 1
+        //  }]
+        //};
+
+        // JSON structure
+        $values = array(
+            "labels" => array(),
+            "datasets" => array()
+        );
+
+        $startDate = date('Y-m-d', strtotime('-6 days', $now));
+        $endDate = date('Y-m-d');
+
+        $reports = Record::whereBetween("created_at", [$startDate, $endDate])->where('barangay_id', auth()->user()->barangays[0]->id)->select('id', 'blotter_status_id', 'created_at', 'purok')->orderBy("created_at", "asc")->get();
+
+        foreach ($reports as $report) {
+            $purok = $report->purok;
+            $idx = array_search($purok, $values["labels"]);
+
+            if ($idx !== false) {
+                $values['datasets'][$idx] = $values['datasets'][$idx] + 1;
+            } else {
+                array_push($values['labels'], $purok);
+                array_push($values['datasets'], 1);
+            }
+        }
+
+        return response()->json(["message" => $values], 200);
     }
 }
