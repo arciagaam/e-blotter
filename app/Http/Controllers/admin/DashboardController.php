@@ -147,4 +147,8 @@ class DashboardController extends Controller
 
         return response()->json(["message" => $dates], 200);
     }
+
+    function getCasesPerBarangay() {
+        return response()->json(["message" => Barangay::withCount('records')->with('users:verified_at')->userNotTrashed()->get()], 200);
+    }
 }

@@ -37,7 +37,7 @@
                                             href="{{ route('records.kp-forms.edit', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Edit</a>
                                         <button data-target="#delete" data-form-record-id="{{ $record }}"
                                             data-form-issued-kp-form-id="{{ $form->id }}"
-                                            class="btn-outline danger">Delete</button>
+                                            class="btn-outline danger">Archive</button>
                                     </div>
                                 </div>
                             @break
@@ -58,7 +58,7 @@
                                             href="{{ route('records.kp-forms.file.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
                                         <button data-target="#delete-file" data-form-record-id="{{ $record }}"
                                             data-form-issued-kp-form-id="{{ $form->id }}"
-                                            class="btn-outline danger">Delete</button>
+                                            class="btn-outline danger">Archive</button>
                                     </div>
                                 </div>
                             @break
@@ -102,7 +102,7 @@
 
 <x-modal id="delete">
     <x-slot:heading>
-        Delete Issued KP Form
+        Archive Issued KP Form
     </x-slot:heading>
 
     <form action="#" method="POST" id="delete-kp-form"
@@ -113,13 +113,13 @@
     </form>
 
     <x-slot:footer>
-        <button class="btn-filled danger" form="delete-kp-form">Delete</button>
+        <button class="btn-filled danger" form="delete-kp-form">Archive</button>
     </x-slot:footer>
 </x-modal>
 
 <x-modal id="delete-file">
     <x-slot:heading>
-        Delete Uploaded KP Form
+        Archive Uploaded KP Form
     </x-slot:heading>
 
     <form action="#" method="POST" id="delete-kp-form-file"
@@ -130,6 +130,6 @@
     </form>
 
     <x-slot:footer>
-        <button class="btn-filled danger" form="delete-kp-form-file">Delete</button>
+        <button class="btn-filled danger" form="delete-kp-form-file">Archive</button>
     </x-slot:footer>
 </x-modal>

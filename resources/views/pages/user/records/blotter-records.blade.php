@@ -146,17 +146,17 @@
 
 <x-modal id="delete">
     <x-slot:heading>
-        Delete Record
+        Archive Record
     </x-slot:heading>
 
     <form action="#" method="POST" id="delete-record-form"
         data-action="{{ route('records.destroy', ['record' => ':id']) }}">
         @csrf
         @method('DELETE')
-        <p>Are you sure you want to delete this record?</p>
+        <p>Are you sure you want to archive this record?</p>
     </form>
 
     <x-slot:footer>
-        <button class="btn-filled danger" form="delete-record-form">Delete</button>
+        <button class="btn-filled danger" form="delete-record-form">Archive</button>
     </x-slot:footer>
 </x-modal>

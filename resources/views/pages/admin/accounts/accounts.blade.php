@@ -170,18 +170,18 @@
 
 <x-modal id="delete">
     <x-slot:heading>
-        Delete Account
+        Archive Account
     </x-slot:heading>
 
     <form action="#" method="POST" id="delete-user-form"
         data-action="{{ route('admin.accounts.destroy', ['account' => ':id']) }}">
         @csrf
         @method('DELETE')
-        <p>Are you sure you want to delete this account?</p>
+        <p>Are you sure you want to archive this account?</p>
     </form>
 
     <x-slot:footer>
-        <button class="btn-filled danger" form="delete-user-form">Delete</button>
+        <button class="btn-filled danger" form="delete-user-form">Archive</button>
     </x-slot:footer>
 </x-modal>
 

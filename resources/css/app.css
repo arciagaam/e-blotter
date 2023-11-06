@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -103,6 +105,10 @@
     .recording {
         @apply before:absolute before:w-full before:h-full before:z-10 before:bg-transparent before:border-2 before:border-rose-600 before:rounded-full before:animate-ping
     }
+}
+
+* {
+    font-family: 'Red Hat Display', sans-serif;
 }
 
 nav box-icon {

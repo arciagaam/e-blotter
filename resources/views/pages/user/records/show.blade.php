@@ -264,7 +264,7 @@
                     <a class="btn-outline success" target="_blank"
                         href="{{ route('records.print', ['record' => $record->id]) }}">Print</a>
                     <button data-target="#delete" data-form-id="{{ $record->id }}"
-                        class="btn-outline danger">Delete</button>
+                        class="btn-outline danger">Archive</button>
                 </div>
             </div>
 
@@ -275,18 +275,18 @@
 
 <x-modal id="delete">
     <x-slot:heading>
-        Delete Record
+        Archive Record
     </x-slot:heading>
 
     <form action="#" method="POST" id="delete-record-form"
         data-action="{{ route('records.destroy', ['record' => ':id']) }}">
         @csrf
         @method('DELETE')
-        <p>Are you sure you want to delete this record?</p>
+        <p>Are you sure you want to archive this record?</p>
     </form>
 
     <x-slot:footer>
-        <button class="btn-filled danger" form="delete-record-form">Delete</button>
+        <button class="btn-filled danger" form="delete-record-form">Archive</button>
     </x-slot:footer>
 </x-modal>
 
