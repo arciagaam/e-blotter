@@ -362,18 +362,12 @@ class DatabaseSeeder extends Seeder
 
         for ($i = 0; $i <= 100; $i++) {
 
-            $purok = $i+1;
-            
-            if($i > 49) {
-                $purok = 1;
-            }
-
             DB::table("records")->insert([
                 [
                     'barangay_id' => $i%2 == 0 ? 1 : 2,
                     'blotter_status_id' => rand(1, 4),
                     'barangay_blotter_number' => $i + 1,
-                    'purok' => $purok,
+                    'purok' => rand(1, 50),
                     'case' => "Theft",
                     'narrative' => "Nagnakaw",
                     'reliefs' => "Bayaran ang ninakaw",
