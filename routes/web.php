@@ -50,6 +50,7 @@ Route::prefix('/admin')->group(function () {
             Route::prefix('/dashboard')->group(function () {
                 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
                 Route::get('/reports', [DashboardController::class, 'getReports'])->name('dashboard.get-reports');
+                Route::get('/cases-per-barangay', [DashboardController::class, 'getCasesPerBarangay'])->name('dashboard.get-cases-per-barangay');
             });
 
             Route::prefix('records')->name('records.')->group(function () {

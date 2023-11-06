@@ -29,18 +29,8 @@ const DAYS = [
 ];
 
 const COUNT = 7;
-
-// {
-//     "settled" = [
-//         {
-//             "label": "barangay-name-here",
-//             "data": []
-//         }
-//     ]
-// }
 const dates = [];
 const datesDataset = [];
-
 
 window.addEventListener('load', async () => {
     const PATH = graphsContainer.dataset.route;
