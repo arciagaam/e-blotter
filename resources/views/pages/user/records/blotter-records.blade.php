@@ -21,7 +21,7 @@
                             <div class="form-input-container">
                                 <label for="search">Search</label>
                                 <select class="form-input" name="search" id="search">
-                                    <option value="">-- SELECT YOUR BARANGAY --</option>
+                                    <option value="">-- SELECT PUROK --</option>
                                     @foreach ($purokList as $purok)
                                         <option value="{{ $purok }}" @selected(array_key_exists('search', request()->query()) && $purok == request()->query()['search'])>
                                             {{ $purok }}</option>
@@ -104,7 +104,7 @@
                                     <p>{{ date_format($record->created_at, 'F j, Y') }}</p>
                                 </td>
                                 <td>
-                                    <div class="flex justify-center items-center">
+                                    <div class="flex justify-center items-center whitespace-nowrap">
                                         <x-blotter-status id="{{ $record->blotterStatus->id }}"
                                             text="{{ $record->blotterStatus->name }}" />
                                     </div>

@@ -33,7 +33,9 @@ class RecordController extends Controller
             }
         }
 
-        $result = Record::getSearchQuery()->with('victim', 'suspect', 'barangays', 'blotterStatus')->paginate(10)->withQueryString();
+        sort($purokList);
+
+        $result = Record::getSearchQuery()->with('victim', 'suspect', 'barangays', 'blotterStatus')->orderBy('barangay_blotter_number')->paginate(10)->withQueryString();
         return view('pages.user.records.blotter-records', ['records' => $result, 'purokList' => $purokList]);
     }
 

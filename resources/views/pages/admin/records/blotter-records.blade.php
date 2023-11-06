@@ -76,7 +76,7 @@
                                 <p>{{ date_format($record->created_at, 'F j, Y') }}</p>
                             </td>
                             <td>
-                                <div class="flex justify-center items-center">
+                                <div class="flex justify-center items-center whitespace-nowrap">
                                     <x-blotter-status id="{{ $record->blotterStatus->id }}"
                                         text="{{ $record->blotterStatus->name }}" />
                                 </div>
