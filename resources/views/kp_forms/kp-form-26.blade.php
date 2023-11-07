@@ -83,8 +83,8 @@
     <p class="self-start">This <span class="underline">{{date('jS', strtotime($issuedForm->created_at ?? now()))}}</span> day of <span class="underline">{{date('F', strtotime($issuedForm->created_at ?? now()))}}</span>, <span class="underline">{{date('Y', strtotime($issuedForm->created_at ?? now()))}}</span>.</p>
 
     <div class="flex flex-col w-max self-start">
-        <p class="w-full h-4 border-b border-0 border-black"></p>
-        <p class="self-start">Punong Barangay/Lupon Chairman</p>
+        <p class="w-full h-6 border-b border-0 border-black">{{ auth()->user()->first_name . " " . auth()->user()->last_name }}</p>
+            <p class="self-start" for="">Punong Barangay/Lupon Chairman</p>
     </div>
 
     <p class="self-start">Notified this <span class="underline">{{date('jS', strtotime($issuedForm->created_at ?? now()))}}</span> day of <span class="underline">{{date('F', strtotime($issuedForm->created_at ?? now()))}}</span>, <span class="underline">{{date('Y', strtotime($issuedForm->created_at ?? now()))}}</span>.</p>
