@@ -70,8 +70,8 @@
         ])>afternoon</span>/
         evening for the hearing of the motion for execution, copy of which is
         attached hereto, filed by <span
-        @class(['underline' => isset($issuedForm->record->victim->name)])>{{ $issuedForm->record->victim->name ?? str_repeat('_', 12) }}</span>,
-    <span @class(['underline' => isset($issuedForm->record->suspect->name)])>{{ $issuedForm->record->suspect->name ?? str_repeat('_', 12) }}</span> (Name of complainant/s/
+        @class(['underline' => isset(formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? ''))])>{{ formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? '') ?? str_repeat('_', 12) }}</span>,
+    <span @class(['underline' => isset(formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? ''))])>{{ formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? '') ?? str_repeat('_', 12) }}</span> (Name of complainant/s/
         respondent/s)
     </p>
 

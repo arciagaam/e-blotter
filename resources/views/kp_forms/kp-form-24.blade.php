@@ -37,7 +37,7 @@
 
     <p class="self-start text-justify indent-4">
         This is to certify that after prior notice and hearing, the respondent/s
-        <span class="underline">{{$issuedForm->record->suspect->name ?? str_repeat('_', 12)}}</span> (name) and _________________ (name) have
+        <span class="underline">{{formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? '') ?? str_repeat('_', 12)}}</span> (name) and _________________ (name) have
         been found to have willfully failed or refused to appear without
         justifiable reason before the Punong Barangay/Pangkat ng
         Tagapagkasundo and therefore respondent/s is/are barred from filing

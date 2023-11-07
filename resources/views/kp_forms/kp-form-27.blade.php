@@ -51,8 +51,8 @@
                 ])>afternoon</span>/
             evening for the hearing of the motion for execution, copy of which is
             attached hereto, filed by <span
-                @class(['underline' => isset($issuedForm->record->victim->name)])>{{ $issuedForm->record->victim->name ?? str_repeat('_', 12) }}</span>,
-            <span @class(['underline' => isset($issuedForm->record->suspect->name)])>{{ $issuedForm->record->suspect->name ?? str_repeat('_', 12) }}</span>
+                @class(['underline' => isset(formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? ''))])>{{ formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? '') ?? str_repeat('_', 12) }}</span>,
+            <span @class(['underline' => isset(formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? ''))])>{{ formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? '') ?? str_repeat('_', 12) }}</span>
             (Name of complainant/s/
             respondent/s)
         </p>
@@ -60,7 +60,7 @@
         <p>The said settlement/award is now final and executory;</p>
         <p>
             WHEREAS, the party obliged <span
-                @class(['underline' => isset($issuedForm->record->suspect->name)])>{{ $issuedForm->record->suspect->name ?? str_repeat('_', 12) }}</span>
+                @class(['underline' => isset(formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? ''))])>{{ formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? '') ?? str_repeat('_', 12) }}</span>
             (name) has not
             complied voluntarily with the aforestated amicable settlement/
             arbitration award, within the period of five (5) days from the date of
@@ -69,7 +69,7 @@
             virtue of the powers vested in me and the Lupon by the Katarungang
             Pambarangay Law and Rules, I shall cause to be realized from the
             goods and personal property of <span
-                @class(['underline' => isset($issuedForm->record->suspect->name)])>{{ $issuedForm->record->suspect->name ?? str_repeat('_', 12) }}</span>
+                @class(['underline' => isset(formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? ''))])>{{ formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? '') ?? str_repeat('_', 12) }}</span>
             (name of party
             obliged) the sum of <span @class(['underline' => isset($tagIds['relief'])])
                 class="underline">{{ $tagIds['relief'] ?? str_repeat('_', 12) }}</span> (state amount of settlement

@@ -38,7 +38,7 @@
     <p class="self-start text-justify indent-4">
         This is to certify that the above-captioned case was dismissed pursuant
         to the Order dated {{ isset($relatedForms['7']) ? date('F j, Y', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 12) }}, for complainant/s
-        <span class="underline">{{$issuedForm->record->victim->name ?? str_repeat('_', 12)}}</span> (name) and ______________ (name) willful failure
+        <span class="underline">{{formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? '') ?? str_repeat('_', 12)}}</span> (name) and ______________ (name) willful failure
         or refusal to appear for hearing before the Punong Barangay/Pangkat
         ng Tagapagkasundo and therefore complainant/s is/are barred from
         filing an action in court/government office.
