@@ -43,7 +43,8 @@ class UserStorePostRequest extends FormRequest
             'email' => 'required|email|unique:users,email',
             'contact_number' => 'required',
             'name' => 'required',
-            'logo' => 'required|image|max:3072|mimes:jpg,jpeg,png', // Make this required later
+            'logo' => 'required|image|max:3072|mimes:jpg,jpeg,png',
+            'purok' => 'required'
         ];
     }
 

@@ -47,8 +47,7 @@ class Record extends Model
             ->when(request()->to, function ($q) {
                 $q->where('created_at', '<=', date('Y-m-d', strtotime(request()->to)));
             })
-            ->where('barangay_id', auth()->user()->barangays[0]->id)
-            ->latest();
+            ->where('barangay_id', auth()->user()->barangays[0]->id);
     }
 
     public function victim(): HasOne

@@ -41,4 +41,9 @@ class Barangay extends Model
     {
         return $this->hasMany(Record::class);
     }
+
+    public function puroks(): HasMany
+    {
+        return $this->hasMany(Purok::class);
+    }
 }

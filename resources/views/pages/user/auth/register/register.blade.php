@@ -10,18 +10,15 @@
 </head>
 
 <body>
-    <div class="grid grid-cols-1 lg:grid-cols-2 w-screen overflow-hidden h-screen !bg-cover !bg-no-repeat bg-project-blue-default" style="background: url({{asset('assets/images/full-bg-plain.png')}})">
+    {{-- <div class="grid grid-cols-1 lg:grid-cols-2 w-screen overflow-hidden h-screen !bg-cover !bg-no-repeat bg-project-blue-default" style="background: url({{asset('assets/images/full-bg-plain.png')}})"> --}}
+    <form method="POST" action="{{ url('/register') }}" class="grid grid-cols-1 lg:grid-cols-2 w-full" enctype="multipart/form-data">
+        @csrf
 
-        <div class="hidden lg:flex flex-col gap-4 w-full h-full justify-center items-center p-20">
-            {{-- <img src="{{ asset('assets/register_illust.svg') }}" alt="Register illustration">
-            <p class="text-6xl text-white font-black text-center">E-Blotter</p> --}}
-        </div>
+        <div class="flex p-8">
+            {{-- <div
+                class="h-fit self-center rounded-lg flex flex-col justify-center items-center lg:col-start-2 gap-5 py-10 px-6"> --}}
 
-        <form method="POST" action="{{ url('/register') }}"
-            class="h-fit w-3/4 self-center rounded-lg shadow-md flex flex-col justify-center items-center lg:col-start-2 gap-5 py-10 px-6 bg-white" enctype="multipart/form-data">
-            @csrf
-
-            <div class="flex flex-col gap-10 w-3/4">
+            <div class="flex flex-col gap-10 w-full">
                 <div>
                     <p class="lg:hidden text-4xl font-bold">E-Blotter</p>
                     <p class="italic lg:text-2xl lg:font-bold lg:not-italic">Barangay Officer Register</p>
@@ -32,22 +29,18 @@
                         <p class="opacity-50 italic">Barangay Captain</p>
                         <div class="flex flex-row gap-2">
                             <div class="form-input-container flex-1">
-                                <label for="first_name">First Name <span
-                                        class="form-input-required">*</span></label>
-                                <input class="form-input" type="text" name="first_name" id="first_name"
-                                    value="{{ old('first_name') }}">
+                                <label for="first_name">First Name <span class="form-input-required">*</span></label>
+                                <input class="form-input" type="text" name="first_name" id="first_name" value="{{ old('first_name') }}">
                                 @error('first_name')
-                                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
                                 @enderror
                             </div>
-    
+
                             <div class="form-input-container flex-1">
-                                <label for="last_name">Last Name <span
-                                        class="form-input-required">*</span></label>
-                                <input class="form-input" type="text" name="last_name" id="last_name"
-                                    value="{{ old('last_name') }}">
+                                <label for="last_name">Last Name <span class="form-input-required">*</span></label>
+                                <input class="form-input" type="text" name="last_name" id="last_name" value="{{ old('last_name') }}">
                                 @error('last_name')
-                                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
@@ -57,81 +50,144 @@
                         <label for="username">Username <span class="form-input-required">*</span></label>
                         <input class="form-input" type="text" name="username" id="username"
                             value="{{ old('username') }}">
-                        @error('username')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
-                    </div> --}}
-
-                    <div class="flex flex-row gap-2">
-                        <div class="form-input-container flex-1">
-                            <label for="password">Password <span class="form-input-required">*</span></label>
-                            <input class="form-input" type="password" name="password" id="password">
-                            @error('password')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="form-input-container flex-1">
-                            <label for="confirm_password">Confirm Password <span
-                                    class="form-input-required">*</span></label>
-                            <input class="form-input" type="password" name="confirm_password" id="confirm_password">
-                            @error('confirm_password')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="flex flex-row gap-2">
-                        <div class="form-input-container flex-1">
-                            <label for="email">Email <span class="form-input-required">*</span></label>
-                            <input class="form-input" type="email" name="email" id="email"
-                                value="{{ old('email') }}">
-                            @error('email')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                            @enderror
-                        </div>
-
-                        <div class="form-input-container flex-1">
-                            <label for="contact_number">Contact Number <span
-                                    class="form-input-required">*</span></label>
-                            <input class="form-input" type="contact_number" name="contact_number" id="contact_number"
-                                value="{{ old('contact_number') }}">
-                            @error('contact_number')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="form-input-container">
-                        <label for="name">Barangay<span class="form-input-required">*</span></label>
-                        <input class="form-input" type="text" name="name" id="name"
-                            value="{{ old('name') }}">
-                        @error('name')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="form-input-container">
-                        <label for="logo">Logo<span class="form-input-required">*</span></label>
-                        <input type="file" name="logo" id="logo" class="w-fit file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:btn-outline file:cursor-pointer">
-                        @error('logo')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="flex w-full flex-col gap-2">
-                    @error('invalid')
-                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @error('username')
+                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
                     @enderror
-                    <a class="underline" href="{{ url('/') }}">Already registered your Barangay?</a>
+                </div> --}}
+
+                <div class="flex flex-row gap-2">
+                    <div class="form-input-container flex-1">
+                        <label for="password">Password <span class="form-input-required">*</span></label>
+                        <input class="form-input" type="password" name="password" id="password">
+                        @error('password')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="form-input-container flex-1">
+                        <label for="confirm_password">Confirm Password <span class="form-input-required">*</span></label>
+                        <input class="form-input" type="password" name="confirm_password" id="confirm_password">
+                        @error('confirm_password')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
 
-                <button class="btn-filled">REGISTER</button>
+                <div class="flex flex-row gap-2">
+                    <div class="form-input-container flex-1">
+                        <label for="email">Email <span class="form-input-required">*</span></label>
+                        <input class="form-input" type="email" name="email" id="email" value="{{ old('email') }}">
+                        @error('email')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div class="form-input-container flex-1">
+                        <label for="contact_number">Contact Number <span class="form-input-required">*</span></label>
+                        <input class="form-input" type="contact_number" name="contact_number" id="contact_number" value="{{ old('contact_number') }}">
+                        @error('contact_number')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-input-container">
+                    <label for="name">Barangay<span class="form-input-required">*</span></label>
+                    <input class="form-input" type="text" name="name" id="name" value="{{ old('name') }}">
+                    @error('name')
+                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="form-input-container">
+                    <label for="logo">Logo<span class="form-input-required">*</span></label>
+                    <input type="file" name="logo" id="logo" class="w-fit file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:btn-outline file:cursor-pointer">
+                    @error('logo')
+                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @enderror
+                </div>
             </div>
 
-        </form>
+            <div class="flex w-full flex-col gap-2">
+                @error('invalid')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                @enderror
+                <a class="underline" href="{{ url('/login') }}">Already registered your Barangay?</a>
+            </div>
+
+            <button class="btn-filled">REGISTER</button>
+        </div>
+
+        {{-- </div> --}}
+        </div>
+
+        <div class="flex p-8 flex-col gap-10">
+            <div class="form-input-container">
+                <label for="purok_count">Purok Count<span class="form-input-required">*</span></label>
+                <input class="form-input" type="text" name="purok_count" id="purok_count" value="{{ old('purok_count') }}">
+                @error('purok_count')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                @enderror
+            </div>
+
+            <div>
+                <p class="font-bold">Purok List</p>
+                <div class="flex flex-col" id="purok_container">
+                </div>
+            </div>
+
+        </div>
+    </form>
+    <div id="template" class="hidden form-input-container">
+        <label data-template-type="label">Purok <span data-template-type="count"></span></label>
+        <input class="form-input" type="text" name="purok[]" data-template-type="input">
     </div>
 </body>
+
+<script>
+    window.addEventListener('load', () => {
+        const container = document.querySelector("#purok_container");
+        const countInput = document.querySelector("#purok_count");
+        const base = document.querySelector("#template");
+
+        countInput.addEventListener("input", (e) => {
+            const count = parseInt(e.target.value);
+
+            if (isNaN(count)) {
+                return;
+            }
+
+            removeChild(container);
+            for (let i = 1; i <= count; i++) {
+                const baseClone = base.cloneNode(true);
+                baseClone.classList.remove("hidden");
+
+                const elementInput = Object.assign(baseClone.querySelector(
+                    "[data-template-type='input']"), {
+                    id: `purok_${i}`,
+                    name: `purok[${i}]`
+                });
+
+                const elementCount = Object.assign(baseClone.querySelector(
+                    "[data-template-type='count']"), {
+                    textContent: i
+                });
+
+                const elementLabel = Object.assign(baseClone.querySelector(
+                    "[data-template-type='label']"), {
+                    htmlFor: `purok_${i}`
+                });
+
+                container.appendChild(baseClone);
+            }
+        })
+
+        function removeChild(parent) {
+            while (parent.lastChild) {
+                parent.removeChild(parent.lastChild);
+            }
+        }
+    })
+</script>
 
 </html>

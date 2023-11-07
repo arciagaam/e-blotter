@@ -7,10 +7,6 @@ use App\Http\Requests\UserStorePostRequest;
 use App\Models\Barangay;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -44,6 +40,22 @@ class UserController extends Controller
         $barangay = Barangay::firstOrCreate($request->safe()->only(["name"]));
         $filePath = $request->file("logo")->store("logos", "public");
         $barangay["logo"] = $filePath;
+
+        // Purok
+        $purokList = $request->safe(["purok"]);
+        $barangayPurokList = [];
+        foreach($purokList['purok'] as $purokNumber => $purok) {
+            if ($purok == null || $purok == "") {
+                continue;
+            }
+
+            $barangayPurokList[] = [
+                'purok_number' => $purokNumber,
+                'name' => $purok
+            ];
+        }
+
+        $barangay->puroks()->createMany($barangayPurokList);
 
         $user->barangays()->save($barangay);
         $user->roles()->save(Role::find(2));
