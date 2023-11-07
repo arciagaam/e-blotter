@@ -21,7 +21,10 @@ return new class extends Migration
             $table->integer('age');
             $table->tinyInteger('sex');
             $table->string('contact_number');
-            $table->string('address');
+            $table->string('purok');
+            $table->string('barangay');
+            $table->string('municipality');
+            $table->string('province');
             $table->timestamps();
         });
     }

@@ -50,8 +50,10 @@
                 </div>
 
                 <div class="grid-cols-1 xl:grid-cols-2 gap-2">
+
                     <div class="form-input-container">
                         <div class="flex flex-row gap-2">
+
                             <div class="flex flex-col flex-1">
                                 <div class="flex flex-row">
                                     <label for="victim_first_name" class="flex gap-2 items-center">First
@@ -64,6 +66,7 @@
                                     <p class="text-xs text-red-500 italic">{{ $message }}</p>
                                 @enderror
                             </div>
+
                             <div class="flex flex-col flex-1">
                                 <div class="flex flex-row">
                                     <label for="victim_middle_name" class="flex gap-2 items-center">Middle
@@ -75,6 +78,7 @@
                                     <p class="text-xs text-red-500 italic">{{ $message }}</p>
                                 @enderror
                             </div>
+
                             <div class="flex flex-col flex-1">
                                 <div class="flex flex-row">
                                     <label for="victim_last_name" class="flex gap-2 items-center">Last
@@ -86,70 +90,95 @@
                                     <p class="text-xs text-red-500 italic">{{ $message }}</p>
                                 @enderror
                             </div>
+
                         </div>
                     </div>
 
-                    <div class="form-input-container">
-                        <div class="flex flex-row">
-                            <label for="victim_age" class="flex gap-2 items-center">Age:</label>
+                    
+                    <div class="flex w-full gap-4">
+                        <div class="form-input-container w-full">
+                            <div class="flex flex-row">
+                                <label for="victim_age" class="flex gap-2 items-center">Age:</label>
+                            </div>
+    
+                            <input class="form-input" type="number" name="victim[age]" id="victim_age"
+                                value="{{ $record->victim->age ?? "" }}">
+                            @error('victim.age')
+                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
                         </div>
 
-                        <input class="form-input" type="number" name="victim[age]" id="victim_age"
-                            value="{{ $record->victim->age ?? "" }}">
-                        @error('victim.age')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="form-input-container">
-                        <div class="flex flex-row">
-                            <label for="victim_sex" class="flex gap-2 items-center">Sex:</label>
+                        <div class="form-input-container w-full">
+                            <div class="flex flex-row">
+                                <label for="victim_sex" class="flex gap-2 items-center">Sex:</label>
+                            </div>
+    
+                            {{-- <input class="form-input" type="text" name="victim_sex" id="victim_sex"> --}}
+                            <select class="form-input" name="victim[sex]" id="victim_sex">
+                                <option value="1" @selected($record->victim->sex == 1)>Male</option>
+                                <option value="2" @selected($record->victim->sex == 2)>Female</option>
+                            </select>
+                            @error('victim.sex')
+                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
                         </div>
 
-                        {{-- <input class="form-input" type="text" name="victim_sex" id="victim_sex"> --}}
-                        <select class="form-input" name="victim[sex]" id="victim_sex">
-                            <option value="1" @selected($record->victim->sex == 1)>Male</option>
-                            <option value="2" @selected($record->victim->sex == 2)>Female</option>
-                        </select>
-                        @error('victim.sex')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="form-input-container">
-                        <div class="flex flex-row">
-                            <label for="victim_contact_number" class="flex gap-2 items-center">Contact Number:</label>
+                        <div class="form-input-container w-full">
+                            <div class="flex flex-row">
+                                <label for="victim_contact_number" class="flex gap-2 items-center">Contact Number:</label>
+                            </div>
+    
+                            <input class="form-input" type="text" name="victim[contact_number]"
+                                id="victim_contact_number" value="{{ $record->victim->contact_number }}">
+                            @error('victim.contact_number')
+                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
                         </div>
 
-                        <input class="form-input" type="text" name="victim[contact_number]"
-                            id="victim_contact_number" value="{{ $record->victim->contact_number }}">
-                        @error('victim.contact_number')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
                     </div>
 
-                    <div class="flex flex-row gap-4">
+                    <div class="flex gap-4">
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
-                                <label for="victim_address" class="flex gap-2 items-center">Address:</label>
+                                <label for="victim_purok" class="flex gap-2 items-center">Purok:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="victim[address]" id="victim_address"
-                                value="{{ $record->victim->address }}">
-                            @error('victim.address')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            <input class="form-input bg-white" type="text" name="victim[purok]" id="victim_purok" value="{{ $record->victim->purok }}">
+                            @error('victim.purok')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
-                                <label for="purok" class="flex gap-2 items-center">Purok:</label>
+                                <label for="victim_barangay" class="flex gap-2 items-center">Barangay:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="purok" id="purok"
-                                value="{{ $record->purok }}">
-                            @error('purok')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            <input class="form-input bg-white" type="text" name="victim[barangay]" id="victim_barangay" value="{{ $record->victim->barangay  }}">
+                            @error('victim.barangay')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="victim_municipality" class="flex gap-2 items-center">Municipality:</label>
+                            </div>
+
+                            <input class="form-input bg-white" type="text" name="victim[municipality]" id="victim_municipality" value="{{ $record->victim->municipality  }}">
+                            @error('victim.municipality')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="victim_province" class="flex gap-2 items-center">Province:</label>
+                            </div>
+
+                            <input class="form-input bg-white" type="text" name="victim[province]" id="victim_province" value="{{ $record->victim->province  }}">
+                            @error('victim.province')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
@@ -232,18 +261,53 @@
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
+                    </div>
+
+                                        <div class="flex gap-4">
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="suspect_purok" class="flex gap-2 items-center">Purok:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="suspect[purok]" id="suspect_purok" value="{{ $record->suspect->purok }}">
+                            @error('suspect.purok')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
 
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
-                                <label for="suspect_address" class="flex gap-2 items-center">Address:</label>
+                                <label for="suspect_barangay" class="flex gap-2 items-center">Barangay:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="suspect[address]" id="suspect_address"
-                                value="{{ $record->suspect->address }}">
-                            @error('suspect.address')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            <input class="form-input" type="text" name="suspect[barangay]" id="suspect_barangay" value="{{ $record->suspect->barangay }}">
+                            @error('suspect.barangay')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="suspect_municipality" class="flex gap-2 items-center">Municipality:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="suspect[municipality]" id="suspect_municipality" value="{{ $record->suspect->municipality }}">
+                            @error('suspect.municipality')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="suspect_province" class="flex gap-2 items-center">Province:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="suspect[province]" id="suspect_province" value="{{ $record->suspect->province }}">
+                            @error('suspect.province')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                     </div>
 
                     <div class="form-input-container col-span-3">

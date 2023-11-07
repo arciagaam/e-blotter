@@ -18,7 +18,10 @@ class Victim extends Model
         'age',
         'sex',
         'contact_number',
-        'address',
+        'purok',
+        'barangay',
+        'municipality',
+        'province',
         'civil_status_id'
     ];
 
