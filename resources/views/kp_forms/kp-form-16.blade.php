@@ -2,7 +2,7 @@
     <div class="flex flex-row justify-between gap-24">
         <div class="flex flex-col gap-6 w-2/5">
             <div class="flex flex-col">
-                <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name ?? ''}}</p>
+                <p class="w-full h-6 border-b border-0 border-black">{{formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? '')}}</p>
                 <p class="w-full h-6 border-b border-0 border-black"></p>
                 <p class="self-end">Complainant/s</p>
             </div>
@@ -10,7 +10,7 @@
             <p class="ml-auto w-fit">--- against ---</p>
 
             <div class="flex flex-col">
-                <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->suspect->name ?? ''}}</p>
+                <p class="w-full h-6 border-b border-0 border-black">{{formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? '')}}</p>
                 <p class="w-full h-4 border-b border-0 border-black"></p>
                 <p class="self-end">Respondent/s</p>
             </div>
@@ -47,11 +47,11 @@
     <div class="flex flex-row gap-24">
         <div class="flex-1">
             <p class="self-start col-span-2">Complainant/s</p>
-            <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name ?? ''}}</p>
+            <p class="w-full h-6 border-b border-0 border-black">{{formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? '')}}</p>
         </div>
         <div class="flex-1">
             <p class="self-start col-span-2">Respondent/s</p>
-            <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->suspect->name ?? ''}}</p>
+            <p class="w-full h-6 border-b border-0 border-black">{{formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? '')}}</p>
         </div>
     </div>
 

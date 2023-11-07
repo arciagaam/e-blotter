@@ -7,7 +7,7 @@
         <div class="flex flex-row gap-2 w-3/4">
             <p>TO:</p>
             <div class="flex flex-col w-3/4">
-                <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name ?? ''}}</p>
+                <p class="w-full h-6 border-b border-0 border-black">{{formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? '')}}</p>
                 <p class="w-full h-6 border-b border-0 border-black"></p>
                 <p class="self-start">Complainant/s</p>
             </div>
@@ -16,7 +16,7 @@
         <div class="flex flex-row justify-end gap-2 w-3/4">
             <p>TO:</p>
             <div class="flex flex-col w-3/4">
-                <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->suspect->name ?? ''}}</p>
+                <p class="w-full h-6 border-b border-0 border-black">{{formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? '')}}</p>
                 <p class="w-full h-6 border-b border-0 border-black"></p>
                 <p class="self-start">Respondents/s</p>
             </div>
@@ -46,7 +46,7 @@
         <div class="flex flex-row gap-2 w-3/4">
             <p>TO:</p>
             <div class="flex flex-col w-3/4">
-                <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name ?? ''}}</p>
+                <p class="w-full h-6 border-b border-0 border-black">{{formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? '')}}</p>
                 <p class="w-full h-6 border-b border-0 border-black"></p>
                 <p class="self-start">Complainant/s</p>
             </div>
@@ -55,7 +55,7 @@
         <div class="flex flex-row justify-end gap-2 w-3/4">
             <p>TO:</p>
             <div class="flex flex-col w-3/4">
-                <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->suspect->name ?? ''}}</p>
+                <p class="w-full h-6 border-b border-0 border-black">{{formatName($issuedForm->record->suspect->first_name ?? '', $issuedForm->record->suspect->middle_name ?? null, $issuedForm->record->suspect->last_name ?? '')}}</p>
                 <p class="w-full h-6 border-b border-0 border-black"></p>
                 <p class="self-start">Respondents/s</p>
             </div>

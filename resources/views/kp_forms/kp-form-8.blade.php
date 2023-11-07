@@ -3,7 +3,7 @@
     <div class="flex flex-row gap-2">
         <p>TO:</p>
         <div class="flex flex-col w-1/5">
-            <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name ?? ''}}</p>
+            <p class="w-full h-6 border-b border-0 border-black">{{formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? '')}}</p>
             <p class="w-full h-6 border-b border-0 border-black"></p>
             <p class="self-end">Complainant/s</p>
         </div>
@@ -34,7 +34,7 @@
 
     <div class="flex flex-col w-max">
         <p>Complainant/s</p>
-        <p class="w-full h-6 border-b border-0 border-black">{{$issuedForm->record->victim->name ?? ''}}</p>
+        <p class="w-full h-6 border-b border-0 border-black">{{formatName($issuedForm->record->victim->first_name ?? '', $issuedForm->record->victim->middle_name ?? null, $issuedForm->record->victim->last_name ?? '')}}</p>
         <p class="w-full h-6 border-b border-0 border-black"></p>
     </div>
 
