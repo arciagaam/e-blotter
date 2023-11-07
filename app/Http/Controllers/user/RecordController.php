@@ -61,7 +61,7 @@ class RecordController extends Controller
 
         $latest = $report->latestRecord(auth()->user()->barangays[0]->id);
         $report->narrative_file = $service->handleUploadRecording($request->validated('narrative_file'));
-        $report->fill($request->safe()->except('victim', 'suspect'));
+        $report->fill([...$request->safe()->except('victim', 'suspect'), 'purok' => $request->validated('victim.purok')]);
         $report->barangays()->associate(auth()->user()->barangays[0]->id);
         $report->blotterStatus()->associate(BlotterStatus::find(2));
         $report->barangay_blotter_number = $latest ? $latest->barangay_blotter_number + 1 : 1;
@@ -115,7 +115,7 @@ class RecordController extends Controller
     {
         $record = Record::find($record->id);
 
-        $record->fill($request->safe()->except('victim', 'suspect'));
+        $record->fill([...$request->safe()->except('victim', 'suspect'), 'purok' => $request->validated('victim.purok')]);
         $record->victim()->update($request->validated('victim'));
         $record->suspect()->update($request->validated('suspect'));
 

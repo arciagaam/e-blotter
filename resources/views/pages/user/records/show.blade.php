@@ -103,44 +103,65 @@
                     <div class="flex flex-row gap-4">
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
-                                <label for="victim_address" class="flex gap-2 items-center">Address:</label>
+                                <label for="victim_purok" class="flex gap-2 items-center">Purok:</label>
                             </div>
 
-                            <input class="form-input bg-white" type="text" name="victim[address]" id="victim_address"
-                                value="{{ $record->victim->address }}" disabled>
-                            @error('victim.address')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            <input disabled class="form-input bg-white" type="text" name="victim[purok]" id="victim_purok" value="{{ $record->victim->purok }}">
+                            @error('victim.purok')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
-
 
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
-                                <label for="purok" class="flex gap-2 items-center">Purok:</label>
+                                <label for="victim_barangay" class="flex gap-2 items-center">Barangay:</label>
                             </div>
 
-                            <input class="form-input bg-white" type="text" name="purok" id="purok"
-                                value="{{ $record->purok }}" disabled>
-                            @error('purok')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            <input disabled class="form-input bg-white" type="text" name="victim[barangay]" id="victim_barangay" value="{{ $record->victim->barangay  }}">
+                            @error('victim.barangay')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="victim_municipality" class="flex gap-2 items-center">Municipality:</label>
+                            </div>
+
+                            <input disabled class="form-input bg-white" type="text" name="victim[municipality]" id="victim_municipality" value="{{ $record->victim->municipality  }}">
+                            @error('victim.municipality')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="victim_province" class="flex gap-2 items-center">Province:</label>
+                            </div>
+
+                            <input disabled class="form-input bg-white" type="text" name="victim[province]" id="victim_province" value="{{ $record->victim->province  }}">
+                            @error('victim.province')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
 
-                    <div class="form-input-container">
-                        <div class="flex flex-row">
-                            <label for="victim_civil_status" class="flex gap-2 items-center">Civil Status:</label>
-                        </div>
 
-                        <input class="form-input bg-white" type="text" name="victim[civil_status_id]"
-                            id="victim_civil_status"
-                            value="{{ ucfirst($civilStatus[$record->victim->civil_status_id]->name) }}" disabled>
 
-                        @error('victim.civil_status_id')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
+                </div>
+
+                <div class="form-input-container">
+                    <div class="flex flex-row">
+                        <label for="victim_civil_status" class="flex gap-2 items-center">Civil Status:</label>
                     </div>
 
+                    <input class="form-input bg-white" type="text" name="victim[civil_status_id]"
+                        id="victim_civil_status"
+                        value="{{ ucfirst($civilStatus[$record->victim->civil_status_id]->name) }}" disabled>
+
+                    @error('victim.civil_status_id')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @enderror
                 </div>
             </div>
 
@@ -177,16 +198,50 @@
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="suspect_purok" class="flex gap-2 items-center">Purok:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="suspect[purok]" id="suspect_purok" value="{{ $record->suspect->purok }}">
+                            @error('suspect.purok')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
 
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
-                                <label for="suspect_address" class="flex gap-2 items-center">Address:</label>
+                                <label for="suspect_barangay" class="flex gap-2 items-center">Barangay:</label>
                             </div>
 
-                            <input class="form-input bg-white" type="text" name="suspect[address]"
-                                id="suspect_address" value="{{ $record->suspect->address }}" disabled>
-                            @error('suspect.address')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            <input class="form-input" type="text" name="suspect[barangay]" id="suspect_barangay" value="{{ $record->suspect->barangay }}">
+                            @error('suspect.barangay')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="suspect_municipality" class="flex gap-2 items-center">Municipality:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="suspect[municipality]" id="suspect_municipality" value="{{ $record->suspect->municipality }}">
+                            @error('suspect.municipality')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="suspect_province" class="flex gap-2 items-center">Province:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="suspect[province]" id="suspect_province" value="{{ $record->suspect->province }}">
+                            @error('suspect.province')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>

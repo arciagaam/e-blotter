@@ -362,12 +362,14 @@ class DatabaseSeeder extends Seeder
 
         for ($i = 0; $i <= 100; $i++) {
 
+            $purok = rand(1, 50);
+            
             DB::table("records")->insert([
                 [
                     'barangay_id' => $i%2 == 0 ? 1 : 2,
                     'blotter_status_id' => rand(1, 4),
                     'barangay_blotter_number' => $i + 1,
-                    'purok' => rand(1, 50),
+                    'purok' => $purok,
                     'case' => "Theft",
                     'narrative' => "Nagnakaw",
                     'reliefs' => "Bayaran ang ninakaw",
@@ -379,22 +381,28 @@ class DatabaseSeeder extends Seeder
             DB::table('victims')->insert([
                 "record_id" => $i + 1,
                 "civil_status_id" => 1,
-                "first_name" => "John",
-                "last_name" => "Doe",
+                "first_name" => fake()->firstName(),
+                "last_name" => fake()->lastName(),
                 "age" => 21,
                 "sex" => 1,
                 "contact_number" => "0912345678",
-                "address" => "123 Street",
+                "purok" => $purok,
+                "barangay" => "Doon",
+                "municipality" => "Pila",
+                "province" => "Laguna",
                 "created_at" => now(),
                 "updated_at" => now(),
             ]);
 
             DB::table('suspects')->insert([
                 "record_id" => $i + 1,
-                "first_name" => "Jane",
-                "last_name" => "Doe",
+                "first_name" => fake()->firstName(),
+                "last_name" => fake()->lastName(),
                 "sex" => 2,
-                "address" => "234 Street",
+                "purok" => $purok,
+                "barangay" => "Doon",
+                "municipality" => "Pila",
+                "province" => "Laguna",
                 "created_at" => now(),
                 "updated_at" => now(),
             ]);

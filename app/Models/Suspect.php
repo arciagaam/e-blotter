@@ -16,7 +16,10 @@ class Suspect extends Model
         'middle_name',
         'last_name',
         'sex',
-        'address',
+        'purok',
+        'barangay',
+        'municipality',
+        'province',
     ];
 
     public function record(): BelongsTo

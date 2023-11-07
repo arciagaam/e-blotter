@@ -105,46 +105,68 @@
                     <div class="flex flex-row gap-4">
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
-                                <label for="victim_address" class="flex gap-2 items-center">Address:</label>
+                                <label for="victim_purok" class="flex gap-2 items-center">Purok:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="victim[address]" id="victim_address" value="{{ old('victim.address') }}">
-                            @error('victim.address')
+                            <input class="form-input" type="text" name="victim[purok]" id="victim_purok" value="{{ old('victim.purok') }}">
+                            @error('victim.purok')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
-                                <label for="purok" class="flex gap-2 items-center">Purok:</label>
+                                <label for="victim_barangay" class="flex gap-2 items-center">Barangay:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="purok" id="purok" value="{{ old('purok') }}">
-                            @error('purok')
+                            <input class="form-input" type="text" name="victim[barangay]" id="victim_barangay" value="{{ old('victim.barangay') ? old('victim.barangay') : auth()->user()->barangays[0]->name }}">
+                            @error('victim.barangay')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="victim_municipality" class="flex gap-2 items-center">Municipality:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="victim[municipality]" id="victim_municipality" value="{{ old('victim.municipality') ? old('victim.municipality') : "Pila" }}">
+                            @error('victim.municipality')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="victim_province" class="flex gap-2 items-center">Province:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="victim[province]" id="victim_province" value="{{ old('victim.province') ? old('victim.province') : "Laguna" }}">
+                            @error('victim.province')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
 
-                    <div class="form-input-container">
-                        <div class="flex flex-row">
-                            <label for="victim_civil_status" class="flex gap-2 items-center">Civil Status:</label>
-                        </div>
-
-                        <select class="form-input" name="victim[civil_status_id]" id="victim_civil_status">
-                            @foreach ($civilStatus as $value)
-                            <option value="{{ $value->id }}" @selected(old('victim.civil_status')==$value->id)>
-                                {{ ucfirst($value->name) }}
-                            </option>
-                            @endforeach
-                        </select>
-
-                        @error('victim.civil_status_id')
-                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
-                    </div>
-
                 </div>
+
+            <div class="form-input-container">
+                <div class="flex flex-row">
+                    <label for="victim_civil_status" class="flex gap-2 items-center">Civil Status:</label>
+                </div>
+
+                <select class="form-input" name="victim[civil_status_id]" id="victim_civil_status">
+                    @foreach ($civilStatus as $value)
+                    <option value="{{ $value->id }}" @selected(old('victim.civil_status')==$value->id)>
+                        {{ ucfirst($value->name) }}
+                    </option>
+                    @endforeach
+                </select>
+
+                @error('victim.civil_status_id')
+                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                @enderror
+            </div>
             </div>
 
             <div class="flex flex-col gap-2">
@@ -204,13 +226,50 @@
                             @enderror
                         </div>
 
-                        <div class="form-input-container flex-grow-[2]">
+                    
+                    </div>
+
+                    <div class="flex gap-4">
+                        <div class="form-input-container flex-1">
                             <div class="flex flex-row">
-                                <label for="suspect_address" class="flex gap-2 items-center">Address:</label>
+                                <label for="suspect_purok" class="flex gap-2 items-center">Purok:</label>
                             </div>
 
-                            <input class="form-input" type="text" name="suspect[address]" id="suspect_address" value="{{ old('suspect.address') }}">
-                            @error('suspect.address')
+                            <input class="form-input" type="text" name="suspect[purok]" id="suspect_purok" value="{{ old('suspect.purok') }}">
+                            @error('suspect.purok')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="suspect_barangay" class="flex gap-2 items-center">Barangay:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="suspect[barangay]" id="suspect_barangay" value="{{ old('suspect.barangay') ? old('suspect.barangay') : auth()->user()->barangays[0]->name }}">
+                            @error('suspect.barangay')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="suspect_municipality" class="flex gap-2 items-center">Municipality:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="suspect[municipality]" id="suspect_municipality" value="{{ old('suspect.municipality') ? old('suspect.municipality') : "Pila" }}">
+                            @error('suspect.municipality')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="form-input-container flex-1">
+                            <div class="flex flex-row">
+                                <label for="suspect_province" class="flex gap-2 items-center">Province:</label>
+                            </div>
+
+                            <input class="form-input" type="text" name="suspect[province]" id="suspect_province" value="{{ old('suspect.province') ? old('suspect.province') : "Laguna" }}">
+                            @error('suspect.province')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror
                         </div>
