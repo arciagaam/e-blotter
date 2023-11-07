@@ -3,7 +3,8 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
-        "build": "php artisan storage:link & vite build"
+        "build": "vite build",
+        "link": "php artisan storage:link & vite build"
     },
     "devDependencies": {
         "autoprefixer": "^10.4.14",
