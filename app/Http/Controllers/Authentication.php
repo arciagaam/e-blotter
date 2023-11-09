@@ -27,6 +27,7 @@ class Authentication extends Controller
             "password" => "required",
         ]);
 
+
         if (Auth::attempt($credentials, true)) {
             $request->session()->regenerate();
 
@@ -40,15 +41,11 @@ class Authentication extends Controller
             // }
 
             if (auth()->user()->roles[0]->id === 1) {
-
                 return redirect()->intended("/admin/dashboard");
             }
 
-            session()->put("login_role", $request->login_role_id);
-
             AuditTrail::create([
                 "barangay_id" => auth()->user()->barangays[0]->id,
-                "login_role_id" => session()->get("login_role"),
                 "user_id" => auth()->user()->id,
                 "action" => "Logged in"
             ]);
@@ -74,7 +71,6 @@ class Authentication extends Controller
 
         AuditTrail::create([
             "barangay_id" => auth()->user()->barangays[0]->id ?? null,
-            "login_role_id" => session()->get("login_role"),
             "user_id" => auth()->user()->id,
             "action" => "Logged out"
         ]);

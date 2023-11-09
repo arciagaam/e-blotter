@@ -17,13 +17,11 @@ class CheckIfVerified
     {
 
         if(auth()->check() && !auth()->user()->verified_at) {
-            $route = str_contains(url()->previous(), 'admin') ? '/admin' : '/';
-
             auth()->logout();
             $request->session()->invalidate();
             $request->session()->regenerateToken();
     
-            return redirect($route)->with('error', 'Your account is not yet verified.');
+            return redirect()->route("login")->with('error', 'Your account is not yet verified.');
         }
 
         return $next($request);

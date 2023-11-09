@@ -27,16 +27,19 @@
                 </div>
                 <div class="flex flex-col gap-2">
                     <div class="form-input-container">
-                        <label for="username">Barangay</label>
-                        <select class="form-input" name="username" id="username">
+                        <div class="form-input-container">
+                            <label for="username">Username</label>
+                            <input class="form-input" type="text" name="username" id="username">
+                            @error('username')
+                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                            @enderror
+                        </div>
+                        {{-- <select class="form-input" name="username" id="username">
                             <option value="">-- SELECT YOUR BARANGAY --</option>
                             <optgroup label="Admin">
                                 @foreach ($adminUsers as $adminUser)
                                     <option value="{{ $adminUser->username }}">{{ formatUsername($adminUser->username) }}</option>
                                 @endforeach
-                                {{-- Fix admin login --}}
-                                {{-- <option value="abc-officer">ABC Officer</option>
-                                <option value="abc-secretary">ABC Secretary</option> --}}
                             </optgroup>
                             <optgroup label="User">
                                 @foreach ($users as $user)
@@ -46,7 +49,7 @@
                         </select>
                         @error('username')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
+                        @enderror --}}
                     </div>
 
                     <div class="form-input-container">
@@ -57,7 +60,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-input-container">
+                    {{-- <div class="form-input-container">
                         <label for="login_role_id">Role</label>
                         <select class="form-input" name="login_role_id" id="login_role_id">
                             @foreach ($loginRoles as $loginRole)
@@ -67,7 +70,7 @@
                         @error('login_role_id')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     @if (session()->has('error'))
                         <p class="text-xs text-red-500 italic">{{ session()->get('error') }}</p>

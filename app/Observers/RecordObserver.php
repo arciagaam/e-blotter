@@ -14,7 +14,7 @@ class RecordObserver
     public function getDefaults() {
         return [
             'barangay_id' => auth()->user()->barangays[0]->id, 
-            'login_role_id' => session()->get('login_role'), 
+              
             'user_id' => auth()->user()->id,
         ];
     }

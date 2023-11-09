@@ -39,6 +39,7 @@ class DefaultBarangaySeeder extends Seeder
                     'username' => 'bbsblotter',
                     'email' => 'bbsblotter@example.com',
                     'contact_number' => '09123221234',
+                    'verified_at' => now(),
                     'password' => bcrypt('123bbs')
                 ],
             ],
@@ -66,6 +67,7 @@ class DefaultBarangaySeeder extends Seeder
                     'last_name' => 'SCSLN',
                     'username' => 'scsblotter',
                     'email' => 'scsblotter@example.com',
+                    'verified_at' => now(),
                     'contact_number' => '09123221234',
                     'password' => bcrypt('123SCS')
                 ],
@@ -91,6 +93,7 @@ class DefaultBarangaySeeder extends Seeder
                     'last_name' => 'Ambrocio',
                     'username' => 'labuinblotter',
                     'email' => 'labuin@example.com',
+                    'verified_at' => now(),
                     'contact_number' => '09123221234',
                     'password' => bcrypt('123labuin')
                 ],

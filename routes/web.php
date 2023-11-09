@@ -15,7 +15,6 @@ use App\Http\Controllers\user\UserController;
 use App\Http\Controllers\user\ReportController as UserReportController;
 use App\Mail\OTP;
 use App\Mail\TestEmail;
-use App\Models\LoginRole;
 use App\Models\Record;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
@@ -76,7 +75,6 @@ Route::prefix('/')->group(function () {
     Route::middleware(['guest'])->group(function () {
 
         Route::get('/', function () {
-
             if (Auth::viaRemember()) {
                 if (auth()->user()->roles[0]->id === 1) {
                     return redirect()->intended("/admin/dashboard");
@@ -89,11 +87,10 @@ Route::prefix('/')->group(function () {
         })->name('userRoot');
 
         Route::get('/login', function() {
-            $loginRoles = LoginRole::all();
             $users = User::getNonDeletedUsers()->get();
             $adminUsers = User::getAdminUsers()->get();
 
-            return view('pages.user.auth.login', ['loginRoles' => $loginRoles, "users" => $users, "adminUsers" => $adminUsers]);
+            return view('pages.user.auth.login', ["users" => $users, "adminUsers" => $adminUsers]);
         })->name('login');
 
         Route::get('/register', [UserController::class, 'index']);

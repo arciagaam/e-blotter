@@ -20,6 +20,7 @@ class DefaultAdminUserSeeder extends Seeder
                 'last_name' => 'Officer',
                 'username' => 'abc_pres',
                 'email' => 'abc_officer@example.com',
+                'verified_at' => now(),
                 'contact_number' => '09123221234',
                 'password' => bcrypt('abc@2024')
             ],
@@ -28,6 +29,7 @@ class DefaultAdminUserSeeder extends Seeder
                 'last_name' => 'Secretary',
                 'username' => 'abc_sec',
                 'email' => 'abc_secretary@example.com',
+                'verified_at' => now(),
                 'contact_number' => '09123221234',
                 'password' => bcrypt('abcsec@2024')
             ]
