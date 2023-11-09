@@ -15,11 +15,11 @@
         enctype="multipart/form-data">
         @csrf
 
-        <div class="flex p-8">
+        <div class="flex px-8 relative">
             {{-- <div
                 class="h-fit self-center rounded-lg flex flex-col justify-center items-center lg:col-start-2 gap-5 py-10 px-6"> --}}
 
-            <div class="flex flex-col gap-10 w-full">
+            <div class="flex py-8 flex-col gap-10 w-full h-fit sticky inset-0">
                 <div>
                     <p class="lg:hidden text-4xl font-bold">E-Blotter</p>
                     <p class="italic lg:text-2xl lg:font-bold lg:not-italic">Barangay Officer Register</p>
@@ -172,8 +172,13 @@
         <div class="flex p-8 flex-col gap-10">
             <div class="form-input-container">
                 <label for="purok_count">Purok Count<span class="form-input-required">*</span></label>
-                <input class="form-input" type="text" name="purok_count" id="purok_count"
-                    value="{{ old('purok_count') }}">
+                <select class="form-input" name="purok_count" id="purok_count">
+                    @for ($i = 0; $i < 100; $i++)
+                        <option value="{{ $i + 1 }}">{{ $i + 1 }}</option>
+                    @endfor
+                </select>
+                {{-- <input class="form-input" type="text" name="purok_count" id="purok_count"
+                    value="{{ old('purok_count') }}"> --}}
                 @error('purok_count')
                     <p class="text-xs text-red-500 italic">{{ $message }}</p>
                 @enderror
