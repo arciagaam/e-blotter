@@ -16,7 +16,6 @@ class Suspect extends Model
         'middle_name',
         'last_name',
         'sex',
-        'purok',
         'barangay',
         'municipality',
         'province',

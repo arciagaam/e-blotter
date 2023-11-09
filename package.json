@@ -18,6 +18,8 @@
         "boxicons": "^2.1.4",
         "chart.js": "^4.4.0",
         "datatables.net-dt": "^1.13.4",
-        "fullcalendar": "^6.1.7"
+        "fullcalendar": "^6.1.7",
+        "laravel-echo": "^1.15.3",
+        "pusher-js": "^8.3.0"
     }
 }

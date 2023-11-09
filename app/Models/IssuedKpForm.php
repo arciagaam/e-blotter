@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\NewIssuedKPForm;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,12 @@ class IssuedKpForm extends Model
         'record_id',
         'kp_form_id',
     ];
+
+    public static function booted() {
+        static::created(function($issuedKpForm) {
+            NewIssuedKPForm::dispatch($issuedKpForm);
+        });
+    }
 
     public function record(): BelongsTo
     {

@@ -127,9 +127,12 @@
                             <div class="flex flex-row">
                                 <label for="victim_contact_number" class="flex gap-2 items-center">Contact Number:</label>
                             </div>
-    
-                            <input class="form-input" type="text" name="victim[contact_number]"
-                                id="victim_contact_number" value="{{ $record->victim->contact_number }}">
+                            
+                            <div class="group flex items-center gap-2 border overflow-clip border-project-gray-default/30 rounded-md text-sm transition-all duration-300 ease-in-out font-normal focus-within:border-project-blue-default bg-white">
+                                <span class="group-focus-within:border-project-blue-default bg-gray-100 py-1 px-2 border-r border-r-project-gray-default/30">+63</span>
+                                <input class="w-full focus-visible:outline-none" type="text" name="victim[contact_number]" id="victim_contact_number" value="{{ $record->victim->contact_number }}">
+                            </div>
+                            
                             @error('victim.contact_number')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror

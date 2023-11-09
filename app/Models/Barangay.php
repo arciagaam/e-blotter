@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\NewBarangay;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,6 +19,12 @@ class Barangay extends Model
         'name',
         'logo'
     ];
+
+    public static function booted() {
+        static::created(function($barangay) {
+            NewBarangay::dispatch($barangay);
+        });
+    }
 
     public function scopeUserNotTrashed(Builder $query) {
         $query->join('user_barangays', 'user_barangays.barangay_id', 'barangays.id')

@@ -20,7 +20,14 @@ class AccountController extends Controller
     public function index()
     {
         $accounts = User::nonAdmin();
+
+        User::where('notification_viewed', 0)->update(['notification_viewed' => 1]);
+        
         return view('pages.admin.accounts.accounts', ['accounts' => $accounts]);
+    }
+
+    public function getNewAccounts() {
+        return response()->json(User::where('notification_viewed', 0)->count(), 200);
     }
 
     /**
