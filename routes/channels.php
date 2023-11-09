@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+
+Broadcast::channel('registerBarangay', function($user) {
+    return $user->id;
+});
+
+Broadcast::channel('issueKpForm', function($user) {
+    return $user->id;
+});

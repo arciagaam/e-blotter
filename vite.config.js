@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/accounts.js',
                 'resources/js/admin_chart.js',
+                'resources/js/admin_nav.js',
                 'resources/js/alert.js',
                 'resources/js/audio_record.js',
                 'resources/js/bootstrap.js',

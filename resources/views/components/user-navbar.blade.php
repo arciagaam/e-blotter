@@ -1,9 +1,9 @@
-<nav class="absolute top-0 left-0 max-w-[4rem]  z-50 flex flex-col min-h-screen h-screen bg-project-blue-dark text-white transition-all duration-200 ease-in-out drop-shadow-lg pb-10 pt-5 gap-12 pr-5"
+<nav class="fixed top-0 left-0 min-w-[13rem] z-50 flex flex-col min-h-screen h-screen bg-project-blue-dark text-white transition-all duration-200 ease-in-out drop-shadow-lg pb-10 pt-5 gap-12 pr-5"
     data-open="false">
 
-    <button id="burger" class="flex items-center self-end pl-5 w-fit">
+    {{-- <button id="burger" class="flex items-center self-end pl-5 w-fit">
         <box-icon type="regular" name='menu' size="sm"></box-icon>
-    </button>
+    </button> --}}
 
     <div id="links-container" class="flex flex-col gap-10 whitespace-nowrap h-full overflow-hidden">
 
@@ -69,4 +69,4 @@
 
 </nav>
 
-@vite('resources/js/nav.js')
+{{-- @vite('resources/js/nav.js') --}}

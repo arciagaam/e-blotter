@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string("middle_name")->nullable();
             $table->string("last_name");
             $table->tinyInteger('sex');
-            $table->string('purok');
             $table->string('barangay');
             $table->string('municipality');
             $table->string('province');

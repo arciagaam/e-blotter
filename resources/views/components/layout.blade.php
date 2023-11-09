@@ -38,7 +38,7 @@
     </div>
 
     <div
-        class="relative ml-16 flex flex-col h-screen overflow-auto py-7 px-10 text-project-gray-default bg-project-gray-light gap-5 z-0">
+        class="relative ml-[13rem] flex flex-col h-screen overflow-auto py-7 px-10 text-project-gray-default bg-project-gray-light gap-5 z-0">
         {{ $slot }}
     </div>
 

@@ -1,11 +1,11 @@
 <nav
-    class="absolute top-0 left-0 max-w-[4rem]  z-50 flex flex-col min-h-screen h-screen bg-project-blue-dark text-white transition-all duration-500 ease-in-out drop-shadow-lg pb-10 pt-5 gap-12 pr-5"
+    class="absolute top-0 left-0 min-w-[13rem] z-50 flex flex-col min-h-screen h-screen bg-project-blue-dark text-white transition-all duration-500 ease-in-out drop-shadow-lg pb-10 pt-5 gap-12 pr-5"
     data-open="false"
     >
 
-    <button id="burger" class="flex items-center self-end pl-5 w-fit">
+    {{-- <button id="burger" class="flex items-center self-end pl-5 w-fit">
         <box-icon type="regular" name='menu' size="sm"></box-icon>
-    </button>
+    </button> --}}
 
     <div id="links-container" class="flex flex-col gap-10 whitespace-nowrap h-full overflow-hidden">
 
@@ -43,9 +43,13 @@
 
             <a href="{{ url('/admin/accounts') }}"
                 class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('admin/accounts*') ? 'text-project-yellow-default' : 'hover:text-project-yellow-default' }}">
-                <box-icon type="{{ request()->is('admin/accounts*') ? 'solid' : 'regular' }}"
-                    color="{{ request()->is('admin/accounts*') ? '#FBAD26' : 'white' }}" name='group'
-                    size="1.5em"></box-icon>
+                <div class="relative">
+                    <box-icon type="{{ request()->is('admin/accounts*') ? 'solid' : 'regular' }}"
+                        color="{{ request()->is('admin/accounts*') ? '#FBAD26' : 'white' }}" name='group'
+                        size="1.5em"></box-icon>
+
+                        <p id="accountsBadge" class="hidden absolute -top-[10%] left-[90%] flex items-center justify-center h-4 text-xs rounded-full aspect-square bg-red-400 text-white font-medium" data-url={{route('admin.accounts.getNewAccounts')}}>5</p>
+                </div>
                 <p class="text-sm font-normal">Accounts</p>
             </a>
 
@@ -61,4 +65,5 @@
 
 </nav>
 
-@vite('resources/js/nav.js')
+{{-- @vite('resources/js/nav.js') --}}
+@vite('resources/js/admin_nav.js')

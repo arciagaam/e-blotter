@@ -23,6 +23,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamp('last_login')->useCurrent();
+            $table->boolean('notification_viewed')->default(0);
             $table->timestamps();
         });
     }

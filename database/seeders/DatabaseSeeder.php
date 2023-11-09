@@ -242,7 +242,6 @@ class DatabaseSeeder extends Seeder
                 "first_name" => fake()->firstName(),
                 "last_name" => fake()->lastName(),
                 "sex" => 2,
-                "purok" => $purok,
                 "barangay" => "Doon",
                 "municipality" => "Pila",
                 "province" => "Laguna",
