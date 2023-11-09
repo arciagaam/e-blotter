@@ -24,7 +24,7 @@ class ReportRequest extends FormRequest
         return [
             "from" => "required",
             "to" => "required",
-            "order" => "required",
+            // "order" => "required",
             "contents" => "required|array",
             "blotter_status" => "required|array",
         ];

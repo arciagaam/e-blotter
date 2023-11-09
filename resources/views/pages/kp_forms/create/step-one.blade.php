@@ -2,8 +2,18 @@
 
     <x-page-header>Issue KP Form</x-page-header>
 
+    <form class="flex flex-col w-full gap-2">
+        <div class="flex flex-row gap-4">
+            <div class="form-input-container">
+                <label for="search">Search</label>
+                <input class="form-input" value="{{ request()->query()['search'] ?? null }}" type="text" name="search"
+                    id="search">
+            </div>
+            <button class="btn-filled h-fit flex justify-center self-end">Search</button>
+        </div>
+    </form>
     <div class="flex flex-col-reverse md:flex-row gap-4">
-        <form class="w-full md:w-2/4 xl:w-3/4 flex flex-col justify-center items-center"
+        <form class="w-full md:w-2/4 xl:w-3/4 flex flex-col items-center"
             action="{{ route('records.kp-forms.post.step-one') }}" id="kp-form" method="POST">
             @csrf
 
@@ -11,16 +21,16 @@
                 @foreach ($kpForms as $key => $kpForm)
                     @php
                         $state = '';
-                        
+
                         if (isset($message['form_ids']) && collect($message['form_ids'])->contains($kpForm->number)) {
                             $state = 1;
                         } elseif ($issuedKpForms->contains($kpForm->number)) {
                             $state = 2;
                         }
                     @endphp
-                    
-                    <x-kp-form-select state="{{ $state }}" label="KP FORM #{{ $kpForm->number }}" name="kp_form_id"
-                        value="{{ $kpForm->id }}" id="{{ $key }}">
+
+                    <x-kp-form-select state="{{ $state }}" label="KP FORM #{{ $kpForm->number }}"
+                        name="kp_form_id" value="{{ $kpForm->id }}" id="{{ $key }}">
                         <span>{{ $kpForm->name }}</span>
                     </x-kp-form-select>
                 @endforeach

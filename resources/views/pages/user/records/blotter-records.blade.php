@@ -117,12 +117,12 @@
                                         </a>
                                         <a href="{{ route('records.show', ['record' => $record->id]) }}"
                                             class="btn-outline flex justify-center items-center">
-                                            <box-icon class="text-xs" name='search'></box-icon>
+                                            <box-icon class="text-xs" name='file'></box-icon>
                                         </a>
-                                        <a href="{{ route('records.edit', ['record' => $record->id]) }}"
+                                        {{-- <a href="{{ route('records.edit', ['record' => $record->id]) }}"
                                             class="btn-outline flex justify-center items-center">
                                             <box-icon class="text-xs" name='edit-alt'></box-icon>
-                                        </a>
+                                        </a> --}}
                                         <button data-target="#delete" data-form-id="{{ $record->id }}"
                                             class="btn-outline danger flex justify-center items-center">
                                             <box-icon class="text-xs" name='trash-alt'></box-icon>

@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="flex flex-col">
-                    <p class="text-lg">Blotter Record Summary</p>
+                    <p class="text-lg">Total Blotter Recorded</p>
                 </div>
             </div>
 
@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-lg">In Prosecution</p>
+                        <p class="text-lg">Endorsed</p>
                     </div>
                 </div>
 

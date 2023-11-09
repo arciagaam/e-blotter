@@ -29,7 +29,7 @@
             </div>
         </div>
 
-        <div class="flex flex-col gap-2">
+        {{-- <div class="flex flex-col gap-2">
             <div class="border-project-gray-default ">
                 <p class="font-bold text-lg">Order</p>
             </div>
@@ -54,7 +54,7 @@
             @error('order')
                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
             @enderror
-        </div>
+        </div> --}}
 
         <div class="flex flex-col gap-2">
             <div class="border-project-gray-default ">
@@ -64,7 +64,8 @@
             <div class="flex flex-col gap-2">
                 <div class="flex flex-row gap-2">
                     <div class="form-input-container flex-row items-center gap-2">
-                        <input type="checkbox" class="form-input" name="contents[]" id="complainant" value="complainant">
+                        <input type="checkbox" class="form-input" name="contents[]" id="complainant"
+                            value="complainant">
                         <div class="flex flex-row">
                             <label for="complainant" class="flex gap-2 items-center">Complainant</label>
                         </div>
@@ -85,11 +86,12 @@
         </div>
 
         <div class="flex flex-col gap-2">
-            <div class="border-project-gray-default ">
+            <div class="border-project-gray-default flex flex-row items-center gap-4">
                 <p class="font-bold text-lg">Blotter Status</p>
+                <button class="btn-outline w-fit" data-button-type="add-all" type="button">Add All</button>
             </div>
 
-            <div class="flex flex-col gap-2">
+            <div class="flex flex-col gap-2" data-input="checkbox">
                 @foreach ($blotterStatus as $status)
                     <div class="flex flex-row gap-2">
                         <div class="form-input-container flex-row items-center gap-2">
@@ -112,3 +114,19 @@
     </form>
 
 </x-layout>
+
+<script>
+    const addAllButtons = document.querySelectorAll("button[data-button-type='add-all']");
+
+    addAllButtons.forEach((button) => {
+        const parent = button.parentNode.parentNode;
+        const checkboxInputContainer = parent.querySelector("div[data-input='checkbox']");
+        const checkboxInputs = checkboxInputContainer.querySelectorAll("input[type='checkbox']");
+
+        button.addEventListener('click', () => {
+            checkboxInputs.forEach((input) => {
+                input.checked = true;
+            });
+        });
+    });
+</script>

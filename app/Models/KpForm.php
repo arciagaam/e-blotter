@@ -23,7 +23,12 @@ class KpForm extends Model
 
     public function scopeGetSelectable(Builder $query)
     {
-        $query->whereNotIn('number', [28]);
+        $query
+            ->when(request()->search, function ($q) {
+                $q->where('name', 'like', '%' . request()->search . '%')
+                    ->orWhere('number', request()->search);
+            })
+            ->whereNotIn('number', [28]);
     }
 
     public function scopeGetKpForm(Builder $query)

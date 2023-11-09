@@ -34,7 +34,7 @@
                 <div class="flex flex-row justify-end">
                     <div class="form-input-container flex-row gap-5">
                         <div class="flex flex-row justify-center items-center">
-                            <label for="date" class="flex gap-2 items-center">Status:</label>
+                            <label for="date" class="flex gap-2 items-center">Remarks:</label>
                         </div>
 
                         <x-blotter-status id="{{ $record->blotterStatus->id }}"

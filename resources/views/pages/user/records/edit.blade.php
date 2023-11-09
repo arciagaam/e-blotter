@@ -30,7 +30,7 @@
                 <div class="flex flex-row justify-end">
                     <div class="form-input-container flex-row gap-5">
                         <div class="flex flex-row justify-center items-center">
-                            <label for="blotter_status_id" class="flex gap-2 items-center">Status:</label>
+                            <label for="blotter_status_id" class="flex gap-2 items-center">Remarks:</label>
                         </div>
 
                         <select class="form-input" name="blotter_status_id" id="blotter_status_id">

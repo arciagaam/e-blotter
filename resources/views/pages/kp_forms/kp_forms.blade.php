@@ -33,8 +33,8 @@
                                     <div class="flex flex-row gap-2">
                                         <a class="btn-outline success" target="_blank"
                                             href="{{ route('records.kp-forms.show', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Print</a>
-                                        <a class="btn-outline"
-                                            href="{{ route('records.kp-forms.edit', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Edit</a>
+                                        {{-- <a class="btn-outline"
+                                            href="{{ route('records.kp-forms.edit', ['recordId' => $record, 'issuedKpFormId' => $form->id]) }}">Edit</a> --}}
                                         <button data-target="#delete" data-form-record-id="{{ $record }}"
                                             data-form-issued-kp-form-id="{{ $form->id }}"
                                             class="btn-outline danger">Archive</button>

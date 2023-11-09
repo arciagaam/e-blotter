@@ -138,7 +138,7 @@ Route::prefix('/')->group(function () {
 
                 Route::get('/step-three', [RecordsKpFormController::class, 'stepThree'])->name('success');
 
-                Route::get('/edit/{recordId}/{issuedKpFormId}', [RecordsKpFormController::class, 'edit'])->name('edit');
+                // Route::get('/edit/{recordId}/{issuedKpFormId}', [RecordsKpFormController::class, 'edit'])->name('edit');
                 Route::put('/update/{recordId}/{issuedKpFormId}', [RecordsKpFormController::class, 'update'])->name('update');
 
                 Route::delete('/delete/{recordId}/{issuedKpFormId}', [RecordsKpFormController::class, 'destroy'])->name('destroy');
