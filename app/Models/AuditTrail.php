@@ -14,7 +14,6 @@ class AuditTrail extends Model
 
     protected $fillable = [
         'barangay_id',
-        'login_role_id',
         'user_id',
         'action'
     ];
@@ -22,11 +21,6 @@ class AuditTrail extends Model
     public function barangays(): BelongsTo
     {
         return $this->belongsTo(Barangay::class, 'barangay_id');
-    }
-
-    public function loginroles(): BelongsTo
-    {
-        return $this->belongsTo(LoginRole::class, 'login_role_id');
     }
 
     public function users(): BelongsTo

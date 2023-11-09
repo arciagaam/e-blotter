@@ -3,25 +3,10 @@
 
 
     <div class="flex flex-col gap-3">
-        {{-- TABLE ACTIONS --}}
-        <div class="flex flex-row w-full justify-between items-center">
-            {{-- <form class="flex w-full gap-6 items-center justify-between">
-                @csrf
-
-                <div class="form-input-container flex-row gap-5">
-                    <div class="flex flex-row justify-center items-center">
-                        <label for="user" class="flex gap-2 items-center">Search</label>
-                    </div>
-
-                    <input class="form-input" type="text" name="user" id="user">
-                </div>
-            </form> --}}
-        </div>
-
         <table id="main-table" class="main-table w-full">
             <thead>
                 <tr>
-                    <th>Role</th>
+                    {{-- <th>Role</th> --}}
                     <th>Action</th>
                     <th>Time</th>
                 </tr>
@@ -34,7 +19,7 @@
                 @else
                     @foreach ($auditTrails as $auditTrail)
                         <tr>
-                            <td>{{$auditTrail->loginroles->name}}</td>
+                            {{-- <td>{{$auditTrail->loginroles->name}}</td> --}}
                             <td>{{$auditTrail->action}}</td>
                             <td>{{$auditTrail->created_at}}</td>
                         </tr>
@@ -42,10 +27,6 @@
                 @endempty
             </tbody>
         </table>
-
-        <div class="w-full flex">
-            {{-- {{$residents->links()}} --}}
-        </div>
     </div>
 
 </x-layout>

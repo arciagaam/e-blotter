@@ -5,14 +5,14 @@
 
         <div class="flex flex-col gap-3">
             {{-- TABLE ACTIONS --}}
-            <div class="flex flex-row w-full justify-between items-center">
-                <form class="flex flex-col w-full gap-2">
-                    <div class="flex flex-row">
-                        <a class="ml-auto btn-filled" href="{{ route('records.create') }}">New Record</a>
-                    </div>
+            <div class="flex flex-col w-full justify-between items-center">
+                <div class="flex flex-row self-end">
+                    <a class="ml-auto btn-filled" href="{{ route('records.create') }}">New Record</a>
+                </div>
 
-                    <div class="flex flex-row justify-between">
-                        <div class="flex flex-row gap-4">
+                <form class="flex flex-col w-full gap-2">
+                    <div class="flex flex-col lg:flex-row gap-4 justify-between">
+                        <div class="flex flex-col lg:flex-row gap-4">
                             {{-- <div class="form-input-container">
                                 <label for="search">Search</label>
                                 <input class="form-input" value="{{ request()->query()['search'] ?? null }}"
@@ -39,11 +39,12 @@
                                     <input class="form-input" value="{{ request()->query()['to'] ?? null }}"
                                         type="date" name="to" id="to">
                                 </div>
+
+                                <button class="btn-filled h-fit flex justify-center self-end">Search</button>
                             </div>
-                            <button class="btn-filled h-fit flex justify-center self-end">Search</button>
                         </div>
 
-                        <div class="flex gap-2 items-center self-end">
+                        <div class="flex gap-2 items-center self-start lg:self-end">
                             <label class="text-sm" for="rows">Rows per page</label>
                             <input class="form-input w-10" type="text" name="rows" id="rows"
                                 value={{ request()->query()['rows'] ?? 10 }}>

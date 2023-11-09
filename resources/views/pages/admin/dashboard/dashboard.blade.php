@@ -94,8 +94,10 @@
         </div>
 
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
-            <canvas id="blotterCasesChart" data-route="{{ route('admin.dashboard.get-cases-per-barangay') }}">
-            </canvas>
+            <div>
+                <canvas id="blotterCasesChart" data-route="{{ route('admin.dashboard.get-cases-per-barangay') }}">
+                </canvas>
+            </div>
         </div>
 
         <div class="grid grid-cols-1 xl:grid-cols-2 gap-8" id="graph-container"

@@ -8,7 +8,7 @@
 
             <div class="flex flex-col gap-2">
 
-                <div class="flex flex-row justify-between">
+                <div class="flex flex-col lg:flex-row gap-2 justify-between">
                     <div class="form-input-container flex-row gap-5">
                         <div class="flex flex-row justify-center items-center">
                             <label for="blotter_number" class="flex gap-2 items-center">Blotter No.:</label>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-row justify-end">
+                <div class="flex flex-row justify-start lg:justify-end">
                     <div class="form-input-container flex-row gap-5">
                         <div class="flex flex-row justify-center items-center">
                             <label for="blotter_status_id" class="flex gap-2 items-center">Remarks:</label>
@@ -137,7 +137,7 @@
 
                     </div>
 
-                    <div class="flex gap-4">
+                    <div class="flex flex-col lg:flex-row gap-4 col-span-2">
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
                                 <label for="victim_purok" class="flex gap-2 items-center">Purok:</label>
@@ -263,7 +263,7 @@
                         </div>
                     </div>
 
-                                        <div class="flex gap-4">
+                    <div class="flex flex-col lg:flex-row gap-4 col-span-2">
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
                                 <label for="suspect_purok" class="flex gap-2 items-center">Purok:</label>

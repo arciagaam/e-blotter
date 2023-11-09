@@ -30,6 +30,10 @@
 
 <body>
     <div id="main" class="flex flex-col gap-8 h-full">
+        @empty(!auth()->user()->barangays[0]->logo)
+            <img class="absolute inset-2 object-fit w-full max-w-[5rem] aspect-square" id="logo" src="{{ asset('assets/' . auth()->user()->barangays[0]->logo) }}">
+        @endempty
+
         @if ($body)
             <div class="flex flex-col gap-2">
                 <div class="flex flex-col items-center">

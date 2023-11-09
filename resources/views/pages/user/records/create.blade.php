@@ -5,7 +5,7 @@
         <form action="{{ route('records.store') }}" method="POST" class="flex flex-col gap-5" enctype="multipart/form-data">
             @csrf
 
-            <div class="flex flex-row justify-between">
+            <div class="flex flex-col xl:flex-row gap-2 justify-between">
                 <div class="form-input-container flex-row gap-5">
                     <div class="flex flex-row justify-center items-center">
                         <label for="blotter_number" class="flex gap-2 items-center">Blotter No.:</label>
@@ -29,8 +29,8 @@
 
                 <div class="grid grid-cols-1 xl:grid-cols-2 gap-2">
 
-                    <div class="form-input-container">
-                        <div class="flex flex-row gap-2">
+                    <div class="form-input-container col-span-2 xl:col-span-1">
+                        <div class="flex flex-col xl:flex-row gap-2">
                             <div class="flex flex-col flex-1">
                                 <div class="flex flex-row">
                                     <label for="victim_first_name" class="flex gap-2 items-center">First
@@ -76,7 +76,7 @@
                         @enderror
                     </div>
 
-                    <div class="form-input-container">
+                    <div class="form-input-container col-span-2 xl:col-span-1">
                         <div class="flex flex-row">
                             <label for="victim_sex" class="flex gap-2 items-center">Sex:</label>
                         </div>
@@ -102,7 +102,7 @@
                         @enderror
                     </div>
 
-                    <div class="flex flex-row gap-4">
+                    <div class="flex flex-col lg:flex-row gap-4 col-span-2">
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
                                 <label for="victim_purok" class="flex gap-2 items-center">Purok:</label>
@@ -229,7 +229,7 @@
                     
                     </div>
 
-                    <div class="flex gap-4">
+                    <div class="flex flex-col lg:flex-row gap-4 col-span-2">
                         <div class="form-input-container flex-1">
                             <div class="flex flex-row">
                                 <label for="suspect_purok" class="flex gap-2 items-center">Purok:</label>
