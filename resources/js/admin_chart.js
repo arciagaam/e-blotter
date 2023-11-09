@@ -78,7 +78,6 @@ window.addEventListener('load', async () => {
         }
     }
 
-
     await fetchReports();
 
     datesDataset.forEach((data, index) => {
@@ -86,21 +85,16 @@ window.addEventListener('load', async () => {
     })
 });
 
-    // 'w-fit text-center rounded-full px-4 p-1',
-    // 'bg-emerald-100 text-emerald-600' => $id == 1,
-    // 'bg-neutral-100 text-neutral-600' => $id == 2,
-    // 'bg-rose-100 text-rose-600' => $id == 3,
-    // 'bg-yellow-100 text-yellow-600' => $id == 4,
 const colors = {
     "settled": {
         class: "text-emerald-600 bg-emerald-100",
         rgb: "rgb(5, 150, 105)",
     },
-    "dismissed": {
+    "kp cases": {
         class: "text-rose-600 bg-rose-100",
         rgb: "rgb(225, 29, 72)"
     },
-    "in prosecution": {
+    "endorsed": {
         class: "text-project-yellow-default bg-yellow-100",
         rgb: "rgb(251, 173, 38)"
     },
@@ -220,6 +214,11 @@ function uppercaseFirstChar(string) {
     const wordsArr = [];
 
     for (const word of words) {
+        if (word == "kp") {
+            wordsArr.push(word[0].toUpperCase() + word[1].toUpperCase());
+            continue;
+        }
+
         wordsArr.push(word[0].toUpperCase() + word.slice(1));
     }
 

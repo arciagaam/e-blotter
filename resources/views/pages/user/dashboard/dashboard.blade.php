@@ -7,27 +7,27 @@
             <p id="intervalTime">--</p>
         </div>
 
-        <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
-            <div class="flex gap-5 items-center self-center">
-                <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-blue-dark">
-                    <box-icon color="white" name="folder" size="3em"></box-icon>
+        <div class="flex flex-col lg:flex-row gap-4">
+            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+                <div class="flex gap-3 items-center self-center">
+                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-project-blue-dark">
+                        <box-icon color="white" name="folder" size="1em"></box-icon>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-lg">Total Blotter Recorded</p>
+                    </div>
                 </div>
 
-                <div class="flex flex-col">
-                    <p class="text-lg">Total Blotter Recorded</p>
-                </div>
+                <hr class="mt-auto">
+
+                <p class="self-center text-2xl font-bold">{{ $records }}</p>
             </div>
 
-            <hr>
-
-            <p class="self-center textt-2xl font-bold">{{ $records }}</p>
-        </div>
-
-        <div class="grid grid-cols-2 gap-5">
             <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
-                <div class="flex gap-5 items-center">
-                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-emerald-600">
-                        <box-icon color="white" name="folder" size="3em"></box-icon>
+                <div class="flex gap-3 items-center self-center">
+                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-emerald-600">
+                        <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
                     <div class="flex flex-col">
@@ -35,62 +35,68 @@
                     </div>
                 </div>
 
-                <hr>
+                <hr class="mt-auto">
 
-                <p class="self-center textt-2xl font-bold">{{ $blotterStatusCount['settled'] }}</p>
+                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['settled'] }}</p>
             </div>
 
             <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
-                <div class="flex gap-5 items-center">
-                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-rose-600">
-                        <box-icon color="white" name="folder" size="3em"></box-icon>
+                <div class="flex gap-3 items-center self-center">
+                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-neutral-500">
+                        <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-lg">Dismissed Cases</p>
+                        <p class="text-lg">Unresolved Cases</p>
                     </div>
                 </div>
 
-                <hr>
-
-                <p class="self-center textt-2xl font-bold">{{ $blotterStatusCount['dismissed'] }}</p>
-            </div>
-
-            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
-                <div class="flex gap-5 items-center">
-                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-project-yellow-default">
-                        <box-icon color="white" name="folder" size="3em"></box-icon>
-                    </div>
-
-                    <div class="flex flex-col">
-                        <p class="text-lg">Endorsed</p>
-                    </div>
-                </div>
-
-                <hr>
-
-                <p class="self-center textt-2xl font-bold">{{ $blotterStatusCount['inProsecution'] }}</p>
-            </div>
-
-            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
-                <div class="flex gap-5 items-center">
-                    <div class="flex items-center justify-center w-[5em] h-[5em] rounded-full bg-neutral-500">
-                        <box-icon color="white" name="folder" size="3em"></box-icon>
-                    </div>
-
-                    <div class="flex flex-col">
-                        <p class="text-lg">Unresolved</p>
-                    </div>
-                </div>
-
-                <hr>
+                <hr class="mt-auto">
 
                 <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['unresolved'] }}</p>
             </div>
+
+            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+                <div class="flex gap-3 items-center self-center">
+                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-rose-600">
+                        <box-icon color="white" name="folder" size="1em"></box-icon>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-lg">KP Cases</p>
+                    </div>
+                </div>
+
+                <hr class="mt-auto">
+
+                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['kp_cases'] }}</p>
+            </div>
+
+            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+                <div class="flex gap-3 items-center self-center">
+                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-project-yellow-default">
+                        <box-icon color="white" name="folder" size="1em"></box-icon>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-lg">Endorsed Cases</p>
+                    </div>
+                </div>
+
+                <hr class="mt-auto">
+
+                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['endorsed'] }}</p>
+            </div>
         </div>
 
-        <canvas id="graph" data-route="{{ route("dashboard.get-reports") }}"></canvas>
-        <canvas id="graph-purok" data-route="{{ route("dashboard.get-hearing-dates-per-purok") }}"></canvas>
+        <div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+            <div>
+                <canvas id="graph" data-route="{{ route('dashboard.get-reports') }}"></canvas>
+            </div>
+            <div>
+                <canvas id="graph-purok" data-route="{{ route('dashboard.get-hearing-dates-per-purok') }}"></canvas>
+            </div>
+        </div>
 
         <x-page-header>Schedules for Conciliation</x-page-header>
 

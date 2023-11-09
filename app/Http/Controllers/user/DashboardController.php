@@ -22,8 +22,8 @@ class DashboardController extends Controller
         $blotterStatusCount = [
             'settled' => count(Record::ofStatus(1)),
             'unresolved' => count(Record::ofStatus(2)),
-            'dismissed' => count(Record::ofStatus(3)),
-            'inProsecution' => count(Record::ofStatus(4)),
+            'kp_cases' => count(Record::ofStatus(3)),
+            'endorsed' => count(Record::ofStatus(4)),
         ];
 
         // setAlertMessage('Title', 'Lorem ipsum, dolor sit amet.', 'warning');
@@ -114,18 +114,6 @@ class DashboardController extends Controller
         $now = time();
         $type = "DAYS";
 
-        // key = Date
-        // value = Count of records
-
-        // Dataset structure
-        // {
-        //     label: "Settled",
-        //     data: [14, 23, 40, 4, 12, 23, 22],
-        //     fill: false,
-        //     borderColor: "rgb(5, 150, 105)",
-        //     tension: 0.1
-        // },
-
         // JSON structure
         $dates = array(
             "dates" => array(),
@@ -148,7 +136,6 @@ class DashboardController extends Controller
                         $dates["dataset"][$status->name] = array_fill(0, count($dates["dates"]), 0);
                     }
 
-
                     foreach ($reports as $report) {
                         $day = date("Y-m-d", strtotime($report->created_at));
                         $statusName = $report->blotterStatus->name;
@@ -162,35 +149,6 @@ class DashboardController extends Controller
             default:
                 return;
         }
-        // switch ($type) {
-        //     case "DAYS": {
-        //             $startDate = date('Y-m-d', strtotime('-6 days', $now));
-        //             $endDate = date('Y-m-d');
-
-        //             $reports = Record::whereBetween("created_at", [$startDate, $endDate])->where('barangay_id', auth()->user()->barangays[0]->id)->with('blotterStatus')->get();
-
-        //             for ($i = 0; $i < 7; $i++) {
-        //                 $dates[date("Y-m-d", strtotime("+{$i} days", strtotime($startDate)))] = array();
-        //             }
-
-        //             foreach ($reports as $report) {
-        //                 $day = date("Y-m-d", strtotime($report->created_at));
-        //                 $blotterName = $report->blotterStatus->name;
-        //                 if (array_key_exists($day, $dates)) {
-        //                     if (array_key_exists($blotterName, $dates[$day])) {
-        //                         $dates[$day][$blotterName] = $dates[$day][$blotterName] + 1;
-        //                     } else {
-        //                         $dates[$day][$blotterName] = 1;
-        //                     }
-        //                 } else {
-        //                     $dates[$day][$blotterName] = 1;
-        //                 }
-        //             }
-        //         }
-        //         break;
-        //     default:
-        //         return;
-        // }
 
         return response()->json(["message" => $dates], 200);
     }
@@ -198,38 +156,6 @@ class DashboardController extends Controller
     public function getReportsPerPurok()
     {
         $now = time();
-
-        // key = Date
-        // value = Count of records
-
-        // Dataset structure
-        //const labels = Utils.months({count: 7});
-        //const data = {
-        //  labels: labels,
-        //  datasets: [{
-        //    label: 'My First Dataset',
-        //    data: [65, 59, 80, 81, 56, 55, 40],
-        //    backgroundColor: [
-        //      'rgba(255, 99, 132, 0.2)',
-        //      'rgba(255, 159, 64, 0.2)',
-        //      'rgba(255, 205, 86, 0.2)',
-        //      'rgba(75, 192, 192, 0.2)',
-        //      'rgba(54, 162, 235, 0.2)',
-        //      'rgba(153, 102, 255, 0.2)',
-        //      'rgba(201, 203, 207, 0.2)'
-        //    ],
-        //    borderColor: [
-        //      'rgb(255, 99, 132)',
-        //      'rgb(255, 159, 64)',
-        //      'rgb(255, 205, 86)',
-        //      'rgb(75, 192, 192)',
-        //      'rgb(54, 162, 235)',
-        //      'rgb(153, 102, 255)',
-        //      'rgb(201, 203, 207)'
-        //    ],
-        //    borderWidth: 1
-        //  }]
-        //};
 
         // JSON structure
         $values = array(

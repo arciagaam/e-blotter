@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div class="grid grid-cols-1 lg:grid-cols-2 w-screen overflow-hidden h-screen !bg-cover !bg-no-repeat bg-project-blue-default" style="background: url({{asset('assets/images/full-bg-plain.png')}})">
+    <div class="grid grid-cols-1 justify-items-center content-center lg:grid-cols-2 w-screen overflow-hidden h-screen !bg-cover !bg-no-repeat bg-project-blue-default" style="background: url({{asset('assets/images/full-bg-plain.png')}})">
 
         <div class="hidden lg:flex flex-col gap-4 w-full h-full justify-center items-center">
             {{-- <img class="h-1/2" src="{{ asset('assets/login_illust.svg') }}" alt="Documents Illustration">

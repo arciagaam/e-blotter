@@ -95,6 +95,11 @@ class Record extends Model
         return $query->where('barangay_id', auth()->user()->barangays[0]->id)->where('blotter_status_id', $blotter_status_id)->get();
     }
 
+    public function scopeOfTotalStatus(Builder $query, int $blotter_status_id)
+    {
+        return $query->where('blotter_status_id', $blotter_status_id)->get();
+    }
+
     public function scopeFilter(Builder $query, string $search = null)
     {
         if (isset($search)) {

@@ -71,9 +71,13 @@ window.addEventListener('load', async () => {
                 y: {
                     beginAtZero: true,
                 }
-            }
+            },
         }
     };
 
-    new Chart(graph, config)
+    const chart = new Chart(graph, config)
+
+    window.addEventListener('resize', () => {
+        chart.resize();
+    })
 });

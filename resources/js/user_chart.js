@@ -15,11 +15,11 @@ const colors = {
         class: "text-emerald-600 bg-emerald-200",
         rgb: "rgb(5, 150, 105)",
     },
-    "dismissed": {
+    "kp cases": {
         class: "text-rose-600 bg-rose-200",
         rgb: "rgb(225, 29, 72)"
     },
-    "in prosecution": {
+    "endorsed": {
         class: "text-project-yellow-default bg-project-yellow-default/25",
         rgb: "rgb(251, 173, 38)"
     },
@@ -205,8 +205,13 @@ window.addEventListener('load', async () => {
     }
 
 
-    new Chart(graph, config);
-    new Chart(graphPurok, reportConfig);
+    const lineGraph = new Chart(graph, config);
+    const barGraph = new Chart(graphPurok, reportConfig);
+
+    window.addEventListener('resize', () => {
+        lineGraph.resize();
+        barGraph.resize();
+    });
 });
 
 function getMonthsRange(count = COUNT) {
@@ -275,6 +280,11 @@ function uppercaseFirstChar(string) {
     const wordsArr = [];
 
     for (const word of words) {
+        if (word == "kp") {
+            wordsArr.push(word[0].toUpperCase() + word[1].toUpperCase());
+            continue;
+        }
+
         wordsArr.push(word[0].toUpperCase() + word.slice(1));
     }
 
