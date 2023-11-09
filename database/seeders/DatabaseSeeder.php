@@ -13,175 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
-        \App\Models\Role::factory()->create([
-            'name' => 'admin'
+        $this->call([
+            RoleSeeder::class,
+            DefaultAdminUserSeeder::class,
+            DefaultBarangaySeeder::class,
+            CivilStatusSeeder::class,
+            BlotterStatusSeeder::class,
         ]);
 
-        \App\Models\Role::factory()->create([
-            'name' => 'user'
-        ]);
-
-        \App\Models\User::factory()->create([
-            'first_name' => 'ABC',
-            'last_name' => 'Officer',
-            'username' => 'abc_officer',
-            'email' => 'abc_officer@example.com',
-            'contact_number' => '09123221234',
-        ]);
-
-        \App\Models\User::factory()->create([
-            'first_name' => 'ABC',
-            'last_name' => 'Secretary',
-            'username' => 'abc_secretary',
-            'email' => 'abc_secretary@example.com',
-            'contact_number' => '09123221234',
-        ]);
-
-        \App\Models\User::factory()->create([
-            'first_name' => 'John',
-            'last_name' => 'Doe',
-            'username' => 'john_d',
-            'email' => 'user1@example.com',
-            'contact_number' => '09123221232'
-        ]);
-
-        \App\Models\User::factory()->create([
-            'first_name' => 'Jane',
-            'last_name' => 'Doe',
-            'username' => 'jane_d',
-            'email' => 'user2@example.com',
-            'contact_number' => '09123221235'
-        ]);
-
-        DB::table('barangays')->insert([
-            [
-                'name' => 'Bulilan Sur',
-                'captain_first_name' => 'Bulilan',
-                'captain_last_name' => 'Captain',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'Labuin',
-                'captain_first_name' => 'Labuin',
-                'captain_last_name' => 'Captain',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-        ]);
-
-        DB::table('user_roles')->insert([
-            [
-                'user_id' => 1,
-                'role_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'user_id' => 2,
-                'role_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'user_id' => 3,
-                'role_id' => 2,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'user_id' => 4,
-                'role_id' => 2,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-        ]);
-
-        DB::table('user_barangays')->insert([
-            [
-                'user_id' => 3,
-                'barangay_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'user_id' => 4,
-                'barangay_id' => 2,
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-        ]);
-
-        DB::table('civil_status')->insert([
-            [
-                'name' => 'single',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'married',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'separated',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'widowed',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            // [
-            //     'name' => 'divorced',
-            //     'created_at' => now(),
-            //     'updated_at' => now()
-            // ],
-        ]);
-
-        DB::table('blotter_status')->insert([
-            [
-                'name' => 'settled',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'unresolved',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'dismissed',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'in prosecution',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-        ]);
-
-        DB::table('login_roles')->insert([
-            [
-                'name' => 'Secretary',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'Barangay Chairman',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-            [
-                'name' => 'Committee in Charge',
-                'created_at' => now(),
-                'updated_at' => now()
-            ],
-        ]);
 
         DB::table('kp_forms')->insert([
             [
@@ -366,11 +205,11 @@ class DatabaseSeeder extends Seeder
 
         for ($i = 0; $i <= 100; $i++) {
 
-            $purok = rand(1, 50);
+            $purok = rand(1, 7);
             
             DB::table("records")->insert([
                 [
-                    'barangay_id' => $i%2 == 0 ? 1 : 2,
+                    'barangay_id' => rand(1,3),
                     'blotter_status_id' => rand(1, 4),
                     'barangay_blotter_number' => $i + 1,
                     'purok' => $purok,
@@ -414,4 +253,5 @@ class DatabaseSeeder extends Seeder
             $startDate = date('Y-m-d', strtotime('+1 day', strtotime($startDate)));
         }
     }
+    
 }

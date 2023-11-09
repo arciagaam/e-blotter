@@ -7,7 +7,7 @@
     <title>E Blotter</title>
     @vite('resources/css/app.css')
 </head>
-<body class="min-h-screen flex flex-col bg-project-blue-dark">
+<body class="min-h-screen flex flex-col bg-[#FAFAFA]">
 
     <nav class="h-16 flex items-center px-3 bg-project-blue-dark">
         <a href="{{route('login')}}" class="btn-filled h-fit ml-auto">Login</a>
@@ -26,16 +26,33 @@
 
     </div>
 
-    <div class="min-h-[100vh] bg-green-200">
-        ABOUT US
+    <div class="flex min-h-[100vh] items-center justify-center w-full bg-[#FAFAFA] px-20">
+        <div class="flex w-1/2 items-center justify-center">
+            ICON HERE
+        </div>
+
+        <div class="flex flex-col gap-6 w-1/2">
+            <h2 class="font-bold text-4xl">About Us</h2>
+
+            <div class="flex flex-col gap-3">
+                <p class="text-justify">E-Blotter System with the capability to Speech-to-Text Transcription for selected Barangay in Municipality of Pila empowers and enhances the barangay justice and improve the accuracy and completeness of blotter reports.</p>
+                <p class="text-justify">Blotters were provided in every barangay in a Municipality and their administration is under their control. This serves as a crucial reference for local officials, law enforcement to track and address issues, maintain community safety, and ensure accountability.</p>
+            </div>
+        </div>
     </div>
 
-    <div class="min-h-[100vh] bg-green-400">
-        SERVICES
-    </div>
+    <div class="flex min-h-[100vh] items-center justify-center w-full bg-[#FAFAFA] px-20">
+        <div class="flex flex-col gap-6 w-1/2">
+            <h2 class="font-bold text-4xl">Contact Us</h2>
 
-    <div class="min-h-[100vh] bg-green-600">
-        CONTACT US
+            <div class="flex flex-col gap-3">
+                Contact Us Form
+            </div>
+        </div>
+
+        <div class="flex w-1/2 items-center justify-center">
+            ICON HERE
+        </div>
     </div>
 
 
