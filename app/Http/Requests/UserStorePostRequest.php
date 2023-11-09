@@ -22,9 +22,9 @@ class UserStorePostRequest extends FormRequest
      */
     protected function prepareForValidation(): void
     {
-        $this->merge([
-            "username" => str_replace(" ", "_", strtolower($this->name))
-        ]);
+        // $this->merge([
+        //     "username" => str_replace(" ", "_", strtolower($this->name))
+        // ]);
     }
 
     /**
@@ -35,6 +35,8 @@ class UserStorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'captain_first_name' => 'required',
+            'captain_last_name' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
             'username' => 'required|unique:users,username',

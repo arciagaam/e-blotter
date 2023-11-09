@@ -32,12 +32,12 @@ class UserController extends Controller
     public function store(UserStorePostRequest $request)
     {
         // Users
-        $user = $request->safe()->except(["name", "logo"]);
+        $user = $request->safe()->except(["captain_first_name", "captain_last_name", "name", "logo"]);
         $user["password"] = bcrypt($user["password"]);
         $user = User::create($user);
 
         // Barangay
-        $barangay = Barangay::firstOrCreate($request->safe()->only(["name"]));
+        $barangay = Barangay::firstOrCreate($request->safe()->only(["captain_first_name", "captain_last_name", "name"]));
         $filePath = $request->file("logo")->store("logos", "public");
         $barangay["logo"] = $filePath;
 

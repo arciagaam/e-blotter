@@ -58,11 +58,15 @@ class DatabaseSeeder extends Seeder
         DB::table('barangays')->insert([
             [
                 'name' => 'Bulilan Sur',
+                'captain_first_name' => 'Bulilan',
+                'captain_last_name' => 'Captain',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'name' => 'Labuin',
+                'captain_first_name' => 'Labuin',
+                'captain_last_name' => 'Captain',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
