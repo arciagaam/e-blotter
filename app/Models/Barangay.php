@@ -13,6 +13,8 @@ class Barangay extends Model
     use HasFactory;
 
     protected $fillable = [
+        'captain_first_name',
+        'captain_last_name',
         'name',
         'logo'
     ];

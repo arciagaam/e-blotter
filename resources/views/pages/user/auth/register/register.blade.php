@@ -11,7 +11,8 @@
 
 <body>
     {{-- <div class="grid grid-cols-1 lg:grid-cols-2 w-screen overflow-hidden h-screen !bg-cover !bg-no-repeat bg-project-blue-default" style="background: url({{asset('assets/images/full-bg-plain.png')}})"> --}}
-    <form method="POST" action="{{ url('/register') }}" class="grid grid-cols-1 lg:grid-cols-2 w-full" enctype="multipart/form-data">
+    <form method="POST" action="{{ url('/register') }}" class="grid grid-cols-1 lg:grid-cols-2 w-full"
+        enctype="multipart/form-data">
         @csrf
 
         <div class="flex p-8">
@@ -24,28 +25,117 @@
                     <p class="italic lg:text-2xl lg:font-bold lg:not-italic">Barangay Officer Register</p>
                 </div>
 
-                <div class="flex flex-col gap-2">
+                <div class="flex flex-col gap-4">
+                    <div class="form-input-container">
+                        <label for="name">Barangay<span class="form-input-required">*</span></label>
+                        <input class="form-input" type="text" name="name" id="name"
+                            value="{{ old('name') }}">
+                        @error('name')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
+                    </div>
+
                     <div>
-                        <p class="opacity-50 italic">Barangay Captain</p>
+                        <p class="opacity-50 italic">Barangay Captain Information</p>
                         <div class="flex flex-row gap-2">
                             <div class="form-input-container flex-1">
-                                <label for="first_name">First Name <span class="form-input-required">*</span></label>
-                                <input class="form-input" type="text" name="first_name" id="first_name" value="{{ old('first_name') }}">
-                                @error('first_name')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                <label for="captain_first_name">First Name <span
+                                        class="form-input-required">*</span></label>
+                                <input class="form-input" type="text" name="captain_first_name"
+                                    id="captain_first_name" value="{{ old('captain_first_name') }}">
+                                @error('captain_first_name')
+                                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
                                 @enderror
                             </div>
 
                             <div class="form-input-container flex-1">
-                                <label for="last_name">Last Name <span class="form-input-required">*</span></label>
-                                <input class="form-input" type="text" name="last_name" id="last_name" value="{{ old('last_name') }}">
-                                @error('last_name')
-                                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                <label for="captain_last_name">Last Name <span
+                                        class="form-input-required">*</span></label>
+                                <input class="form-input" type="text" name="captain_last_name" id="captain_last_name"
+                                    value="{{ old('captain_last_name') }}">
+                                @error('captain_last_name')
+                                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
                                 @enderror
                             </div>
                         </div>
                     </div>
 
+                    <div>
+                        <p class="opacity-50 italic">Barangay Secretary Information</p>
+                        <div class="flex flex-col gap-2">
+                            <div class="flex flex-row gap-2">
+                                <div class="form-input-container flex-1">
+                                    <label for="first_name">First Name <span
+                                            class="form-input-required">*</span></label>
+                                    <input class="form-input" type="text" name="first_name"
+                                        id="first_name" value="{{ old('first_name') }}">
+                                    @error('first_name')
+                                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="form-input-container flex-1">
+                                    <label for="last_name">Last Name <span
+                                            class="form-input-required">*</span></label>
+                                    <input class="form-input" type="text" name="last_name"
+                                        id="last_name" value="{{ old('last_name') }}">
+                                    @error('last_name')
+                                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row gap-2">
+                                <div class="form-input-container flex-1">
+                                    <label for="password">Password <span class="form-input-required">*</span></label>
+                                    <input class="form-input" type="password" name="password" id="password">
+                                    @error('password')
+                                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="form-input-container flex-1">
+                                    <label for="confirm_password">Confirm Password <span
+                                            class="form-input-required">*</span></label>
+                                    <input class="form-input" type="password" name="confirm_password"
+                                        id="confirm_password">
+                                    @error('confirm_password')
+                                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="flex flex-row gap-2">
+                                <div class="form-input-container flex-1">
+                                    <label for="username">Userame <span class="form-input-required">*</span></label>
+                                    <input class="form-input" type="text" name="username" id="username"
+                                        value="{{ old('username') }}">
+                                    @error('email')
+                                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="form-input-container flex-1">
+                                    <label for="email">Email <span class="form-input-required">*</span></label>
+                                    <input class="form-input" type="email" name="email" id="email"
+                                        value="{{ old('email') }}">
+                                    @error('email')
+                                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                    @enderror
+                                </div>
+
+                                <div class="form-input-container flex-1">
+                                    <label for="contact_number">Contact Number <span
+                                            class="form-input-required">*</span></label>
+                                    <input class="form-input" type="contact_number" name="contact_number"
+                                        id="contact_number" value="{{ old('contact_number') }}">
+                                    @error('contact_number')
+                                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     {{-- <div class="form-input-container">
                         <label for="username">Username <span class="form-input-required">*</span></label>
                         <input class="form-input" type="text" name="username" id="username"
@@ -55,78 +145,37 @@
                     @enderror
                 </div> --}}
 
-                <div class="flex flex-row gap-2">
-                    <div class="form-input-container flex-1">
-                        <label for="password">Password <span class="form-input-required">*</span></label>
-                        <input class="form-input" type="password" name="password" id="password">
-                        @error('password')
-                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
-                    </div>
 
-                    <div class="form-input-container flex-1">
-                        <label for="confirm_password">Confirm Password <span class="form-input-required">*</span></label>
-                        <input class="form-input" type="password" name="confirm_password" id="confirm_password">
-                        @error('confirm_password')
-                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    <div class="form-input-container">
+                        <label for="logo">Logo<span class="form-input-required">*</span></label>
+                        <input type="file" name="logo" id="logo"
+                            class="w-fit file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:btn-outline file:cursor-pointer">
+                        @error('logo')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
 
-                <div class="flex flex-row gap-2">
-                    <div class="form-input-container flex-1">
-                        <label for="email">Email <span class="form-input-required">*</span></label>
-                        <input class="form-input" type="email" name="email" id="email" value="{{ old('email') }}">
-                        @error('email')
+                <div class="flex w-full flex-col gap-2">
+                    @error('invalid')
                         <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <div class="form-input-container flex-1">
-                        <label for="contact_number">Contact Number <span class="form-input-required">*</span></label>
-                        <input class="form-input" type="contact_number" name="contact_number" id="contact_number" value="{{ old('contact_number') }}">
-                        @error('contact_number')
-                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                        @enderror
-                    </div>
-                </div>
-
-                <div class="form-input-container">
-                    <label for="name">Barangay<span class="form-input-required">*</span></label>
-                    <input class="form-input" type="text" name="name" id="name" value="{{ old('name') }}">
-                    @error('name')
-                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
                     @enderror
+                    <a class="underline" href="{{ url('/login') }}">Already registered your Barangay?</a>
                 </div>
 
-                <div class="form-input-container">
-                    <label for="logo">Logo<span class="form-input-required">*</span></label>
-                    <input type="file" name="logo" id="logo" class="w-fit file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:btn-outline file:cursor-pointer">
-                    @error('logo')
-                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                    @enderror
-                </div>
+                <button class="btn-filled">REGISTER</button>
             </div>
 
-            <div class="flex w-full flex-col gap-2">
-                @error('invalid')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                @enderror
-                <a class="underline" href="{{ url('/login') }}">Already registered your Barangay?</a>
-            </div>
-
-            <button class="btn-filled">REGISTER</button>
-        </div>
-
-        {{-- </div> --}}
+            {{-- </div> --}}
         </div>
 
         <div class="flex p-8 flex-col gap-10">
             <div class="form-input-container">
                 <label for="purok_count">Purok Count<span class="form-input-required">*</span></label>
-                <input class="form-input" type="text" name="purok_count" id="purok_count" value="{{ old('purok_count') }}">
+                <input class="form-input" type="text" name="purok_count" id="purok_count"
+                    value="{{ old('purok_count') }}">
                 @error('purok_count')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
                 @enderror
             </div>
 
