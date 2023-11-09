@@ -312,7 +312,7 @@
 
                     <div class="form-input-container col-span-3">
                         <div class="flex flex-row">
-                            <label for="case" class="flex gap-2 items-center">Case:</label>
+                            <label for="case" class="flex gap-2 items-center">Nature of Incident:</label>
                         </div>
 
                         <input class="form-input" type="text" name="case" id="case" list="cases"

@@ -69,7 +69,7 @@
     <p class="self-start">This _____________ day of _______________, ______________.</p>
 
     <div class="flex flex-col w-max self-start">
-        <p class="w-full h-6 border-b border-0 border-black">{{ auth()->user()->first_name . " " . auth()->user()->last_name }}</p>
+        <p class="w-full h-6 border-b border-0 border-black">{{  auth()->user()->barangays[0]->captain_first_name . " " . auth()->user()->barangays[0]->captain_last_name }}</p>
             <p class="self-start" for="">Punong Barangay/Lupon Chairman</p>
     </div>
 

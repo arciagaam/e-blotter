@@ -20,7 +20,7 @@ class DefaultBarangaySeeder extends Seeder
                     'name' => 'Bulilan Sur',
                     'captain_first_name' => 'Nilo',
                     'captain_last_name' => 'Ladanga',
-                    'logo' => '',
+                    'logo' => null
                 ],
 
                 'puroks' => [
@@ -49,7 +49,7 @@ class DefaultBarangaySeeder extends Seeder
                     'name' => 'Sta Clara Sur',
                     'captain_first_name' => 'SCSCAPTFN',
                     'captain_last_name' => 'SCSCAPTLN',
-                    'logo' => '',
+                    'logo' => null,
                 ],
 
                 'puroks' => [
@@ -78,7 +78,7 @@ class DefaultBarangaySeeder extends Seeder
                     'name' => 'Labuin',
                     'captain_first_name' => 'Jovir',
                     'captain_last_name' => 'Matienzo',
-                    'logo' => '',
+                    'logo' => null,
                 ],
 
                 'puroks' => [

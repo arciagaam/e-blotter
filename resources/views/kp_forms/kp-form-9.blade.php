@@ -71,7 +71,7 @@
         <p class="self-start">This <span class="underline">{{isset($relatedForms['7']) ? date('jS', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span> day of <span class="underline">{{isset($relatedForms['7']) ? date('F', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span>, <span class="underline">{{isset($relatedForms['7']) ? date('Y', strtotime($relatedForms['7']['created_at'])) : str_repeat('_', 6)}}</span>.</p>
 
         <div class="flex flex-col w-max self-start">
-            <p class="w-full h-6 border-b border-0 border-black">{{ auth()->user()->first_name . " " . auth()->user()->last_name }}</p>
+            <p class="w-full h-6 border-b border-0 border-black">{{  auth()->user()->barangays[0]->captain_first_name . " " . auth()->user()->barangays[0]->captain_last_name }}</p>
             <p class="self-start" for="">Punong Barangay/Lupon Chairman</p>
         </div>
     </div>

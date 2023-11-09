@@ -248,7 +248,7 @@
 
                     <div class="form-input-container col-span-3">
                         <div class="flex flex-row">
-                            <label for="case" class="flex gap-2 items-center">Case:</label>
+                            <label for="case" class="flex gap-2 items-center">Nature of Incident:</label>
                         </div>
 
                         <input class="form-input bg-white" type="text" name="case" id="case"
@@ -308,10 +308,10 @@
                 <div class="flex flex-col ml-auto gap-2">
                     <a href="{{ route('records.kp-forms.get.step-one', ['id' => $record->id]) }}" class="btn-filled"
                         data-target="#print" type="button">Issue KP Form</a>
-                    <button data-target="#upload-form" data-form-id="{{ $record->id }}"
+                    {{-- <button data-target="#upload-form" data-form-id="{{ $record->id }}"
                         class="btn-outline flex justify-center items-center">
                         Upload KP Form
-                    </button>
+                    </button> --}}
                     <button class="btn-outline" data-target="#schedule" type="button">Schedule of
                         Reconciliation</button>
                     <a class="btn-outline text-center"
@@ -345,7 +345,7 @@
     </x-slot:footer>
 </x-modal>
 
-<x-modal id="upload-form">
+{{-- <x-modal id="upload-form">
     <x-slot:heading>
         Upload KP Form
     </x-slot:heading>
@@ -366,7 +366,7 @@
     <x-slot:footer>
         <button class="btn-filled" form="upload-kp-form">Upload</button>
     </x-slot:footer>
-</x-modal>
+</x-modal> --}}
 
 <x-modal id="schedule">
     <x-slot:heading>

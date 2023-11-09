@@ -17,7 +17,7 @@ class BlotterStatusSeeder extends Seeder
             ['name' => 'settled'],
             ['name' => 'unresolved'],
             ['name' => 'dismissed'],
-            ['name' => 'in prosecution'],
+            ['name' => 'endorsed'],
         ];
 
         foreach($blotterStatuses as $blotterStatus) {
