@@ -118,7 +118,13 @@ class RecordKpFormActions
 
     public function getMessageAndRecommendations($latestKpForm, string $record, GetKpFormMessageActions $action)
     {
-        // dd($latestKpForm);
+        $recordStatus = Record::where('id', $record)->with('blotterStatus')->first()->blotterStatus->id;
+
+        switch($recordStatus) {
+            case 1: return ['message' => 'Case has been settled.', 'recommendations' => null, 'form_ids' => []];
+            case 3: return $action->getKpForm23Message();
+        }
+
         if (!isset($latestKpForm->kp_form_id)) {
             return ['message' => 'No KP Forms issued yet', 'recommendations' => 'Issue Form 7', 'form_ids' => [7]];
         }

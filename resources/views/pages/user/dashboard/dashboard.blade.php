@@ -10,11 +10,7 @@
 
         <div class="flex flex-row gap-1 text-xl">
             <p class="w-fit">
-                Welcome,
-            </p>
-            <p class="relative font-bold">
-                {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
-                <span class="absolute break-keep left-0 text-center top-6 text-xs italic font-normal w-full">Barangay Secretary</span>
+                Welcome, Barangay Secretary {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}!
             </p>
         </div>
         </div>
