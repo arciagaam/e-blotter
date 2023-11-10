@@ -2,9 +2,21 @@
     <x-page-header>Dashboard</x-page-header>
 
     <div class="flex flex-col gap-10">
+        <div class="flex flex-col gap-2">
         <div class="flex gap-5">
             <p id="intervalDate">--</p>
             <p id="intervalTime">--</p>
+        </div>
+
+        <div class="flex flex-row gap-1 text-xl">
+            <p class="w-fit">
+                Welcome,
+            </p>
+            <p class="relative font-bold">
+                {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}
+                <span class="absolute break-keep left-0 text-center top-6 text-xs italic font-normal w-full">Barangay Secretary</span>
+            </p>
+        </div>
         </div>
 
         <div class="flex flex-col lg:flex-row gap-4">

@@ -55,6 +55,49 @@
                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
             @enderror
         </div> --}}
+        <div class="flex flex-col gap-2">
+            <div class="border-project-gray-default ">
+                <p class="font-bold text-lg">Addressee Information</p>
+            </div>
+
+            <div class="flex flex-col gap-2 lg:w-2/4 xl:w-1/4">
+                <div class="flex flex-col flex-1">
+                    <div class="flex flex-row">
+                        <label for="addressee_to" class="flex gap-2 items-center">To:</label>
+                    </div>
+
+                    <input class="form-input" type="text" name="addressee_to" id="addressee_to"
+                        value="{{ old('addressee_to') }}">
+                    @error('addressee_to')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="flex flex-col flex-1">
+                    <div class="flex flex-row">
+                        <label for="addressee_company" class="flex gap-2 items-center">Company:</label>
+                    </div>
+
+                    <input class="form-input" type="text" name="addressee_company" id="addressee_company"
+                        value="{{ old('addressee_company') }}">
+                    @error('addressee_company')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="flex flex-col flex-1">
+                    <div class="flex flex-row">
+                        <label for="addressee_address" class="flex gap-2 items-center">Address:</label>
+                    </div>
+
+                    <input class="form-input" type="text" name="addressee_address" id="addressee_address"
+                        value="{{ old('addressee_address') }}">
+                    @error('addressee_address')
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                    @enderror
+                </div>
+            </div>
+        </div>
 
         <div class="flex flex-col gap-2">
             <div class="border-project-gray-default ">

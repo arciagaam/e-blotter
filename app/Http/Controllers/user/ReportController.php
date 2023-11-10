@@ -56,7 +56,9 @@ class ReportController extends Controller
 
         $results = $query->get();
 
-        return view("pages.user.reports.template", ["results" => $results, "selections" => $request->safe()]);
+        $addressee = $request->safe(["addressee_to", "addressee_company", "addressee_address"]);
+
+        return view("pages.user.reports.template", ["results" => $results, "selections" => $request->safe(), "addressee" => $addressee]);
     }
 
     /**
