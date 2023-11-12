@@ -336,8 +336,6 @@ async function formEventListener(event) {
         method = temp._method;
     }
 
-    console.log(body);
-
     if (method != undefined && method == 'DELETE') {
         return;
     }
