@@ -47,7 +47,7 @@
                 <box-icon type="{{ request()->is('audit-trail*') ? 'solid' : 'regular' }}"
                     color="{{ request()->is('audit-trail*') ? '#FBAD26' : 'white' }}" name='group'
                     size="1.5em"></box-icon>
-                <p class="text-sm font-normal">Account</p>
+                <p class="text-sm font-normal">Audit Trail</p>
             </a>
 
             <a href="{{ url('/reports') }}"

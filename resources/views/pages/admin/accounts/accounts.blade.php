@@ -79,7 +79,7 @@
                                     </button>
                                     <button data-target="#delete" data-form-id="{{ $account->id }}"
                                         class="btn-outline danger flex justify-center items-center">
-                                            <box-icon class="text-xs" name='trash-alt' ></box-icon>
+                                            <box-icon class="text-xs pointer-events-none" name='trash-alt' ></box-icon>
                                     </button>
                                 </div>
                             </td>
