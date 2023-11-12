@@ -1,8 +1,6 @@
 <x-layout>
     <x-page-header>New Record</x-page-header>
 
-
-
     <div class="flex flex-col gap-3">
         <form action="{{ route('records.store') }}" method="POST" class="flex flex-col gap-5"
             enctype="multipart/form-data">
@@ -39,7 +37,7 @@
                         </div>
         
                         <input class="form-input" type="text" name="barangay" id="barangay"
-                            value="{{ old('barangay') ? old('barangay') : auth()->user()->barangays[0]->name }}"
+                            value="{{ auth()->user()->barangays[0]->name }}"
                             disabled>
                         @error('barangay')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
@@ -50,9 +48,16 @@
                         <div class="flex flex-row">
                             <label for="purok" class="flex gap-2 items-center">Purok:</label>
                         </div>
-        
-                        <input class="form-input w-16" type="text" name="purok" id="purok"
-                            value="{{ old('purok') }}">
+
+                        <input list="puroks" name="purok" id="purok" class="form-input">
+                        
+                        <datalist id="puroks">
+                            @foreach (auth()->user()->barangays[0]->puroks as $purok)
+                                <option value="{{$purok->id}}">{{$purok->name}}</option>
+                                
+                            @endforeach
+                        </datalist>
+
                         @error('purok')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror

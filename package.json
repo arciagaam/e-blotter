@@ -4,7 +4,9 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "link": "php artisan storage:link & vite build"
+        "link": "php artisan storage:link & vite build",
+        "all": "concurrently \"php artisan websockets:serve\" \"npm run dev\" \"php artisan serve\""
+        
     },
     "devDependencies": {
         "autoprefixer": "^10.4.14",
@@ -17,6 +19,7 @@
     "dependencies": {
         "boxicons": "^2.1.4",
         "chart.js": "^4.4.0",
+        "concurrently": "^8.2.2",
         "datatables.net-dt": "^1.13.4",
         "fullcalendar": "^6.1.7",
         "laravel-echo": "^1.15.3",

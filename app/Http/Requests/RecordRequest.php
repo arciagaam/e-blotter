@@ -47,6 +47,7 @@ class RecordRequest extends FormRequest
             "narrative" => 'required',
             "narrative_file" => 'nullable',
             "reliefs" => 'required',
+            "purok" => 'required',
         ];
     }
 
