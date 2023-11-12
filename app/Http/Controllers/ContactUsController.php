@@ -30,7 +30,10 @@ class ContactUsController extends Controller
      */
     public function store(ContactUsRequest $request)
     {
-        Mail::to(env("MAIL_USERNAME"))->send(new MailContactUs(...$request->validated()));
+        // Add 2FA then uncomment the line below and remove the eblottercs02@gmail.com
+
+        // Mail::to(env("MAIL_USERNAME"))->send(new MailContactUs(...$request->validated()));
+        Mail::to("eblottercs02@gmail.com")->send(new MailContactUs(...$request->validated()));
 
         return redirect()->route('userRoot');
     }

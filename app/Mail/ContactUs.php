@@ -15,7 +15,7 @@ class ContactUs extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct(private $email, private $name, private $message)
+    public function __construct(private $email, private $name, private $messageBody)
     {
         //
     }
@@ -40,7 +40,7 @@ class ContactUs extends Mailable
             with: [
                 "email" => $this->email,
                 "name" => $this->name,
-                "message" => $this->message,
+                "messageBody" => $this->messageBody
             ]
         );
     }

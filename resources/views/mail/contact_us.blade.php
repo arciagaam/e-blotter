@@ -7,6 +7,8 @@
     <title>Contact Us</title>
 </head>
 <body>
-    <p>This came from contact us</p>
+    <p><strong>From:</strong> {{ $email }}</p>
+    <p><strong>Name:</strong> {{ $name }}</p>
+    <p><strong>Message:</strong> {{ $messageBody }}</p>
 </body>
 </html>

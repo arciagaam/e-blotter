@@ -83,9 +83,9 @@
                         @enderror
                     </div>
                     <div class="form-input-container w-full">
-                        <label for="message">Message</label>
-                        <textarea class="form-input resize-none" name="message" id="message" cols="30" rows="10">{{ old('message') }}</textarea>
-                        @error('message')
+                        <label for="messageBody">Message</label>
+                        <textarea class="form-input resize-none" name="messageBody" id="messageBody" cols="30" rows="10">{{ old('messageBody') }}</textarea>
+                        @error('messageBody')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
