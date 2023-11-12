@@ -6,7 +6,8 @@
         <div class="flex flex-col gap-3">
             {{-- TABLE ACTIONS --}}
             <div class="flex flex-col w-full justify-between items-center">
-                <div class="flex flex-row self-end">
+                <div class="flex flex-row self-end gap-2">
+                    <a class="btn-outline danger" href="{{ route('records.archived') }}">Archived Blotter Cases</a>
                     <a class="ml-auto btn-filled" href="{{ route('records.create') }}">New Record</a>
                 </div>
 

@@ -40,7 +40,8 @@ class RecordController extends Controller
         return view('pages.user.records.blotter-records', ['records' => $result, 'purokList' => $purokList]);
     }
 
-    public function getNewRecords() {
+    public function getNewRecords()
+    {
         $result = Record::getSearchQuery()->where('notification_viewed', 0)->count();
         return response()->json($result, 200);
     }
@@ -142,6 +143,34 @@ class RecordController extends Controller
         $record->delete();
 
         return redirect()->route('records.index');
+    }
+
+    public function showDestroyed()
+    {
+        $record = Record::select('purok')->orderBy('purok')->get();
+        $purokList = array();
+
+        foreach ($record as $key => $value) {
+            if (!in_array($value->purok, $purokList)) {
+                array_push($purokList, $value->purok);
+            }
+        }
+
+        sort($purokList);
+
+        $result = Record::getSearchQuery()->onlyTrashed()->with('victim', 'suspect', 'barangays', 'blotterStatus')->orderBy('barangay_blotter_number', 'desc')->paginate(10)->withQueryString();
+        return view("pages.user.records.show-archived", ['records' => $result, 'purokList' => $purokList]);
+    }
+
+    public function restore(string $record)
+    {
+        $result = Record::withTrashed()->where('id', $record)->where('deleted_at', '!=', null)->first();
+
+        if ($result) {
+            $result->restore();
+        }
+
+        return redirect()->route('records.archived');
     }
 
     /**

@@ -159,6 +159,8 @@ Route::prefix('/')->group(function () {
                 Route::delete('/file/delete/{recordId}/{issuedKpFormId}', [RecordsKpFormController::class, 'deleteFile'])->name('file.destroy');
             });
         });
+        Route::get('/records/archived', [UserRecordController::class, 'showDestroyed'])->name('records.archived');
+        Route::get('/records/restore/{record}', [UserRecordController::class, 'restore'])->name('records.restore');
         Route::resource('records', UserRecordController::class);
 
         Route::prefix('kp-forms')->name('kp-forms.')->group(function () {
