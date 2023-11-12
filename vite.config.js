@@ -19,7 +19,7 @@ export default defineConfig({
                 'resources/js/datetime.js',
                 'resources/js/dynamic_input.js',
                 'resources/js/kp_form_select.js',
-                'resources/js/kp_form_notifications.js',
+                'resources/js/kp_forms_notifications.js',
                 'resources/js/modal.js',
                 'resources/js/nav.js',
                 'resources/js/print_window.js',
