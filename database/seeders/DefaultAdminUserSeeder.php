@@ -17,9 +17,9 @@ class DefaultAdminUserSeeder extends Seeder
         $defaultAdminUsers = [
             [
                 'first_name' => 'ABC',
-                'last_name' => 'Officer',
+                'last_name' => 'President',
                 'username' => 'abc_pres',
-                'email' => 'abc_officer@example.com',
+                'email' => 'abc_president@example.com',
                 'verified_at' => now(),
                 'contact_number' => '09123221234',
                 'password' => bcrypt('abc@2024')
