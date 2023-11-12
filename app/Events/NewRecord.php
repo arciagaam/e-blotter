@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Models\IssuedKpForm;
+use App\Models\Record;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -11,16 +11,16 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class NewIssuedKPForm implements ShouldBroadcast 
+class NewRecord implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $issuedKpForm;
+    public $record;
     /**
      * Create a new event instance.
      */
-    public function __construct(IssuedKpForm $issuedKpForm)
+    public function __construct(Record $record)
     {
-        $this->issuedKpForm = $issuedKpForm;
+       $this->record = $record; 
     }
 
     /**
@@ -28,8 +28,10 @@ class NewIssuedKPForm implements ShouldBroadcast
      *
      * @return array<int, \Illuminate\Broadcasting\Channel>
      */
-    public function broadcastOn()
+    public function broadcastOn(): array
     {
-        return new Channel('issueKpForm');
+        return [
+            new Channel('newRecord'),
+        ];
     }
 }

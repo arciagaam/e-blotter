@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('record_id')->nullable()->constrained('records')->cascadeOnUpdate();
             $table->foreignId('kp_form_id')->nullable()->constrained('kp_forms')->cascadeOnUpdate();
+            $table->boolean('notification_viewed')->default(0);
             $table->timestamps();
         });
     }

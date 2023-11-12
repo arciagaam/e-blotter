@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('narrative_file')->nullable();
             $table->text('reliefs');
             $table->date('kp_deadline')->nullable();
+            $table->boolean('notification_viewed')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

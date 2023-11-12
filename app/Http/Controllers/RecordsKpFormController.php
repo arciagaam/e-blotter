@@ -26,6 +26,8 @@ class RecordsKpFormController extends Controller
      */
     public function index(string $record, RecordsKpFormService $service, RecordKpFormActions $kpFormAction, GetKpFormMessageActions $kpFormMessageAction)
     {
+        IssuedKpForm::where('record_id', $record)->where('notification_viewed',0)->update(['notification_viewed' => 1]);
+        
         $message = $kpFormAction->getMessageAndRecommendations($service->checkLatestKpForm($record), $record, $kpFormMessageAction);
 
         $issuedKpForms = IssuedKpForm::with('kpForm')->latest()->where('record_id', $record)->get();
@@ -35,6 +37,16 @@ class RecordsKpFormController extends Controller
         // dd($combinedKpForms);
 
         return view('pages.kp_forms.kp_forms', ['record' => $record, 'issuedKpForms' => $combinedKpForms, 'message' => $message]);
+    }
+
+    public function getNewKpForms(Request $request) {
+        $recordId = $request->record;
+        $issuedKpForms = IssuedKpForm::with('kpForm')->latest()->where('record_id', $recordId)->where('notification_viewed', 0)->count();
+        // $uploadedKpForms = IssuedKpFormUpload::where('record_id', $recordId)->where('notification_viewed', 0)->count();
+
+        $combinedKpForms = $issuedKpForms;
+
+        return response()->json($combinedKpForms, 200);
     }
 
     /**

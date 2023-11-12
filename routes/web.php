@@ -131,9 +131,12 @@ Route::prefix('/')->group(function () {
         Route::get('/dashboard/reports-purok', [UserDashboardController::class, 'getReportsPerPurok'])->name('dashboard.get-hearing-dates-per-purok');
 
         Route::prefix('records')->name('records.')->group(function () {
+            Route::get('/get-new-records', [UserRecordController::class, 'getNewRecords'])->name('getNewRecords');
             Route::get('print/{record}', [UserRecordController::class, 'print'])->name('print');
 
             Route::prefix('kp-forms')->name('kp-forms.')->group(function () {
+                Route::get('/get-new-kp-forms', [RecordsKpFormController::class, 'getNewKpForms'])->name('getNewKpForms');
+
                 Route::get('/step-one/{id}', [RecordsKpFormController::class, 'stepOne'])->name('get.step-one');
                 Route::post('/step-one', [RecordsKpFormController::class, 'postStepOne'])->name('post.step-one');
 

@@ -1,5 +1,5 @@
 <nav
-    class="absolute top-0 left-0 min-w-[13rem] z-50 flex flex-col min-h-screen h-screen bg-project-blue-dark text-white transition-all duration-500 ease-in-out drop-shadow-lg pb-10 pt-5 gap-12 pr-5"
+    class="absolute top-0 left-0 min-w-[15rem] z-50 flex flex-col min-h-screen h-screen bg-project-blue-dark text-white transition-all duration-500 ease-in-out drop-shadow-lg pb-10 pt-5 gap-12 pr-5"
     data-open="false"
     >
 
@@ -43,14 +43,12 @@
 
             <a href="{{ url('/admin/accounts') }}"
                 class="pl-5 flex items-center gap-5 transition-all duration-300 {{ request()->is('admin/accounts*') ? 'text-project-yellow-default' : 'hover:text-project-yellow-default' }}">
-                <div class="relative">
                     <box-icon type="{{ request()->is('admin/accounts*') ? 'solid' : 'regular' }}"
                         color="{{ request()->is('admin/accounts*') ? '#FBAD26' : 'white' }}" name='group'
                         size="1.5em"></box-icon>
 
-                        <p id="accountsBadge" class="hidden absolute -top-[10%] left-[90%] flex items-center justify-center h-4 text-xs rounded-full aspect-square bg-red-400 text-white font-medium" data-url={{route('admin.accounts.getNewAccounts')}}>5</p>
-                </div>
-                <p class="text-sm font-normal">Accounts</p>
+                        <p class="text-sm font-normal">Accounts</p>
+                        <p id="accountsBadge" class="hidden flex items-center justify-center h-5 text-sm rounded-md p-1 aspect-square bg-red-400 text-white font-medium" data-url={{route('admin.accounts.getNewAccounts')}}></p>
             </a>
 
             <a href="{{ url('/logout') }}"

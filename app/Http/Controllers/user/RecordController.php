@@ -24,6 +24,7 @@ class RecordController extends Controller
      */
     public function index()
     {
+        Record::getSearchQuery()->where('notification_viewed', 0)->update(['notification_viewed' => 1]);
         $record = Record::select('purok')->orderBy('purok')->get();
         $purokList = array();
 
@@ -37,6 +38,11 @@ class RecordController extends Controller
 
         $result = Record::getSearchQuery()->with('victim', 'suspect', 'barangays', 'blotterStatus')->orderBy('barangay_blotter_number', 'desc')->paginate(10)->withQueryString();
         return view('pages.user.records.blotter-records', ['records' => $result, 'purokList' => $purokList]);
+    }
+
+    public function getNewRecords() {
+        $result = Record::getSearchQuery()->where('notification_viewed', 0)->count();
+        return response()->json($result, 200);
     }
 
     /**

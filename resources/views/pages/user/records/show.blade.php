@@ -5,8 +5,10 @@
 
         <div class="flex flex-row gap-4">
             <x-nav-button url="{{ route('records.show', ['record' => $record->id]) }}">Details</x-nav-button>
-            <x-nav-button url="{{ route('records.kp-forms.index', ['record' => $record->id]) }}">Issued
-                Certificate</x-nav-button>
+            <x-nav-button url="{{ route('records.kp-forms.index', ['record' => $record->id]) }}">
+                Issued Certificate
+                <p id="issuedKpFormsBadge" class="hidden absolute -top-[10%] left-[95%] flex items-center justify-center h-6 text-xs rounded-full aspect-square bg-red-400 text-white font-medium" data-url={{route('records.kp-forms.getNewKpForms', ['record' => $record->id])}}>0</p>
+            </x-nav-button>
         </div>
 
         <div class="flex flex-col gap-5">
@@ -317,6 +319,8 @@
 
         </div>
     </div>
+    
+    @vite('resources/js/kp_forms_notifications')
 
 </x-layout>
 

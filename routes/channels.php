@@ -24,3 +24,7 @@ Broadcast::channel('registerBarangay', function($user) {
 Broadcast::channel('issueKpForm', function($user) {
     return $user->id;
 });
+
+Broadcast::channel('newBarangay', function($user) {
+    return $user->id;
+});

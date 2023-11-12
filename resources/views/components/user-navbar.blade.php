@@ -1,4 +1,4 @@
-<nav class="fixed top-0 left-0 min-w-[13rem] z-50 flex flex-col min-h-screen h-screen bg-project-blue-dark text-white transition-all duration-200 ease-in-out drop-shadow-lg pb-10 pt-5 gap-12 pr-5"
+<nav class="fixed top-0 left-0 min-w-[15rem] z-50 flex flex-col min-h-screen h-screen bg-project-blue-dark text-white transition-all duration-200 ease-in-out drop-shadow-lg pb-10 pt-5 gap-12 pr-5"
     data-open="false">
 
     {{-- <button id="burger" class="flex items-center self-end pl-5 w-fit">
@@ -31,6 +31,7 @@
                     color="{{ request()->is('records*') ? '#FBAD26' : 'white' }}" name='folder'
                     size="1.5em"></box-icon>
                 <p class="text-sm font-normal">Blotter Records</p>
+                <p id="blottersBadge" class="hidden flex items-center justify-center h-5 text-sm rounded-md p-1 aspect-square bg-red-400 text-white font-medium" data-url={{route('records.getNewRecords')}}></p>
             </a>
 
             <a href="{{ url('/kp-forms') }}"
@@ -69,4 +70,4 @@
 
 </nav>
 
-{{-- @vite('resources/js/nav.js') --}}
+@vite('resources/js/user_nav.js')

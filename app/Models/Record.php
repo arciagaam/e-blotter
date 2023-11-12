@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\NewRecord;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,6 +17,12 @@ class Record extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public static function booted() {
+        static::created(function($newRecord) {
+            NewRecord::dispatch($newRecord);
+        });
+    }
 
     protected $fillable = [
         'barangay_id',

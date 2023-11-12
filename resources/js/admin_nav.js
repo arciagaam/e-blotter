@@ -4,6 +4,7 @@ Echo.channel('registerBarangay')
         getNewAccountsCount();
     });
 
+window.addEventListener('load', getNewAccountsCount);
 
 
 async function getNewAccountsCount() {
