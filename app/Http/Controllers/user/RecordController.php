@@ -46,8 +46,8 @@ class RecordController extends Controller
     {
         $civilStatus = new CivilStatus();
         $record = new Record();
-
         $latest = $record->latestRecord(auth()->user()->barangays[0]->id);
+        $puroks = auth()->user()->barangays[0]->puroks;
 
         return view('pages.user.records.create', ['civilStatus' => $civilStatus->getAllCivilStatus(), 'blotterNumber' => $latest ? $latest->barangay_blotter_number + 1 : 1]);
     }
@@ -61,7 +61,7 @@ class RecordController extends Controller
 
         $latest = $report->latestRecord(auth()->user()->barangays[0]->id);
         $report->narrative_file = $service->handleUploadRecording($request->validated('narrative_file'));
-        $report->fill([...$request->safe()->except('victim', 'suspect'), 'purok' => $request->validated('victim.purok')]);
+        $report->fill([...$request->safe()->except('victim', 'suspect'), 'purok' => $request->validated('purok')]);
         $report->barangays()->associate(auth()->user()->barangays[0]->id);
         $report->blotterStatus()->associate(BlotterStatus::find(2));
         $report->barangay_blotter_number = $latest ? $latest->barangay_blotter_number + 1 : 1;
