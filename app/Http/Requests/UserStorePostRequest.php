@@ -5,7 +5,6 @@ namespace App\Http\Requests;
 use App\Models\Barangay;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
-use Mockery\Undefined;
 
 class UserStorePostRequest extends FormRequest
 {

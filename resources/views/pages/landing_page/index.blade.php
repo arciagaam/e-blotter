@@ -60,7 +60,11 @@
         <div class="flex flex-col gap-6 w-full xl:w-1/2">
             <h2 class="font-bold text-center xl:text-left text-6xl">Contact Us</h2>
 
-            <form action="#" method="post">
+            {{-- Should send at the email below --}}
+            {{-- eblottercs02@gmail.com --}}
+
+            <form action="{{ route('contact-us') }}" method="post">
+                @csrf
                 <div class="flex flex-col gap-4">
                     <div class="form-input-container w-full">
                         <label for="name">Name</label>

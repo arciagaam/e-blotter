@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\KpFormController;
 use App\Http\Controllers\admin\RecordController;
 use App\Http\Controllers\Authentication;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\RecordsKpFormController;
 use App\Http\Controllers\user\AuditTrailController;
@@ -86,6 +87,8 @@ Route::prefix('/')->group(function () {
 
             return view('pages.landing_page.index');
         })->name('userRoot');
+
+        Route::post('/contact-us', [ContactUsController::class, 'store'])->name("contact-us");
 
         Route::get('/login', function() {
             $users = User::getNonDeletedUsers()->get();
