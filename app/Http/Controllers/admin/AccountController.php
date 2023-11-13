@@ -19,7 +19,13 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = User::nonAdmin();
+        $accounts = User::nonAdmin()->when(request()->search, function ($q) {
+                $q->where('first_name', 'like', '%' . request()->search . '%')
+                    ->orWhere('last_name', 'like', '%' . request()->search . '%')
+                    ->orWhereHas('barangays', function (Builder $query) {
+                        $query->where('name', 'like', '%' . request()->search . '%');
+                    });
+            })->get();
 
         User::where('notification_viewed', 0)->update(['notification_viewed' => 1]);
         

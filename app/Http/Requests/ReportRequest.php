@@ -28,7 +28,7 @@ class ReportRequest extends FormRequest
             "addressee_company" => "required",
             "addressee_address" => "required",
             // "order" => "required",
-            "contents" => "required|array",
+            // "contents" => "required|array",
             "blotter_status" => "required|array",
         ];
     }

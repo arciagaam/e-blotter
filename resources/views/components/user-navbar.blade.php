@@ -11,9 +11,8 @@
             <img class="object-fit w-full max-w-[5rem] aspect-square" id="logo"
                 src="{{ $barangayInformation->logo ? asset('assets/' . $barangayInformation->logo) : asset('assets/no-image.webp') }}"
                 alt="">
-            <p id="barangay-label"
-                class="opacity-0 hidden transition-opacity duration-100 max-w-[10rem] break-words whitespace-normal">
-                {{ $barangayInformation->name }}</p>
+            <p id="barangay-label" class="duration-100 max-w-[10rem] break-words whitespace-normal">
+                Barangay {{ $barangayInformation->name }}</p>
         </a>
 
         <div class="flex flex-col gap-5 h-full">

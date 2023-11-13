@@ -6,7 +6,7 @@
             <form class="flex w-full gap-6 items-center">
 
                 <div class="flex gap-2 items-center">
-                    <label class="text-sm" for="search">Search Form Number</label>
+                    <label class="text-sm" for="search">Search KP Forms</label>
                     <div
                         class="flex items-center border border-table-even focus-within:border-project-blue rounded-md overflow-hidden gap-2 px-1 bg-white transition-all duration-300 ease-in-out">
                         <input class="w-full outline-none px-1 text-sm py-1" type="text" name="search" id="search"

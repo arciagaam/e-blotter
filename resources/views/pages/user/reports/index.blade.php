@@ -75,7 +75,7 @@
 
                 <div class="flex flex-col flex-1">
                     <div class="flex flex-row">
-                        <label for="addressee_company" class="flex gap-2 items-center">Company:</label>
+                        <label for="addressee_company" class="flex gap-2 items-center">Designation:</label>
                     </div>
 
                     <input class="form-input" type="text" name="addressee_company" id="addressee_company"
@@ -99,7 +99,7 @@
             </div>
         </div>
 
-        <div class="flex flex-col gap-2">
+        {{-- <div class="flex flex-col gap-2">
             <div class="border-project-gray-default ">
                 <p class="font-bold text-lg">Contents</p>
             </div>
@@ -126,7 +126,7 @@
             @error('contents')
                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
             @enderror
-        </div>
+        </div> --}}
 
         <div class="flex flex-col gap-2">
             <div class="border-project-gray-default flex flex-row items-center gap-4">

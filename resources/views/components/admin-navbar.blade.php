@@ -13,7 +13,7 @@
             <img class="object-fit w-full max-w-[5rem] aspect-square" id="logo"
                 src="{{ asset('assets/logos/municipality_of_pila.png') ?? asset('assets/no-image.webp') }}"
                 alt="">
-            <p id="barangay-label" class="opacity-0 hidden transition-opacity duration-100 max-w-[10rem] break-words whitespace-normal">ABC Officer</p>
+            <p id="barangay-label" class="transition-opacity duration-100 max-w-[10rem] break-words whitespace-normal">{{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}</p>
         </a>
 
         <div class="flex flex-col gap-5 h-full">

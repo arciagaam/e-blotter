@@ -125,7 +125,10 @@ class DashboardController extends Controller
 
                     $reports = Record::whereBetween("created_at", [$startDate, $endDate])->with('blotterStatus', 'barangays')->select('id', 'barangay_id', 'blotter_status_id', 'created_at')->orderBy("created_at", "asc")->get();
                     $blotterStatus = BlotterStatus::all();
-                    $barangays = Barangay::all();
+                    $barangays = Barangay::whereHas('users', function ($q) {
+                        $q->whereNotNull('verified_at');
+                    })->get();
+
 
                     for ($i = 0; $i < 7; $i++) {
                         array_push($dates["dates"], date("Y-m-d", strtotime("+{$i} days", strtotime($startDate))));
@@ -144,7 +147,7 @@ class DashboardController extends Controller
                         $statusName = $report->blotterStatus->name;
                         $barangayName = $report->barangays->name;
                         $idx = array_search($day, $dates["dates"]);
-                        
+
                         $dates["dataset"][$statusName][$barangayName][$idx] += 1;
                     }
                 }
@@ -156,7 +159,10 @@ class DashboardController extends Controller
         return response()->json(["message" => $dates], 200);
     }
 
-    function getCasesPerBarangay() {
-        return response()->json(["message" => Barangay::withCount('records')->with('users:verified_at')->userNotTrashed()->get()], 200);
+    function getCasesPerBarangay()
+    {
+        return response()->json(["message" => Barangay::withCount('records')->whereHas('users', function ($q) {
+            $q->whereNotNull('verified_at');
+        })->userNotTrashed()->get()], 200);
     }
 }

@@ -80,11 +80,10 @@
                         </th>
                     </tr>
                 </thead>
-
                 <tbody>
-                    @empty($records)
+                    @if(!count($records))
                         <tr>
-                            <td colspan="100%" class="text-center">There are no data.</td>
+                            <td colspan="100%" class="text-center">No Records.</td>
                         </tr>
                     @else
                         @foreach ($records as $key => $record)
@@ -133,7 +132,7 @@
                                 </td>
                             </tr>
                         @endforeach
-                    @endempty
+                    @endif
                 </tbody>
             </table>
 
