@@ -67,18 +67,17 @@
                                 <div class="form-input-container flex-1">
                                     <label for="first_name">First Name <span
                                             class="form-input-required">*</span></label>
-                                    <input class="form-input" type="text" name="first_name"
-                                        id="first_name" value="{{ old('first_name') }}">
+                                    <input class="form-input" type="text" name="first_name" id="first_name"
+                                        value="{{ old('first_name') }}">
                                     @error('first_name')
                                         <p class="text-xs text-red-500 italic">{{ $message }}</p>
                                     @enderror
                                 </div>
 
                                 <div class="form-input-container flex-1">
-                                    <label for="last_name">Last Name <span
-                                            class="form-input-required">*</span></label>
-                                    <input class="form-input" type="text" name="last_name"
-                                        id="last_name" value="{{ old('last_name') }}">
+                                    <label for="last_name">Last Name <span class="form-input-required">*</span></label>
+                                    <input class="form-input" type="text" name="last_name" id="last_name"
+                                        value="{{ old('last_name') }}">
                                     @error('last_name')
                                         <p class="text-xs text-red-500 italic">{{ $message }}</p>
                                     @enderror
@@ -125,10 +124,19 @@
                                 </div>
 
                                 <div class="form-input-container flex-1">
-                                    <label for="contact_number">Contact Number <span
-                                            class="form-input-required">*</span></label>
-                                    <input class="form-input" type="contact_number" name="contact_number"
-                                        id="contact_number" value="{{ old('contact_number') }}">
+                                    <div class="flex flex-row">
+                                        <label for="contact_number" class="flex gap-2 items-center">Contact Number:</label>
+                                    </div>
+            
+                                    <div
+                                        class="group flex items-center gap-2 border overflow-clip border-project-gray-default/30 rounded-md text-sm transition-all duration-300 ease-in-out font-normal focus-within:border-project-blue-default bg-white">
+                                        <span
+                                            class="group-focus-within:border-project-blue-default bg-gray-100 py-1 px-2 border-r border-r-project-gray-default/30">+63</span>
+                                        <input class="w-full focus-visible:outline-none" type="text"
+                                            name="victim[contact_number]" id="contact_number"
+                                            value="{{ old('contact_number') }}">
+                                    </div>
+            
                                     @error('contact_number')
                                         <p class="text-xs text-red-500 italic">{{ $message }}</p>
                                     @enderror
@@ -156,10 +164,32 @@
                     </div>
                 </div>
 
+                <hr>
+
+                <div class="flex flex-col gap-5">
+                    <div class="form-input-container">
+                        <label for="purok_count">Purok Count<span class="form-input-required">*</span></label>
+                        <select class="form-input" name="purok_count" id="purok_count">
+                            @for ($i = 0; $i < 15; $i++)
+                                <option value="{{ $i + 1 }}">{{ $i + 1 }}</option>
+                            @endfor
+                        </select>
+                        {{-- <input class="form-input" type="text" name="purok_count" id="purok_count"
+                            value="{{ old('purok_count') }}"> --}}
+                        @error('purok_count')
+                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <p class="font-bold">Purok List</p>
+                        <div class="flex flex-col" id="purok_container">
+                        </div>
+                    </div>
+
+                </div>
+
                 <div class="flex w-full flex-col gap-2">
-                    @error('invalid')
-                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                    @enderror
                     <a class="underline" href="{{ url('/login') }}">Already registered your Barangay?</a>
                 </div>
 
@@ -167,29 +197,6 @@
             </div>
 
             {{-- </div> --}}
-        </div>
-
-        <div class="flex p-8 flex-col gap-10">
-            <div class="form-input-container">
-                <label for="purok_count">Purok Count<span class="form-input-required">*</span></label>
-                <select class="form-input" name="purok_count" id="purok_count">
-                    @for ($i = 0; $i < 100; $i++)
-                        <option value="{{ $i + 1 }}">{{ $i + 1 }}</option>
-                    @endfor
-                </select>
-                {{-- <input class="form-input" type="text" name="purok_count" id="purok_count"
-                    value="{{ old('purok_count') }}"> --}}
-                @error('purok_count')
-                    <p class="text-xs text-red-500 italic">{{ $message }}</p>
-                @enderror
-            </div>
-
-            <div>
-                <p class="font-bold">Purok List</p>
-                <div class="flex flex-col" id="purok_container">
-                </div>
-            </div>
-
         </div>
     </form>
     <div id="template" class="hidden form-input-container">
@@ -206,7 +213,12 @@
 
         countInput.addEventListener("input", (e) => {
             const count = parseInt(e.target.value);
+            generateFields(count);
+        })
 
+        generateFields(1);
+
+        function generateFields(count) {
             if (isNaN(count)) {
                 return;
             }
@@ -234,7 +246,7 @@
 
                 container.appendChild(baseClone);
             }
-        })
+        }
 
         function removeChild(parent) {
             while (parent.lastChild) {

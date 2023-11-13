@@ -155,7 +155,7 @@ class DashboardController extends Controller
 
     public function getReportsPerPurok()
     {
-        $now = time();
+        // $now = time();
 
         // JSON structure
         $values = array(
@@ -163,10 +163,14 @@ class DashboardController extends Controller
             "datasets" => array()
         );
 
-        $startDate = date('Y-m-d', strtotime('-6 days', $now));
-        $endDate = date('Y-m-d');
+        // $startDate = date('Y-m-d', strtotime('-6 days', $now));
+        // $endDate = date('Y-m-d');
 
-        $reports = Record::whereBetween("created_at", [$startDate, $endDate])->where('barangay_id', auth()->user()->barangays[0]->id)->select('id', 'blotter_status_id', 'created_at', 'purok')->orderBy("created_at", "asc")->get();
+        $reports = Record::where('records.barangay_id', auth()->user()->barangays[0]->id)
+        ->join('puroks', 'puroks.id', 'records.purok')
+        ->orderBy("puroks.purok_number", "asc")
+        ->select('records.id', 'blotter_status_id', 'records.created_at', 'records.purok', 'puroks.purok_number')
+        ->get();
 
         foreach ($reports as $report) {
             $purok = $report->purok;

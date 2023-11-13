@@ -27,7 +27,7 @@ class RecordRequest extends FormRequest
             "victim.first_name" => 'required|string|max:255',
             "victim.middle_name" => 'nullable|string|max:255',
             "victim.last_name" => 'required|string|max:255',
-            "victim.age" => 'required|numeric',
+            "victim.age" => 'required|numeric|gt:0',
             "victim.sex" => 'required|numeric',
             "victim.contact_number" => 'required|numeric|regex:/^9\d{9}$/',
             "victim.purok" => 'required|max:255',
@@ -47,7 +47,7 @@ class RecordRequest extends FormRequest
             "narrative" => 'required',
             "narrative_file" => 'nullable',
             "reliefs" => 'required',
-            "purok" => 'required',
+            "purok" => 'sometimes|required',
         ];
     }
 

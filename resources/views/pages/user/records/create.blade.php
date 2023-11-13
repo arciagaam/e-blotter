@@ -53,7 +53,7 @@
                         
                         <datalist id="puroks">
                             @foreach (auth()->user()->barangays[0]->puroks as $purok)
-                                <option value="{{$purok->id}}">{{$purok->name}}</option>
+                                <option value="{{$purok->purok_number}}">{{$purok->name}}</option>
                                 
                             @endforeach
                         </datalist>
@@ -116,7 +116,7 @@
                             <label for="victim_age" class="flex gap-2 items-center">Age:</label>
                         </div>
 
-                        <input class="form-input" type="number" name="victim[age]" id="victim_age"
+                        <input min=0 class="form-input" type="number" name="victim[age]" id="victim_age"
                             value="{{ old('victim.age') }}">
                         @error('victim.age')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>

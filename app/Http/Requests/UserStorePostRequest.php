@@ -42,36 +42,10 @@ class UserStorePostRequest extends FormRequest
             'password' => 'required',
             'confirm_password' => 'required|same:password',
             'email' => 'required|email|unique:users,email',
-            'contact_number' => 'required',
-            'name' => 'required',
+            'contact_number' => 'required|numeric|regex:/^9\d{9}$/',
+            'name' => 'required|unique:barangays,name',
             'logo' => 'required|image|max:3072|mimes:jpg,jpeg,png',
             'purok' => 'required'
-        ];
-    }
-
-    /**
-     * Get the "after" validation callables for the request.
-     */
-    public function after(): array
-    {
-        return [
-            function (Validator $validator) {
-                if ($validator->errors()->messages('username')) {
-                    $validator->errors()->add(
-                        'invalid',
-                        'Barangay already exists.'
-                    );
-                }
-
-                $barangay = Barangay::where('name', $validator->safe()->only(['name']))->getExisting()->first();
-
-                if ($barangay && count($barangay->users)) {
-                    $validator->errors()->add(
-                        'invalid',
-                        'Barangay already exists.'
-                    );
-                }
-            }
         ];
     }
 }

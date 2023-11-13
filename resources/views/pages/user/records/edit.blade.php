@@ -101,7 +101,7 @@
                                 <label for="victim_age" class="flex gap-2 items-center">Age:</label>
                             </div>
     
-                            <input class="form-input" type="number" name="victim[age]" id="victim_age"
+                            <input onchange="(e) => {e.target.value = e.target.value < 0 ? 0 : e.target.value}" class="form-input" type="number" name="victim[age]" id="victim_age"
                                 value="{{ $record->victim->age ?? "" }}">
                             @error('victim.age')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>

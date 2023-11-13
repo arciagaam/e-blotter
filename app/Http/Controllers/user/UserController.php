@@ -56,7 +56,6 @@ class UserController extends Controller
         }
 
         $barangay->puroks()->createMany($barangayPurokList);
-
         $user->barangays()->save($barangay);
         $user->roles()->save(Role::find(2));
 

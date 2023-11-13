@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RecordRequest;
 use App\Models\BlotterStatus;
 use App\Models\CivilStatus;
+use App\Models\Purok;
 use App\Models\Record;
 use App\Models\Suspect;
 use App\Models\Victim;
@@ -66,9 +67,12 @@ class RecordController extends Controller
     {
         $report = new Record();
 
+        $purok = Purok::where('barangay_id', auth()->user()->barangays[0]->id)
+        ->where('purok_number', $request->validated('purok'))->first()->id;
+
         $latest = $report->latestRecord(auth()->user()->barangays[0]->id);
         $report->narrative_file = $service->handleUploadRecording($request->validated('narrative_file'));
-        $report->fill([...$request->safe()->except('victim', 'suspect'), 'purok' => $request->validated('purok')]);
+        $report->fill([...$request->safe()->except('victim', 'suspect'), 'purok' => $purok]);
         $report->barangays()->associate(auth()->user()->barangays[0]->id);
         $report->blotterStatus()->associate(BlotterStatus::find(2));
         $report->barangay_blotter_number = $latest ? $latest->barangay_blotter_number + 1 : 1;
