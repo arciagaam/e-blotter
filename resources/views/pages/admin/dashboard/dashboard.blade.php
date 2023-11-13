@@ -3,8 +3,20 @@
 
     <div class="flex flex-col gap-10">
         <div class="flex gap-5">
-            <p id="intervalDate">--</p>
-            <p id="intervalTime">--</p>
+            <div class="flex flex-row gap-2 justify-center">
+                <p>Date: </p>
+                <p id="intervalDate">--</p>
+            </div>
+            <div class="flex flex-row gap-2 justify-center">
+                <p>Time: </p>
+                <p id="intervalTime">--</p>
+            </div>
+        </div>
+
+        <div class="flex flex-row gap-1 text-xl">
+            <p class="w-fit">
+                Welcome, {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}!
+            </p>
         </div>
 
         <div class="flex flex-col lg:flex-row gap-4">

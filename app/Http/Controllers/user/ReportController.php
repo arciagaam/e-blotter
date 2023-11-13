@@ -43,16 +43,16 @@ class ReportController extends Controller
             ->where("created_at", ">=", $fromDate)
             ->where("created_at", "<=", $toDate)
             ->whereIn("blotter_status_id", $request->blotter_status)
-            ->with('blotterStatus')
+            ->with('blotterStatus', 'victim', 'suspect')
             ->orderBy('barangay_blotter_number', 'desc');
 
-        if (in_array("complainant", $request->contents)) {
-            $query = $query->with("victim");
-        }
+        // if (in_array("complainant", $request->contents)) {
+        //     $query = $query->with("victim");
+        // }
 
-        if (in_array("respondent", $request->contents)) {
-            $query = $query->with("suspect");
-        }
+        // if (in_array("respondent", $request->contents)) {
+        //     $query = $query->with("suspect");
+        // }
 
         $results = $query->get();
 

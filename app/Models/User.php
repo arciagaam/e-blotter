@@ -58,7 +58,7 @@ class User extends Authenticatable
     {
         return User::whereHas('roles', function ($query) {
             return $query->where('role_id', '!=', 1);
-        })->get();
+        });
     }
 
     public function scopeGetBarangays()

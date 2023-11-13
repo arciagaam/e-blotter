@@ -15,7 +15,11 @@ class RecordController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.records.blotter-records', ['records' => Record::latest()->withTrashed()->filter(request('search'))->paginate(10), 'barangays' => Barangay::all()]);
+        $record = Record::orderBy('id', 'desc')->withTrashed()->filter(request('search'))->paginate(10)->withQueryString();
+
+        return view('pages.admin.records.blotter-records', ['records' => $record, 'barangays' => Barangay::whereHas('users', function ($q) {
+            $q->whereNotNull('verified_at');
+        })->get()]);
     }
 
     /**
@@ -42,7 +46,6 @@ class RecordController extends Controller
         $record = Record::where('id', $record)->withTrashed()->with('victim', 'suspect', 'blotterStatus')->first();
         $civilStatus = new CivilStatus();
         return view('pages.admin.records.show', ['record' => $record, 'civilStatus' => $civilStatus->getAllCivilStatus()]);
-
     }
 
     /**

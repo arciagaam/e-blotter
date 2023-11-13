@@ -13,7 +13,7 @@ class KpFormController extends Controller
      */
     public function index()
     {
-        return view('pages.admin.kp_forms.kp-forms', ['kpForms' => KpForm::getKpForm()->getSelectable()->orderBy('id', 'asc')->get()]);
+        return view('pages.admin.kp_forms.kp-forms', ['kpForms' => KpForm::getSelectable()->orderBy('id', 'asc')->get()]);
     }
 
     /**

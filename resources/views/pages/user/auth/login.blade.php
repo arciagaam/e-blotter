@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>E-Blotter System</title>
     @vite('resources/css/app.css')
+    @vite('resources/js/bootstrap.js')
+    @vite('resources/js/app.js')
 </head>
 
 <body>
@@ -54,12 +56,17 @@
 
                     <div class="form-input-container">
                         <label for="password">Password</label>
-                        <input class="form-input" type="password" name="password" id="password">
+                        <div class="relative">
+                            <input class="form-input w-full" type="password" name="password" id="password" />
+                            <button type="button" id="show-password-btn" class="absolute top-0 right-0 h-full flex justify-center items-center">
+                                <box-icon size="0.5" class="p-1 flex justify-center items-center h-full" name='show'></box-icon>
+                            </button>
+                        </div>
                         @error('password')
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
-
+                    
                     {{-- <div class="form-input-container">
                         <label for="login_role_id">Role</label>
                         <select class="form-input" name="login_role_id" id="login_role_id">
@@ -93,3 +100,18 @@
 </body>
 
 </html>
+
+<script>
+    const toggleShowPasswordButton = document.querySelector('#show-password-btn');
+
+    const parent = toggleShowPasswordButton.parentNode;
+    const input = parent.querySelector('input[type="password"]');
+
+    toggleShowPasswordButton.addEventListener('click', (e) => {
+        if (input.getAttribute("type") === "password") {
+            input.setAttribute("type", "text");
+        } else {
+            input.setAttribute("type", "password");
+        }
+    });
+</script>
