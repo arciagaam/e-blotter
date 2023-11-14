@@ -11,7 +11,7 @@ if (clearBtn) {
         return input;
     });
 
-    console.log(inputFields);
+    // console.log(inputFields);
 
     clearBtn.addEventListener('click', () => {
         inputFields.forEach(input => {

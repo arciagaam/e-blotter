@@ -81,7 +81,7 @@ class RecordController extends Controller
         $report->victim()->save(new Victim($request->validated('victim')));
         $report->suspect()->save(new Suspect($request->validated('suspect')));
 
-        return redirect()->route('records.index');
+        return redirect()->route('records.show', ['record' => $report->id]);
     }
 
     /**

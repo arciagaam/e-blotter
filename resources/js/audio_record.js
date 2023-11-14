@@ -56,7 +56,8 @@ window.addEventListener('load', () => {
                         form.append("language", "tl")
 
                         const headers = {
-                            'Authorization': 'Bearer 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',
+                            'Authorization': `Bearer ${document.querySelector('meta[name="openai-token"]').content}`
+
                         }
 
                         const transcript = await fetch(`${api_transcription_url}`, {
@@ -70,7 +71,6 @@ window.addEventListener('load', () => {
                         }
 
                         let transcriptResult = await transcript.json();
-                        console.log(transcriptResult, transcriptResult.text);
 
                         if (transcriptResult.text) {
                             document.querySelector("#narrative").innerText = transcriptResult.text;

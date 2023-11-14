@@ -2,7 +2,6 @@ const issuedKpFormsBadge = document.querySelector('#issuedKpFormsBadge');
 
 Echo.channel('issueKpForm')
     .listen('NewIssuedKPForm', (e) => {
-        console.log('yes');
         getNewKPFormsCount();
     });
 
