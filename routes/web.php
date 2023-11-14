@@ -62,6 +62,8 @@ Route::prefix('/admin')->group(function () {
             Route::resource('kp-forms', KpFormController::class)->only(['index', 'show']);
 
             Route::prefix('/accounts')->name('accounts.')->group(function () {
+                Route::get('/archived', [AccountController::class, 'showDestroyed'])->name('archived');
+                Route::get('/restore/{account}', [AccountController::class, 'restore'])->name('restore');
                 Route::get('/get-new-accounts', [AccountController::class, 'getNewAccounts'])->name('getNewAccounts');
                 Route::post('/verify', [AccountController::class, 'verify'])->name('verify');
             });

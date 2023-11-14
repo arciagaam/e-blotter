@@ -28,7 +28,7 @@ class AccountController extends Controller
             })->get();
 
         User::where('notification_viewed', 0)->update(['notification_viewed' => 1]);
-        
+
         return view('pages.admin.accounts.accounts', ['accounts' => $accounts]);
     }
 
@@ -121,6 +121,30 @@ class AccountController extends Controller
 
         return redirect()->route('admin.accounts.index');
         // return response()->json(['message' => 'Success'], 200);
+    }
+
+    public function showDestroyed()
+    {
+        $accounts = User::nonAdmin()->onlyTrashed()->when(request()->search, function ($q) {
+                $q->where('first_name', 'like', '%' . request()->search . '%')
+                    ->orWhere('last_name', 'like', '%' . request()->search . '%')
+                    ->orWhereHas('barangays', function (Builder $query) {
+                        $query->where('name', 'like', '%' . request()->search . '%');
+                    });
+            })->get();
+
+        return view('pages.admin.accounts.show-archived', ['accounts' => $accounts]);
+    }
+
+    public function restore(string $account)
+    {
+        $result = User::withTrashed()->where('id', $account)->first();
+
+        if ($result) {
+            $result->restore();
+        }
+
+        return redirect()->route('admin.accounts.index');
     }
 
     public function verify(Request $request)
