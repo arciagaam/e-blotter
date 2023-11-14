@@ -68,7 +68,7 @@ class RecordController extends Controller
         $report = new Record();
 
         $purok = Purok::where('barangay_id', auth()->user()->barangays[0]->id)
-        ->where('purok_number', $request->validated('purok'))->first()->id;
+            ->where('purok_number', $request->validated('purok'))->first()->id;
 
         $latest = $report->latestRecord(auth()->user()->barangays[0]->id);
         $report->narrative_file = $service->handleUploadRecording($request->validated('narrative_file'));

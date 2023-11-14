@@ -3,20 +3,19 @@
 
     <div class="flex flex-col gap-3">
 
-        <div class="flex flex-row w-full justify-between items-center">
+        <div class="flex flex-col w-full justify-between items-center">
+            <div class="flex flex-row self-end gap-2">
+                <a class="btn-outline danger" href="{{ route('admin.accounts.archived') }}">Archived Accounts</a>
+            </div>
             <form class="flex w-full gap-6 items-center">
-
                 <div class="flex gap-2 items-center">
                     <label class="text-sm" for="search">Search</label>
-                    <div
-                        class="flex items-center border border-table-even focus-within:border-project-blue rounded-md overflow-hidden gap-2 px-1 bg-white transition-all duration-300 ease-in-out">
-                        <input class="w-full outline-none px-1 text-sm py-1" type="text" name="search" id="search"
-                            value="{{ request()->query()['search'] ?? null }}">
-                        <button class="w-fit h-fit aspect-square flex items-center justify-center"><i
-                                class='bx bx-search'></i></button>
+                    <div class="flex items-center border border-table-even focus-within:border-project-blue rounded-md overflow-hidden gap-2 px-1 bg-white transition-all duration-300 ease-in-out">
+                        <input class="w-full outline-none px-1 text-sm py-1" type="text" name="search" id="search" value="{{ request()->query()['search'] ?? null }}">
+                        <button class="w-fit h-fit aspect-square flex items-center justify-center"><i class='bx bx-search'></i></button>
                     </div>
                 </div>
-
+                <button class="btn-filled h-fit flex justify-center self-end">Search</button>
             </form>
         </div>
 
@@ -45,46 +44,42 @@
             </thead>
             <tbody>
                 @empty($accounts)
-                    <tr>
-                        <td colspan="100%" class="text-center">There are no data.</td>
-                    </tr>
+                <tr>
+                    <td colspan="100%" class="text-center">There are no data.</td>
+                </tr>
                 @else
-                    @foreach ($accounts as $account)
-                        <tr>
-                            <td>{{ $account->first_name }} {{ $account->last_name }}</td>
-                            <td>{{ $account->barangays[0]->name }}</td>
-                            <td>{{ $account->contact_number }}</td>
-                            <td>{{ $account->email }}</td>
-                            <td>
-                                <div class="flex justify-center items-center">
-                                    @if ($account->verified_at)
-                                        <p class="w-fit bg-emerald-100 text-center rounded-full text-emerald-600 px-4 py-1">
-                                            Verified</p>
-                                    @else
-                                        <p class="bg-rose-100 text-center rounded-full text-rose-600 px-4 py-1">Unverified
-                                        </p>
-                                    @endif
-                                </div>
-                            </td>
-                            <td>
-                                <div class="flex flex-row gap-3">
-                                    <button data-target="#verify" data-form-id="{{ $account->id }}"
-                                        class="verify-btn flex justify-center items-center {{ $account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled' }}"
-                                        {{ $account->verified_at ? 'disabled' : '' }}>
-                                        <box-icon class="text-xs" name='check' ></box-icon>
-                                    </button>
-                                    <button data-target="#edit" data-form-id="{{ $account->id }}"
-                                        class="btn-outline flex justify-center items-center">
-                                            <box-icon class="text-xs" name='edit-alt' ></box-icon>
-                                    </button>
-                                    <button data-target="#delete" data-form-id="{{ $account->id }}"
-                                        class="btn-outline danger flex justify-center items-center">
-                                            <box-icon class="text-xs pointer-events-none" name='trash-alt' ></box-icon>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
+                @foreach ($accounts as $account)
+                <tr>
+                    <td>{{ $account->first_name }} {{ $account->last_name }}</td>
+                    <td>{{ $account->barangays[0]->name }}</td>
+                    <td>{{ $account->contact_number }}</td>
+                    <td>{{ $account->email }}</td>
+                    <td>
+                        <div class="flex justify-center items-center">
+                            @if ($account->verified_at)
+                            <p class="w-fit bg-emerald-100 text-center rounded-full text-emerald-600 px-4 py-1">
+                                Verified</p>
+                            @else
+                            <p class="bg-rose-100 text-center rounded-full text-rose-600 px-4 py-1">Unverified
+                            </p>
+                            @endif
+                        </div>
+                    </td>
+                    <td>
+                        <div class="flex flex-row gap-3">
+                            <button data-target="#verify" data-form-id="{{ $account->id }}" class="verify-btn flex justify-center items-center {{ $account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled' }}" {{ $account->verified_at ? 'disabled' : '' }}>
+                                <box-icon class="text-xs" name='check'></box-icon>
+                            </button>
+                            <button data-target="#edit" data-form-id="{{ $account->id }}" class="btn-outline flex justify-center items-center">
+                                <box-icon class="text-xs" name='edit-alt'></box-icon>
+                            </button>
+                            <button data-target="#delete" data-form-id="{{ $account->id }}" class="btn-outline danger flex justify-center items-center">
+                                <box-icon class="text-xs pointer-events-none" name='trash-alt'></box-icon>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
                 @endempty
             </tbody>
         </table>
@@ -102,8 +97,7 @@
         Edit User
     </x-slot:heading>
 
-    <form action="#" method="POST" id="edit-user-form" class="flex flex-col gap-2"
-        data-action="{{ route('admin.accounts.update', ['account' => ':id']) }}" enctype="multipart/form-data" data-file-upload="true">
+    <form action="#" method="POST" id="edit-user-form" class="flex flex-col gap-2" data-action="{{ route('admin.accounts.update', ['account' => ':id']) }}" enctype="multipart/form-data" data-file-upload="true">
         @method('PUT')
 
         <div class="form-input-container">
@@ -138,10 +132,9 @@
 
         <div class="form-input-container">
             <label for="logo">Logo</label>
-            <input type="file" name="logo" id="logo"
-                class="w-fit file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:btn-outline file:cursor-pointer">
+            <input type="file" name="logo" id="logo" class="w-fit file:mr-4 file:py-2 file:px-4 file:rounded-full file:text-sm file:font-semibold file:btn-outline file:cursor-pointer">
             @error('logo')
-                <p class="text-xs text-red-500 italic">{{ $message }}</p>
+            <p class="text-xs text-red-500 italic">{{ $message }}</p>
             @enderror
             <span class="text-red-500 italic">Do not upload anything if you do not want to replace the old file.</span>
         </div>
@@ -173,8 +166,7 @@
         Archive Account
     </x-slot:heading>
 
-    <form action="#" method="POST" id="delete-user-form"
-        data-action="{{ route('admin.accounts.destroy', ['account' => ':id']) }}">
+    <form action="#" method="POST" id="delete-user-form" data-action="{{ route('admin.accounts.destroy', ['account' => ':id']) }}">
         @csrf
         @method('DELETE')
         <p>Are you sure you want to archive this account?</p>
