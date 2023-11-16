@@ -68,11 +68,14 @@
                     <td>
                         <div class="flex flex-row gap-3">
                             <button data-target="#verify" data-form-id="{{ $account->id }}" class="verify-btn flex justify-center items-center {{ $account->verified_at ? 'btn-gray cursor-not-allowed' : 'btn-filled' }}" {{ $account->verified_at ? 'disabled' : '' }}>
-                                <box-icon class="text-xs" name='check'></box-icon>
+                                <box-icon class="text-xs pointer-events-none" name='check'></box-icon>
                             </button>
-                            <button data-target="#edit" data-form-id="{{ $account->id }}" class="btn-outline flex justify-center items-center">
-                                <box-icon class="text-xs" name='edit-alt'></box-icon>
-                            </button>
+                            <a class="btn-outline" href="{{ route('admin.accounts.edit', ['account' => $account->id]) }}">
+                                <box-icon class="text-xs pointer-events-none" name='edit-alt'></box-icon>
+                            </a>
+                            {{-- <button data-target="#edit" data-form-id="{{ $account->id }}" class="btn-outline flex justify-center items-center">
+                            <box-icon class="text-xs pointer-events-none" name='edit-alt'></box-icon>
+                            </button> --}}
                             <button data-target="#delete" data-form-id="{{ $account->id }}" class="btn-outline danger flex justify-center items-center">
                                 <box-icon class="text-xs pointer-events-none" name='trash-alt'></box-icon>
                             </button>

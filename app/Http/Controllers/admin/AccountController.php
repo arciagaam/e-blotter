@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserUpdateRequest;
 use App\Mail\Verification;
 use App\Models\Barangay;
 use App\Models\User;
+use App\Models\Purok;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -20,19 +22,20 @@ class AccountController extends Controller
     public function index()
     {
         $accounts = User::nonAdmin()->when(request()->search, function ($q) {
-                $q->where('first_name', 'like', '%' . request()->search . '%')
-                    ->orWhere('last_name', 'like', '%' . request()->search . '%')
-                    ->orWhereHas('barangays', function (Builder $query) {
-                        $query->where('name', 'like', '%' . request()->search . '%');
-                    });
-            })->get();
+            $q->where('first_name', 'like', '%' . request()->search . '%')
+                ->orWhere('last_name', 'like', '%' . request()->search . '%')
+                ->orWhereHas('barangays', function (Builder $query) {
+                    $query->where('name', 'like', '%' . request()->search . '%');
+                });
+        })->get();
 
         User::where('notification_viewed', 0)->update(['notification_viewed' => 1]);
 
         return view('pages.admin.accounts.accounts', ['accounts' => $accounts]);
     }
 
-    public function getNewAccounts() {
+    public function getNewAccounts()
+    {
         return response()->json(User::where('notification_viewed', 0)->count(), 200);
     }
 
@@ -66,7 +69,8 @@ class AccountController extends Controller
      */
     public function edit(string $id)
     {
-        return view('pages.admin.accounts.edit', ['account' => User::find($id)]);
+        $account = User::where('id', $id)->with('barangays.puroks')->first();
+        return view('pages.admin.accounts.edit', ['account' => $account]);
     }
 
     /**
@@ -75,42 +79,95 @@ class AccountController extends Controller
     public function update(Request $request, User $account)
     {
         $validator = Validator::make($request->all(), [
+            'captain_first_name' => 'required',
+            'captain_last_name' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
+            'password' => 'sometimes',
+            'confirm_password' => 'sometimes|required_with:password|same:password',
             'username' => [
                 'required',
                 Rule::unique('users')->ignore($account)
-            ],
-            'barangays' => [
-                'required',
-                Rule::unique('barangays', 'name')->ignore($account->barangays[0]->id)
             ],
             'contact_number' => 'required',
             'email' => [
                 'required',
                 Rule::unique('users', 'email')->ignore($account)
             ],
-            'logo' => 'nullable|image|max:3072|mimes:jpg,jpeg,png'
+            'name' => [
+                'required',
+                Rule::unique('barangays', 'name')->ignore($account->barangays[0]->id)
+            ],
+            'logo' => 'nullable|image|max:3072|mimes:jpg,jpeg,png',
+            'purok' => 'required'
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return redirect()->route('admin.accounts.edit', ['account' => $account])
+                ->withErrors($validator)
+                ->withInput();
         }
 
-        $barangayUpdates = [
-            'name' => $validator->safe()->only(['barangays'])['barangays'],
-        ];
+        $userRequest = $validator->safe()->except(["captain_first_name", "captain_last_name", "name", "logo", "purok", "confirm_password"]);
+        $barangayRequest = $validator->safe()->only(["captain_first_name", "captain_last_name", "name", "logo"]);
+        $purokRequest = $validator->safe()->only(["purok"]);
 
-        if (!empty($validator->safe(['logo']))) {
-            $filePath = $request->file("logo")->store("logos", "public");
-            $barangayUpdates['logo'] = $filePath;
+
+        if ($userRequest['password'] === null) {
+            unset($userRequest['password']);
+        } else {
+            $userRequest["password"] = bcrypt($userRequest["password"]);
         }
 
-        User::findOrFail($account->id)->update($validator->safe()->except(['barangays']));
-        Barangay::findOrFail($account->barangays[0]->id)->update($barangayUpdates);
+        foreach ($purokRequest["purok"] as $id => $purok) {
+            Purok::findOrFail($id)->update(['name' => $purok]);
+        }
 
-        return response()->json(['message' => 'Success'], 200);
+        User::findOrFail($account->id)->update($userRequest);
+        Barangay::findOrFail($account->barangays[0]->id)->update($barangayRequest);
+
+        return redirect()->route('admin.accounts.index');
     }
+    //  public function update(Request $request, User $account)
+    //  {
+    //      dd($request->all());
+    //      $validator = Validator::make($request->all(), [
+    //          'first_name' => 'required',
+    //          'last_name' => 'required',
+    //          'username' => [
+    //              'required',
+    //              Rule::unique('users')->ignore($account)
+    //          ],
+    //          'barangays' => [
+    //              'required',
+    //              Rule::unique('barangays', 'name')->ignore($account->barangays[0]->id)
+    //          ],
+    //          'contact_number' => 'required',
+    //          'email' => [
+    //              'required',
+    //              Rule::unique('users', 'email')->ignore($account)
+    //          ],
+    //          'logo' => 'nullable|image|max:3072|mimes:jpg,jpeg,png'
+    //      ]);
+
+    //      if ($validator->fails()) {
+    //          return response()->json($validator->errors(), 422);
+    //      }
+
+    //      $barangayUpdates = [
+    //          'name' => $validator->safe()->only(['barangays'])['barangays'],
+    //      ];
+
+    //      if (!empty($validator->safe(['logo']))) {
+    //          $filePath = $request->file("logo")->store("logos", "public");
+    //          $barangayUpdates['logo'] = $filePath;
+    //      }
+
+    //      User::findOrFail($account->id)->update($validator->safe()->except(['barangays']));
+    //      Barangay::findOrFail($account->barangays[0]->id)->update($barangayUpdates);
+
+    //      return response()->json(['message' => 'Success'], 200);
+    //  }
 
     /**
      * Remove the specified resource from storage.
@@ -126,12 +183,12 @@ class AccountController extends Controller
     public function showDestroyed()
     {
         $accounts = User::nonAdmin()->onlyTrashed()->when(request()->search, function ($q) {
-                $q->where('first_name', 'like', '%' . request()->search . '%')
-                    ->orWhere('last_name', 'like', '%' . request()->search . '%')
-                    ->orWhereHas('barangays', function (Builder $query) {
-                        $query->where('name', 'like', '%' . request()->search . '%');
-                    });
-            })->get();
+            $q->where('first_name', 'like', '%' . request()->search . '%')
+                ->orWhere('last_name', 'like', '%' . request()->search . '%')
+                ->orWhereHas('barangays', function (Builder $query) {
+                    $query->where('name', 'like', '%' . request()->search . '%');
+                });
+        })->get();
 
         return view('pages.admin.accounts.show-archived', ['accounts' => $accounts]);
     }

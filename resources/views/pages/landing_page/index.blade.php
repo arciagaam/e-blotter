@@ -21,12 +21,9 @@
     </nav>
 
     <div class="relative flex h-[90vh] overflow-hidden" id="#">
-        <img class="absolute top-0 left-0 w-full h-full object-fill xl:object-cover"
-            src="{{ asset('assets/images/bg.png') }}" alt="">
-        <img class="absolute left-0 bottom-0 translate-x-[-25%] translate-y-[35%] z-10 h-auto w-full"
-            src="{{ asset('assets/images/hall.png') }}" alt="">
-        <img class="absolute top-[10%] left-[10%] z-10 h-1/4 w-auto" src="{{ asset('assets/images/pila-logo.png') }}"
-            alt="">
+        <img class="absolute top-0 left-0 w-full h-full object-fill xl:object-cover" src="{{ asset('assets/images/bg.png') }}" alt="">
+        <img class="absolute left-0 bottom-0 translate-x-[-25%] translate-y-[35%] z-10 h-auto w-full" src="{{ asset('assets/images/hall.png') }}" alt="">
+        <img class="absolute top-[10%] left-[10%] z-10 h-1/4 w-auto" src="{{ asset('assets/images/pila-logo.png') }}" alt="">
 
         <div class="absolute right-[10%] top-[10%] flex flex-col items-end text-project-blue-darker">
             <h2 class="text-7xl font-bold">BARANGAY</h2>
@@ -34,12 +31,12 @@
         </div>
     </div>
 
-    <div class="flex flex-col text-center xl:text-left gap-8 xl:flex-row xl:gap-0 min-h-[100vh] items-center justify-center w-full bg-[#FAFAFA] px-20" id="about-us">
-        <div class="flex w-full xl:w-1/2 items-center justify-center">
+    <div class="relative flex flex-col text-center xl:text-left gap-8 xl:flex-row xl:gap-0 min-h-[100vh] items-center justify-center w-full bg-[#FAFAFA] px-20" id="about-us">
+        <div class="flex z-[1] w-full xl:w-1/2 items-center justify-center">
             <img class="w-3/4" src="{{ asset('assets/images/e-blotter-banner.png') }}" alt="">
         </div>
 
-        <div class="w-full xl:w-1/2">
+        <div class="w-full z-[1] xl:w-1/2">
             <div class="xl:px-12 flex flex-col gap-6">
                 <h2 class="font-bold text-6xl">About Us</h2>
 
@@ -54,10 +51,12 @@
                 </div>
             </div>
         </div>
+
+        <img class="absolute top-0 left-0 w-full h-full object-fill xl:object-cover" src="{{ asset('assets/images/about-us.png') }}" alt="">
     </div>
 
-    <div class="flex flex-col-reverse xl:flex-row gap-8 min-h-[100vh] items-center justify-center w-full bg-[#d8e7f8] px-20" id="contact-us">
-        <div class="flex flex-col gap-6 w-full xl:w-1/2">
+    <div class="relative flex flex-col-reverse xl:flex-row gap-8 min-h-[100vh] items-center justify-center w-full bg-[#d8e7f8] px-20" id="contact-us">
+        <div class="z-[1] flex flex-col gap-6 w-full xl:w-1/2">
             <h2 class="font-bold text-center xl:text-left text-6xl">Contact Us</h2>
 
             {{-- Should send at the email below --}}
@@ -68,25 +67,23 @@
                 <div class="flex flex-col gap-4">
                     <div class="form-input-container w-full">
                         <label for="name">Name</label>
-                        <input class="form-input" type="text" name="name" id="name"
-                            value="{{ old('name') }}">
+                        <input class="form-input" type="text" name="name" id="name" value="{{ old('name') }}">
                         @error('name')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="form-input-container w-full">
                         <label for="email">Email</label>
-                        <input class="form-input" type="text" name="email" id="email"
-                            value="{{ old('email') }}">
+                        <input class="form-input" type="text" name="email" id="email" value="{{ old('email') }}">
                         @error('email')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="form-input-container w-full">
                         <label for="messageBody">Message</label>
                         <textarea class="form-input resize-none" name="messageBody" id="messageBody" cols="30" rows="10">{{ old('messageBody') }}</textarea>
                         @error('messageBody')
-                            <p class="text-xs text-red-500 italic">{{ $message }}</p>
+                        <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
 
@@ -95,9 +92,11 @@
             </form>
         </div>
 
-        <div class="flex w-full xl:w-1/2 items-center justify-center">
+        <div class="z-[1] flex w-full xl:w-1/2 items-center justify-center">
             <img class="w-3/4" src="{{ asset('assets/images/contact-us-icon.png') }}" alt="">
         </div>
+
+        <img class="absolute top-0 left-0 w-full h-full object-fill xl:object-cover" src="{{ asset('assets/images/contact-us.png') }}" alt="">
     </div>
 
 
