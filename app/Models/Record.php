@@ -33,6 +33,7 @@ class Record extends Model
         'narrative',
         'reliefs',
         'kp_deadline',
+        'created_at'
     ];
 
     protected $guarded = [

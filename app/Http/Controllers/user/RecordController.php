@@ -12,6 +12,7 @@ use App\Models\Suspect;
 use App\Models\Victim;
 use App\Services\RecordsService;
 use Illuminate\Database\Query\JoinClause;
+use Illuminate\Http\Request;
 
 class RecordController extends Controller
 {
@@ -23,7 +24,7 @@ class RecordController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         Record::getSearchQuery()->where('notification_viewed', 0)->update(['notification_viewed' => 1]);
         $record = Record::select('purok')->orderBy('purok')->get();
@@ -37,7 +38,7 @@ class RecordController extends Controller
 
         sort($purokList);
 
-        $result = Record::getSearchQuery()->with('victim', 'suspect', 'barangays', 'blotterStatus')->orderBy('barangay_blotter_number', 'desc')->paginate(10)->withQueryString();
+        $result = Record::getSearchQuery()->with('victim', 'suspect', 'barangays', 'blotterStatus')->orderBy('barangay_blotter_number', 'desc')->paginate($request->rows ?? 10)->withQueryString();
         return view('pages.user.records.blotter-records', ['records' => $result, 'purokList' => $purokList]);
     }
 

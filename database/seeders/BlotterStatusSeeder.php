@@ -18,6 +18,8 @@ class BlotterStatusSeeder extends Seeder
             ['name' => 'unresolved'],
             ['name' => 'kp cases'],
             ['name' => 'endorsed'],
+            ['name' => 'blotter cases'],
+            ['name' => 'dismissed'],
         ];
 
         foreach($blotterStatuses as $blotterStatus) {

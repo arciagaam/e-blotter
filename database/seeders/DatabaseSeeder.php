@@ -2,12 +2,13 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
+    use WithoutModelEvents;
     /**
      * Seed the application's database.
      */
@@ -19,6 +20,7 @@ class DatabaseSeeder extends Seeder
             DefaultBarangaySeeder::class,
             CivilStatusSeeder::class,
             BlotterStatusSeeder::class,
+            RecordSeeder::class
         ]);
 
 
@@ -194,63 +196,6 @@ class DatabaseSeeder extends Seeder
 
         ]);
 
-        $now = time();
-        $startDate = date('Y-m-d', strtotime('-7 days', $now));
-        $datesArray = [];
-
-        for($i = 0; $i <= 7; $i++) {
-            $startDate = date('Y-m-d', strtotime('+1 days', strtotime($startDate)));
-            array_push($datesArray, $startDate);
-        }
-
-        for ($i = 0; $i <= 100; $i++) {
-
-            $purok = rand(1, 7);
-            
-            DB::table("records")->insert([
-                [
-                    'barangay_id' => rand(1,3),
-                    'blotter_status_id' => rand(1, 4),
-                    'barangay_blotter_number' => $i + 1,
-                    'purok' => $purok,
-                    'case' => "Theft",
-                    'narrative' => "Nagnakaw",
-                    'reliefs' => "Bayaran ang ninakaw",
-                    'created_at' => $datesArray[array_rand($datesArray)],
-                    'updated_at' => now()
-                ]
-            ]);
-
-            DB::table('victims')->insert([
-                "record_id" => $i + 1,
-                "civil_status_id" => 1,
-                "first_name" => fake()->firstName(),
-                "last_name" => fake()->lastName(),
-                "age" => 21,
-                "sex" => 1,
-                "contact_number" => "0912345678",
-                "purok" => $purok,
-                "barangay" => "Doon",
-                "municipality" => "Pila",
-                "province" => "Laguna",
-                "created_at" => now(),
-                "updated_at" => now(),
-            ]);
-
-            DB::table('suspects')->insert([
-                "record_id" => $i + 1,
-                "first_name" => fake()->firstName(),
-                "last_name" => fake()->lastName(),
-                "sex" => 2,
-                "barangay" => "Doon",
-                "municipality" => "Pila",
-                "province" => "Laguna",
-                "created_at" => now(),
-                "updated_at" => now(),
-            ]);
-            
-            $startDate = date('Y-m-d', strtotime('+1 day', strtotime($startDate)));
-        }
     }
     
 }
