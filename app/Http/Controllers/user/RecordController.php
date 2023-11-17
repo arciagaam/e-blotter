@@ -44,7 +44,7 @@ class RecordController extends Controller
 
     public function getNewRecords()
     {
-        $result = Record::getSearchQuery()->where('notification_viewed', 0)->count();
+        $result = Record::getSearchQuery()->where('notification_viewed', 0)->where('barangay_id', auth()->user()->barangays[0]->id)->count();
         return response()->json($result, 200);
     }
 

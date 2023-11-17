@@ -17,8 +17,9 @@ class Record extends Model
     use HasFactory;
     use SoftDeletes;
 
-    public static function booted() {
-        static::created(function($newRecord) {
+    public static function booted()
+    {
+        static::created(function ($newRecord) {
             NewRecord::dispatch($newRecord);
         });
     }
@@ -47,7 +48,24 @@ class Record extends Model
     {
         $query->when(request()->search, function ($q) {
             $q->where('purok', request()->search);
+        })
+            ->when(request()->from, function ($q) {
+                $q->where('created_at', '>=', date('Y-m-d', strtotime(request()->from)));
             })
+            ->when(request()->to, function ($q) {
+                $q->where('created_at', '<=', date('Y-m-d', strtotime(request()->to)));
+            })
+            ->when(request()->type, function ($q) {
+                $q->where('blotter_status_id', '=', request()->type);
+            })
+            ->where('barangay_id', auth()->user()->barangays[0]->id);
+    }
+
+    public function scopeGetAdminSearchQuery(Builder $query)
+    {
+        $query->when(request()->search, function ($q) {
+            $q->where('purok', request()->search);
+        })
             ->when(request()->from, function ($q) {
                 $q->where('created_at', '>=', date('Y-m-d', strtotime(request()->from)));
             })
