@@ -2,7 +2,7 @@
     <x-page-header>Dashboard</x-page-header>
 
     <div class="flex flex-col gap-10">
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col p-3 gap-2 rounded-md overflow-hidden shadow-lg w-fit">
             <div class="flex gap-5">
                 <div class="flex flex-row gap-2 justify-center">
                     <p>Date: </p>
@@ -14,124 +14,124 @@
                 </div>
             </div>
 
-            <div class="flex flex-row gap-1 text-xl">
-                <p class="w-fit">
+            <div class="flex flex-row gap-1 text-base">
+                <p class="w-fit text-base">
                     Welcome, Barangay Secretary {{ auth()->user()->first_name . ' ' . auth()->user()->last_name }}!
                 </p>
             </div>
         </div>
 
         <div class="grid grid-cols-5 gap-4">
-            <div class="col-span-2 row-span-2 flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <div class="col-span-2 row-span-2 flex flex-col p-3 gap-2 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-project-blue-dark">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-lg">Total Blotter Recorded</p>
+                        <p class="text-xs">Total Blotter Recorded</p>
                     </div>
                 </div>
 
                 <hr class="mt-auto">
 
-                <p class="self-center text-2xl font-bold">{{ $records }}</p>
+                <p class="self-center text-base font-bold">{{ $records }}</p>
             </div>
 
-            <a href="{{ url('/records?type=2') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <a href="{{ url('/records?type=2') }}" class="flex flex-col p-3 gap-2 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-neutral-500">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-lg">Unresolved Cases</p>
+                        <p class="text-xs">Unresolved Cases</p>
                     </div>
                 </div>
 
                 <hr class="mt-auto">
 
-                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['unresolved'] }}</p>
+                <p class="self-center text-base font-bold">{{ $blotterStatusCount['unresolved'] }}</p>
             </a>
 
-            <a href="{{ url('/records?type=5') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <a href="{{ url('/records?type=5') }}" class="flex flex-col p-3 gap-2 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-yellow-600">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-lg">Blotter Cases</p>
+                        <p class="text-xs">Blotter Cases</p>
                     </div>
                 </div>
 
                 <hr class="mt-auto">
 
-                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['blotter_cases'] }}</p>
+                <p class="self-center text-base font-bold">{{ $blotterStatusCount['blotter_cases'] }}</p>
             </a>
 
-            <a href="{{ url('/records?type=6') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <a href="{{ url('/records?type=6') }}" class="flex flex-col p-3 gap-2 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-rose-600">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-lg">Dismissed Cases</p>
+                        <p class="text-xs">Dismissed Cases</p>
                     </div>
                 </div>
 
                 <hr class="mt-auto">
 
-                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['dismissed'] }}</p>
+                <p class="self-center text-base font-bold">{{ $blotterStatusCount['dismissed'] }}</p>
             </a>
 
-            <a href="{{ url('/records?type=1') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <a href="{{ url('/records?type=1') }}" class="flex flex-col p-3 gap-2 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-emerald-600">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-lg">Settled Cases</p>
+                        <p class="text-xs">Settled Cases</p>
                     </div>
                 </div>
 
                 <hr class="mt-auto">
 
-                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['settled'] }}</p>
+                <p class="self-center text-base font-bold">{{ $blotterStatusCount['settled'] }}</p>
             </a>
 
-            <a href="{{ url('/records?type=3') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <a href="{{ url('/records?type=3') }}" class="flex flex-col p-3 gap-2 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-orange-400">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-lg">KP Cases</p>
+                        <p class="text-xs">KP Cases</p>
                     </div>
                 </div>
 
                 <hr class="mt-auto">
 
-                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['kp_cases'] }}</p>
+                <p class="self-center text-base font-bold">{{ $blotterStatusCount['kp_cases'] }}</p>
             </a>
 
-            <a href="{{ url('/records?type=4') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <a href="{{ url('/records?type=4') }}" class="flex flex-col p-3 gap-2 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-blue-400">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-lg">Endorsed Cases</p>
+                        <p class="text-xs">Endorsed Cases</p>
                     </div>
                 </div>
 
                 <hr class="mt-auto">
 
-                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['endorsed'] }}</p>
+                <p class="self-center text-base font-bold">{{ $blotterStatusCount['endorsed'] }}</p>
             </a>
 
         </div>
