@@ -87,20 +87,28 @@ window.addEventListener('load', async () => {
 
 const colors = {
     "settled": {
-        class: "text-emerald-600 bg-emerald-100",
+        class: "text-emerald-600 bg-emerald-200",
         rgb: "rgb(5, 150, 105)",
     },
+    "unresolved": {
+        class: "text-neutral-500 bg-neutral-200",
+        rgb: "rgb(115, 115, 115)"
+    },
     "kp cases": {
-        class: "text-rose-600 bg-rose-100",
-        rgb: "rgb(225, 29, 72)"
+        class: "text-orange-600 bg-orange-200",
+        rgb: "rgb(251, 146, 60)"
     },
     "endorsed": {
-        class: "text-project-yellow-default bg-yellow-100",
-        rgb: "rgb(251, 173, 38)"
+        class: "text-blue-400 bg-blue-200",
+        rgb: "rgb(96, 165, 250)"
     },
-    "unresolved": {
-        class: "text-neutral-500 bg-neutral-100",
-        rgb: "rgb(115, 115, 115)"
+    "blotter cases": {
+        class: "text-yellow-600 bg-yellow-200",
+        rgb: "rgb(202, 138, 4)"
+    },
+    "dismissed": {
+        class: "text-rose-600 bg-rose-200",
+        rgb: "rgb(225, 29, 72)"
     },
 };
 
@@ -139,7 +147,7 @@ function createGraph(textLabel, dataset, idx) {
     const canvas = Object.assign(document.createElement("canvas"), {
         id: idx
     });
-    
+
     container.appendChild(label);
     container.appendChild(canvas);
 

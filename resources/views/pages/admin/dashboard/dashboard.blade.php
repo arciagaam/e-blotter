@@ -19,8 +19,8 @@
             </p>
         </div>
 
-        <div class="flex flex-col lg:flex-row gap-4">
-            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+        <div class="grid grid-cols-5 gap-4">
+            <div class="col-span-2 row-span-2 flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-project-blue-dark">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
@@ -36,23 +36,7 @@
                 <p class="self-center text-2xl font-bold">{{ $records }}</p>
             </div>
 
-            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
-                <div class="flex gap-3 items-center self-center">
-                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-emerald-600">
-                        <box-icon color="white" name="folder" size="1em"></box-icon>
-                    </div>
-
-                    <div class="flex flex-col">
-                        <p class="text-lg">Settled Cases</p>
-                    </div>
-                </div>
-
-                <hr class="mt-auto">
-
-                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['settled'] }}</p>
-            </div>
-
-            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <a href="{{ url('admin/records?type=2') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-neutral-500">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
@@ -66,11 +50,59 @@
                 <hr class="mt-auto">
 
                 <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['unresolved'] }}</p>
-            </div>
+            </a>
 
-            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <a href="{{ url('admin/records?type=5') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+                <div class="flex gap-3 items-center self-center">
+                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-yellow-600">
+                        <box-icon color="white" name="folder" size="1em"></box-icon>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-lg">Blotter Cases</p>
+                    </div>
+                </div>
+
+                <hr class="mt-auto">
+
+                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['blotter_cases'] }}</p>
+            </a>
+
+            <a href="{{ url('admin/records?type=6') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-rose-600">
+                        <box-icon color="white" name="folder" size="1em"></box-icon>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-lg">Dismissed Cases</p>
+                    </div>
+                </div>
+
+                <hr class="mt-auto">
+
+                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['dismissed'] }}</p>
+            </a>
+
+            <a href="{{ url('admin/records?type=1') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+                <div class="flex gap-3 items-center self-center">
+                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-emerald-600">
+                        <box-icon color="white" name="folder" size="1em"></box-icon>
+                    </div>
+
+                    <div class="flex flex-col">
+                        <p class="text-lg">Settled Cases</p>
+                    </div>
+                </div>
+
+                <hr class="mt-auto">
+
+                <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['settled'] }}</p>
+            </a>
+
+            <a href="{{ url('admin/records?type=3') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+                <div class="flex gap-3 items-center self-center">
+                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-orange-400">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
@@ -82,11 +114,11 @@
                 <hr class="mt-auto">
 
                 <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['kp_cases'] }}</p>
-            </div>
+            </a>
 
-            <div class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
+            <a href="{{ url('admin/records?type=4') }}" class="flex flex-col p-5 gap-4 rounded-md w-full overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
-                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-project-yellow-default">
+                    <div class="flex self-start items-center justify-center p-2 rounded-full bg-blue-400">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
@@ -98,7 +130,8 @@
                 <hr class="mt-auto">
 
                 <p class="self-center text-2xl font-bold">{{ $blotterStatusCount['endorsed'] }}</p>
-            </div>
+            </a>
+
         </div>
 
         <div class="flex w-full">

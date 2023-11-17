@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Events\NewRecord;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -48,14 +47,16 @@ class Record extends Model
     {
         $query->when(request()->search, function ($q) {
             $q->where('purok', request()->search);
-        })
+            })
             ->when(request()->from, function ($q) {
                 $q->where('created_at', '>=', date('Y-m-d', strtotime(request()->from)));
             })
             ->when(request()->to, function ($q) {
                 $q->where('created_at', '<=', date('Y-m-d', strtotime(request()->to)));
             })
-            ->where('barangay_id', auth()->user()->barangays[0]->id);
+            ->when(request()->type, function ($q) {
+                $q->where('blotter_status_id', '=', request()->type);
+            });
     }
 
     public function victim(): HasOne

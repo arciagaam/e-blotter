@@ -15,7 +15,7 @@ class RecordController extends Controller
      */
     public function index()
     {
-        $record = Record::orderBy('id', 'desc')->withTrashed()->filter(request('search'))->paginate(10)->withQueryString();
+        $record = Record::orderBy('id', 'desc')->withTrashed()->getSearchQuery()->paginate(10)->withQueryString();
 
         return view('pages.admin.records.blotter-records', ['records' => $record, 'barangays' => Barangay::whereHas('users', function ($q) {
             $q->whereNotNull('verified_at');

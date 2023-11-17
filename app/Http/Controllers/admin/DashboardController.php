@@ -22,6 +22,8 @@ class DashboardController extends Controller
             'unresolved' => count(Record::ofTotalStatus(2)),
             'kp_cases' => count(Record::ofTotalStatus(3)),
             'endorsed' => count(Record::ofTotalStatus(4)),
+            'blotter_cases' => count(Record::ofTotalStatus(5)),
+            'dismissed' => count(Record::ofTotalStatus(6)),
         ];
 
         return view('pages.admin.dashboard.dashboard', ['barangays' => Barangay::withCount('records')->with('users:verified_at')->userNotTrashed()->get(), 'records' => $records, 'blotterStatusCount' => $blotterStatusCount]);
@@ -83,39 +85,6 @@ class DashboardController extends Controller
         $dates = array(
             "dates" => array(),
             "dataset" => array()
-        );
-
-        // Structure
-        array(
-            "dates" => array(),
-            "dataset" => [
-                "settled" => [
-                    "barangay-1" => 0,
-                    "barangay-2" => 1
-                ],
-                "unresolved" => [
-                    "barangay-1" => 0,
-                    "barangay-2" => 0
-                ]
-            ],
-            // "dataset" => [
-            //     "barangay-name-here" => [
-            //         "dataset" => [
-            //             "settled" => [],
-            //             "unresolved" => [],
-            //             "dismissed" => [],
-            //             "in prosecution" => []
-            //         ]
-            //     ],
-            //     "barangay-name-here" => [
-            //         "dataset" => [
-            //             "settled" => [],
-            //             "unresolved" => [],
-            //             "dismissed" => [],
-            //             "in prosecution" => []
-            //         ]
-            //     ],
-            // ]
         );
 
         switch ($type) {

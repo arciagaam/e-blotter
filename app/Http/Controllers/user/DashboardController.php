@@ -24,6 +24,8 @@ class DashboardController extends Controller
             'unresolved' => count(Record::ofStatus(2)),
             'kp_cases' => count(Record::ofStatus(3)),
             'endorsed' => count(Record::ofStatus(4)),
+            'blotter_cases' => count(Record::ofStatus(5)),
+            'dismissed' => count(Record::ofStatus(6)),
         ];
 
         // setAlertMessage('Title', 'Lorem ipsum, dolor sit amet.', 'warning');
