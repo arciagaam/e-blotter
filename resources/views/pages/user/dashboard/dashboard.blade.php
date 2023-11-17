@@ -21,19 +21,19 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-5 gap-4">
-            <div class="col-span-2 row-span-2 flex flex-col p-3 gap-2 rounded-md w-full overflow-hidden shadow-lg h-fit">
+        <div class="grid grid-cols-4 gap-4">
+            <div class="row-span-2 flex flex-col p-3 gap-4 rounded-md items-center justify-center overflow-hidden shadow-lg">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-project-blue-dark">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
                     </div>
 
                     <div class="flex flex-col">
-                        <p class="text-xs">Total Blotter Recorded</p>
+                        <p class="text-base">Total Blotter Recorded</p>
                     </div>
                 </div>
 
-                <hr class="mt-auto">
+                <hr class="w-full">
 
                 <p class="self-center text-base font-bold">{{ $records }}</p>
             </div>
