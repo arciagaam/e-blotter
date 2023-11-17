@@ -2,7 +2,7 @@
     <x-page-header>Dashboard</x-page-header>
 
     <div class="flex flex-col gap-10">
-        <div class="flex flex-col p-3 gap-2 rounded-md overflow-hidden shadow-lg w-fit">
+        <div class="flex flex-col gap-2">
             <div class="flex gap-5">
                 <div class="flex flex-row gap-2 justify-center">
                     <p>Date: </p>
@@ -22,7 +22,7 @@
         </div>
 
         <div class="grid grid-cols-5 gap-4">
-            <div class="col-span-2 row-span-2 flex flex-col p-3 gap-2 rounded-md w-full overflow-hidden shadow-lg">
+            <div class="col-span-2 row-span-2 flex flex-col p-3 gap-2 rounded-md w-full overflow-hidden shadow-lg h-fit">
                 <div class="flex gap-3 items-center self-center">
                     <div class="flex self-start items-center justify-center p-2 rounded-full bg-project-blue-dark">
                         <box-icon color="white" name="folder" size="1em"></box-icon>
