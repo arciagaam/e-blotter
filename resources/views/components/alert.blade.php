@@ -1,4 +1,4 @@
-{{-- 
+{{--
 
     Orientations
     tm = top-middle
@@ -14,7 +14,7 @@
     warning = yellow
     danger = red
     success = green
-    
+
 --}}
 
 @props(['title', 'description', 'type' => 'information', 'orientation' => 'tr'])
@@ -51,7 +51,13 @@
             @endswitch
         </div>
         <div class="flex flex-col">
-            <p class="font-bold">{{ $title }}</p>
+            <p @class([
+                'font-bold',
+                'text-project-yellow-default' => $type === 'warning',
+                'text-rose-400' => $type === 'danger',
+                'text-emerald-400' => $type === 'success',
+                'text-blue-400' => $type === 'information',
+            ])>{{ $title }}</p>
             <p>{{ $description }}</p>
         </div>
         <div>

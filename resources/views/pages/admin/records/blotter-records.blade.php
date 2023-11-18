@@ -14,9 +14,17 @@
                                 {{ Str::ucfirst($barangay->name) }}</option>
                         @endforeach
                     </select>
-
                 </div>
-
+                <div class="flex gap-2 items-center">
+                    <label class="text-sm" for="type">Select Remarks</label>
+                    <select class="form-input" name="type" id="type" onchange="this.form.submit()">
+                        <option value="">All</option>
+                        @foreach ($blotterStatus as $status)
+                            <option value="{{ $status->id }}" @selected(request()->query('type') == $status->id)>
+                                {{ Str::ucfirst($status->name) }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </form>
         </div>
 

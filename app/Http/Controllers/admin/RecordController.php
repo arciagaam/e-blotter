@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barangay;
+use App\Models\BlotterStatus;
 use App\Models\CivilStatus;
 use App\Models\Record;
 use Illuminate\Http\Request;
@@ -16,10 +17,11 @@ class RecordController extends Controller
     public function index()
     {
         $record = Record::orderBy('id', 'desc')->withTrashed()->getAdminSearchQuery()->paginate(10)->withQueryString();
+        $blotterStatus = BlotterStatus::all();
 
         return view('pages.admin.records.blotter-records', ['records' => $record, 'barangays' => Barangay::whereHas('users', function ($q) {
             $q->whereNotNull('verified_at');
-        })->get()]);
+        })->get(), 'blotterStatus' => $blotterStatus]);
     }
 
     /**

@@ -10,6 +10,15 @@
 </head>
 
 <body class="min-h-screen flex flex-col bg-[#FAFAFA]">
+    <div class="w-screen h-screen flex fixed top-0 left-0 z-[9999] px-8 py-4 pointer-events-none">
+        @if (session('alert'))
+            <x-alert
+                title="{{ session('alert')['title'] }}"
+                description="{{ session('alert')['description'] }}"
+                type="{{ session('alert')['type'] ?? 'information' }}"
+            />
+        @endif
+    </div>
 
     <nav class="h-16 flex items-center gap-8 justify-end px-3 bg-project-blue-dark">
         <div class="flex flex-row gap-4 text-white">
@@ -99,7 +108,7 @@
         <img class="absolute top-0 left-0 w-full h-full object-fill xl:object-cover" src="{{ asset('assets/images/contact-us.png') }}" alt="">
     </div>
 
-
+    @vite('resources/js/alert.js')
 </body>
 
 </html>
