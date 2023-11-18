@@ -25,7 +25,8 @@ export default defineConfig({
                 'resources/js/print_window.js',
                 'resources/js/table.js',
                 'resources/js/user_chart.js',
-                'resources/js/user_nav.js'
+                'resources/js/user_nav.js',
+                'resources/js/contact_number.js',
             ],
             refresh: true,
         }),

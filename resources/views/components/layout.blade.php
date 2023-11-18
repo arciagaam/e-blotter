@@ -45,6 +45,7 @@
 
     @vite('resources/js/modal.js')
     @vite('resources/js/alert.js')
+    @vite('resources/js/contact_number.js')
 </body>
 
 </html>

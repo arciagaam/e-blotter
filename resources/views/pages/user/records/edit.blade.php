@@ -94,13 +94,13 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="flex w-full gap-4">
                         <div class="form-input-container w-full">
                             <div class="flex flex-row">
                                 <label for="victim_age" class="flex gap-2 items-center">Age:</label>
                             </div>
-    
+
                             <input onchange="(e) => {e.target.value = e.target.value < 0 ? 0 : e.target.value}" class="form-input" type="number" name="victim[age]" id="victim_age"
                                 value="{{ $record->victim->age ?? "" }}">
                             @error('victim.age')
@@ -112,7 +112,7 @@
                             <div class="flex flex-row">
                                 <label for="victim_sex" class="flex gap-2 items-center">Sex:</label>
                             </div>
-    
+
                             {{-- <input class="form-input" type="text" name="victim_sex" id="victim_sex"> --}}
                             <select class="form-input" name="victim[sex]" id="victim_sex">
                                 <option value="1" @selected($record->victim->sex == 1)>Male</option>
@@ -127,12 +127,12 @@
                             <div class="flex flex-row">
                                 <label for="victim_contact_number" class="flex gap-2 items-center">Contact Number:</label>
                             </div>
-                            
+
                             <div class="group flex items-center gap-2 border overflow-clip border-project-gray-default/30 rounded-md text-sm transition-all duration-300 ease-in-out font-normal focus-within:border-project-blue-default bg-white">
                                 <span class="group-focus-within:border-project-blue-default bg-gray-100 py-1 px-2 border-r border-r-project-gray-default/30">+63</span>
-                                <input class="w-full focus-visible:outline-none" type="text" name="victim[contact_number]" id="victim_contact_number" value="{{ $record->victim->contact_number }}">
+                                <input class="w-full focus-visible:outline-none" type="text" name="victim[contact_number]" id="victim_contact_number" max="10" value="{{ $record->victim->contact_number }}">
                             </div>
-                            
+
                             @error('victim.contact_number')
                                 <p class="text-xs text-red-500 italic">{{ $message }}</p>
                             @enderror

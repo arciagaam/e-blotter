@@ -60,17 +60,22 @@ if (!function_exists('formatUsername')) {
 }
 
 if (!function_exists('formatName')) {
-    function formatName(string $first, string $middle = null, string $last)
+    function formatName(string $first = null, string $middle = null, string $last = null)
     {
         $name = "";
+        $arr = [$first, $middle, $last];
 
-        $name .= $first;
+        foreach ($arr as $value) {
+            if ($value === null) {
+                continue;
+            }
 
-        if ($middle !== null) {
-            $name .= " " . $middle;
+            if ($name === "") {
+                $name .= $value;
+            } else {
+                $name .= " " . $value;
+            }
         }
-
-        $name .= " " . $last;
 
         return $name;
     }

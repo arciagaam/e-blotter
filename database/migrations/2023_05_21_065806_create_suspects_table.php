@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('suspects', function (Blueprint $table) {
             $table->id();
             $table->foreignId('record_id')->constrained('records')->cascadeOnUpdate()->restrictOnDelete();
-            $table->string("first_name");
+            $table->string("first_name")->nullable();
             $table->string("middle_name")->nullable();
-            $table->string("last_name");
+            $table->string("last_name")->nullable();
             $table->tinyInteger('sex');
             $table->string('barangay');
             $table->string('municipality');

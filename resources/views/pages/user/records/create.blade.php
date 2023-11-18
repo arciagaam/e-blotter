@@ -35,7 +35,7 @@
                         <div class="flex flex-row">
                             <label for="barangay" class="flex gap-2 items-center">Barangay:</label>
                         </div>
-        
+
                         <input class="form-input" type="text" name="barangay" id="barangay"
                             value="{{ auth()->user()->barangays[0]->name }}"
                             disabled>
@@ -43,18 +43,18 @@
                             <p class="text-xs text-red-500 italic">{{ $message }}</p>
                         @enderror
                     </div>
-        
+
                     <div class="flex flex-row gap-2">
                         <div class="flex flex-row">
                             <label for="purok" class="flex gap-2 items-center">Purok:</label>
                         </div>
 
                         <input list="puroks" name="purok" id="purok" class="form-input">
-                        
+
                         <datalist id="puroks">
                             @foreach (auth()->user()->barangays[0]->puroks as $purok)
                                 <option value="{{$purok->purok_number}}">{{$purok->name}}</option>
-                                
+
                             @endforeach
                         </datalist>
 
@@ -147,7 +147,7 @@
                             class="group flex items-center gap-2 border overflow-clip border-project-gray-default/30 rounded-md text-sm transition-all duration-300 ease-in-out font-normal focus-within:border-project-blue-default bg-white">
                             <span
                                 class="group-focus-within:border-project-blue-default bg-gray-100 py-1 px-2 border-r border-r-project-gray-default/30">+63</span>
-                            <input class="w-full focus-visible:outline-none" type="text"
+                            <input class="w-full focus-visible:outline-none" type="text" max="10"
                                 name="victim[contact_number]" id="victim_contact_number"
                                 value="{{ old('victim.contact_number') }}">
                         </div>

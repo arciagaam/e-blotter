@@ -35,9 +35,9 @@ class RecordRequest extends FormRequest
             "victim.municipality" => 'required|max:255',
             "victim.province" => 'required|max:255',
             "victim.civil_status_id" => 'required|numeric',
-            "suspect.first_name" => 'required|string|max:255',
+            "suspect.first_name" => 'nullable|string|max:255',
             "suspect.middle_name" => 'nullable|string|max:255',
-            "suspect.last_name" => 'required|string|max:255',
+            "suspect.last_name" => 'nullable|string|max:255',
             "suspect.sex" => 'required',
             "suspect.barangay" => 'required|max:255',
             "suspect.municipality" => 'required|max:255',
@@ -46,7 +46,7 @@ class RecordRequest extends FormRequest
             "case" => 'required',
             "narrative" => 'required',
             "narrative_file" => 'nullable',
-            "reliefs" => 'required',
+            "reliefs" => 'nullable',
             "purok" => 'sometimes|required',
         ];
     }

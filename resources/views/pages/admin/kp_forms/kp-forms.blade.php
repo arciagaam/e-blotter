@@ -11,9 +11,8 @@
                         class="flex items-center border border-table-even focus-within:border-project-blue rounded-md overflow-hidden gap-2 px-1 bg-white transition-all duration-300 ease-in-out">
                         <input class="w-full outline-none px-1 text-sm py-1" type="text" name="search" id="search"
                             value="{{ request()->query()['search'] ?? null }}">
-                        <button class="w-fit h-fit aspect-square flex items-center justify-center"><i
-                                class='bx bx-search'></i></button>
                     </div>
+                    <button class="btn-filled h-fit flex justify-center self-end">Search</button>
                 </div>
 
             </form>
