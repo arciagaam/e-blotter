@@ -112,6 +112,10 @@ class AccountController extends Controller
         $barangayRequest = $validator->safe()->only(["captain_first_name", "captain_last_name", "name", "logo"]);
         $purokRequest = $validator->safe()->only(["purok"]);
 
+        if (!empty($validator->safe(['logo']))) {
+            $filePath = $request->file("logo")->store("logos", "public");
+            $barangayRequest['logo'] = $filePath;
+        }
 
         if ($userRequest['password'] === null) {
             unset($userRequest['password']);
@@ -128,6 +132,7 @@ class AccountController extends Controller
 
         return redirect()->route('admin.accounts.index');
     }
+
     //  public function update(Request $request, User $account)
     //  {
     //      dd($request->all());
