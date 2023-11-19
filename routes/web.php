@@ -95,7 +95,7 @@ Route::prefix('/')->group(function () {
             return view('pages.user.auth.login', ["users" => $users, "adminUsers" => $adminUsers]);
         })->name('login');
 
-        Route::get('/register', [UserController::class, 'index']);
+        Route::get('/register', [UserController::class, 'index'])->name('register');
         Route::post('/register', [UserController::class, 'store']);
         Route::get('/registration-success', [UserController::class, 'success']);
 
