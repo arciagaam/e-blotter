@@ -26,7 +26,7 @@ class RecordController extends Controller
      */
     public function index(Request $request)
     {
-        Record::getSearchQuery()->where('notification_viewed', 0)->update(['notification_viewed' => 1]);
+        Record::where('barangay_id', auth()->user()->barangays[0]->id)->where('notification_viewed', 0)->update(['notification_viewed' => 1]);
         $record = Record::select('purok')->orderBy('purok')->get();
         $purokList = array();
 

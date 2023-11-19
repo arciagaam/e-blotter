@@ -46,19 +46,39 @@ class Record extends Model
 
     public function scopeGetSearchQuery(Builder $query)
     {
+  
         $query->when(request()->search, function ($q) {
-            $q->where('purok', request()->search);
+            $q->join('blotter_status', 'blotter_status.id', 'records.blotter_status_id')
+            ->join('suspects', 'suspects.record_id', 'records.id')
+            ->join('victims', 'victims.record_id', 'records.id')
+            ->where('records.purok', request()->search)
+            ->orWhereRaw('CONCAT(suspects.first_name, " ", suspects.middle_name, " ", suspects.last_name) like ?', ["%".request()->search."%"])
+            ->orWhereRaw('CONCAT(suspects.first_name, " ", suspects.last_name) like ?', ["%".request()->search."%"])
+            ->orWhere('suspects.first_name', 'like', request()->search . '%')
+            ->orWhere('suspects.middle_name', 'like', request()->search . '%')
+            ->orWhere('suspects.last_name', 'like', request()->search . '%')
+            ->orWhereRaw('CONCAT(victims.first_name, " ", victims.middle_name, " ", victims.last_name) like ?', ["%".request()->search."%"])
+            ->orWhereRaw('CONCAT(victims.first_name, " ", victims.last_name) like ?', ["%".request()->search."%"])
+            ->orWhere('victims.first_name', 'like', request()->search . '%')
+            ->orWhere('victims.middle_name', 'like', request()->search . '%')
+            ->orWhere('victims.last_name', 'like', request()->search . '%')
+            ->orWhere('records.barangay_blotter_number', request()->search)
+            ->orWhere('blotter_status.name', 'LIKE', "%".request()->search."%" )
+            ->orWhere('records.case', 'LIKE', "%".request()->search."%" )
+            ->orWhere('records.narrative', 'LIKE', "%".request()->search."%" )
+            ->orWhere('records.reliefs', 'LIKE', "%".request()->search."%" );
         })
-            ->when(request()->from, function ($q) {
-                $q->where('created_at', '>=', date('Y-m-d', strtotime(request()->from)));
-            })
-            ->when(request()->to, function ($q) {
-                $q->where('created_at', '<=', date('Y-m-d', strtotime(request()->to)));
-            })
-            ->when(request()->type, function ($q) {
-                $q->where('blotter_status_id', '=', request()->type);
-            })
-            ->where('barangay_id', auth()->user()->barangays[0]->id);
+        ->when(request()->from, function ($q) {
+            $q->where('records.created_at', '>=', date('Y-m-d', strtotime(request()->from)));
+        })
+        ->when(request()->to, function ($q) {
+            $q->where('records.created_at', '<=', date('Y-m-d', strtotime(request()->to)));
+        })
+        ->when(request()->type, function ($q) {
+            $q->where('records.blotter_status_id', '=', request()->type);
+        })
+        ->where('barangay_id', auth()->user()->barangays[0]->id)
+        ->select('records.*');
     }
 
     public function scopeGetAdminSearchQuery(Builder $query)
