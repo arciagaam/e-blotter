@@ -21,13 +21,14 @@
                             </div> --}}
                             <div class="form-input-container">
                                 <label for="search">Search</label>
-                                <select class="form-input" name="search" id="search">
+                                <input id="search" name="search" type="text" class="form-input" value="{{array_key_exists('search', request()->query()) ? request()->query()['search'] : ''}}">
+                                {{-- <select class="form-input" name="search" id="search">
                                     <option value="">-- SELECT PUROK --</option>
                                     @foreach ($purokList as $purok)
                                         <option value="{{ $purok }}" @selected(array_key_exists('search', request()->query()) && $purok == request()->query()['search'])>
                                             {{ $purok }}</option>
                                     @endforeach
-                                </select>
+                                </select> --}}
                             </div>
                             <div class="flex flex-row gap-2">
                                 <div class="form-input-container">
