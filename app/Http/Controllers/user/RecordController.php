@@ -69,11 +69,11 @@ class RecordController extends Controller
         $report = new Record();
 
         $purok = Purok::where('barangay_id', auth()->user()->barangays[0]->id)
-            ->where('purok_number', $request->validated('purok'))->first()->id;
+            ->where('purok_number', $request->validated('purok'))->first();
 
         $latest = $report->latestRecord(auth()->user()->barangays[0]->id);
         $report->narrative_file = $service->handleUploadRecording($request->validated('narrative_file'));
-        $report->fill([...$request->safe()->except('victim', 'suspect'), 'purok' => $purok]);
+        $report->fill([...$request->safe()->except('victim', 'suspect'), 'purok' => $purok->purok_number]);
         $report->barangays()->associate(auth()->user()->barangays[0]->id);
         $report->blotterStatus()->associate(BlotterStatus::find(2));
         $report->barangay_blotter_number = $latest ? $latest->barangay_blotter_number + 1 : 1;
