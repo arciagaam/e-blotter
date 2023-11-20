@@ -12,15 +12,15 @@
 </head>
 
 <body>
-    <div class="grid grid-cols-1 justify-items-center content-center lg:grid-cols-2 w-screen overflow-hidden h-screen !bg-cover !bg-no-repeat bg-project-blue-default" style="background: url({{asset('assets/images/full-bg-plain.png')}})">
+    <div class="flex items-center justify-center lg:grid-cols-2 w-screen overflow-hidden min-h-screen !bg-cover !bg-no-repeat !bg-center bg-project-blue-default" style="background: url({{asset('assets/images/login-bg.png')}})">
 
-        <div class="hidden lg:flex flex-col gap-4 w-full h-full justify-center items-center">
-            {{-- <img class="h-1/2" src="{{ asset('assets/login_illust.svg') }}" alt="Documents Illustration">
-            <p class="text-6xl text-white font-black text-center">E-Blotter</p> --}}
-        </div>
+        {{-- <div class="hidden lg:flex flex-col gap-4 w-full h-full justify-center items-center">
+            <img class="h-1/2" src="{{ asset('assets/login_illust.svg') }}" alt="Documents Illustration">
+            <p class="text-6xl text-white font-black text-center">E-Blotter</p>
+        </div> --}}
 
         <form method="POST" action="{{ route('guest.authenticate') }}"
-            class="h-fit w-3/4 self-center flex flex-col justify-center items-center lg:col-start-2 gap-5 py-10 px-6 bg-white rounded-lg shadow-md">
+            class="h-fit w-1/2 self-center flex flex-col justify-center items-center lg:col-start-2 gap-5 py-10 px-6 bg-white rounded-lg shadow-md translate-y-[20%]">
             @csrf
             <div class="flex flex-col gap-10 w-3/4">
                 <div>

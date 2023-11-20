@@ -31,7 +31,7 @@
 
     <div class="flex flex-col gap-28 bg-[#FAFAFA]">
 
-        <div class="flex p-20 gap-20">
+        {{-- <div class="flex p-20 gap-20">
             <div class="flex flex-col rounded-lg overflow-clip shadow-sm min-w-[40vw]">
                 <img class="z-10 object-cover h-full w-auto" src="{{ asset('assets/images/hall_2.png') }}" alt="">
             </div>
@@ -54,6 +54,21 @@
                     <a href="{{route('login')}}" class="underline underline-offset-3 text-black/50 text-sm">Already have an account? Login here</a>
                 </div>
             </div>
+        </div> --}}
+
+        <div class="relative flex h-[calc(100vh-4rem)] !bg-cover" style="background: url({{asset('assets/images/hall_2.png')}})">
+
+            <div class="flex flex-col items-center justify-center absolute inset-0 bg-gradient-to-t from-black/70 to-transparent gap-10">
+                <div class="flex flex-col gap-1 items-center text-center text-white shadow-lg">
+                    <h2 class="text-9xl font-bold shadow-md">BARANGAY</h2>
+                    <h3 class="text-4xl font-medium shadow-md">E-BLOTTER SYSTEM</h3>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <a href="{{route('login')}}" class="btn-filled text-2xl py-4 px-8">Login</a>
+                </div>
+            </div>
+
         </div>
 
         <div class="relative flex flex-col text-center xl:text-left gap-8 xl:flex-row xl:gap-0 items-center justify-center w-fit self-center mx-20 px-20 rounded-lg ring-2 ring-gray-200 py-20 shadow-sm" id="about-us">

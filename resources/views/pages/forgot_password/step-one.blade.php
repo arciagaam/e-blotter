@@ -29,7 +29,11 @@
                 </div>
             </div>
 
-            <button class="btn-filled">Send Verification Code</button>
+            <div class="flex gap-5 self-end">
+                <a href="{{route('login')}}" class="btn-outline">Cancel</a>
+                <button class="btn-filled">Send Verification Code</button>
+
+            </div>
 
         </form>  
     </div>
