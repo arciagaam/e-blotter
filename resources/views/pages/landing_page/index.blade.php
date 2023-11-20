@@ -26,7 +26,7 @@
             <a href="#about-us">About</a>
             <a href="#contact-us">Contact Us</a>
         </div>
-        <a href="{{ route('login') }}" class="btn-filled h-fit">Login</a>
+        {{-- <a href="{{ route('login') }}" class="btn-filled h-fit">Login</a> --}}
     </nav>
 
     <div class="flex flex-col gap-28 bg-[#FAFAFA]">
